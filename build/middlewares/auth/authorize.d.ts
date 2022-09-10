@@ -1,4 +1,3 @@
 /// <reference types="qs" />
 /// <reference types="express" />
-declare const _default: import("express").RequestHandler<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>;
-export default _default;
+export declare const authorize: import("express").RequestHandler<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>;

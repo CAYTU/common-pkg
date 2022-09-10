@@ -12,10 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.authorize = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const not_authorized_1 = require("../../errors/not-authorized");
 // ...
-exports.default = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.authorize = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     if (!req.currentUser) {
         throw new not_authorized_1.NotAuthorizedErr();
     }

@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import { NotAuthorizedErr } from "../../errors/not-authorized";
 
 // ...
-export default asyncHandler(
+export const authorize = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     if (!req.currentUser) {
       throw new NotAuthorizedErr();

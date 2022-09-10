@@ -1,0 +1,9 @@
+{
+    "name": "@caytu/common",
+    "version": "1.0.0",
+    "description": "Shared Packages",
+    "main": "main.js",
+    "author": "caytu",
+    "license": "MIT",
+    "private": true
+}

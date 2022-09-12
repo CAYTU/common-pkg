@@ -13,4 +13,3 @@ export * from "./middlewares/user/current-user";
 
 export * from "./nats-events/listener";
 export * from "./nats-events/publisher";
-export * from "./nats-events/subjects";

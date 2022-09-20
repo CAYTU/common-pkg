@@ -8,5 +8,6 @@ export const authorize = asyncHandler(
     if (!req.currentUser) {
       throw new NotAuthorizedErr();
     }
+    next();
   }
 );

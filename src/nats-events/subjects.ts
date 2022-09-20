@@ -22,4 +22,8 @@ export enum Subjects {
   AgentCreated = "agent:created",
   AgentUpdated = "agent:updated",
   AgentDeleted = "agent:deleted",
+  // Category Subjects
+  CategoryCreated = "category:created",
+  CategoryUpdated = "category:updated",
+  CategoryDeleted = "category:deleted"
 }

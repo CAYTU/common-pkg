@@ -25,5 +25,9 @@ export enum Subjects {
   // Category Subjects
   CategoryCreated = "category:created",
   CategoryUpdated = "category:updated",
-  CategoryDeleted = "category:deleted"
+  CategoryDeleted = "category:deleted",
+  // Operators Subjects
+  OperatorCreated = "operator:created",
+  OperatorUpdated = "operator:updated",
+  OperatorDeleted = "operator:deleted",
 }

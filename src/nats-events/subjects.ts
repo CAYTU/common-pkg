@@ -18,10 +18,10 @@ export enum Subjects {
   ZoneCreated = "zone:created",
   ZoneUpdated = "zone:updated",
   ZoneDeleted = "zone:deleted",
-  // Agent Subjects
-  AgentCreated = "agent:created",
-  AgentUpdated = "agent:updated",
-  AgentDeleted = "agent:deleted",
+  // Vendor Subjects
+  VendorCreated = "vendor:created",
+  VendorUpdated = "vendor:updated",
+  VendorDeleted = "vendor:deleted",
   // Category Subjects
   CategoryCreated = "category:created",
   CategoryUpdated = "category:updated",

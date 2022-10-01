@@ -1,4 +1,4 @@
-import { Types } from "mongoose";
+import { Document, Types } from "mongoose";
 
 declare namespace CTypes {
   // Some common types:
@@ -76,6 +76,10 @@ declare namespace CTypes {
     zone?: Types.ObjectId;
     currentOrder?: number;
     version: number;
+    findByEvent: (event: {
+      id: string;
+      version: number;
+    }) => Promise<Document<RobotInterface> | null>;
   }
 
   /**
@@ -107,6 +111,10 @@ declare namespace CTypes {
     status: TaskStatusType;
     description?: string;
     version: number;
+    findByEvent: (event: {
+      id: string;
+      version: number;
+    }) => Promise<Document<TaskInterface> | null>;
   }
 
   /**
@@ -125,6 +133,7 @@ declare namespace CTypes {
     image: string;
     roles: RoleType[];
     version: number;
+    matchPwd: (pwd: string) => Promise<boolean>;
   }
 
   /**

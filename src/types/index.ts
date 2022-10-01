@@ -39,6 +39,7 @@ declare namespace CTypes {
     earnings: number;
     aboutMe: string;
     zone?: Types.ObjectId;
+    version: number;
   }
 
   /**
@@ -55,6 +56,7 @@ declare namespace CTypes {
     category: Types.ObjectId;
     image: string;
     description?: string;
+    version: number;
   }
 
   /**
@@ -73,6 +75,7 @@ declare namespace CTypes {
     vendor?: Types.ObjectId;
     zone?: Types.ObjectId;
     currentOrder?: number;
+    version: number;
   }
 
   /**
@@ -103,6 +106,7 @@ declare namespace CTypes {
     points?: CoordinateType[];
     status: TaskStatusType;
     description?: string;
+    version: number;
   }
 
   /**
@@ -120,6 +124,7 @@ declare namespace CTypes {
     password: string;
     image: string;
     roles: RoleType[];
+    version: number;
   }
 
   /**
@@ -137,6 +142,7 @@ declare namespace CTypes {
     zone: Types.ObjectId;
     coordinates: CoordinateType;
     owner: Types.ObjectId;
+    version: number;
   }
 
   /**
@@ -152,6 +158,7 @@ declare namespace CTypes {
     popDensity: popDensityType;
     terrainDomination: terrainDominationType;
     securityLevel: securityLevelType;
+    version: number;
   }
 }
 

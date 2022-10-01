@@ -19,9 +19,11 @@ declare namespace CTypes {
    * Category:
    */
   export interface CategoryInterface {
+    id: string;
     name: string;
     image: string;
     description?: string;
+    version: number;
   }
 
   /**
@@ -30,6 +32,7 @@ declare namespace CTypes {
   export type IDType = "id" | "passport";
 
   export interface OperatorInterface {
+    id: string;
     user?: Types.ObjectId;
     identityType: IDType;
     identityNumber: number;
@@ -46,6 +49,7 @@ declare namespace CTypes {
    * Product:
    */
   export interface ProductInterface {
+    id: string;
     name: string;
     type: string;
     quantity: number;
@@ -63,6 +67,7 @@ declare namespace CTypes {
    * Robot:
    */
   export interface RobotInterface {
+    id: string;
     robotId: string;
     name: string;
     accountId?: string;
@@ -91,6 +96,7 @@ declare namespace CTypes {
   export type TaskType = "delivery" | "non-delivery";
 
   export interface TaskInterface {
+    id: string;
     name: string;
     type: TaskType;
     fare: number;
@@ -123,6 +129,7 @@ declare namespace CTypes {
   export type RoleType = "create" | "edit" | "readOnly" | "delete" | "all";
 
   export interface UserInterface {
+    id: string;
     username: string;
     zone: Types.ObjectId;
     firstName: string;
@@ -140,6 +147,7 @@ declare namespace CTypes {
    * Vendor:
    */
   export interface VendorInterface {
+    id: string;
     name: string;
     businessField: string;
     vaxOrTax: number;
@@ -162,6 +170,7 @@ declare namespace CTypes {
   export type securityLevelType = "green" | "yellow" | "red";
 
   export interface ZoneInterface {
+    id: string;
     name: string;
     coordinates: CoordinateType[];
     popDensity: popDensityType;

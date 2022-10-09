@@ -9,8 +9,10 @@ declare namespace CTypes {
     longitude: number;
   };
 
-  // Type for polygon: geometrical area
-  export type PolygonType = [[[number]]];
+  export type PolygonType = {
+    type: string;
+    coordinates: [[[number]]];
+  };
 
   /**
    * Category:

@@ -92,7 +92,6 @@ declare namespace CTypes {
    *
    */
   export type TaskStatusType = "pending" | "running" | "completed" | "failed";
-  export type ExecutionDomainType = "area" | "itinerary" | "points";
   export type TaskType = "delivery" | "non-delivery";
 
   export interface TaskInterface {
@@ -110,10 +109,7 @@ declare namespace CTypes {
     customer?: Types.ObjectId;
     //   Ref to Robot Model
     robot?: Types.ObjectId;
-    execDomain: ExecutionDomainType;
-    itinerary?: ItineraryType;
     zone?: Types.ObjectId;
-    points?: CoordinateType[];
     status: TaskStatusType;
     description?: string;
     version: number;
@@ -165,17 +161,11 @@ declare namespace CTypes {
   /**
    * Zone:
    */
-  export type popDensityType = "free" | "dayToDay" | "crowded" | "busted";
-  export type terrainDominationType = "sandy" | "bumpy" | "flat" | "road";
-  export type securityLevelType = "green" | "yellow" | "red";
 
   export interface ZoneInterface {
     id: string;
     name: string;
     coordinates: CoordinateType[];
-    popDensity: popDensityType;
-    terrainDomination: terrainDominationType;
-    securityLevel: securityLevelType;
     version: number;
   }
 }

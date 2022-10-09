@@ -9,11 +9,8 @@ declare namespace CTypes {
     longitude: number;
   };
 
-  // Type for itinerary where we have start & end point as Coordinates
-  export type ItineraryType = {
-    start: CoordinateType;
-    end: CoordinateType;
-  };
+  // Type for polygon: geometrical area
+  export type PolygonType = [[[number]]];
 
   /**
    * Category:
@@ -165,7 +162,7 @@ declare namespace CTypes {
   export interface ZoneInterface {
     id: string;
     name: string;
-    coordinates: CoordinateType[];
+    coordinates: PolygonType;
     version: number;
   }
 }

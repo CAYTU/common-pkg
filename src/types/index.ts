@@ -164,7 +164,10 @@ declare namespace CTypes {
   export interface ZoneInterface {
     id: string;
     name: string;
-    coordinates: PolygonType;
+    location: {
+      type: string;
+      coordinates: number[][][];
+    };
     version: number;
   }
 }

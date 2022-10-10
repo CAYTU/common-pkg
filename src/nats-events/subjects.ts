@@ -14,6 +14,10 @@ export enum Subjects {
   TaskCreated = "task:created",
   TaskUpdated = "task:updated",
   TaskDeleted = "task:deleted",
+  // User Subjects
+  UserCreated = "user:created",
+  UserUpdated = "user:updated",
+  UserDeleted = "user:deleted",
   // Zone Subjects
   ZoneCreated = "zone:created",
   ZoneUpdated = "zone:updated",

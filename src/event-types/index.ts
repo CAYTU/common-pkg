@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
 
-declare namespace CTypes {
+declare namespace ETypes {
   // Some common types:
   //--------------------
   // Coordinate type for an object coupling both latitude & longitude
@@ -17,34 +17,40 @@ declare namespace CTypes {
   /**
    * Category:
    */
-  export interface CategoryInterface {
-    name: string;
-    image: string;
-    description?: string;
-  }
-
-  export interface CategoryRepInterface {
+  export interface CategoryEventInterface {
     id: string;
     name: string;
     image: string;
+    description?: string;
+    version: number;
+  }
+
+  export interface CategoryRepEventInterface {
+    id: string;
+    name: string;
+    image: string;
+    version: number;
   }
 
   /**
    * Customer:
    */
-  export interface CustomerInterface {
+  export interface CustomerEventInterface {
+    id: string;
     user: Types.ObjectId;
     loyaltyPoint: number;
     walletBalance: number;
     address: string;
     city: string;
+    version: string;
   }
 
-  export interface CustomerRepInterface {
+  export interface CustomerRepEventInterface {
     id: string;
     user: Types.ObjectId;
     address: string;
     city: string;
+    version: number;
   }
 
   /**
@@ -52,7 +58,8 @@ declare namespace CTypes {
    */
   export type IDType = "id" | "passport";
 
-  export interface OperatorInterface {
+  export interface OperatorEventInterface {
+    id: string;
     user?: Types.ObjectId;
     identityType: IDType;
     identityNumber: number;
@@ -62,18 +69,21 @@ declare namespace CTypes {
     earnings: number;
     aboutMe: string;
     zone?: Types.ObjectId;
+    version: number;
   }
 
-  export interface OperatorRepInterface {
+  export interface OperatorRepEventInterface {
     id: string;
     user?: Types.ObjectId;
     active: boolean;
+    version: number;
   }
 
   /**
    * Product:
    */
-  export interface ProductInterface {
+  export interface ProductEventInterface {
+    id: string;
     name: string;
     type: string;
     quantity: number;
@@ -84,20 +94,23 @@ declare namespace CTypes {
     category: Types.ObjectId;
     image: string;
     description?: string;
+    version: number;
   }
 
-  export interface ProductRepInterface {
+  export interface ProductRepEventInterface {
     id: string;
     name: string;
     price: number;
     description: string;
     image?: string;
+    version: string;
   }
 
   /**
    * Robot:
    */
-  export interface RobotInterface {
+  export interface RobotEventInterface {
+    id: string;
     robotId: string;
     name: string;
     accountId?: string;
@@ -110,14 +123,16 @@ declare namespace CTypes {
     vendor?: Types.ObjectId;
     zone?: Types.ObjectId;
     currentOrder?: number;
+    version: number;
   }
 
-  export interface RobotRepInterface {
+  export interface RobotRepEventInterface {
     id: string;
     name: string;
     type: string;
     image: string;
     position: CoordinateType;
+    version: number;
   }
 
   /**
@@ -127,7 +142,8 @@ declare namespace CTypes {
   export type TaskStatusType = "pending" | "running" | "completed" | "failed";
   export type TaskType = "delivery" | "non-delivery";
 
-  export interface TaskInterface {
+  export interface TaskEventInterface {
+    id: string;
     name: string;
     type: TaskType;
     fare: number;
@@ -144,9 +160,10 @@ declare namespace CTypes {
     zone?: Types.ObjectId;
     status: TaskStatusType;
     description?: string;
+    version: number;
   }
 
-  export interface TaskRepInterface {
+  export interface TaskRepEventInterface {
     id: string;
     name: string;
     type: TaskType;
@@ -154,6 +171,7 @@ declare namespace CTypes {
     robot?: Types.ObjectId;
     status: TaskStatusType;
     description?: string;
+    version: number;
   }
 
   /**
@@ -161,7 +179,8 @@ declare namespace CTypes {
    */
   export type RoleType = "create" | "edit" | "readOnly" | "delete" | "all";
 
-  export interface UserInterface {
+  export interface UserEventInterface {
+    id: string;
     username: string;
     zone: Types.ObjectId;
     firstName: string;
@@ -171,20 +190,23 @@ declare namespace CTypes {
     password: string;
     image: string;
     roles: RoleType[];
+    version: number;
   }
 
-  export interface UserRepInterface {
+  export interface UserRepEventInterface {
     id: string;
     username: string;
     firstName: string;
     lastName: string;
     image: string;
+    version: number;
   }
 
   /**
    * Vendor:
    */
-  export interface VendorInterface {
+  export interface VendorEventInterface {
+    id: string;
     name: string;
     businessField: string;
     vaxOrTax: number;
@@ -199,23 +221,26 @@ declare namespace CTypes {
     version: number;
   }
 
-  export interface VendorRepInterface {
+  export interface VendorRepEventInterface {
     id: string;
     name: string;
     address: string;
     logo: string;
+    version: number;
   }
 
   /**
    * Zone:
    */
 
-  export interface ZoneInterface {
+  export interface ZoneEventInterface {
+    id: string;
     name: string;
     location: {
       type: string;
       coordinates: number[][][];
     };
+    version: number;
   }
 
   export interface ZoneRepInterface {
@@ -224,4 +249,4 @@ declare namespace CTypes {
   }
 }
 
-export default CTypes;
+export default ETypes;

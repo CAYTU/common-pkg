@@ -1,5 +1,6 @@
 // Types import
 import CTypes from "./types";
+import ETypes from "./event-types";
 
 export * from "./errors/bad-request";
 export * from "./errors/custom";
@@ -18,4 +19,4 @@ export * from "./nats-events/listener";
 export * from "./nats-events/publisher";
 export * from "./nats-events/subjects";
 
-export { CTypes };
+export { CTypes, ETypes };

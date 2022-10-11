@@ -30,6 +30,23 @@ declare namespace CTypes {
   }
 
   /**
+   * Customer:
+   */
+  export interface CustomerInterface {
+    user: Types.ObjectId;
+    loyaltyPoint: number;
+    walletBalance: number;
+    address: string;
+    city: string;
+  }
+
+  export interface CustomerRepInterface {
+    user: Types.ObjectId;
+    address: string;
+    city: string;
+  }
+
+  /**
    * Operator:
    */
   export type IDType = "id" | "passport";

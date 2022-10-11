@@ -1,4 +1,4 @@
-import { Document, Types } from "mongoose";
+import { Types } from "mongoose";
 
 declare namespace CTypes {
   // Some common types:
@@ -17,12 +17,15 @@ declare namespace CTypes {
   /**
    * Category:
    */
-  export interface CategoryInterface extends Document {
-    id: string;
+  export interface CategoryInterface {
     name: string;
     image: string;
     description?: string;
-    version: number;
+  }
+
+  export interface CategoryRepInterface {
+    name: string;
+    image: string;
   }
 
   /**
@@ -30,8 +33,7 @@ declare namespace CTypes {
    */
   export type IDType = "id" | "passport";
 
-  export interface OperatorInterface extends Document {
-    id: string;
+  export interface OperatorInterface {
     user?: Types.ObjectId;
     identityType: IDType;
     identityNumber: number;
@@ -41,14 +43,17 @@ declare namespace CTypes {
     earnings: number;
     aboutMe: string;
     zone?: Types.ObjectId;
-    version: number;
+  }
+
+  export interface OperatorRepInterface {
+    user?: Types.ObjectId;
+    active: boolean;
   }
 
   /**
    * Product:
    */
-  export interface ProductInterface extends Document {
-    id: string;
+  export interface ProductInterface {
     name: string;
     type: string;
     quantity: number;
@@ -59,14 +64,19 @@ declare namespace CTypes {
     category: Types.ObjectId;
     image: string;
     description?: string;
-    version: number;
+  }
+
+  export interface ProductRepInterface {
+    name: string;
+    price: number;
+    description: string;
+    image?: string;
   }
 
   /**
    * Robot:
    */
-  export interface RobotInterface extends Document {
-    id: string;
+  export interface RobotInterface {
     robotId: string;
     name: string;
     accountId?: string;
@@ -79,11 +89,13 @@ declare namespace CTypes {
     vendor?: Types.ObjectId;
     zone?: Types.ObjectId;
     currentOrder?: number;
-    version: number;
-    findByEvent: (event: {
-      id: string;
-      version: number;
-    }) => Promise<Document<RobotInterface> | null>;
+  }
+
+  export interface RobotRepInterface {
+    name: string;
+    type: string;
+    image: string;
+    position: CoordinateType;
   }
 
   /**
@@ -93,8 +105,7 @@ declare namespace CTypes {
   export type TaskStatusType = "pending" | "running" | "completed" | "failed";
   export type TaskType = "delivery" | "non-delivery";
 
-  export interface TaskInterface extends Document {
-    id: string;
+  export interface TaskInterface {
     name: string;
     type: TaskType;
     fare: number;
@@ -111,11 +122,15 @@ declare namespace CTypes {
     zone?: Types.ObjectId;
     status: TaskStatusType;
     description?: string;
-    version: number;
-    findByEvent: (event: {
-      id: string;
-      version: number;
-    }) => Promise<Document<TaskInterface> | null>;
+  }
+
+  export interface TaskRepInterface {
+    name: string;
+    type: TaskType;
+    fare: number;
+    robot?: Types.ObjectId;
+    status: TaskStatusType;
+    description?: string;
   }
 
   /**
@@ -123,8 +138,7 @@ declare namespace CTypes {
    */
   export type RoleType = "create" | "edit" | "readOnly" | "delete" | "all";
 
-  export interface UserInterface extends Document {
-    id: string;
+  export interface UserInterface {
     username: string;
     zone: Types.ObjectId;
     firstName: string;
@@ -134,14 +148,19 @@ declare namespace CTypes {
     password: string;
     image: string;
     roles: RoleType[];
-    version: number;
-    matchPwd: (pwd: string) => Promise<boolean>;
+  }
+
+  export interface UserRepInterface {
+    username: string;
+    firstName: string;
+    lastName: string;
+    image: string;
   }
 
   /**
    * Vendor:
    */
-  export interface VendorInterface extends Document {
+  export interface VendorInterface {
     id: string;
     name: string;
     businessField: string;
@@ -157,18 +176,26 @@ declare namespace CTypes {
     version: number;
   }
 
+  export interface VendorRepInterface {
+    name: string;
+    address: string;
+    logo: string;
+  }
+
   /**
    * Zone:
    */
 
-  export interface ZoneInterface extends Document {
-    id: string;
+  export interface ZoneInterface {
     name: string;
     location: {
       type: string;
       coordinates: number[][][];
     };
-    version: number;
+  }
+
+  export interface ZoneRepInterface {
+    name: string;
   }
 }
 

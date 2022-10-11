@@ -24,6 +24,7 @@ declare namespace CTypes {
   }
 
   export interface CategoryRepInterface {
+    id: string;
     name: string;
     image: string;
   }
@@ -46,6 +47,7 @@ declare namespace CTypes {
   }
 
   export interface OperatorRepInterface {
+    id: string;
     user?: Types.ObjectId;
     active: boolean;
   }
@@ -67,6 +69,7 @@ declare namespace CTypes {
   }
 
   export interface ProductRepInterface {
+    id: string;
     name: string;
     price: number;
     description: string;
@@ -92,6 +95,7 @@ declare namespace CTypes {
   }
 
   export interface RobotRepInterface {
+    id: string;
     name: string;
     type: string;
     image: string;
@@ -125,6 +129,7 @@ declare namespace CTypes {
   }
 
   export interface TaskRepInterface {
+    id: string;
     name: string;
     type: TaskType;
     fare: number;
@@ -151,6 +156,7 @@ declare namespace CTypes {
   }
 
   export interface UserRepInterface {
+    id: string;
     username: string;
     firstName: string;
     lastName: string;
@@ -177,6 +183,7 @@ declare namespace CTypes {
   }
 
   export interface VendorRepInterface {
+    id: string;
     name: string;
     address: string;
     logo: string;
@@ -195,6 +202,7 @@ declare namespace CTypes {
   }
 
   export interface ZoneRepInterface {
+    id: string;
     name: string;
   }
 }

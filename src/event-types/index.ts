@@ -243,9 +243,10 @@ declare namespace ETypes {
     version: number;
   }
 
-  export interface ZoneRepInterface {
+  export interface ZoneRepEventInterface {
     id: string;
     name: string;
+    version: number;
   }
 }
 

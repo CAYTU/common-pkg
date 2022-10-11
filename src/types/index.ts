@@ -17,7 +17,7 @@ declare namespace CTypes {
   /**
    * Category:
    */
-  export interface CategoryInterface {
+  export interface CategoryInterface extends Document {
     id: string;
     name: string;
     image: string;
@@ -30,7 +30,7 @@ declare namespace CTypes {
    */
   export type IDType = "id" | "passport";
 
-  export interface OperatorInterface {
+  export interface OperatorInterface extends Document {
     id: string;
     user?: Types.ObjectId;
     identityType: IDType;
@@ -47,7 +47,7 @@ declare namespace CTypes {
   /**
    * Product:
    */
-  export interface ProductInterface {
+  export interface ProductInterface extends Document {
     id: string;
     name: string;
     type: string;
@@ -65,7 +65,7 @@ declare namespace CTypes {
   /**
    * Robot:
    */
-  export interface RobotInterface {
+  export interface RobotInterface extends Document {
     id: string;
     robotId: string;
     name: string;
@@ -93,7 +93,7 @@ declare namespace CTypes {
   export type TaskStatusType = "pending" | "running" | "completed" | "failed";
   export type TaskType = "delivery" | "non-delivery";
 
-  export interface TaskInterface {
+  export interface TaskInterface extends Document {
     id: string;
     name: string;
     type: TaskType;
@@ -123,7 +123,7 @@ declare namespace CTypes {
    */
   export type RoleType = "create" | "edit" | "readOnly" | "delete" | "all";
 
-  export interface UserInterface {
+  export interface UserInterface extends Document {
     id: string;
     username: string;
     zone: Types.ObjectId;
@@ -141,7 +141,7 @@ declare namespace CTypes {
   /**
    * Vendor:
    */
-  export interface VendorInterface {
+  export interface VendorInterface extends Document {
     id: string;
     name: string;
     businessField: string;
@@ -161,7 +161,7 @@ declare namespace CTypes {
    * Zone:
    */
 
-  export interface ZoneInterface {
+  export interface ZoneInterface extends Document {
     id: string;
     name: string;
     location: {

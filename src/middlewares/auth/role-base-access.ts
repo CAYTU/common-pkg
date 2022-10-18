@@ -56,6 +56,26 @@ const RbaUserACL = {
     }
   ),
 
+  isCustomer: asyncHandler(
+    async (req: Request, res: Response, next: NextFunction) => {
+      if (req.currentUser?.roles.includes("customer")) {
+        next();
+      } else {
+        throw new BadRequestErr("Not Authorized as Customer.");
+      }
+    }
+  ),
+
+  isOperator: asyncHandler(
+    async (req: Request, res: Response, next: NextFunction) => {
+      if (req.currentUser?.roles.includes("operator")) {
+        next();
+      } else {
+        throw new BadRequestErr("Not Authorized as Operator.");
+      }
+    }
+  ),
+
   isAdmin: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
       if (req.currentUser?.roles.includes("all")) {

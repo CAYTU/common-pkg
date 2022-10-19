@@ -1,3 +1,6 @@
+// Please if any modification happens in this files then make
+// sure to do it in the event-types as well: "src/event-types/index.ts"
+
 import { Types } from "mongoose";
 
 declare namespace CTypes {

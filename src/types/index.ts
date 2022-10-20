@@ -178,10 +178,10 @@ declare namespace CTypes {
     //   Ref to Operator Model
     operator?: Types.ObjectId;
     //   Ref to Customer Model
-    customer: Types.ObjectId;
+    customer?: Types.ObjectId;
     //   Ref to Robot Model
     robot?: Types.ObjectId;
-    status: TaskStatus;
+    status?: TaskStatus;
     duration?: DurationType;
     // Delivery Attrs
     itinerary?: ItineraryType;

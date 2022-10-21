@@ -31,9 +31,9 @@ export enum TaskType {
 }
 
 export enum UserRole {
-  // This is the basic role that any user which creates an account
-  // through the web interface will have.
-  // Basic operations are allowed
+  // This is the most basic role that any user that creates an account
+  // through the api will have.
+  // Basic operations are allowed -> Read & Create Task
   Customer = "customer",
   // This role combine both the customer and the its own.
   Operator = "operator",
@@ -42,4 +42,10 @@ export enum UserRole {
   Manager = "manager",
   // Not only it encapsules the 2 aboves also he's all rights
   Admin = "admin",
+
+  // Primitive Roles | if missing, they can prevent user to do basic operation
+  Delete = "delete",
+  Create = "create",
+  Update = "update",
+  ReadOnly = "readOnly",
 }

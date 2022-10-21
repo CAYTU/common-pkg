@@ -194,7 +194,7 @@ declare namespace ETypes {
     email: string;
     password: string;
     image: string;
-    role: UserRole;
+    roles: UserRole[];
     zone?: Types.ObjectId;
     version: number;
   }

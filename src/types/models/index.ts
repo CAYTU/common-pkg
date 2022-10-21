@@ -179,7 +179,7 @@ declare namespace CTypes {
     email: string;
     password: string;
     image: string;
-    role: UserRole;
+    roles: UserRole[];
     zone?: Types.ObjectId;
   }
 

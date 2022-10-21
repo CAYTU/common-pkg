@@ -193,8 +193,8 @@ declare namespace ETypes {
     phone: string;
     email: string;
     password: string;
-    image: string;
-    roles: UserRole[];
+    image?: string;
+    roles?: UserRole[];
     zone?: Types.ObjectId;
     version: number;
   }
@@ -204,7 +204,7 @@ declare namespace ETypes {
     username: string;
     firstName: string;
     lastName: string;
-    image: string;
+    image?: string;
     version: number;
   }
 

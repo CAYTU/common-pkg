@@ -178,8 +178,8 @@ declare namespace CTypes {
     phone: string;
     email: string;
     password: string;
-    image: string;
-    roles: UserRole[];
+    image?: string;
+    roles?: UserRole[];
     zone?: Types.ObjectId;
   }
 
@@ -188,7 +188,7 @@ declare namespace CTypes {
     username: string;
     firstName: string;
     lastName: string;
-    image: string;
+    image?: string;
   }
 
   /**

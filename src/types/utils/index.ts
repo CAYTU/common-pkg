@@ -48,4 +48,5 @@ export enum UserRole {
   Create = "create",
   Update = "update",
   ReadOnly = "readOnly",
+  All = "all"
 }

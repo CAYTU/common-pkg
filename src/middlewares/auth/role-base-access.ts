@@ -70,7 +70,7 @@ const RbaUserACL = {
       ) {
         next();
       } else {
-        throw new BadRequestErr("Not Authorized as Customer.");
+        throw new BadRequestErr("Not Authorized ...");
       }
     }
   ),

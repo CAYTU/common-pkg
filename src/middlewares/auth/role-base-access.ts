@@ -62,7 +62,12 @@ const RbaUserACL = {
 
   isCustomer: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-      if (req.currentUser?.roles.includes("customer")) {
+      if (
+        req.currentUser?.roles.includes("customer") ||
+        req.currentUser?.roles.includes("admin") ||
+        req.currentUser?.roles.includes("all") ||
+        req.currentUser?.roles.includes("operator")
+      ) {
         next();
       } else {
         throw new BadRequestErr("Not Authorized as Customer.");
@@ -72,7 +77,11 @@ const RbaUserACL = {
 
   isOperator: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-      if (req.currentUser?.roles.includes("operator")) {
+      if (
+        req.currentUser?.roles.includes("operator") ||
+        req.currentUser?.roles.includes("admin") ||
+        req.currentUser?.roles.includes("all")
+      ) {
         next();
       } else {
         throw new BadRequestErr("Not Authorized as Operator.");

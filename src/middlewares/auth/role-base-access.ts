@@ -8,7 +8,8 @@ const RbaUserACL = {
     async (req: Request, res: Response, next: NextFunction) => {
       if (
         req.currentUser?.roles.includes("create") ||
-        req.currentUser?.roles.includes("all")
+        req.currentUser?.roles.includes("all") ||
+        req.currentUser?.roles.includes("admin")
       ) {
         next();
       } else {
@@ -21,7 +22,8 @@ const RbaUserACL = {
     async (req: Request, res: Response, next: NextFunction) => {
       if (
         req.currentUser?.roles.includes("edit") ||
-        req.currentUser?.roles.includes("all")
+        req.currentUser?.roles.includes("all") ||
+        req.currentUser?.roles.includes("admin")
       ) {
         next();
       } else {
@@ -34,7 +36,8 @@ const RbaUserACL = {
     async (req: Request, res: Response, next: NextFunction) => {
       if (
         req.currentUser?.roles.includes("delete") ||
-        req.currentUser?.roles.includes("all")
+        req.currentUser?.roles.includes("all") ||
+        req.currentUser?.roles.includes("admin")
       ) {
         next();
       } else {
@@ -47,7 +50,8 @@ const RbaUserACL = {
     async (req: Request, res: Response, next: NextFunction) => {
       if (
         req.currentUser?.roles.includes("readOnly") ||
-        req.currentUser?.roles.includes("all")
+        req.currentUser?.roles.includes("all") ||
+        req.currentUser?.roles.includes("admin")
       ) {
         next();
       } else {
@@ -78,7 +82,10 @@ const RbaUserACL = {
 
   isAdmin: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-      if (req.currentUser?.roles.includes("all")) {
+      if (
+        req.currentUser?.roles.includes("all") ||
+        req.currentUser?.roles.includes("admin")
+      ) {
         next();
       } else {
         throw new BadRequestErr("Not Authorized as Admin.");

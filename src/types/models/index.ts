@@ -110,11 +110,11 @@ declare namespace CTypes {
     image: string;
     token?: string;
     status: string;
-    orderCount: number;
-    assignedOrderCount?: number;
+    taskCount: number;
+    assignedTaskCount?: number;
     vendor?: Types.ObjectId;
     zone?: Types.ObjectId;
-    currentOrder?: number;
+    currentTask?: Types.ObjectId;
   }
 
   export interface RobotRepInterface {

@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-import { TaskStatus, TaskType, UserRole } from "../utils";
+import { RobotStates, TaskStatus, TaskType, UserRole } from "../utils";
 
 declare namespace CTypes {
   // Some common types:
@@ -109,7 +109,7 @@ declare namespace CTypes {
     type: string;
     image: string;
     token?: string;
-    status: string;
+    state: RobotStates;
     taskCount: number;
     assignedTaskCount?: number;
     vendor?: Types.ObjectId;

@@ -61,22 +61,24 @@ declare namespace ETypes {
 
   export interface OperatorEventInterface {
     id: string;
-    user?: Types.ObjectId;
     identityType: IDType;
     identityNumber: number;
     fcmToken: string;
-    active: boolean;
-    orderCount: number;
-    earnings: number;
-    aboutMe: string;
+    user: Types.ObjectId;
+    active?: boolean;
+    taskCount?: number;
+    earnings?: number;
+    aboutMe?: string;
+    currentTask?: Types.ObjectId;
     zone?: Types.ObjectId;
     version: number;
   }
 
   export interface OperatorRepEventInterface {
     id: string;
-    user?: Types.ObjectId;
-    active: boolean;
+    user: Types.ObjectId;
+    active?: boolean;
+    aboutMe?: string;
     version: number;
   }
 

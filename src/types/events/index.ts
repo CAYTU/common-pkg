@@ -118,8 +118,8 @@ declare namespace ETypes {
     type: string;
     image: string;
     token?: string;
-    state: RobotStates;
-    taskCount: number;
+    state?: RobotStates;
+    taskCount?: number;
     assignedTaskCount?: number;
     vendor?: Types.ObjectId;
     zone?: Types.ObjectId;

@@ -182,7 +182,7 @@ declare namespace CTypes {
     password: string;
     image?: string;
     roles?: UserRole[];
-    zone?: Types.ObjectId;
+    position?: CoordinateType;
   }
 
   export interface UserRepInterface {

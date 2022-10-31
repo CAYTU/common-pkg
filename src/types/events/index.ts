@@ -197,7 +197,7 @@ declare namespace ETypes {
     password: string;
     image?: string;
     roles?: UserRole[];
-    zone?: Types.ObjectId;
+    position?: CoordinateType;
     version: number;
   }
 

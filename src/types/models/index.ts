@@ -179,6 +179,7 @@ declare namespace CTypes {
     lastName: string;
     phone: string;
     email: string;
+    isVerified?: boolean;
     password: string;
     image?: string;
     roles?: UserRole[];

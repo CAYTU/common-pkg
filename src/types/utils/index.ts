@@ -76,3 +76,14 @@ export enum RobotStates {
   // customer after terminating the task
   ENJOYMEALMSG = "enjoy-meal-msg",
 }
+
+export enum CurrentRoleState {
+  // the first roles the user has been created with
+  Native = "native",
+  // When a user make a request for a new roles and has not been accepted yet
+  Pending = "pending",
+  // When the request to upgrade has been accepted
+  Upgraded = "upgraded",
+  // When the request to upgraded has been turn down
+  Denied = "denied",
+}

@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-import { RobotStates, TaskStatus, TaskType, UserRole } from "../utils";
+import { CurrentRoleState, RobotStates, TaskStatus, TaskType, UserRole } from "../utils";
 
 declare namespace CTypes {
   // Some common types:
@@ -180,6 +180,7 @@ declare namespace CTypes {
     phone: string;
     email: string;
     isVerified?: boolean;
+    currentRoleState: CurrentRoleState;
     password: string;
     image?: string;
     roles?: UserRole[];

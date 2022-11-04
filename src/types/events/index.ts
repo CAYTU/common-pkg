@@ -1,5 +1,11 @@
 import { Types } from "mongoose";
-import { RobotStates, TaskStatus, TaskType, UserRole } from "../utils";
+import {
+  CurrentRoleState,
+  RobotStates,
+  TaskStatus,
+  TaskType,
+  UserRole,
+} from "../utils";
 
 declare namespace ETypes {
   // Some common types:
@@ -195,6 +201,7 @@ declare namespace ETypes {
     phone: string;
     email: string;
     isVerified?: boolean;
+    currentRoleState: CurrentRoleState;
     password: string;
     image?: string;
     roles?: UserRole[];

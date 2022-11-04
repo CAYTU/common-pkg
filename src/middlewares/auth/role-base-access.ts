@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
 import { NextFunction, Request, Response } from "express";
-import { BadRequestErr } from "../../errors/bad-request";
+import { NotAuthorizedErr } from "../../errors/not-authorized";
 
 // Role Based Access: User ACL
 const RbaUserACL = {
@@ -13,7 +13,7 @@ const RbaUserACL = {
       ) {
         next();
       } else {
-        throw new BadRequestErr("Cannot create.");
+        throw new NotAuthorizedErr("Cannot create.");
       }
     }
   ),
@@ -27,7 +27,7 @@ const RbaUserACL = {
       ) {
         next();
       } else {
-        throw new BadRequestErr("Cannot Edit.");
+        throw new NotAuthorizedErr("Cannot Edit.");
       }
     }
   ),
@@ -41,7 +41,7 @@ const RbaUserACL = {
       ) {
         next();
       } else {
-        throw new BadRequestErr("Cannot Delete.");
+        throw new NotAuthorizedErr("Cannot Delete.");
       }
     }
   ),
@@ -55,7 +55,7 @@ const RbaUserACL = {
       ) {
         next();
       } else {
-        throw new BadRequestErr("Not Authorized.");
+        throw new NotAuthorizedErr("Not Authorized.");
       }
     }
   ),
@@ -70,7 +70,7 @@ const RbaUserACL = {
       ) {
         next();
       } else {
-        throw new BadRequestErr("Not Authorized ...");
+        throw new NotAuthorizedErr("Not Authorized ...");
       }
     }
   ),
@@ -84,7 +84,7 @@ const RbaUserACL = {
       ) {
         next();
       } else {
-        throw new BadRequestErr("Not Authorized as Operator.");
+        throw new NotAuthorizedErr("Not Authorized as Operator.");
       }
     }
   ),
@@ -97,7 +97,7 @@ const RbaUserACL = {
       ) {
         next();
       } else {
-        throw new BadRequestErr("Not Authorized as Admin.");
+        throw new NotAuthorizedErr("Not Authorized as Admin.");
       }
     }
   ),

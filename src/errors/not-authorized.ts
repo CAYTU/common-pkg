@@ -3,7 +3,7 @@ import { CustomErr } from "./custom";
 export class NotAuthorizedErr extends CustomErr {
   statusCode = 401;
 
-  constructor(public msg: string) {
+  constructor(public msg?: string) {
     super(msg);
     Object.setPrototypeOf(this, NotAuthorizedErr.prototype);
   }

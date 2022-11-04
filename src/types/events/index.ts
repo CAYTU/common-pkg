@@ -201,7 +201,7 @@ declare namespace ETypes {
     phone: string;
     email: string;
     isVerified?: boolean;
-    currentRoleState: CurrentRoleState;
+    currentRoleState?: CurrentRoleState;
     password: string;
     image?: string;
     roles?: UserRole[];

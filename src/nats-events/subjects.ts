@@ -6,6 +6,10 @@ export enum Subjects {
   CustomerCreated = "customer:created",
   CustomerUpdated = "customer:updated",
   CustomerDeleted = "customer:deleted",
+  // Notification Subjects
+  NotificationCreated = "notification:created",
+  NotificationUpdated = "notification:updated",
+  NotificationDeleted = "notification:deleted",
   // Robot Subjects
   RobotCreated = "robot:created",
   RobotUpdated = "robot:updated",

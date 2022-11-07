@@ -61,6 +61,18 @@ declare namespace ETypes {
   }
 
   /**
+   * Notification
+   */
+
+  export interface Notification {
+    id: string;
+    from: string;
+    to: string;
+    message: string;
+    version: number;
+  }
+
+  /**
    * Operator:
    */
   export type IDType = "id" | "passport";

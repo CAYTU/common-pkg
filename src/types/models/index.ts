@@ -53,6 +53,16 @@ declare namespace CTypes {
   }
 
   /**
+   * Notification
+   */
+
+  export interface Notification {
+    from: string;
+    to: string;
+    message: string;
+  }
+
+  /**
    * Operator:
    */
   export type IDType = "id" | "passport";

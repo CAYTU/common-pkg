@@ -64,9 +64,9 @@ declare namespace ETypes {
    * Notification
    */
 
-  export interface Notification {
+  export interface NotificationInterface {
     id: string;
-    from: string;
+    from?: string;
     to: string;
     message: string;
     version: number;
@@ -226,6 +226,7 @@ declare namespace ETypes {
     username: string;
     firstName: string;
     lastName: string;
+    email: string;
     image?: string;
     version: number;
   }

@@ -56,8 +56,8 @@ declare namespace CTypes {
    * Notification
    */
 
-  export interface Notification {
-    from: string;
+  export interface NotificationInterface {
+    from?: string;
     to: string;
     message: string;
   }
@@ -201,6 +201,7 @@ declare namespace CTypes {
     id: string;
     username: string;
     firstName: string;
+    email: string;
     lastName: string;
     image?: string;
   }

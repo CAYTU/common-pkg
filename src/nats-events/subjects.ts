@@ -15,6 +15,8 @@ export enum Subjects {
   RobotCreated = "robot:created",
   RobotUpdated = "robot:updated",
   RobotDeleted = "robot:deleted",
+  RobotAssigned = "robot:assigned",
+  RobotUnassigned = "robot:unassigned",
   // Taks Subjects
   TaskCreated = "task:created",
   TaskUpdated = "task:updated",
@@ -43,4 +45,6 @@ export enum Subjects {
   OperatorCreated = "operator:created",
   OperatorUpdated = "operator:updated",
   OperatorDeleted = "operator:deleted",
+  OperatorAssigned = "operator:assigned",
+  OperatorUnassigned = "operator:unassigned"
 }

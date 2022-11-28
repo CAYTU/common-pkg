@@ -10,6 +10,7 @@ export enum Subjects {
   NotificationCreated = "notification:created",
   NotificationUpdated = "notification:updated",
   NotificationDeleted = "notification:deleted",
+  NotifyUserIsVerified = "notify:user:is:verified",
   // Robot Subjects
   RobotCreated = "robot:created",
   RobotUpdated = "robot:updated",
@@ -22,6 +23,10 @@ export enum Subjects {
   UserCreated = "user:created",
   UserUpdated = "user:updated",
   UserDeleted = "user:deleted",
+  UserCreationIntent = "user:creation:intent",
+  UserUpgraded = "user:upgraded",
+  UserLogout = "user:logout",
+  UserLogin = "user:login",
   // Zone Subjects
   ZoneCreated = "zone:created",
   ZoneUpdated = "zone:updated",

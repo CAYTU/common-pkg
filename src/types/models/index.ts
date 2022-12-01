@@ -177,6 +177,8 @@ declare namespace CTypes {
     type: TaskType;
     fare: number;
     status: TaskStatus;
+    //   Ref to Robot Model
+    robot?: Types.ObjectId;
     // Delivery Attrs
     itinerary?: ItineraryType;
     // Cleaning Attrs

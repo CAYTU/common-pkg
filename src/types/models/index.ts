@@ -1,4 +1,5 @@
-import { Types } from "mongoose";
+import GeoJSON from "mongoose-geojson-schema";
+import mongoose, { Types } from "mongoose";
 import { CurrentRoleState, RobotStates, TaskStatus, TaskType, UserRole } from "../utils";
 
 declare namespace CTypes {
@@ -9,15 +10,6 @@ declare namespace CTypes {
   // Please if any modification happens in this files then make
   // sure to do it in the event-types as well: "src/event-types/index.ts"
 
-  export type CoordinateType = {
-    latitude: number;
-    longitude: number;
-  };
-
-  export type PolygonType = {
-    type: string;
-    coordinates: [[[number]]];
-  };
 
   /**
    * Category:
@@ -134,7 +126,7 @@ declare namespace CTypes {
     name: string;
     type: string;
     image: string;
-    position: CoordinateType;
+    position: mongoose.Schema.Types.Point;
   }
 
   /**
@@ -149,8 +141,8 @@ declare namespace CTypes {
   };
 
   export type ItineraryType = {
-    start: CoordinateType;
-    end: CoordinateType;
+    start: mongoose.Schema.Types.Point;
+    end: mongoose.Schema.Types.Point;
   };
 
   export interface TaskInterface {
@@ -169,7 +161,7 @@ declare namespace CTypes {
     // Delivery Attrs
     itinerary?: ItineraryType;
     // Cleaning Attrs
-    location?: CoordinateType;
+    location?: mongoose.Schema.Types.Point;
   }
 
   export interface TaskRepInterface {
@@ -194,7 +186,7 @@ declare namespace CTypes {
     password: string;
     image?: string;
     roles?: UserRole[];
-    position?: CoordinateType;
+    position?: mongoose.Schema.Types.Point;
   }
 
   export interface UserRepInterface {
@@ -219,7 +211,7 @@ declare namespace CTypes {
     coverImage: string;
     logo: string;
     zone: Types.ObjectId;
-    coordinates: CoordinateType;
+    coordinates: mongoose.Schema.Types.Point;
     owner: Types.ObjectId;
     version: number;
   }
@@ -237,10 +229,9 @@ declare namespace CTypes {
 
   export interface ZoneInterface {
     name: string;
-    location: {
-      type: string;
-      coordinates: number[][][];
-    };
+    area: mongoose.Schema.Types.Polygon;
+    securityRate?: number;
+    practicabilityPercentage?: number;
   }
 
   export interface ZoneRepInterface {

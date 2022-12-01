@@ -1,4 +1,5 @@
-import { Types } from "mongoose";
+import GeoJSON from "mongoose-geojson-schema";
+import mongoose, { Types } from "mongoose";
 import {
   CurrentRoleState,
   RobotStates,
@@ -11,15 +12,6 @@ declare namespace ETypes {
   // Some common types:
   //--------------------
   // Coordinate type for an object coupling both latitude & longitude
-  export type CoordinateType = {
-    latitude: number;
-    longitude: number;
-  };
-
-  export type PolygonType = {
-    type: string;
-    coordinates: [[[number]]];
-  };
 
   /**
    * Category:
@@ -152,7 +144,7 @@ declare namespace ETypes {
     name: string;
     type: string;
     image: string;
-    position: CoordinateType;
+    position: mongoose.Schema.Types.Point;
     version: number;
   }
 
@@ -168,8 +160,8 @@ declare namespace ETypes {
   };
 
   export type ItineraryType = {
-    start: CoordinateType;
-    end: CoordinateType;
+    start: mongoose.Schema.Types.Point;
+    end: mongoose.Schema.Types.Point;
   };
 
   export interface TaskEventInterface {
@@ -189,7 +181,7 @@ declare namespace ETypes {
     // Delivery Attrs
     itinerary?: ItineraryType;
     // Cleaning Attrs
-    location?: CoordinateType;
+    location?: mongoose.Schema.Types.GeoJSON;
     version: number;
   }
 
@@ -217,7 +209,7 @@ declare namespace ETypes {
     password: string;
     image?: string;
     roles?: UserRole[];
-    position?: CoordinateType;
+    position?: mongoose.Schema.Types.Point;
     version: number;
   }
 
@@ -245,7 +237,7 @@ declare namespace ETypes {
     coverImage: string;
     logo: string;
     zone: Types.ObjectId;
-    coordinates: CoordinateType;
+    coordinates: mongoose.Schema.Types.Point;
     owner: Types.ObjectId;
     version: number;
   }
@@ -265,10 +257,9 @@ declare namespace ETypes {
   export interface ZoneEventInterface {
     id: string;
     name: string;
-    location: {
-      type: string;
-      coordinates: number[][][];
-    };
+    area: mongoose.Schema.Types.Polygon;
+    securityRate?: number;
+    practicabilityPercentage?: number;
     version: number;
   }
 

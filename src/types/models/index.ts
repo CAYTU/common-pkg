@@ -118,6 +118,7 @@ declare namespace CTypes {
     assignedTaskCount?: number;
     vendor?: Types.ObjectId;
     zone?: Types.ObjectId;
+    position?: mongoose.Schema.Types.Point;
     currentTask?: Types.ObjectId;
   }
 
@@ -126,7 +127,7 @@ declare namespace CTypes {
     name: string;
     type: string;
     image: string;
-    position: mongoose.Schema.Types.Point;
+    position?: mongoose.Schema.Types.Point;
   }
 
   /**

@@ -135,6 +135,7 @@ declare namespace ETypes {
     assignedTaskCount?: number;
     vendor?: Types.ObjectId;
     zone?: Types.ObjectId;
+    position?: mongoose.Schema.Types.Point;
     currentTask?: Types.ObjectId;
     version: number;
   }
@@ -144,7 +145,7 @@ declare namespace ETypes {
     name: string;
     type: string;
     image: string;
-    position: mongoose.Schema.Types.Point;
+    position?: mongoose.Schema.Types.Point;
     version: number;
   }
 

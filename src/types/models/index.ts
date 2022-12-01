@@ -1,6 +1,12 @@
 import GeoJSON from "mongoose-geojson-schema";
 import mongoose, { Types } from "mongoose";
-import { CurrentRoleState, RobotStates, TaskStatus, TaskType, UserRole } from "../utils";
+import {
+  CurrentRoleState,
+  RobotStates,
+  TaskStatus,
+  TaskType,
+  UserRole,
+} from "../utils";
 
 declare namespace CTypes {
   // Some common types:
@@ -9,7 +15,6 @@ declare namespace CTypes {
 
   // Please if any modification happens in this files then make
   // sure to do it in the event-types as well: "src/event-types/index.ts"
-
 
   /**
    * Category:
@@ -127,8 +132,8 @@ declare namespace CTypes {
     name: string;
     type: string;
     image: string;
-       // Robot can be modifiable from event
-       robot?: Types.ObjectId;
+    // Robot can be modifiable from event
+    robot?: Types.ObjectId;
     position?: mongoose.Schema.Types.Point;
   }
 
@@ -172,6 +177,10 @@ declare namespace CTypes {
     type: TaskType;
     fare: number;
     status: TaskStatus;
+    // Delivery Attrs
+    itinerary?: ItineraryType;
+    // Cleaning Attrs
+    location?: mongoose.Schema.Types.Point;
   }
 
   /**

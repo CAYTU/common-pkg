@@ -193,6 +193,10 @@ declare namespace ETypes {
     status: TaskStatus;
     // Robot can be modifiable from event
     robot?: Types.ObjectId;
+    // Delivery Attrs
+    itinerary?: ItineraryType;
+    // Cleaning Attrs
+    location?: mongoose.Schema.Types.Point;
     version: number;
   }
 

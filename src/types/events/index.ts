@@ -191,6 +191,8 @@ declare namespace ETypes {
     type: TaskType;
     fare: number;
     status: TaskStatus;
+    // Robot can be modifiable from event
+    robot?: Types.ObjectId;
     version: number;
   }
 

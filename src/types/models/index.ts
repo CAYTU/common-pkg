@@ -127,6 +127,8 @@ declare namespace CTypes {
     name: string;
     type: string;
     image: string;
+       // Robot can be modifiable from event
+       robot?: Types.ObjectId;
     position?: mongoose.Schema.Types.Point;
   }
 

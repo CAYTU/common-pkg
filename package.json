@@ -1,6 +1,6 @@
 {
     "name": "@caytu/common",
-    "version": "1.0.63",
+    "version": "1.0.64",
     "description": "Shared Packages",
     "main": "./build/index.js",
     "types": "./build/index.d.ts",

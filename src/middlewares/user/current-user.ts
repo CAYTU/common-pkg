@@ -29,13 +29,18 @@ export const currentUser = asyncHandler(
         // Split the headers then grap token at index 1
         token = req.headers.authorization.split(" ")[1];
         // Validate the user token with the Secret key
-        const payload = jwt.verify(
+        let payload;
+        jwt.verify(
           token,
           `${process.env.ACCESS_TOKEN_PRIVATE_KEY}`,
           (err, decoded) => {
-            throw new Error(`Token Error: ${err?.message}`);
+            if (err) {
+              throw new Error(`Token Error: ${err?.message}`);
+            }
+
+            (payload = decoded) as UserPayload;
           }
-        ) as UserPayload;
+        );
 
         // Save decoded payload in req.currentUser
         req.currentUser = payload;

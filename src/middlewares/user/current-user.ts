@@ -31,7 +31,10 @@ export const currentUser = asyncHandler(
         // Validate the user token with the Secret key
         const payload = jwt.verify(
           token,
-          `${process.env.ACCESS_TOKEN_PRIVATE_KEY}`
+          `${process.env.ACCESS_TOKEN_PRIVATE_KEY}`,
+          (err, decoded) => {
+            throw new Error(`Token Error: ${err?.message}`);
+          }
         ) as UserPayload;
 
         // Save decoded payload in req.currentUser

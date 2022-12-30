@@ -30,25 +30,14 @@ export const currentUser = asyncHandler(
         // Split the headers then grap token at index 1
         token = req.headers.authorization.split(" ")[1];
         // Validate the user token with the Secret key
-        jwt.verify(
+        payload = jwt.verify(
           token,
-          `${process.env.ACCESS_TOKEN_PRIVATE_KEY}`,
-          (err, decoded) => {
-            if (err) {
-              res.status(401);
-              throw new Error(`Token Error: ${err?.message}`);
-            }
-
-            (payload = decoded) as UserPayload;
-          }
-        );
+          `${process.env.ACCESS_TOKEN_PRIVATE_KEY}`
+        ) as UserPayload;
 
         // Save decoded payload in req.currentUser
         req.currentUser = payload;
-      } catch (err) {
-        res.status(401);
-        throw new Error("Not Authorized, token failed");
-      }
+      } catch (err) {}
 
       next();
     } else if (req.session && req.session?.accessToken) {

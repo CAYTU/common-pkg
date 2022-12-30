@@ -19,8 +19,11 @@ declare global {
 
 export const currentUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    let token;
     let payload;
+
+    if (!req.headers.authorization && !req.session) {
+      return next();
+    }
 
     if (
       req.headers.authorization &&
@@ -28,34 +31,24 @@ export const currentUser = asyncHandler(
     ) {
       try {
         // Split the headers then grap token at index 1
-        token = req.headers.authorization.split(" ")[1];
+        let token = req.headers.authorization.split(" ")[1];
         // Validate the user token with the Secret key
         payload = jwt.verify(
           token,
           `${process.env.ACCESS_TOKEN_PRIVATE_KEY}`
         ) as UserPayload;
-
-        // Save decoded payload in req.currentUser
-        req.currentUser = payload;
       } catch (err) {}
-
-      next();
     } else if (req.session && req.session?.accessToken) {
       try {
         payload = jwt.verify(
           req.session.accessToken,
           `${process.env.ACCESS_TOKEN_PRIVATE_KEY}`
         ) as UserPayload;
-
-        req.currentUser = payload;
       } catch (err) {}
-
-      next();
     }
 
-    if (!token) {
-      next();
-    }
+    // Save decoded payload in req.currentUser
+    req.currentUser = payload;
 
     next();
   }

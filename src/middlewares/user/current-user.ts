@@ -20,6 +20,7 @@ declare global {
 export const currentUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     let token;
+    let payload;
 
     if (
       req.headers.authorization &&
@@ -29,12 +30,12 @@ export const currentUser = asyncHandler(
         // Split the headers then grap token at index 1
         token = req.headers.authorization.split(" ")[1];
         // Validate the user token with the Secret key
-        let payload;
         jwt.verify(
           token,
           `${process.env.ACCESS_TOKEN_PRIVATE_KEY}`,
           (err, decoded) => {
             if (err) {
+              res.status(401);
               throw new Error(`Token Error: ${err?.message}`);
             }
 
@@ -45,15 +46,36 @@ export const currentUser = asyncHandler(
         // Save decoded payload in req.currentUser
         req.currentUser = payload;
       } catch (err) {
-        console.error(err);
         res.status(401);
         throw new Error("Not Authorized, token failed");
       }
+
+      next();
+    } else if (req.session && req.session?.accessToken) {
+      try {
+        jwt.verify(
+          req.session.accessToken,
+          `${process.env.ACCESS_TOKEN_PRIVATE_KEY}`,
+          (err, decoded) => {
+            if (err) {
+              res.status(401);
+              throw new Error(`Token Error: ${err?.message}`);
+            }
+
+            (payload = decoded) as UserPayload;
+          }
+        );
+
+        req.currentUser = payload;
+      } catch (err) {}
+
       next();
     }
 
     if (!token) {
       next();
     }
+
+    next();
   }
 );

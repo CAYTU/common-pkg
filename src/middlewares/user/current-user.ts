@@ -53,18 +53,10 @@ export const currentUser = asyncHandler(
       next();
     } else if (req.session && req.session?.accessToken) {
       try {
-        jwt.verify(
+        payload = jwt.verify(
           req.session.accessToken,
-          `${process.env.ACCESS_TOKEN_PRIVATE_KEY}`,
-          (err, decoded) => {
-            if (err) {
-              res.status(401);
-              throw new Error(`Token Error: ${err?.message}`);
-            }
-
-            (payload = decoded) as UserPayload;
-          }
-        );
+          `${process.env.ACCESS_TOKEN_PRIVATE_KEY}`
+        ) as UserPayload;
 
         req.currentUser = payload;
       } catch (err) {}

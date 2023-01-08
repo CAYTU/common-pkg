@@ -7,6 +7,11 @@ export * from "./errors/custom";
 export * from "./errors/not-authorized";
 export * from "./errors/not-found";
 export * from "./errors/request-validation";
+export * from "./errors/bad-gateway";
+export * from "./errors/database-fetch";
+export * from "./errors/forbidden";
+export * from "./errors/server-error";
+
 
 export * from "./middlewares/auth/authorize";
 export * from "./middlewares/auth/role-base-access";

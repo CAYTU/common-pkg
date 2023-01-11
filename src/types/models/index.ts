@@ -16,6 +16,17 @@ declare namespace CTypes {
   // Please if any modification happens in this files then make
   // sure to do it in the event-types as well: "src/event-types/index.ts"
 
+  // Common
+  export type Point = {
+    type?: "Point" | string;
+    coordinates: [number, number];
+  };
+
+  export type GeoJSONType = {
+    type?: "GeoJSON" | string;
+    coordinates: number[];
+  };
+
   /**
    * Category:
    */
@@ -123,7 +134,7 @@ declare namespace CTypes {
     assignedTaskCount?: number;
     vendor?: Types.ObjectId;
     zone?: Types.ObjectId;
-    position?: mongoose.Schema.Types.Point;
+    position?: mongoose.Schema.Types.Point & Point;
     currentTask?: Types.ObjectId;
   }
 
@@ -134,7 +145,7 @@ declare namespace CTypes {
     image: string;
     // Robot can be modifiable from event
     robot?: Types.ObjectId;
-    position?: mongoose.Schema.Types.Point;
+    position?: mongoose.Schema.Types.Point & Point;
   }
 
   /**
@@ -149,8 +160,8 @@ declare namespace CTypes {
   };
 
   export type ItineraryType = {
-    start: mongoose.Schema.Types.Point;
-    end: mongoose.Schema.Types.Point;
+    start: mongoose.Schema.Types.Point & Point;
+    end: mongoose.Schema.Types.Point & Point;
   };
 
   export interface TaskInterface {
@@ -169,7 +180,7 @@ declare namespace CTypes {
     // Delivery Attrs
     itinerary?: ItineraryType;
     // Cleaning Attrs
-    location?: mongoose.Schema.Types.Point;
+    location?: mongoose.Schema.Types.GeoJSON & GeoJSONType;
   }
 
   export interface TaskRepInterface {
@@ -182,7 +193,7 @@ declare namespace CTypes {
     // Delivery Attrs
     itinerary?: ItineraryType;
     // Cleaning Attrs
-    location?: mongoose.Schema.Types.Point;
+    location?: mongoose.Schema.Types.GeoJSON & GeoJSONType;
   }
 
   /**
@@ -200,7 +211,7 @@ declare namespace CTypes {
     password: string;
     image?: string;
     roles?: UserRole[];
-    position?: mongoose.Schema.Types.Point;
+    position?: mongoose.Schema.Types.Point & Point;
   }
 
   export interface UserRepInterface {
@@ -225,7 +236,7 @@ declare namespace CTypes {
     coverImage: string;
     logo: string;
     zone: Types.ObjectId;
-    coordinates: mongoose.Schema.Types.Point;
+    location: mongoose.Schema.Types.Point & Point;
     owner: Types.ObjectId;
     version: number;
   }

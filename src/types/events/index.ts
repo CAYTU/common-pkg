@@ -16,6 +16,18 @@ declare namespace ETypes {
   /**
    * Category:
    */
+
+  // Common
+  type Point = {
+    type?: "Point" | string;
+    coordinates: [number, number];
+  };
+
+  type GeoJSONType = {
+    type?: "GeoJSON" | string;
+    coordinates: number[]
+  }
+
   export interface CategoryEventInterface {
     id: string;
     name: string;
@@ -135,7 +147,7 @@ declare namespace ETypes {
     assignedTaskCount?: number;
     vendor?: Types.ObjectId;
     zone?: Types.ObjectId;
-    position?: mongoose.Schema.Types.Point;
+    position?: mongoose.Schema.Types.Point & Point;
     currentTask?: Types.ObjectId;
     version: number;
   }
@@ -145,7 +157,7 @@ declare namespace ETypes {
     name: string;
     type: string;
     image: string;
-    position?: mongoose.Schema.Types.Point;
+    position?: mongoose.Schema.Types.Point & Point;
     version: number;
   }
 
@@ -161,8 +173,8 @@ declare namespace ETypes {
   };
 
   export type ItineraryType = {
-    start: mongoose.Schema.Types.Point;
-    end: mongoose.Schema.Types.Point;
+    start: mongoose.Schema.Types.Point & Point;
+    end: mongoose.Schema.Types.Point & Point;
   };
 
   export interface TaskEventInterface {
@@ -182,7 +194,7 @@ declare namespace ETypes {
     // Delivery Attrs
     itinerary?: ItineraryType;
     // Cleaning Attrs
-    location?: mongoose.Schema.Types.GeoJSON;
+    location?: mongoose.Schema.Types.GeoJSON & GeoJSONType;
     version: number;
   }
 
@@ -196,7 +208,7 @@ declare namespace ETypes {
     // Delivery Attrs
     itinerary?: ItineraryType;
     // Cleaning Attrs
-    location?: mongoose.Schema.Types.Point;
+    location?: mongoose.Schema.Types.Point & GeoJSONType;
     version: number;
   }
 
@@ -216,7 +228,7 @@ declare namespace ETypes {
     password: string;
     image?: string;
     roles?: UserRole[];
-    position?: mongoose.Schema.Types.Point;
+    position?: mongoose.Schema.Types.Point & Point;
     version: number;
   }
 
@@ -244,7 +256,7 @@ declare namespace ETypes {
     coverImage: string;
     logo: string;
     zone: Types.ObjectId;
-    coordinates: mongoose.Schema.Types.Point;
+    location: mongoose.Schema.Types.Point & Point;
     owner: Types.ObjectId;
     version: number;
   }

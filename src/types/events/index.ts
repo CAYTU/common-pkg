@@ -20,13 +20,13 @@ declare namespace ETypes {
   // Common
   type Point = {
     type?: "Point" | string;
-    coordinates: [number, number];
+    coordinates: [number];
   };
 
   type GeoJSONType = {
     type?: "GeoJSON" | string;
-    coordinates: number[]
-  }
+    coordinates: [[[number]]];
+  };
 
   export interface CategoryEventInterface {
     id: string;
@@ -142,6 +142,10 @@ declare namespace ETypes {
     type: string;
     image: string;
     token?: string;
+    // This variable lock the robot if after handshake of task acceptance the robot failed
+    available?: boolean;
+    // uri represents the address to reach the robot
+    uri?: string;
     state?: RobotStates;
     taskCount?: number;
     assignedTaskCount?: number;

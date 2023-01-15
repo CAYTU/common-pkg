@@ -19,12 +19,12 @@ declare namespace CTypes {
   // Common
   export type Point = {
     type?: "Point" | string;
-    coordinates: [number, number];
+    coordinates: [number];
   };
 
   export type GeoJSONType = {
     type?: "GeoJSON" | string;
-    coordinates: number[];
+    coordinates: [[[number]]];
   };
 
   /**
@@ -131,6 +131,10 @@ declare namespace CTypes {
     token?: string;
     state?: RobotStates;
     taskCount?: number;
+    // This variable lock the robot if after handshake of task acceptance the robot failed
+    available?: boolean; 
+    // uri represents the address to reach the robot 
+    uri?: string;
     assignedTaskCount?: number;
     vendor?: Types.ObjectId;
     zone?: Types.ObjectId;

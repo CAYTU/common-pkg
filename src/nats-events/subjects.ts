@@ -50,5 +50,6 @@ export enum Subjects {
   OperatorUpdated = "operator:updated",
   OperatorDeleted = "operator:deleted",
   OperatorAssigned = "operator:assigned",
-  OperatorUnassigned = "operator:unassigned"
+  OperatorGetCandidate = "operator:get:candidate",
+  OperatorUnassigned = "operator:unassigned",
 }

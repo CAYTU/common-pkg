@@ -216,6 +216,15 @@ declare namespace ETypes {
     version: number;
   }
 
+  export interface TaskGetRobotCandidate {
+    id: string;
+    type: TaskType;
+    // Delivery Attrs
+    itinerary?: ItineraryType;
+    // Cleaning Attrs
+    location?: mongoose.Schema.Types.Point & GeoJSONType;
+  }
+
   /**
    * User:
    */

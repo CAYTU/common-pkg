@@ -16,6 +16,7 @@ export enum Subjects {
   RobotUpdated = "robot:updated",
   RobotDeleted = "robot:deleted",
   RobotAssigned = "robot:assigned",
+  RobotGetCandidate = "robot:get:candidate",
   RobotUnassigned = "robot:unassigned",
   // Taks Subjects
   TaskCreated = "task:created",

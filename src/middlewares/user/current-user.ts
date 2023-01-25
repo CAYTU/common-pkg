@@ -6,6 +6,8 @@ interface UserPayload {
   id: string;
   username: string;
   email: string;
+  isVerified?: boolean;
+  customerSet?: boolean;
   roles: string[];
 }
 
@@ -18,7 +20,7 @@ declare global {
 }
 
 export const currentUser = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, _res: Response, next: NextFunction) => {
     let payload;
 
     if (!req.headers.authorization && !req.session) {

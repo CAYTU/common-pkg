@@ -132,8 +132,8 @@ declare namespace CTypes {
     state?: RobotStates;
     taskCount?: number;
     // This variable lock the robot if after handshake of task acceptance the robot failed
-    available?: boolean; 
-    // uri represents the address to reach the robot 
+    available?: boolean;
+    // uri represents the address to reach the robot
     uri?: string;
     assignedTaskCount?: number;
     vendor?: Types.ObjectId;
@@ -211,6 +211,7 @@ declare namespace CTypes {
     phone: string;
     email: string;
     isVerified?: boolean;
+    customerSet?: boolean;
     currentRoleState?: CurrentRoleState;
     password: string;
     image?: string;
@@ -224,6 +225,8 @@ declare namespace CTypes {
     firstName: string;
     email: string;
     lastName: string;
+    isVerified?: boolean;
+    customerSet?: boolean;
     image?: string;
   }
 

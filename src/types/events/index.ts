@@ -237,6 +237,7 @@ declare namespace ETypes {
     phone: string;
     email: string;
     isVerified?: boolean;
+    customerSet?: boolean;
     currentRoleState?: CurrentRoleState;
     password: string;
     image?: string;
@@ -252,6 +253,8 @@ declare namespace ETypes {
     lastName: string;
     email: string;
     image?: string;
+    isVerified?: boolean;
+    customerSet?: boolean;
     version: number;
   }
 

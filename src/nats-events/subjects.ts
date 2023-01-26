@@ -45,6 +45,10 @@ export enum Subjects {
   CategoryCreated = "category:created",
   CategoryUpdated = "category:updated",
   CategoryDeleted = "category:deleted",
+  // Simulation Subjects
+  SimulationCreated = "simulation:created",
+  SimulationUpdated = "simulation:updated",
+  SimulationDeleted = "simulation:deleted",
   // Operators Subjects
   OperatorCreated = "operator:created",
   OperatorUpdated = "operator:updated",

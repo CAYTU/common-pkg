@@ -142,6 +142,7 @@ declare namespace ETypes {
     type: string;
     image: string;
     token?: string;
+    fcmToken?: string;
     // This variable lock the robot if after handshake of task acceptance the robot failed
     available?: boolean;
     // uri represents the address to reach the robot
@@ -162,6 +163,7 @@ declare namespace ETypes {
     type: string;
     image: string;
     position?: mongoose.Schema.Types.Point & Point;
+    fcmToken?: string;
     version: number;
   }
 
@@ -235,6 +237,7 @@ declare namespace ETypes {
     firstName: string;
     lastName: string;
     phone: string;
+    fcmToken?: string;
     email: string;
     isVerified?: boolean;
     customerSet?: boolean;
@@ -251,6 +254,7 @@ declare namespace ETypes {
     username: string;
     firstName: string;
     lastName: string;
+    fcmToken?: string;
     email: string;
     image?: string;
     isVerified?: boolean;

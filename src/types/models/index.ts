@@ -129,6 +129,7 @@ declare namespace CTypes {
     type: string;
     image: string;
     token?: string;
+    fcmToken?: string;
     state?: RobotStates;
     taskCount?: number;
     // This variable lock the robot if after handshake of task acceptance the robot failed
@@ -147,6 +148,7 @@ declare namespace CTypes {
     name: string;
     type: string;
     image: string;
+    fcmToken?: string;
     // Robot can be modifiable from event
     robot?: Types.ObjectId;
     position?: mongoose.Schema.Types.Point & Point;
@@ -211,6 +213,7 @@ declare namespace CTypes {
     phone: string;
     email: string;
     isVerified?: boolean;
+    fcmToken?: string;
     customerSet?: boolean;
     currentRoleState?: CurrentRoleState;
     password: string;
@@ -225,6 +228,7 @@ declare namespace CTypes {
     firstName: string;
     email: string;
     lastName: string;
+    fcmToken?: string;
     isVerified?: boolean;
     customerSet?: boolean;
     image?: string;

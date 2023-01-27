@@ -136,6 +136,7 @@ declare namespace CTypes {
     available?: boolean;
     // uri represents the address to reach the robot
     uri?: string;
+    accessToken?: string;
     assignedTaskCount?: number;
     vendor?: Types.ObjectId;
     zone?: Types.ObjectId;
@@ -149,6 +150,7 @@ declare namespace CTypes {
     type: string;
     image: string;
     fcmToken?: string;
+    accessToken?: string;
     // Robot can be modifiable from event
     robot?: Types.ObjectId;
     position?: mongoose.Schema.Types.Point & Point;

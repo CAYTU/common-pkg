@@ -56,4 +56,6 @@ export enum Subjects {
   OperatorAssigned = "operator:assigned",
   OperatorGetCandidate = "operator:get:candidate",
   OperatorUnassigned = "operator:unassigned",
+  // Standalone
+  FcmTokenUpdated = "fcmToken:updated",
 }

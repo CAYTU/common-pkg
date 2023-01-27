@@ -129,6 +129,7 @@ declare namespace CTypes {
     type: string;
     image: string;
     token?: string;
+    secret?: string;
     fcmToken?: string;
     state?: RobotStates;
     taskCount?: number;
@@ -151,6 +152,7 @@ declare namespace CTypes {
     image: string;
     fcmToken?: string;
     accessToken?: string;
+    secret?: string;
     // Robot can be modifiable from event
     robot?: Types.ObjectId;
     position?: mongoose.Schema.Types.Point & Point;

@@ -203,6 +203,12 @@ declare namespace ETypes {
     duration?: DurationType;
     // Delivery Attrs
     itinerary?: ItineraryType;
+    // Number of assignment trial for a robot
+    // This is only needed for a robot as the
+    // process is automated
+    // As, for an operator, the assignment is done
+    // by the operator
+    robotAssignmentTrial?: number;
     // Cleaning Attrs
     location?: mongoose.Schema.Types.GeoJSON & GeoJSONType;
     version: number;

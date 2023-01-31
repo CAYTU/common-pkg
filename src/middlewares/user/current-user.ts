@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
-interface UserPayload {
+interface UserPayload extends JwtPayload {
   id: string;
   username: string;
   email: string;
@@ -21,7 +21,7 @@ declare global {
 
 export const currentUser = asyncHandler(
   async (req: Request, _res: Response, next: NextFunction) => {
-    let payload;
+    let payload: UserPayload | undefined;
 
     if (!req.headers.authorization && !req.session) {
       return next();
@@ -46,8 +46,13 @@ export const currentUser = asyncHandler(
           req.session.accessToken,
           `${process.env.ACCESS_TOKEN_PRIVATE_KEY}`
         ) as UserPayload;
-      } catch (err) {}
+      } catch (err) {
+        req.sessionOptions.maxAge = 0;
+      }
     }
+
+    req.sessionOptions.maxAge =
+      (payload?.exp ?? 60 * 60 * 24 * 7) * 1000 - Date.now();
 
     // Save decoded payload in req.currentUser
     req.currentUser = payload;

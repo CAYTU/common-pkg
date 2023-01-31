@@ -123,7 +123,6 @@ declare namespace CTypes {
    * Robot:
    */
   export interface RobotInterface {
-    robotId: string;
     name: string;
     accountId?: string;
     type: string;

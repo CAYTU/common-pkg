@@ -136,7 +136,6 @@ declare namespace ETypes {
    */
   export interface RobotEventInterface {
     id: string;
-    robotId: string;
     name: string;
     accountId?: string;
     type: string;

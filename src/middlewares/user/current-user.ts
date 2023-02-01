@@ -46,13 +46,8 @@ export const currentUser = asyncHandler(
           req.session.accessToken,
           `${process.env.ACCESS_TOKEN_PRIVATE_KEY}`
         ) as UserPayload;
-      } catch (err) {
-        req.sessionOptions.maxAge = 0;
-      }
+      } catch (err) {}
     }
-
-    req.sessionOptions.maxAge =
-      (payload?.exp ?? 60 * 60 * 24 * 7) * 1000 - Date.now();
 
     // Save decoded payload in req.currentUser
     req.currentUser = payload;

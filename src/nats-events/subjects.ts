@@ -11,6 +11,8 @@ export enum Subjects {
   NotificationUpdated = "notification:updated",
   NotificationDeleted = "notification:deleted",
   NotifyUserIsVerified = "notify:user:is:verified",
+  // Derived
+  EmailLinkResendRequest = "email:link:resend:request",
   // Robot Subjects
   RobotCreated = "robot:created",
   RobotUpdated = "robot:updated",

@@ -19,7 +19,7 @@ declare namespace CTypes {
   // Common
   export type Point = {
     type?: "Point" | string;
-    coordinates: [number];
+    coordinates: [number, number];
   };
 
   export type GeoJSONType = {
@@ -139,6 +139,7 @@ declare namespace CTypes {
     accessToken?: string;
     assignedTaskCount?: number;
     vendor?: Types.ObjectId;
+    batteryLevel?: number;
     zone?: Types.ObjectId;
     position?: mongoose.Schema.Types.Point & Point;
     currentTask?: Types.ObjectId;
@@ -274,6 +275,9 @@ declare namespace CTypes {
    */
 
   export interface ZoneInterface {
+    region?: string;
+    city?: string;
+    country?: string;
     name: string;
     area: mongoose.Schema.Types.Polygon;
     securityRate?: number;
@@ -283,6 +287,7 @@ declare namespace CTypes {
   export interface ZoneRepInterface {
     id: string;
     name: string;
+    country?: string;
   }
 }
 

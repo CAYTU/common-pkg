@@ -20,7 +20,7 @@ declare namespace ETypes {
   // Common
   type Point = {
     type?: "Point" | string;
-    coordinates: [number];
+    coordinates: [number, number];
   };
 
   type GeoJSONType = {
@@ -150,6 +150,7 @@ declare namespace ETypes {
     uri?: string;
     state?: RobotStates;
     taskCount?: number;
+    batteryLevel?: number;
     assignedTaskCount?: number;
     vendor?: Types.ObjectId;
     zone?: Types.ObjectId;
@@ -305,6 +306,9 @@ declare namespace ETypes {
   export interface ZoneEventInterface {
     id: string;
     name: string;
+    region?: string;
+    city?: string;
+    country?: string;
     area: mongoose.Schema.Types.Polygon;
     securityRate?: number;
     practicabilityPercentage?: number;
@@ -314,6 +318,7 @@ declare namespace ETypes {
   export interface ZoneRepEventInterface {
     id: string;
     name: string;
+    country?: string;
     version: number;
   }
 }

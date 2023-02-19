@@ -191,12 +191,12 @@ declare namespace CTypes {
     // Delivery Attrs
     itinerary?: ItineraryType;
     // Number of assignment trial for a robot
-    // This is only needed for a robot as the 
+    // This is only needed for a robot as the
     // process is automated
     // As, for an operator, the assignment is done
     // by the operator
     robotAssignmentTrial?: number;
-  
+
     // Cleaning Attrs
     location?: mongoose.Schema.Types.GeoJSON & GeoJSONType;
   }
@@ -208,6 +208,7 @@ declare namespace CTypes {
     status: TaskStatus;
     //   Ref to Robot Model
     robot?: Types.ObjectId;
+    customer: Types.ObjectId;
     // Delivery Attrs
     itinerary?: ItineraryType;
     // Cleaning Attrs

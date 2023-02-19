@@ -151,6 +151,7 @@ declare namespace ETypes {
     state?: RobotStates;
     taskCount?: number;
     batteryLevel?: number;
+    speed?: number;
     assignedTaskCount?: number;
     vendor?: Types.ObjectId;
     zone?: Types.ObjectId;

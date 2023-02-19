@@ -140,6 +140,7 @@ declare namespace CTypes {
     assignedTaskCount?: number;
     vendor?: Types.ObjectId;
     batteryLevel?: number;
+    speed?: number;
     zone?: Types.ObjectId;
     position?: mongoose.Schema.Types.Point & Point;
     currentTask?: Types.ObjectId;

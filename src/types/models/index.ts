@@ -24,7 +24,7 @@ declare namespace CTypes {
 
   export type GeoJSONType = {
     type?: "GeoJSON" | string;
-    coordinates: [[[number]]];
+    coordinates: [[[number, number]]];
   };
 
   /**
@@ -208,6 +208,8 @@ declare namespace CTypes {
     status: TaskStatus;
     //   Ref to Robot Model
     robot?: Types.ObjectId;
+    //   Ref to Operator Model
+    operator?: Types.ObjectId;
     customer: Types.ObjectId;
     // Delivery Attrs
     itinerary?: ItineraryType;
@@ -289,6 +291,7 @@ declare namespace CTypes {
   export interface ZoneRepInterface {
     id: string;
     name: string;
+    area: mongoose.Schema.Types.Polygon;
     country?: string;
   }
 }

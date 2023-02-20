@@ -222,6 +222,8 @@ declare namespace ETypes {
     status: TaskStatus;
     // Robot can be modifiable from event
     robot?: Types.ObjectId;
+    //   Ref to Operator Model
+    operator?: Types.ObjectId;
     customer: Types.ObjectId;
     // Delivery Attrs
     itinerary?: ItineraryType;
@@ -321,6 +323,7 @@ declare namespace ETypes {
     id: string;
     name: string;
     country?: string;
+    area: mongoose.Schema.Types.Polygon;
     version: number;
   }
 }

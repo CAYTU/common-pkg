@@ -138,6 +138,7 @@ declare namespace ETypes {
     id: string;
     name: string;
     accountId?: string;
+    deviceId?: string;
     type: string;
     image: string;
     token?: string;
@@ -164,6 +165,7 @@ declare namespace ETypes {
     id: string;
     name: string;
     type: string;
+    deviceId?: string;
     image: string;
     position?: mongoose.Schema.Types.Point & Point;
     fcmToken?: string;

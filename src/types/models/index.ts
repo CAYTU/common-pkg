@@ -125,6 +125,7 @@ declare namespace CTypes {
   export interface RobotInterface {
     name: string;
     accountId?: string;
+    deviceId?: string;
     type: string;
     image: string;
     token?: string;
@@ -152,6 +153,7 @@ declare namespace CTypes {
     type: string;
     image: string;
     fcmToken?: string;
+    deviceId?: string;
     accessToken?: string;
     secret?: string;
     // Robot can be modifiable from event

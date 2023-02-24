@@ -142,6 +142,10 @@ declare namespace CTypes {
     vendor?: Types.ObjectId;
     batteryLevel?: number;
     speed?: number;
+    control_mode?: string | number,
+    fault_code?: number | string,
+    linear_velocity?: number,
+    angular_velocity?: number,
     zone?: Types.ObjectId;
     position?: mongoose.Schema.Types.Point & Point;
     currentTask?: Types.ObjectId;

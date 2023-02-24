@@ -153,6 +153,10 @@ declare namespace ETypes {
     taskCount?: number;
     batteryLevel?: number;
     speed?: number;
+    control_mode?: string | number;
+    fault_code?: number | string;
+    linear_velocity?: number;
+    angular_velocity?: number;
     assignedTaskCount?: number;
     vendor?: Types.ObjectId;
     zone?: Types.ObjectId;

@@ -25,7 +25,7 @@ declare namespace ETypes {
 
   type GeoJSONType = {
     type?: "GeoJSON" | string;
-    coordinates: [[[number]]];
+    coordinates: [[[number, number]]];
   };
 
   export interface CategoryEventInterface {
@@ -143,12 +143,8 @@ declare namespace ETypes {
     image: string;
     token?: string;
     fcmToken?: string;
-    accessToken?: string;
-    secret?: string;
-    // This variable lock the robot if after handshake of task acceptance the robot failed
-    available?: boolean;
-    // uri represents the address to reach the robot
-    uri?: string;
+    // Means the robots is online or not.
+    status?: boolean;
     state?: RobotStates;
     taskCount?: number;
     batteryLevel?: number;
@@ -157,6 +153,7 @@ declare namespace ETypes {
     fault_code?: number | string;
     linear_velocity?: number;
     angular_velocity?: number;
+
     assignedTaskCount?: number;
     vendor?: Types.ObjectId;
     zone?: Types.ObjectId;
@@ -169,12 +166,13 @@ declare namespace ETypes {
     id: string;
     name: string;
     type: string;
-    deviceId?: string;
     image: string;
-    position?: mongoose.Schema.Types.Point & Point;
     fcmToken?: string;
-    accessToken?: string;
-    secret?: string;
+    deviceId?: string;
+    token?: string;
+    // Robot can be modifiable from event
+    robot?: Types.ObjectId;
+    position?: mongoose.Schema.Types.Point & Point;
     version: number;
   }
 
@@ -198,6 +196,8 @@ declare namespace ETypes {
     id: string;
     type: TaskType;
     fare?: number;
+    // Code to deactivate or open robot
+    code?: number;
     //   Ref to product Model
     product?: Types.ObjectId;
     //   Ref to Operator Model
@@ -225,6 +225,7 @@ declare namespace ETypes {
     id: string;
     type: TaskType;
     fare: number;
+    code?: number;
     status: TaskStatus;
     // Robot can be modifiable from event
     robot?: Types.ObjectId;

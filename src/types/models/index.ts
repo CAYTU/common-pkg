@@ -129,23 +129,19 @@ declare namespace CTypes {
     type: string;
     image: string;
     token?: string;
-    secret?: string;
     fcmToken?: string;
+    // Means the robots is online or not.
+    status?: boolean;
     state?: RobotStates;
     taskCount?: number;
-    // This variable lock the robot if after handshake of task acceptance the robot failed
-    available?: boolean;
-    // uri represents the address to reach the robot
-    uri?: string;
-    accessToken?: string;
-    assignedTaskCount?: number;
-    vendor?: Types.ObjectId;
     batteryLevel?: number;
     speed?: number;
-    control_mode?: string | number,
-    fault_code?: number | string,
-    linear_velocity?: number,
-    angular_velocity?: number,
+    control_mode?: string | number;
+    fault_code?: number | string;
+    linear_velocity?: number;
+    angular_velocity?: number;
+
+    assignedTaskCount?: number;
     zone?: Types.ObjectId;
     position?: mongoose.Schema.Types.Point & Point;
     currentTask?: Types.ObjectId;
@@ -158,8 +154,7 @@ declare namespace CTypes {
     image: string;
     fcmToken?: string;
     deviceId?: string;
-    accessToken?: string;
-    secret?: string;
+    token?: string;
     // Robot can be modifiable from event
     robot?: Types.ObjectId;
     position?: mongoose.Schema.Types.Point & Point;
@@ -184,6 +179,8 @@ declare namespace CTypes {
   export interface TaskInterface {
     type: TaskType;
     fare?: number;
+    // Code to deactivate or open the robot
+    code?: number;
     //   Ref to product Model
     product?: Types.ObjectId;
     //   Ref to Operator Model
@@ -211,6 +208,7 @@ declare namespace CTypes {
     id: string;
     type: TaskType;
     fare: number;
+    code?: number;
     status: TaskStatus;
     //   Ref to Robot Model
     robot?: Types.ObjectId;

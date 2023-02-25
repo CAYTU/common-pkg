@@ -246,10 +246,12 @@ declare namespace ETypes {
   export interface TaskGetRobotCandidate {
     id: string;
     type: TaskType;
+    // Count Id for number of tasks with padded number
+    trackId: string;
     // Delivery Attrs
     itinerary?: ItineraryType;
     // Cleaning Attrs
-    location?: mongoose.Schema.Types.Point & GeoJSONType;
+    area?: mongoose.Schema.Types.Point & GeoJSONType;
   }
 
   /**

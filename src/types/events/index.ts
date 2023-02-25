@@ -198,6 +198,8 @@ declare namespace ETypes {
     fare?: number;
     // Code to deactivate or open robot
     code?: number;
+    // Count Id for number of tasks with padded number
+    trackId: string;
     //   Ref to product Model
     product?: Types.ObjectId;
     //   Ref to Operator Model
@@ -226,6 +228,8 @@ declare namespace ETypes {
     type: TaskType;
     fare: number;
     code?: number;
+    // Count Id for number of tasks with padded number
+    trackId: string;
     status: TaskStatus;
     // Robot can be modifiable from event
     robot?: Types.ObjectId;

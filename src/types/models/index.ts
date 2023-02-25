@@ -181,6 +181,8 @@ declare namespace CTypes {
     fare?: number;
     // Code to deactivate or open the robot
     code?: number;
+    // Count Id for number of tasks with padded number
+    trackId: string;
     //   Ref to product Model
     product?: Types.ObjectId;
     //   Ref to Operator Model
@@ -201,7 +203,7 @@ declare namespace CTypes {
     robotAssignmentTrial?: number;
 
     // Cleaning Attrs
-    location?: mongoose.Schema.Types.GeoJSON & GeoJSONType;
+    area?: mongoose.Schema.Types.GeoJSON & GeoJSONType;
   }
 
   export interface TaskRepInterface {
@@ -209,6 +211,8 @@ declare namespace CTypes {
     type: TaskType;
     fare: number;
     code?: number;
+    // Count Id for number of tasks with padded number
+    trackId: string;
     status: TaskStatus;
     //   Ref to Robot Model
     robot?: Types.ObjectId;
@@ -218,7 +222,7 @@ declare namespace CTypes {
     // Delivery Attrs
     itinerary?: ItineraryType;
     // Cleaning Attrs
-    location?: mongoose.Schema.Types.GeoJSON & GeoJSONType;
+    area?: mongoose.Schema.Types.GeoJSON & GeoJSONType;
   }
 
   /**

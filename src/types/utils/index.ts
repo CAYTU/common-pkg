@@ -26,6 +26,10 @@ export enum TaskType {
   Delivery = "delivery",
   // If task is for cleaning
   Cleaning = "cleaning",
+  // Inspection Task
+  Inspection = "inspection",
+  // Run a simulation
+  Simulation = "simulation",
   // If task is none of the above (delivery, cleaning, ...)
   Custom = "custom",
 }

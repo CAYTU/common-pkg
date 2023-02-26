@@ -31,10 +31,12 @@ export enum Subjects {
   UserCreated = "user:created",
   UserUpdated = "user:updated",
   UserDeleted = "user:deleted",
-  UserCreationIntent = "user:creation:intent",
+  UserPasswordForgotten = "user:password:forgotten",
+  UserPasswordReset = "user:password:reset",
   UserUpgraded = "user:upgraded",
   UserLogout = "user:logout",
   UserLogin = "user:login",
+  UserStatus = "user:status",
   // Zone Subjects
   ZoneCreated = "zone:created",
   ZoneUpdated = "zone:updated",
@@ -58,6 +60,7 @@ export enum Subjects {
   OperatorAssigned = "operator:assigned",
   OperatorGetCandidate = "operator:get:candidate",
   OperatorUnassigned = "operator:unassigned",
-  // Standalone
-  FcmTokenUpdated = "fcmToken:updated",
+  // FCM Tokens
+  RobotFcmTokenUpdated = "robot:fcmToken:updated",
+  UserFCMTokenUpdated = "user:fcmToken:updated",
 }

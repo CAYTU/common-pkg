@@ -196,12 +196,10 @@ declare namespace ETypes {
     id: string;
     type: TaskType;
     fare?: number;
-    // Code to deactivate or open robot
+    // Code to deactivate or open the robot
     code?: number;
     // Count Id for number of tasks with padded number
-    trackId: string;
-    //   Ref to product Model
-    product?: Types.ObjectId;
+    taskId: string;
     //   Ref to Operator Model
     operator?: Types.ObjectId;
     //   Ref to Customer Model
@@ -209,17 +207,15 @@ declare namespace ETypes {
     //   Ref to Robot Model
     robot?: Types.ObjectId;
     status?: TaskStatus;
+    statusTracker?: Types.ObjectId;
     duration?: DurationType;
-    // Delivery Attrs
-    itinerary?: ItineraryType;
-    // Number of assignment trial for a robot
-    // This is only needed for a robot as the
-    // process is automated
-    // As, for an operator, the assignment is done
-    // by the operator
     robotAssignmentTrial?: number;
-    // Cleaning Attrs
-    location?: mongoose.Schema.Types.GeoJSON & GeoJSONType;
+
+    delivery?: Types.ObjectId;
+    cleaning?: Types.ObjectId;
+    simulation?: Types.ObjectId;
+    inspection?: Types.ObjectId;
+    custom?: Types.ObjectId;
     version: number;
   }
 
@@ -229,17 +225,14 @@ declare namespace ETypes {
     fare: number;
     code?: number;
     // Count Id for number of tasks with padded number
-    trackId: string;
+    taskId: string;
     status: TaskStatus;
     // Robot can be modifiable from event
     robot?: Types.ObjectId;
     //   Ref to Operator Model
     operator?: Types.ObjectId;
     customer: Types.ObjectId;
-    // Delivery Attrs
-    itinerary?: ItineraryType;
-    // Cleaning Attrs
-    location?: mongoose.Schema.Types.Point & GeoJSONType;
+
     version: number;
   }
 
@@ -247,11 +240,12 @@ declare namespace ETypes {
     id: string;
     type: TaskType;
     // Count Id for number of tasks with padded number
-    trackId: string;
+    taskId: string;
     // Delivery Attrs
     itinerary?: ItineraryType;
     // Cleaning Attrs
     area?: mongoose.Schema.Types.Point & GeoJSONType;
+    version: number;
   }
 
   /**

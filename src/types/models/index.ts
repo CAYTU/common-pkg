@@ -16,6 +16,11 @@ declare namespace CTypes {
   // Please if any modification happens in this files then make
   // sure to do it in the event-types as well: "src/event-types/index.ts"
 
+  export interface DateTrackerInterface {
+    updatedAt?: Date;
+    createdAt?: Date;
+  }
+
   // Common
   export type Point = {
     type?: "Point" | string;
@@ -36,7 +41,7 @@ declare namespace CTypes {
     description?: string;
   }
 
-  export interface CategoryRepInterface {
+  export interface CategoryRepInterface extends DateTrackerInterface {
     id: string;
     name: string;
     image: string;
@@ -45,7 +50,7 @@ declare namespace CTypes {
   /**
    * Customer:
    */
-  export interface CustomerInterface {
+  export interface CustomerInterface extends DateTrackerInterface {
     user: Types.ObjectId;
     loyaltyPoint: number;
     walletBalance: number;
@@ -53,7 +58,7 @@ declare namespace CTypes {
     city: string;
   }
 
-  export interface CustomerRepInterface {
+  export interface CustomerRepInterface extends DateTrackerInterface {
     id: string;
     user: Types.ObjectId;
     address: string;
@@ -64,7 +69,7 @@ declare namespace CTypes {
    * Notification
    */
 
-  export interface NotificationInterface {
+  export interface NotificationInterface extends DateTrackerInterface {
     from?: string;
     to: string;
     message: string;
@@ -75,7 +80,7 @@ declare namespace CTypes {
    */
   export type IDType = "id" | "passport";
 
-  export interface OperatorInterface {
+  export interface OperatorInterface extends DateTrackerInterface {
     identityType: IDType;
     identityNumber: number;
     fcmToken: string;
@@ -88,7 +93,7 @@ declare namespace CTypes {
     zone?: Types.ObjectId;
   }
 
-  export interface OperatorRepInterface {
+  export interface OperatorRepInterface extends DateTrackerInterface {
     id: string;
     user: Types.ObjectId;
     active?: boolean;
@@ -98,7 +103,7 @@ declare namespace CTypes {
   /**
    * Product:
    */
-  export interface ProductInterface {
+  export interface ProductInterface extends DateTrackerInterface {
     name: string;
     type: string;
     quantity: number;
@@ -111,7 +116,7 @@ declare namespace CTypes {
     description?: string;
   }
 
-  export interface ProductRepInterface {
+  export interface ProductRepInterface extends DateTrackerInterface {
     id: string;
     name: string;
     price: number;
@@ -122,7 +127,7 @@ declare namespace CTypes {
   /**
    * Robot:
    */
-  export interface RobotInterface {
+  export interface RobotInterface extends DateTrackerInterface {
     name: string;
     accountId?: string;
     deviceId?: string;
@@ -136,18 +141,22 @@ declare namespace CTypes {
     taskCount?: number;
     batteryLevel?: number;
     speed?: number;
-    control_mode?: string | number;
-    fault_code?: number | string;
-    linear_velocity?: number;
-    angular_velocity?: number;
+    controlMode?: string | number;
+    faultCode?: number | string;
+    linearVelocity?: number;
+    angularVelocity?: number;
 
     assignedTaskCount?: number;
     zone?: Types.ObjectId;
     position?: mongoose.Schema.Types.Point & Point;
     currentTask?: Types.ObjectId;
+    // Time Tracker
+    assignedAt?: Date;
+    unassignedAt?: Date;
+    arrivedAt?: Date;
   }
 
-  export interface RobotRepInterface {
+  export interface RobotRepInterface extends DateTrackerInterface {
     id: string;
     name: string;
     type: string;
@@ -176,15 +185,45 @@ declare namespace CTypes {
     end: mongoose.Schema.Types.Point & Point;
   };
 
-  export interface TaskInterface {
+  export interface TaskDeliveryInterface extends DateTrackerInterface {
+    // Ref to a Product
+    product?: Types.ObjectId;
+    // Ref to a Vendor
+    vendor?: Types.ObjectId;
+    // Delivery Attrs
+    itinerary: ItineraryType;
+  }
+
+  export interface TaskCleaningInterface extends DateTrackerInterface {
+    // Cleaning Attrs
+    area: mongoose.Schema.Types.GeoJSON & GeoJSONType;
+  }
+
+  export interface TaskInspectionInterface extends DateTrackerInterface {
+    area: mongoose.Schema.Types.GeoJSON & GeoJSONType;
+  }
+
+  export interface TaskSimulationInterface extends DateTrackerInterface {}
+
+  export interface TaskCustomInterface extends DateTrackerInterface {}
+
+  export interface TaskStatusTracker extends DateTrackerInterface {
+    acceptedAt?: Date;
+    runningAt?: Date;
+    arrivedAt?: Date;
+    processingAt?: Date;
+    cancelledAt?: Date;
+    paymentFailedAt?: Date;
+    refundedAt?: Date;
+  }
+
+  export interface TaskInterface extends DateTrackerInterface {
     type: TaskType;
     fare?: number;
     // Code to deactivate or open the robot
     code?: number;
     // Count Id for number of tasks with padded number
-    trackId: string;
-    //   Ref to product Model
-    product?: Types.ObjectId;
+    taskId: string;
     //   Ref to Operator Model
     operator?: Types.ObjectId;
     //   Ref to Customer Model
@@ -192,9 +231,8 @@ declare namespace CTypes {
     //   Ref to Robot Model
     robot?: Types.ObjectId;
     status?: TaskStatus;
+    statusTracker?: Types.ObjectId;
     duration?: DurationType;
-    // Delivery Attrs
-    itinerary?: ItineraryType;
     // Number of assignment trial for a robot
     // This is only needed for a robot as the
     // process is automated
@@ -202,22 +240,27 @@ declare namespace CTypes {
     // by the operator
     robotAssignmentTrial?: number;
 
-    // Cleaning Attrs
-    area?: mongoose.Schema.Types.GeoJSON & GeoJSONType;
+    delivery?: Types.ObjectId;
+    cleaning?: Types.ObjectId;
+    simulation?: Types.ObjectId;
+    inspection?: Types.ObjectId;
+    custom?: Types.ObjectId;
   }
 
-  export interface TaskRepInterface {
+  export interface TaskRepInterface extends DateTrackerInterface {
     id: string;
     type: TaskType;
     fare: number;
     code?: number;
     // Count Id for number of tasks with padded number
-    trackId: string;
+    taskId: string;
     status: TaskStatus;
     //   Ref to Robot Model
     robot?: Types.ObjectId;
     //   Ref to Operator Model
     operator?: Types.ObjectId;
+    // Ref to a Vendor
+    vendor?: Types.ObjectId;
     customer: Types.ObjectId;
     // Delivery Attrs
     itinerary?: ItineraryType;
@@ -229,7 +272,7 @@ declare namespace CTypes {
    * User:
    */
 
-  export interface UserInterface {
+  export interface UserInterface extends DateTrackerInterface {
     username: string;
     firstName: string;
     lastName: string;
@@ -245,7 +288,7 @@ declare namespace CTypes {
     position?: mongoose.Schema.Types.Point & Point;
   }
 
-  export interface UserRepInterface {
+  export interface UserRepInterface extends DateTrackerInterface {
     id: string;
     username: string;
     firstName: string;
@@ -260,7 +303,7 @@ declare namespace CTypes {
   /**
    * Vendor:
    */
-  export interface VendorInterface {
+  export interface VendorInterface extends DateTrackerInterface {
     name: string;
     businessField: string;
     vaxOrTax: number;
@@ -272,10 +315,9 @@ declare namespace CTypes {
     zone: Types.ObjectId;
     location: mongoose.Schema.Types.Point & Point;
     owner: Types.ObjectId;
-    version: number;
   }
 
-  export interface VendorRepInterface {
+  export interface VendorRepInterface extends DateTrackerInterface {
     id: string;
     name: string;
     address: string;
@@ -286,7 +328,7 @@ declare namespace CTypes {
    * Zone:
    */
 
-  export interface ZoneInterface {
+  export interface ZoneInterface extends DateTrackerInterface {
     region?: string;
     city?: string;
     country?: string;
@@ -296,7 +338,7 @@ declare namespace CTypes {
     practicabilityPercentage?: number;
   }
 
-  export interface ZoneRepInterface {
+  export interface ZoneRepInterface extends DateTrackerInterface {
     id: string;
     name: string;
     area: mongoose.Schema.Types.Polygon;

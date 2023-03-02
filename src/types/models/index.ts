@@ -78,7 +78,7 @@ declare namespace CTypes {
     user: Types.ObjectId;
     address: string;
     city: string;
-    version: string;
+    version: number;
   }
 
   /**

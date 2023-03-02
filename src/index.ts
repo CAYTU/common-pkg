@@ -1,6 +1,5 @@
 // Types import
 import CTypes from "./types/models";
-import ETypes from "./types/events";
 
 export * from "./errors/bad-request";
 export * from "./errors/custom";
@@ -11,7 +10,6 @@ export * from "./errors/bad-gateway";
 export * from "./errors/database-fetch";
 export * from "./errors/forbidden";
 export * from "./errors/server-error";
-
 
 export * from "./middlewares/auth/authorize";
 export * from "./middlewares/auth/role-base-access";
@@ -27,4 +25,4 @@ export * from "./types/utils";
 
 export * from "./utils/gen-jwt";
 
-export { CTypes, ETypes };
+export { CTypes };

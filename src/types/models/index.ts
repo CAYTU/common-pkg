@@ -18,8 +18,6 @@ declare namespace CTypes {
   // sure to do it in the event-types as well: "src/event-types/index.ts"
 
   export interface IMongooseObjectExt {
-    id: string;
-    version: number;
     updatedAt?: Date;
     createdAt?: Date;
   }
@@ -49,6 +47,13 @@ declare namespace CTypes {
     image: string;
   }
 
+  export interface CategoryEventInterface {
+    id: string;
+    name: string;
+    image: string;
+    version: number;
+  }
+
   /**
    * Customer:
    */
@@ -64,6 +69,14 @@ declare namespace CTypes {
     user: Types.ObjectId;
     address: string;
     city: string;
+  }
+
+  export interface CustomerEventInterface {
+    id: string;
+    user: Types.ObjectId;
+    address: string;
+    city: string;
+    version: string;
   }
 
   /**
@@ -84,7 +97,6 @@ declare namespace CTypes {
   export interface OperatorInterface extends IMongooseObjectExt {
     identityType: IDType;
     identityNumber: number;
-    fcmToken: string;
     user: Types.ObjectId;
     active?: boolean;
     taskCount?: number;
@@ -98,6 +110,14 @@ declare namespace CTypes {
     user: Types.ObjectId;
     active?: boolean;
     aboutMe?: string;
+  }
+
+  export interface OperatorEventInterface {
+    id: string;
+    user: Types.ObjectId;
+    active?: boolean;
+    aboutMe?: string;
+    version: number;
   }
 
   /**
@@ -122,6 +142,15 @@ declare namespace CTypes {
     price: number;
     description: string;
     image?: string;
+  }
+
+  export interface ProductEventInterface {
+    id: string;
+    name: string;
+    price: number;
+    description: string;
+    image?: string;
+    version: number;
   }
 
   /**
@@ -164,9 +193,19 @@ declare namespace CTypes {
     fcmToken?: string;
     deviceId?: string;
     token?: string;
-    // Robot can be modifiable from event
-    robot?: Types.ObjectId;
     lastRecordedLocation?: mongoose.Schema.Types.Point & Point;
+  }
+
+  export interface RobotEventInterface {
+    id: string;
+    name: string;
+    type: string;
+    image: string;
+    fcmToken?: string;
+    deviceId?: string;
+    token?: string;
+    lastRecordedLocation?: mongoose.Schema.Types.Point & Point;
+    version: number;
   }
 
   /**
@@ -273,7 +312,22 @@ declare namespace CTypes {
     custom?: Types.ObjectId;
   }
 
-  export interface TaskRepInterface extends Omit<IMongooseObjectExt, "id"> {
+  export interface TaskRepInterface extends IMongooseObjectExt {
+    type: TaskType;
+    fare: number;
+    code?: number;
+    // Count Id for number of tasks with padded number
+    taskId: string;
+    status: TaskStatus;
+    //   Ref to Robot Model
+    robot?: Types.ObjectId;
+    //   Ref to Operator Model
+    operator?: Types.ObjectId;
+
+    customer: Types.ObjectId;
+  }
+
+  export interface TaskEventInterface {
     id: string;
     type: TaskType;
     fare: number;
@@ -287,6 +341,16 @@ declare namespace CTypes {
     operator?: Types.ObjectId;
 
     customer: Types.ObjectId;
+    version: number;
+  }
+
+  // TODO: Must be removed from here in the future
+  export interface TaskGetRobotCandidateEventInterface {
+    id: string;
+    type: TaskType;
+    // Count Id for number of tasks with padded number
+    taskId: string;
+    version: number;
   }
 
   /**
@@ -309,7 +373,18 @@ declare namespace CTypes {
     position?: mongoose.Schema.Types.Point & Point;
   }
 
-  export interface UserRepInterface extends Omit<IMongooseObjectExt, "id"> {
+  export interface UserRepInterface extends IMongooseObjectExt {
+    username: string;
+    firstName: string;
+    email: string;
+    lastName: string;
+    fcmToken?: string;
+    isVerified?: boolean;
+    customerSet?: boolean;
+    image?: string;
+  }
+
+  export interface UserEventInterface {
     id: string;
     username: string;
     firstName: string;
@@ -319,6 +394,7 @@ declare namespace CTypes {
     isVerified?: boolean;
     customerSet?: boolean;
     image?: string;
+    version: number;
   }
 
   /**
@@ -338,11 +414,18 @@ declare namespace CTypes {
     owner: Types.ObjectId;
   }
 
-  export interface VendorRepInterface extends Omit<IMongooseObjectExt, "id"> {
+  export interface VendorRepInterface extends IMongooseObjectExt {
+    name: string;
+    address: string;
+    logo: string;
+  }
+
+  export interface VendorEventInterface {
     id: string;
     name: string;
     address: string;
     logo: string;
+    version: number;
   }
 
   /**
@@ -359,11 +442,18 @@ declare namespace CTypes {
     practicabilityPercentage?: number;
   }
 
-  export interface ZoneRepInterface extends Omit<IMongooseObjectExt, "id"> {
+  export interface ZoneRepInterface extends IMongooseObjectExt {
+    name: string;
+    area: mongoose.Schema.Types.Polygon;
+    country?: string;
+  }
+
+  export interface ZoneEventInterface {
     id: string;
     name: string;
     area: mongoose.Schema.Types.Polygon;
     country?: string;
+    version: number;
   }
 }
 

@@ -203,6 +203,13 @@ declare namespace CTypes {
     accessToken?: string;
   }
 
+  export interface SimulationRepInterface extends IMongooseObjectExt {
+    name: string;
+    jobDefinition?: string;
+    jobQueue?: string;
+    state?: SimulationState;
+  }
+
   export interface TaskDeliveryInterface extends IMongooseObjectExt {
     // Ref to a Product
     product?: Types.ObjectId;
@@ -266,7 +273,7 @@ declare namespace CTypes {
     custom?: Types.ObjectId;
   }
 
-  export interface TaskRepInterface extends IMongooseObjectExt {
+  export interface TaskRepInterface extends Omit<IMongooseObjectExt, "id"> {
     id: string;
     type: TaskType;
     fare: number;
@@ -302,7 +309,7 @@ declare namespace CTypes {
     position?: mongoose.Schema.Types.Point & Point;
   }
 
-  export interface UserRepInterface extends IMongooseObjectExt {
+  export interface UserRepInterface extends Omit<IMongooseObjectExt, "id"> {
     id: string;
     username: string;
     firstName: string;
@@ -331,7 +338,7 @@ declare namespace CTypes {
     owner: Types.ObjectId;
   }
 
-  export interface VendorRepInterface extends IMongooseObjectExt {
+  export interface VendorRepInterface extends Omit<IMongooseObjectExt, "id"> {
     id: string;
     name: string;
     address: string;
@@ -352,7 +359,7 @@ declare namespace CTypes {
     practicabilityPercentage?: number;
   }
 
-  export interface ZoneRepInterface extends IMongooseObjectExt {
+  export interface ZoneRepInterface extends Omit<IMongooseObjectExt, "id"> {
     id: string;
     name: string;
     area: mongoose.Schema.Types.Polygon;

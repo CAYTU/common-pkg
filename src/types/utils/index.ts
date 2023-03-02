@@ -19,6 +19,8 @@ export enum TaskStatus {
   Refunded = "refunded",
   // Scheduled time for the task
   Scheduled = "scheduled",
+  //
+  Completed = "completed",
 }
 
 export enum TaskType {
@@ -90,4 +92,13 @@ export enum CurrentRoleState {
   Upgraded = "upgraded",
   // When the request to upgraded has been turn down
   Denied = "denied",
+}
+
+export enum SimulationState {
+  // TODO: add documentation here ...
+  Pending = "pending",
+  Running = "running",
+  Suspended = "suspended",
+  Terminated = "terminated",
+  Completed = "completed",
 }

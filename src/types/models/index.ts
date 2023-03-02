@@ -43,6 +43,7 @@ declare namespace CTypes {
   }
 
   export interface CategoryRepInterface extends IMongooseObjectExt {
+    id: string;
     name: string;
     image: string;
   }
@@ -66,6 +67,7 @@ declare namespace CTypes {
   }
 
   export interface CustomerRepInterface extends IMongooseObjectExt {
+    id: string;
     user: Types.ObjectId;
     address: string;
     city: string;
@@ -107,6 +109,7 @@ declare namespace CTypes {
   }
 
   export interface OperatorRepInterface extends IMongooseObjectExt {
+    id: string;
     user: Types.ObjectId;
     active?: boolean;
     aboutMe?: string;
@@ -138,6 +141,7 @@ declare namespace CTypes {
   }
 
   export interface ProductRepInterface extends IMongooseObjectExt {
+    id: string;
     name: string;
     price: number;
     description: string;
@@ -187,6 +191,7 @@ declare namespace CTypes {
   }
 
   export interface RobotRepInterface extends IMongooseObjectExt {
+    id: string;
     name: string;
     type: string;
     image: string;
@@ -243,10 +248,20 @@ declare namespace CTypes {
   }
 
   export interface SimulationRepInterface extends IMongooseObjectExt {
+    id: string;
     name: string;
     jobDefinition?: string;
     jobQueue?: string;
     state?: SimulationState;
+  }
+
+  export interface SimulationRepInterface extends IMongooseObjectExt {
+    id: string;
+    name: string;
+    jobDefinition?: string;
+    jobQueue?: string;
+    state?: SimulationState;
+    version: number;
   }
 
   export interface TaskDeliveryInterface extends IMongooseObjectExt {
@@ -313,6 +328,7 @@ declare namespace CTypes {
   }
 
   export interface TaskRepInterface extends IMongooseObjectExt {
+    id: string;
     type: TaskType;
     fare: number;
     code?: number;
@@ -374,6 +390,7 @@ declare namespace CTypes {
   }
 
   export interface UserRepInterface extends IMongooseObjectExt {
+    id: string;
     username: string;
     firstName: string;
     email: string;
@@ -415,6 +432,7 @@ declare namespace CTypes {
   }
 
   export interface VendorRepInterface extends IMongooseObjectExt {
+    id: string;
     name: string;
     address: string;
     logo: string;
@@ -443,6 +461,7 @@ declare namespace CTypes {
   }
 
   export interface ZoneRepInterface extends IMongooseObjectExt {
+    id: string;
     name: string;
     area: mongoose.Schema.Types.Polygon;
     country?: string;

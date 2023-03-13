@@ -1,5 +1,5 @@
 {
-    "name": "@caytu/common",
+    "name": "@caytu/shared",
     "version": "1.0.104",
     "description": "Shared Packages",
     "main": "./build/index.js",

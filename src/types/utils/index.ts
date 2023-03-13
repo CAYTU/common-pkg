@@ -58,29 +58,10 @@ export enum UserRole {
 }
 
 export enum RobotStates {
-  // default state | robot -> closed
-  AVAILABLE = "available",
-  // pending | confirmed // once upon
-  OPENLID = "open-lid",
-  // robot -> opened
-  CLOSELID = "close-lid",
-  // robot -> closed
-  CONFIRMEDINAPP = "confirmed-in-app",
-  // picked_up
-  PROCESSING = "processing",
-  // arrived
-  ARRIVED = "arrived",
-  // verify-order
-  KEYPADIN = "keypad-in",
-  // !correct
-  WRONGCODE = "wrong-code",
-  // correct
-  OPENLIDARRIVAL = "open-lid-arrival",
-  // robot -> opened
-  CLOSELIDARRIVAL = "close-lid-arrival",
-  // Last robot state which display a message to the
-  // customer after terminating the task
-  ENJOYMEALMSG = "enjoy-meal-msg",
+  Unavailable = "unavailable",
+  Running = "running",
+  Failed = "failed",
+  Available = "available",
 }
 
 export enum CurrentRoleState {
@@ -94,11 +75,10 @@ export enum CurrentRoleState {
   Denied = "denied",
 }
 
-export enum SimulationState {
+export enum SimulationJobState {
   // TODO: add documentation here ...
   Pending = "pending",
   Running = "running",
-  Suspended = "suspended",
   Terminated = "terminated",
   Completed = "completed",
 }

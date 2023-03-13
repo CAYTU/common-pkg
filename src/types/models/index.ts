@@ -3,7 +3,7 @@ import mongoose, { Types } from "mongoose";
 import {
   CurrentRoleState,
   RobotStates,
-  SimulationState,
+  SimulationJobState,
   TaskStatus,
   TaskType,
   UserRole,
@@ -237,14 +237,9 @@ declare namespace CTypes {
     name: string;
     jobDefinition?: string;
     jobQueue?: string;
-    state?: SimulationState;
-    lotEndpoint?: string;
-    lotClientId?: string;
-    subscribeTopic?: string;
-    publishTopic?: string;
-    accessKey?: string;
-    secretKey?: string;
-    accessToken?: string;
+    templateURL?: string;
+    role?: string;
+    region?: string;
   }
 
   export interface SimulationRepInterface extends IMongooseObjectExt {
@@ -252,15 +247,34 @@ declare namespace CTypes {
     name: string;
     jobDefinition?: string;
     jobQueue?: string;
-    state?: SimulationState;
+    templateURL?: string;
+    role?: string;
+    region?: string;
+    version: number;
   }
 
-  export interface SimulationRepInterface extends IMongooseObjectExt {
+  export interface SimulationJobInterface extends IMongooseObjectExt {
+    jobName: string;
+    accessKeyId: string;
+    secretAccessKey: string;
+    sessionToken: string;
+    region: string;
+    endpoint: string;
+    thing: string;
+    simulationId: string;
+    state: SimulationJobState;
+  }
+
+  export interface SimulationJobRepInterface extends IMongooseObjectExt {
     id: string;
-    name: string;
-    jobDefinition?: string;
-    jobQueue?: string;
-    state?: SimulationState;
+    jobName: string;
+    accessKeyId: string;
+    secretAccessKey: string;
+    sessionToken: string;
+    region: string;
+    endpoint: string;
+    thing: string;
+    state: SimulationJobState;
     version: number;
   }
 

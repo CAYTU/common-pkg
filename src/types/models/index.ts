@@ -235,25 +235,25 @@ declare namespace CTypes {
 
   export interface SimulationInterface extends IMongooseObjectExt {
     name: string;
-    image: string;
-    description: string;
-    jobDefinition?: string;
-    jobQueue?: string;
-    templateURL?: string;
-    role?: string;
-    region?: string;
+    image?: string;
+    description?: string;
+    jobDefinition: string;
+    jobQueue: string;
+    templateURL: string;
+    role: string;
+    region: string;
   }
 
   export interface SimulationRepInterface extends IMongooseObjectExt {
     id: string;
     name: string;
-    image: string;
-    description: string;
-    jobDefinition?: string;
-    jobQueue?: string;
-    templateURL?: string;
-    role?: string;
-    region?: string;
+    image?: string;
+    description?: string;
+    jobDefinition: string;
+    jobQueue: string;
+    templateURL: string;
+    role: string;
+    region: string;
     version: number;
   }
 
@@ -266,7 +266,8 @@ declare namespace CTypes {
     endpoint: string;
     thing: string;
     simulationId: Types.ObjectId;
-    state: SimulationJobState;
+    state?: SimulationJobState;
+    operator?: Types.ObjectId;
   }
 
   export interface SimulationJobRepInterface extends IMongooseObjectExt {
@@ -278,7 +279,7 @@ declare namespace CTypes {
     region: string;
     endpoint: string;
     thing: string;
-    state: SimulationJobState;
+    operator?: Types.ObjectId;
     version: number;
   }
 

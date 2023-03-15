@@ -235,6 +235,8 @@ declare namespace CTypes {
 
   export interface SimulationInterface extends IMongooseObjectExt {
     name: string;
+    image: string;
+    description: string;
     jobDefinition?: string;
     jobQueue?: string;
     templateURL?: string;
@@ -245,6 +247,8 @@ declare namespace CTypes {
   export interface SimulationRepInterface extends IMongooseObjectExt {
     id: string;
     name: string;
+    image: string;
+    description: string;
     jobDefinition?: string;
     jobQueue?: string;
     templateURL?: string;

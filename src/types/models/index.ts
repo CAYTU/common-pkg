@@ -265,7 +265,7 @@ declare namespace CTypes {
     region: string;
     endpoint: string;
     thing: string;
-    simulationId: string;
+    simulationId: Types.ObjectId;
     state: SimulationJobState;
   }
 

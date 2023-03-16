@@ -258,6 +258,7 @@ declare namespace CTypes {
   }
 
   export interface SimulationJobInterface extends IMongooseObjectExt {
+    jobId: string;
     jobName: string;
     accessKeyId: string;
     secretAccessKey: string;
@@ -272,6 +273,7 @@ declare namespace CTypes {
 
   export interface SimulationJobRepInterface extends IMongooseObjectExt {
     id: string;
+    jobId: string;
     jobName: string;
     accessKeyId: string;
     secretAccessKey: string;

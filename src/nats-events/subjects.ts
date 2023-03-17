@@ -28,6 +28,7 @@ export enum Subjects {
   TaskAccepted = "task:accepted",
   TaskExhausted = "task:exhausted",
   // User Subjects
+  UserRegistered = "user:registered",
   UserCreated = "user:created",
   UserUpdated = "user:updated",
   UserDeleted = "user:deleted",

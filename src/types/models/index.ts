@@ -1,7 +1,6 @@
 import GeoJSON from "mongoose-geojson-schema";
 import mongoose, { Types } from "mongoose";
 import {
-  CurrentRoleState,
   RobotStates,
   SimulationJobState,
   TaskStatus,
@@ -60,24 +59,18 @@ declare namespace CTypes {
    */
   export interface CustomerInterface extends IMongooseObjectExt {
     user: Types.ObjectId;
-    loyaltyPoint: number;
-    walletBalance: number;
-    address: string;
-    city: string;
+    loyaltyPoint?: number;
+    wallet?: number;
   }
 
   export interface CustomerRepInterface extends IMongooseObjectExt {
     id: string;
     user: Types.ObjectId;
-    address: string;
-    city: string;
   }
 
   export interface CustomerEventInterface {
     id: string;
     user: Types.ObjectId;
-    address: string;
-    city: string;
     version: number;
   }
 
@@ -254,6 +247,18 @@ declare namespace CTypes {
     templateURL: string;
     role: string;
     region: string;
+  }
+
+  export interface SimulationEventInterface extends IMongooseObjectExt {
+    id: string;
+    name: string;
+    image?: string;
+    description?: string;
+    jobDefinition: string;
+    jobQueue: string;
+    templateURL: string;
+    role: string;
+    region: string;
     version: number;
   }
 
@@ -269,9 +274,23 @@ declare namespace CTypes {
     simulationId: Types.ObjectId;
     state?: SimulationJobState;
     operator?: Types.ObjectId;
+    duration?: number
   }
 
   export interface SimulationJobRepInterface extends IMongooseObjectExt {
+    id: string;
+    jobId: string;
+    jobName: string;
+    accessKeyId: string;
+    secretAccessKey: string;
+    sessionToken: string;
+    region: string;
+    endpoint: string;
+    thing: string;
+    operator?: Types.ObjectId;
+  }
+
+  export interface SimulationJobEventInterface extends IMongooseObjectExt {
     id: string;
     jobId: string;
     jobName: string;
@@ -402,12 +421,11 @@ declare namespace CTypes {
     email: string;
     isVerified?: boolean;
     fcmToken?: string;
-    customerSet?: boolean;
-    currentRoleState?: CurrentRoleState;
     password: string;
     image?: string;
     roles?: UserRole[];
     position?: mongoose.Schema.Types.Point & Point;
+    address?: string;
   }
 
   export interface UserRepInterface extends IMongooseObjectExt {
@@ -418,8 +436,6 @@ declare namespace CTypes {
     lastName: string;
     fcmToken?: string;
     isVerified?: boolean;
-    customerSet?: boolean;
-    image?: string;
   }
 
   export interface UserEventInterface {
@@ -430,8 +446,6 @@ declare namespace CTypes {
     lastName: string;
     fcmToken?: string;
     isVerified?: boolean;
-    customerSet?: boolean;
-    image?: string;
     version: number;
   }
 

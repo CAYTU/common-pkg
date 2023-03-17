@@ -43,10 +43,7 @@ export enum UserRole {
   Customer = "customer",
   // This role combine both the customer and the its own.
   Operator = "operator",
-  // He's a customer role but not the operator's. Though, he's capabilities
-  // are different from the operator.
-  Manager = "manager",
-  // Not only it encapsules the 2 aboves also he's all rights
+  // Not only it encapsules the 2 aboves
   Admin = "admin",
 
   // Primitive Roles | if missing, they can prevent user to do basic operation
@@ -62,17 +59,6 @@ export enum RobotStates {
   Running = "running",
   Failed = "failed",
   Available = "available",
-}
-
-export enum CurrentRoleState {
-  // the first roles the user has been created with
-  Native = "native",
-  // When a user make a request for a new roles and has not been accepted yet
-  Pending = "pending",
-  // When the request to upgrade has been accepted
-  Upgraded = "upgraded",
-  // When the request to upgraded has been turn down
-  Denied = "denied",
 }
 
 export enum SimulationJobState {

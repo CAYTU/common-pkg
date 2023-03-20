@@ -1,6 +1,7 @@
 import GeoJSON from "mongoose-geojson-schema";
 import mongoose, { Types } from "mongoose";
 import {
+  OperatorStatus,
   RobotStates,
   SimulationJobState,
   TaskStatus,
@@ -95,7 +96,8 @@ declare namespace CTypes {
     user: Types.ObjectId;
     active?: boolean;
     taskCount?: number;
-    earnings?: number;
+    status?: OperatorStatus;
+    wallet?: Types.ObjectId;
     aboutMe?: string;
     currentTask?: Types.ObjectId;
     zone?: Types.ObjectId;
@@ -105,14 +107,16 @@ declare namespace CTypes {
     id: string;
     user: Types.ObjectId;
     active?: boolean;
-    aboutMe?: string;
+    currentTask?: Types.ObjectId;
+    wallet?: Types.ObjectId;
   }
 
   export interface OperatorEventInterface {
     id: string;
     user: Types.ObjectId;
     active?: boolean;
-    aboutMe?: string;
+    currentTask?: Types.ObjectId;
+    wallet?: Types.ObjectId;
     version: number;
   }
 

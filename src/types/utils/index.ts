@@ -64,8 +64,8 @@ export enum RobotStates {
 export enum OperatorStatus {
   Pending = "Pending",
   Denied = "Denied",
-  Verified = "Verified",
-  Banned = "Banned"
+  Approved = "Approved",
+  Revoked = "Revoked"
 }
 
 export enum SimulationJobState {

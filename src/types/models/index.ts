@@ -92,7 +92,8 @@ declare namespace CTypes {
 
   export interface OperatorInterface extends IMongooseObjectExt {
     identityType: IDType;
-    identityNumber: number;
+    identityPhoto: string;
+    identityNumber?: number;
     user: Types.ObjectId;
     active?: boolean;
     taskCount?: number;
@@ -100,7 +101,6 @@ declare namespace CTypes {
     wallet?: Types.ObjectId;
     aboutMe?: string;
     currentTask?: Types.ObjectId;
-    zone?: Types.ObjectId;
   }
 
   export interface OperatorRepInterface extends IMongooseObjectExt {
@@ -108,6 +108,7 @@ declare namespace CTypes {
     user: Types.ObjectId;
     active?: boolean;
     currentTask?: Types.ObjectId;
+    status?: OperatorStatus;
     wallet?: Types.ObjectId;
   }
 
@@ -116,6 +117,7 @@ declare namespace CTypes {
     user: Types.ObjectId;
     active?: boolean;
     currentTask?: Types.ObjectId;
+    status?: OperatorStatus;
     wallet?: Types.ObjectId;
     version: number;
   }

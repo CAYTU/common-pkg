@@ -293,6 +293,7 @@ declare namespace CTypes {
     region: string;
     endpoint: string;
     thing: string;
+    state?: SimulationJobState;
     operator?: Types.ObjectId;
   }
 
@@ -306,6 +307,7 @@ declare namespace CTypes {
     region: string;
     endpoint: string;
     thing: string;
+    state?: SimulationJobState;
     operator?: Types.ObjectId;
     version: number;
   }

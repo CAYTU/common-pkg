@@ -122,6 +122,14 @@ declare namespace CTypes {
     version: number;
   }
 
+  export interface OperatorRequestedEventInterface {
+    identityType: IDType;
+    identityPhoto: string;
+    identityNumber?: number;
+    user: Types.ObjectId;
+    aboutMe?: string;
+  }
+
   /**
    * Product:
    */

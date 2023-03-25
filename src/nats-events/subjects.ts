@@ -64,6 +64,7 @@ export enum Subjects {
   OperatorAssigned = "operator:assigned",
   OperatorGetCandidate = "operator:get:candidate",
   OperatorUnassigned = "operator:unassigned",
+  OperatorRequested = "operator:requested",
   // FCM Tokens
   RobotFcmTokenUpdated = "robot:fcmToken:updated",
   UserFCMTokenUpdated = "user:fcmToken:updated",

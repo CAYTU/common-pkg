@@ -93,7 +93,7 @@ declare namespace CTypes {
   export interface OperatorInterface extends IMongooseObjectExt {
     identityType: IDType;
     identityPhoto: string;
-    identityNumber?: number;
+    identityNumber?: string;
     user: Types.ObjectId;
     active?: boolean;
     taskCount?: number;
@@ -125,7 +125,7 @@ declare namespace CTypes {
   export interface OperatorRequestedEventInterface {
     identityType: IDType;
     identityPhoto: string;
-    identityNumber?: number;
+    identityNumber?: string;
     user: Types.ObjectId;
     aboutMe?: string;
   }

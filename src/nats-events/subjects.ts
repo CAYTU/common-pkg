@@ -68,4 +68,7 @@ export enum Subjects {
   // FCM Tokens
   RobotFcmTokenUpdated = "robot:fcmToken:updated",
   UserFCMTokenUpdated = "user:fcmToken:updated",
+
+  // Task Type
+  TaskSimulationCreated = "task:simulation:created",
 }

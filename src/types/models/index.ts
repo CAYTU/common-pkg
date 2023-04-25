@@ -240,6 +240,25 @@ declare namespace CTypes {
    * Simulation:
    */
 
+  export interface SimulationCategoryInterface extends IMongooseObjectExt {
+    value: string;
+    displayName: string;
+  }
+
+  export interface SimulationRegionInterface
+    extends SimulationCategoryInterface {}
+
+  export interface SimulationJobQueueInterface
+    extends SimulationCategoryInterface {}
+
+  export interface SimulationJobDefinitionInterface
+    extends SimulationCategoryInterface {}
+
+  export interface SimulationRoleInterface
+    extends SimulationCategoryInterface {}
+
+  export interface SimulationTemplateURLInterface extends SimulationCategoryInterface {}
+
   export interface SimulationInterface extends IMongooseObjectExt {
     name: string;
     image?: string;
@@ -288,7 +307,7 @@ declare namespace CTypes {
     simulationId: Types.ObjectId;
     state?: SimulationJobState;
     operator?: Types.ObjectId;
-    duration?: number
+    duration?: number;
   }
 
   export interface SimulationJobRepInterface extends IMongooseObjectExt {

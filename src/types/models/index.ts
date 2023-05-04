@@ -1,9 +1,9 @@
 import GeoJSON from "mongoose-geojson-schema";
 import mongoose, { Types } from "mongoose";
 import {
-  CurrentRoleState,
+  OperatorStatus,
   RobotStates,
-  SimulationState,
+  SimulationJobState,
   TaskStatus,
   TaskType,
   UserRole,
@@ -60,24 +60,18 @@ declare namespace CTypes {
    */
   export interface CustomerInterface extends IMongooseObjectExt {
     user: Types.ObjectId;
-    loyaltyPoint: number;
-    walletBalance: number;
-    address: string;
-    city: string;
+    loyaltyPoint?: number;
+    wallet?: number;
   }
 
   export interface CustomerRepInterface extends IMongooseObjectExt {
     id: string;
     user: Types.ObjectId;
-    address: string;
-    city: string;
   }
 
   export interface CustomerEventInterface {
     id: string;
     user: Types.ObjectId;
-    address: string;
-    city: string;
     version: number;
   }
 
@@ -87,7 +81,8 @@ declare namespace CTypes {
 
   export interface NotificationInterface extends IMongooseObjectExt {
     from?: string;
-    to: string;
+    to: Types.ObjectId;
+    isRead?: boolean;
     message: string;
   }
 
@@ -98,29 +93,42 @@ declare namespace CTypes {
 
   export interface OperatorInterface extends IMongooseObjectExt {
     identityType: IDType;
-    identityNumber: number;
+    identityPhoto: string;
+    identityNumber?: string;
     user: Types.ObjectId;
     active?: boolean;
     taskCount?: number;
-    earnings?: number;
+    status?: OperatorStatus;
+    wallet?: Types.ObjectId;
     aboutMe?: string;
     currentTask?: Types.ObjectId;
-    zone?: Types.ObjectId;
   }
 
   export interface OperatorRepInterface extends IMongooseObjectExt {
     id: string;
     user: Types.ObjectId;
     active?: boolean;
-    aboutMe?: string;
+    currentTask?: Types.ObjectId;
+    status?: OperatorStatus;
+    wallet?: Types.ObjectId;
   }
 
   export interface OperatorEventInterface {
     id: string;
     user: Types.ObjectId;
     active?: boolean;
-    aboutMe?: string;
+    currentTask?: Types.ObjectId;
+    status?: OperatorStatus;
+    wallet?: Types.ObjectId;
     version: number;
+  }
+
+  export interface OperatorRequestedEventInterface {
+    identityType: IDType;
+    identityPhoto: string;
+    identityNumber?: string;
+    user: Types.ObjectId;
+    aboutMe?: string;
   }
 
   /**
@@ -233,34 +241,102 @@ declare namespace CTypes {
    * Simulation:
    */
 
+  export interface SimulationCategoryInterface extends IMongooseObjectExt {
+    value: string;
+    displayName: string;
+  }
+
+  export interface SimulationRegionInterface
+    extends SimulationCategoryInterface {}
+
+  export interface SimulationJobQueueInterface
+    extends SimulationCategoryInterface {}
+
+  export interface SimulationJobDefinitionInterface
+    extends SimulationCategoryInterface {}
+
+  export interface SimulationRoleInterface
+    extends SimulationCategoryInterface {}
+
+  export interface SimulationTemplateURLInterface extends SimulationCategoryInterface {}
+
   export interface SimulationInterface extends IMongooseObjectExt {
     name: string;
-    jobDefinition?: string;
-    jobQueue?: string;
-    state?: SimulationState;
-    lotEndpoint?: string;
-    lotClientId?: string;
-    subscribeTopic?: string;
-    publishTopic?: string;
-    accessKey?: string;
-    secretKey?: string;
-    accessToken?: string;
+    image?: string;
+    description?: string;
+    jobDefinition: string;
+    jobQueue: string;
+    templateURL: string;
+    role: string;
+    region: string;
   }
 
   export interface SimulationRepInterface extends IMongooseObjectExt {
     id: string;
     name: string;
-    jobDefinition?: string;
-    jobQueue?: string;
-    state?: SimulationState;
+    image?: string;
+    description?: string;
+    jobDefinition: string;
+    jobQueue: string;
+    templateURL: string;
+    role: string;
+    region: string;
   }
 
-  export interface SimulationRepInterface extends IMongooseObjectExt {
+  export interface SimulationEventInterface extends IMongooseObjectExt {
     id: string;
     name: string;
-    jobDefinition?: string;
-    jobQueue?: string;
-    state?: SimulationState;
+    image?: string;
+    description?: string;
+    jobDefinition: string;
+    jobQueue: string;
+    templateURL: string;
+    role: string;
+    region: string;
+    version: number;
+  }
+
+  export interface SimulationJobInterface extends IMongooseObjectExt {
+    jobId: string;
+    jobName: string;
+    accessKeyId: string;
+    secretAccessKey: string;
+    sessionToken: string;
+    region: string;
+    endpoint: string;
+    thing: string;
+    simulation: Types.ObjectId;
+    state?: SimulationJobState;
+    operator?: Types.ObjectId;
+    duration?: number;
+  }
+
+  export interface SimulationJobRepInterface extends IMongooseObjectExt {
+    id: string;
+    jobId: string;
+    jobName: string;
+    accessKeyId: string;
+    secretAccessKey: string;
+    sessionToken: string;
+    region: string;
+    endpoint: string;
+    thing: string;
+    state?: SimulationJobState;
+    operator?: Types.ObjectId;
+  }
+
+  export interface SimulationJobEventInterface extends IMongooseObjectExt {
+    id: string;
+    jobId: string;
+    jobName: string;
+    accessKeyId: string;
+    secretAccessKey: string;
+    sessionToken: string;
+    region: string;
+    endpoint: string;
+    thing: string;
+    state?: SimulationJobState;
+    operator?: Types.ObjectId;
     version: number;
   }
 
@@ -381,12 +457,11 @@ declare namespace CTypes {
     email: string;
     isVerified?: boolean;
     fcmToken?: string;
-    customerSet?: boolean;
-    currentRoleState?: CurrentRoleState;
     password: string;
     image?: string;
     roles?: UserRole[];
     position?: mongoose.Schema.Types.Point & Point;
+    address?: string;
   }
 
   export interface UserRepInterface extends IMongooseObjectExt {
@@ -397,8 +472,6 @@ declare namespace CTypes {
     lastName: string;
     fcmToken?: string;
     isVerified?: boolean;
-    customerSet?: boolean;
-    image?: string;
   }
 
   export interface UserEventInterface {
@@ -409,8 +482,6 @@ declare namespace CTypes {
     lastName: string;
     fcmToken?: string;
     isVerified?: boolean;
-    customerSet?: boolean;
-    image?: string;
     version: number;
   }
 

@@ -20,7 +20,7 @@ export enum TaskStatus {
   // Scheduled time for the task
   Scheduled = "scheduled",
   //
-  Completed = "completed",
+  Completed = "completed"
 }
 
 export enum TaskType {
@@ -33,7 +33,7 @@ export enum TaskType {
   // Run a simulation
   Simulation = "simulation",
   // If task is none of the above (delivery, cleaning, ...)
-  Custom = "custom",
+  Custom = "custom"
 }
 
 export enum UserRole {
@@ -43,10 +43,7 @@ export enum UserRole {
   Customer = "customer",
   // This role combine both the customer and the its own.
   Operator = "operator",
-  // He's a customer role but not the operator's. Though, he's capabilities
-  // are different from the operator.
-  Manager = "manager",
-  // Not only it encapsules the 2 aboves also he's all rights
+  // Not only it encapsules the 2 aboves
   Admin = "admin",
 
   // Primitive Roles | if missing, they can prevent user to do basic operation
@@ -54,51 +51,27 @@ export enum UserRole {
   Create = "create",
   Update = "update",
   ReadOnly = "readOnly",
-  All = "all",
+  All = "all"
 }
 
 export enum RobotStates {
-  // default state | robot -> closed
-  AVAILABLE = "available",
-  // pending | confirmed // once upon
-  OPENLID = "open-lid",
-  // robot -> opened
-  CLOSELID = "close-lid",
-  // robot -> closed
-  CONFIRMEDINAPP = "confirmed-in-app",
-  // picked_up
-  PROCESSING = "processing",
-  // arrived
-  ARRIVED = "arrived",
-  // verify-order
-  KEYPADIN = "keypad-in",
-  // !correct
-  WRONGCODE = "wrong-code",
-  // correct
-  OPENLIDARRIVAL = "open-lid-arrival",
-  // robot -> opened
-  CLOSELIDARRIVAL = "close-lid-arrival",
-  // Last robot state which display a message to the
-  // customer after terminating the task
-  ENJOYMEALMSG = "enjoy-meal-msg",
+  Unavailable = "unavailable",
+  Running = "running",
+  Failed = "failed",
+  Available = "available"
 }
 
-export enum CurrentRoleState {
-  // the first roles the user has been created with
-  Native = "native",
-  // When a user make a request for a new roles and has not been accepted yet
-  Pending = "pending",
-  // When the request to upgrade has been accepted
-  Upgraded = "upgraded",
-  // When the request to upgraded has been turn down
-  Denied = "denied",
+export enum OperatorStatus {
+  Pending = "Pending",
+  Denied = "Denied",
+  Approved = "Approved",
+  Revoked = "Revoked"
 }
 
-export enum SimulationState {
+export enum SimulationJobState {
   // TODO: add documentation here ...
   Pending = "pending",
   Running = "running",
-  Suspended = "suspended",
   Terminated = "terminated",
-  Completed = "completed",
+  Completed = "completed"
 }

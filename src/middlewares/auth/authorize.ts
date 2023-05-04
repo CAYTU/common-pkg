@@ -6,7 +6,7 @@ import { NotAuthorizedErr } from "../../errors/not-authorized";
 export const authorize = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     if (!req.currentUser) {
-      throw new NotAuthorizedErr();
+      throw new NotAuthorizedErr("Token must have failed.");
     }
     next();
   }

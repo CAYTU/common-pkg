@@ -28,6 +28,7 @@ export enum Subjects {
   TaskAccepted = "task:accepted",
   TaskExhausted = "task:exhausted",
   // User Subjects
+  UserRegistered = "user:registered",
   UserCreated = "user:created",
   UserUpdated = "user:updated",
   UserDeleted = "user:deleted",
@@ -53,6 +54,9 @@ export enum Subjects {
   SimulationCreated = "simulation:created",
   SimulationUpdated = "simulation:updated",
   SimulationDeleted = "simulation:deleted",
+  SimulationJobCreated = "simulationjob:created",
+  SimulationJobUpdated = "simulationjob:updated",
+  SimulationJobDeleted = "simulationjob:deleted",
   // Operators Subjects
   OperatorCreated = "operator:created",
   OperatorUpdated = "operator:updated",
@@ -60,7 +64,11 @@ export enum Subjects {
   OperatorAssigned = "operator:assigned",
   OperatorGetCandidate = "operator:get:candidate",
   OperatorUnassigned = "operator:unassigned",
+  OperatorRequested = "operator:requested",
   // FCM Tokens
   RobotFcmTokenUpdated = "robot:fcmToken:updated",
   UserFCMTokenUpdated = "user:fcmToken:updated",
+
+  // Task Type
+  TaskSimulationCreated = "task:simulation:created",
 }

@@ -258,7 +258,8 @@ declare namespace CTypes {
   export interface SimulationRoleInterface
     extends SimulationCategoryInterface {}
 
-  export interface SimulationTemplateURLInterface extends SimulationCategoryInterface {}
+  export interface SimulationTemplateURLInterface
+    extends SimulationCategoryInterface {}
 
   export interface SimulationInterface extends IMongooseObjectExt {
     name: string;
@@ -451,11 +452,12 @@ declare namespace CTypes {
 
   export interface UserInterface extends IMongooseObjectExt {
     username: string;
-    firstName: string;
-    lastName: string;
-    phone: string;
+    firstName?: string;
+    lastName?: string;
+    phone?: string;
     email: string;
     isVerified?: boolean;
+    isCompleted?: boolean;
     fcmToken?: string;
     password: string;
     image?: string;
@@ -472,6 +474,7 @@ declare namespace CTypes {
     lastName: string;
     fcmToken?: string;
     isVerified?: boolean;
+    isCompleted?: boolean;
   }
 
   export interface UserEventInterface {
@@ -482,6 +485,7 @@ declare namespace CTypes {
     lastName: string;
     fcmToken?: string;
     isVerified?: boolean;
+    isCompleted?: boolean;
     version: number;
   }
 

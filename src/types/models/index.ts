@@ -452,8 +452,8 @@ declare namespace CTypes {
 
   export interface UserInterface extends IMongooseObjectExt {
     username: string;
-    firstName?: string;
-    lastName?: string;
+    firstName: string;
+    lastName: string;
     phone?: string;
     email: string;
     isVerified?: boolean;
@@ -461,7 +461,7 @@ declare namespace CTypes {
     fcmToken?: string;
     password: string;
     image?: string;
-    roles?: UserRole[];
+    roles: UserRole[];
     position?: mongoose.Schema.Types.Point & Point;
     address?: string;
   }

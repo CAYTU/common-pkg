@@ -356,7 +356,9 @@ declare namespace CTypes {
   }
 
   export interface TaskInspectionInterface extends IMongooseObjectExt {
-    area: mongoose.Schema.Types.GeoJSON & GeoJSONType;
+    name?: string;
+    // Inspection Attrs
+    itinerary: ItineraryType;
   }
 
   export interface TaskSimulationInterface extends IMongooseObjectExt {}

@@ -80,10 +80,18 @@ declare namespace CTypes {
    */
 
   export interface NotificationInterface extends IMongooseObjectExt {
-    from?: string;
-    to: Types.ObjectId;
-    isRead?: boolean;
-    message: string;
+    user: Types.ObjectId;
+    title: string;
+    body: string;
+    read?: boolean;
+  }
+
+  export interface NotificationRepInterface extends IMongooseObjectExt {
+    id: string;
+    user: Types.ObjectId;
+    title: string;
+    body: string;
+    read?: boolean;
   }
 
   /**
@@ -168,6 +176,28 @@ declare namespace CTypes {
   /**
    * Robot:
    */
+
+  export interface RobotMetaDataInterface extends IMongooseObjectExt {
+    robot: Types.ObjectId;
+    batteryLevel?: number;
+    speed?: number;
+    controlMode?: string | number;
+    faultCode?: number | string;
+    linearVelocity?: number;
+    angularVelocity?: number;
+    position?: {
+      lng: number;
+      lat: number;
+    };
+  }
+
+  export interface RobotStateTrackerInterface extends IMongooseObjectExt {
+    unavailable?: Date;
+    running?: Date;
+    faile?: Date;
+    available?: Date;
+  }
+
   export interface RobotInterface extends IMongooseObjectExt {
     name: string;
     accountId?: string;
@@ -177,25 +207,16 @@ declare namespace CTypes {
     token?: string;
     fcmToken?: string;
     // Means the robots is online or not.
-    status?: boolean;
+    isOnline?: boolean;
     state?: RobotStates;
     taskCount?: number;
-    batteryLevel?: number;
-    speed?: number;
-    controlMode?: string | number;
-    faultCode?: number | string;
-    linearVelocity?: number;
-    angularVelocity?: number;
 
     assignedTaskCount?: number;
     zone?: Types.ObjectId;
-    position?: mongoose.Schema.Types.Point & Point;
     lastRecordedLocation?: mongoose.Schema.Types.Point & Point;
     currentTask?: Types.ObjectId;
     // Time Tracker
-    assignedAt?: Date;
-    unassignedAt?: Date;
-    arrivedAt?: Date;
+    stateTracker?: Types.ObjectId;
   }
 
   export interface RobotRepInterface extends IMongooseObjectExt {
@@ -466,6 +487,7 @@ declare namespace CTypes {
     roles: UserRole[];
     position?: mongoose.Schema.Types.Point & Point;
     address?: string;
+    isOnline?: boolean;
   }
 
   export interface UserRepInterface extends IMongooseObjectExt {
@@ -473,6 +495,7 @@ declare namespace CTypes {
     username: string;
     firstName: string;
     email: string;
+    image?: string;
     lastName: string;
     fcmToken?: string;
     isVerified?: boolean;

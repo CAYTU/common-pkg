@@ -496,6 +496,7 @@ declare namespace CTypes {
     firstName: string;
     email: string;
     image?: string;
+    roles?: UserRole[];
     lastName: string;
     fcmToken?: string;
     isVerified?: boolean;
@@ -508,6 +509,7 @@ declare namespace CTypes {
     firstName: string;
     email: string;
     lastName: string;
+    roles?: UserRole[];
     fcmToken?: string;
     isVerified?: boolean;
     isCompleted?: boolean;

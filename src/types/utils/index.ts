@@ -20,7 +20,7 @@ export enum TaskStatus {
   // Scheduled time for the task
   Scheduled = "scheduled",
   //
-  Completed = "completed"
+  Completed = "completed",
 }
 
 export enum TaskType {
@@ -33,7 +33,7 @@ export enum TaskType {
   // Run a simulation
   Simulation = "simulation",
   // If task is none of the above (delivery, cleaning, ...)
-  Custom = "custom"
+  Custom = "custom",
 }
 
 export enum UserRole {
@@ -51,21 +51,21 @@ export enum UserRole {
   Create = "create",
   Update = "update",
   ReadOnly = "readOnly",
-  All = "all"
+  All = "all",
 }
 
 export enum RobotStates {
   Unavailable = "unavailable",
   Running = "running",
   Failed = "failed",
-  Available = "available"
+  Available = "available",
 }
 
 export enum OperatorStatus {
   Pending = "Pending",
   Denied = "Denied",
   Approved = "Approved",
-  Revoked = "Revoked"
+  Revoked = "Revoked",
 }
 
 export enum SimulationJobState {
@@ -73,5 +73,10 @@ export enum SimulationJobState {
   Pending = "pending",
   Running = "running",
   Terminated = "terminated",
-  Completed = "completed"
+  Completed = "completed",
+}
+
+export enum PlatformRobotics {
+  FreedomRobotics = "freedomRobotics",
+  AWSCloudIoT = "awsCloudIoT",
 }

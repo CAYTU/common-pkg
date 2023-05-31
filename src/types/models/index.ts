@@ -2,6 +2,7 @@ import GeoJSON from "mongoose-geojson-schema";
 import mongoose, { Types } from "mongoose";
 import {
   OperatorStatus,
+  PlatformRobotics,
   RobotStates,
   SimulationJobState,
   TaskStatus,
@@ -203,8 +204,10 @@ declare namespace CTypes {
     accountId?: string;
     deviceId?: string;
     type: string;
+    platform?: PlatformRobotics;
     image: string;
     token?: string;
+    secret?: string;
     fcmToken?: string;
     // Means the robots is online or not.
     isOnline?: boolean;
@@ -222,11 +225,13 @@ declare namespace CTypes {
   export interface RobotRepInterface extends IMongooseObjectExt {
     id: string;
     name: string;
+    platform?: PlatformRobotics;
     type: string;
     image: string;
     fcmToken?: string;
     deviceId?: string;
     token?: string;
+    secret?: string;
     lastRecordedLocation?: mongoose.Schema.Types.Point & Point;
   }
 
@@ -234,10 +239,12 @@ declare namespace CTypes {
     id: string;
     name: string;
     type: string;
+    platform?: PlatformRobotics;
     image: string;
     fcmToken?: string;
     deviceId?: string;
     token?: string;
+    secret?: string;
     lastRecordedLocation?: mongoose.Schema.Types.Point & Point;
     version: number;
   }
@@ -246,12 +253,6 @@ declare namespace CTypes {
    * Task:
    *
    */
-
-  export type DurationType = {
-    hours: number;
-    minutes: number;
-    seconds: number;
-  };
 
   export type ItineraryType = {
     start: mongoose.Schema.Types.Point & Point;
@@ -373,11 +374,14 @@ declare namespace CTypes {
 
   export interface TaskCleaningInterface extends IMongooseObjectExt {
     // Cleaning Attrs
-    area: mongoose.Schema.Types.GeoJSON & GeoJSONType;
+    cleaningOf?: string;
+    description?: string;
+    area: mongoose.Schema.Types.Polygon;
   }
 
   export interface TaskInspectionInterface extends IMongooseObjectExt {
     name?: string;
+    description?: string;
     // Inspection Attrs
     itinerary: ItineraryType;
   }
@@ -412,7 +416,7 @@ declare namespace CTypes {
     robot?: Types.ObjectId;
     status?: TaskStatus;
     statusTracker?: Types.ObjectId;
-    duration?: DurationType;
+    duration?: number;
     // Number of assignment trial for a robot
     // This is only needed for a robot as the
     // process is automated
@@ -557,6 +561,7 @@ declare namespace CTypes {
     city?: string;
     country?: string;
     name: string;
+    surface?: number;
     area: mongoose.Schema.Types.Polygon;
     securityRate?: number;
     practicabilityPercentage?: number;

@@ -20,6 +20,8 @@ export enum Subjects {
   RobotAssigned = "robot:assigned",
   RobotGetCandidate = "robot:get:candidate",
   RobotUnassigned = "robot:unassigned",
+  RobotIsOnline = "robot:is:online",
+  RobotIsOffline = "robot:is:offline",
   // Taks Subjects
   TaskCreated = "task:created",
   TaskUpdated = "task:updated",

@@ -504,6 +504,7 @@ declare namespace CTypes {
     lastName: string;
     fcmToken?: string;
     isVerified?: boolean;
+    isOnline?: boolean;
     isCompleted?: boolean;
   }
 
@@ -516,6 +517,7 @@ declare namespace CTypes {
     roles?: UserRole[];
     fcmToken?: string;
     isVerified?: boolean;
+    isOnline?: boolean;
     isCompleted?: boolean;
     version: number;
   }

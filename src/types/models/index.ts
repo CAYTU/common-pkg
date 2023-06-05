@@ -190,6 +190,7 @@ declare namespace CTypes {
       lng: number;
       lat: number;
     };
+    data?: any
   }
 
   export interface RobotStateTrackerInterface extends IMongooseObjectExt {

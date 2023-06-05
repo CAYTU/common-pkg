@@ -190,7 +190,7 @@ declare namespace CTypes {
       lng: number;
       lat: number;
     };
-    data?: any
+    data?: any;
   }
 
   export interface RobotStateTrackerInterface extends IMongooseObjectExt {
@@ -200,6 +200,15 @@ declare namespace CTypes {
     available?: Date;
   }
 
+  // You can generate doc like this for an interface
+  // export interface RobotInterface extends IMongooseObjectExt {
+  // ...
+  // }
+  // Then run this command: npx ts-json-schema-generator --path "src/types/models/index.ts" --type RobotInterface --tsconfig "tsconfig.json" --jsDoc "extended"
+  // Then copy the generated schema and paste it here
+  // Then you can use it in the model like this:
+  // const RobotSchema = new Schema<CTypes.RobotInterface>(RobotSchemaJSON);
+
   export interface RobotInterface extends IMongooseObjectExt {
     name: string;
     accountId?: string;
@@ -207,7 +216,8 @@ declare namespace CTypes {
     type: string;
     platform?: PlatformRobotics;
     image: string;
-    token?: string;
+    privateToken?: string; // This is the token that is used to authenticate the robot in the backend
+    publicToken?: string; // This is the token that is used to authenticate the robot in freedom robotics
     secret?: string;
     fcmToken?: string;
     // Means the robots is online or not.

@@ -184,6 +184,7 @@ declare namespace CTypes {
     speed?: number;
     controlMode?: string | number;
     faultCode?: number | string;
+    currentTask?: Types.ObjectId;
     linearVelocity?: number;
     angularVelocity?: number;
     position?: {

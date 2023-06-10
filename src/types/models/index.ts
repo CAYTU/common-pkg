@@ -1,6 +1,7 @@
 import GeoJSON from "mongoose-geojson-schema";
 import mongoose, { Types } from "mongoose";
 import {
+  AccountType,
   OperatorStatus,
   PaymentMethod,
   PaymentStatus,
@@ -521,6 +522,7 @@ declare namespace CTypes {
     password: string;
     image?: string;
     roles: UserRole[];
+    accountType?: AccountType;
     position?: mongoose.Schema.Types.Point & Point;
     address?: string;
     isOnline?: boolean;

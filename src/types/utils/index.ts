@@ -110,3 +110,9 @@ export enum PaymentMethod {
   OrangeMoney = "orangeMoney",
   Wari = "wari",
 }
+
+export enum AccountType {
+  Default = "default",
+  Google = "google",
+  Github = "github",
+}

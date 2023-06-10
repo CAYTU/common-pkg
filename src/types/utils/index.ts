@@ -89,6 +89,7 @@ export enum PaymentSubscrtionPlan {
 }
 
 export enum PaymentStatus {
+  Created = "created",
   Pending = "pending",
   Succeeded = "succeeded",
   Failed = "failed",

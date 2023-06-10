@@ -154,11 +154,24 @@ declare namespace CTypes {
     amount: number;
     currency: string;
     status: PaymentStatus;
-    transactionId: string;
-    userId: string;
-    paymentMethod: PaymentMethod; // Can be "card" or "wallet"
+    transactionId?: string;
+    paymentMethod?: PaymentMethod; // Can be "card" or "wallet"
     isSubscribed?: boolean;
+    description?: string;
     subscriptionPlan?: PaymentSubscrtionPlan; // Can be "monthly" or "yearly"
+  }
+
+  export interface PaymentRepInterface extends IMongooseObjectExt {
+    id: string;
+    // Ref to Customer Model
+    customer: Types.ObjectId;
+    status: PaymentStatus;
+    description?: string;
+    subscriptionPlan?: PaymentSubscrtionPlan; // Can be "monthly" or "yearly"
+  }
+
+  export interface PaymentEventInterface extends PaymentRepInterface {
+    version: number;
   }
 
   /**

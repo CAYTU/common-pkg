@@ -80,3 +80,33 @@ export enum PlatformRobotics {
   FreedomRobotics = "freedomRobotics",
   AWSCloudIoT = "awsCloudIoT",
 }
+
+export enum PaymentSubscrtionPlan {
+  Free = "free",
+  Monthly = "monthly",
+  Yearly = "yearly",
+  OnDemand = "onDemand",
+}
+
+export enum PaymentStatus {
+  Pending = "pending",
+  Succeeded = "succeeded",
+  Failed = "failed",
+  Refunded = "refunded",
+  Captured = "captured",
+}
+
+export enum PaymentMethod {
+  Card = "card",
+  Bank = "bank",
+  Cash = "cash",
+  Paypal = "paypal",
+  ApplePay = "applePay",
+  GooglePay = "googlePay",
+  Alipay = "alipay",
+  Stripe = "stripe",
+  // Local payment method
+  Wave = "wave",
+  OrangeMoney = "orangeMoney",
+  Wari = "wari",
+}

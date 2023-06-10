@@ -2,6 +2,9 @@ import GeoJSON from "mongoose-geojson-schema";
 import mongoose, { Types } from "mongoose";
 import {
   OperatorStatus,
+  PaymentMethod,
+  PaymentStatus,
+  PaymentSubscrtionPlan,
   PlatformRobotics,
   RobotStates,
   SimulationJobState,
@@ -138,6 +141,23 @@ declare namespace CTypes {
     identityNumber?: string;
     user: Types.ObjectId;
     aboutMe?: string;
+  }
+
+  /**
+   * Payment
+   */
+  export interface PaymentInterface extends IMongooseObjectExt {
+    // Ref to Customer Model
+    customer: Types.ObjectId;
+    accountId: string;
+    amount: number;
+    currency: string;
+    status: PaymentStatus;
+    transactionId: string;
+    userId: string;
+    paymentMethod: PaymentMethod; // Can be "card" or "wallet"
+    isSubscribed?: boolean;
+    subscriptionPlan?: PaymentSubscrtionPlan; // Can be "monthly" or "yearly"
   }
 
   /**

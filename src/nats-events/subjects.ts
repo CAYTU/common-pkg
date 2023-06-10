@@ -74,4 +74,13 @@ export enum Subjects {
 
   // Task Type
   TaskSimulationCreated = "task:simulation:created",
+
+  // Payment
+  PaymentCreated = "payment:created",
+  PaymentUpdated = "payment:updated",
+  PaymentDeleted = "payment:deleted",
+  PaymentRefunded = "payment:refunded",
+  PaymentFailed = "payment:failed",
+  PaymentSucceeded = "payment:succeeded",
+  PaymentCaptured = "payment:captured",
 }

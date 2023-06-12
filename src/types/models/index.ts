@@ -560,6 +560,7 @@ declare namespace CTypes {
     username: string;
     firstName: string;
     email: string;
+    image?: string;
     lastName: string;
     roles?: UserRole[];
     fcmToken?: string;

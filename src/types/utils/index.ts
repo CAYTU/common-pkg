@@ -76,16 +76,16 @@ export enum SimulationJobState {
   Completed = "completed",
 }
 
-export enum PlatformRobotics {
+export enum RoboticPlatform {
   FreedomRobotics = "freedomRobotics",
   AWSCloudIoT = "awsCloudIoT",
 }
 
-export enum PaymentSubscrtionPlan {
+export enum SubscriptionType {
   Free = "free",
   Monthly = "monthly",
   Yearly = "yearly",
-  OnDemand = "onDemand",
+  asYouGo = "asYouGo",
 }
 
 export enum PaymentStatus {
@@ -112,7 +112,7 @@ export enum PaymentMethod {
   Wari = "wari",
 }
 
-export enum AccountType {
+export enum OauthType {
   Default = "default",
   Google = "google",
   Github = "github",

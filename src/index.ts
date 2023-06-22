@@ -23,6 +23,6 @@ export * from "./nats-events/publisher";
 export * from "./nats-events/subjects";
 export * from "./types/utils";
 
-export * from "./utils/gen-jwt";
+export * from "./utils/encryptor";
 
 export { CTypes };

@@ -74,6 +74,10 @@ export const encryptToken = (
     secret
   ).toString();
 
+  console.log("Payload: ", payload);
+  console.log("Encrypted token: ", encryptedToken)
+  console.log("secret: ", secret);
+
   return encryptedToken;
 };
 

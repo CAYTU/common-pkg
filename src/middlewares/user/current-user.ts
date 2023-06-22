@@ -22,6 +22,7 @@ declare global {
 export const currentUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     let payload: UserPayload | undefined;
+    let token: string;
 
     // Default accessGrant to deny
     req.accessGrant = "deny";
@@ -29,16 +30,17 @@ export const currentUser = asyncHandler(
     // Check if the access token is in the request header or if c_aToken is in the cookie
     if (
       (!req.headers.authorization ||
-        !req.headers.authorization.startsWith("Bearer")) &&
+        !req.headers.authorization?.startsWith("Bearer")) &&
       !req.cookies?.c_aToken
     ) {
       // No access token found, continue to the next middleware or route handler
       return next();
     }
 
+
+
     // Get the access token
-    const token =
-      req.headers.authorization?.split(" ")[1] || req.cookies?.c_aToken;
+    token = req.headers.authorization?.split(" ")[1] || req.cookies?.c_aToken;
 
     // Decrypt the token
     payload = decryptToken(token, `${process.env.ACCESS_SECRET}` as string);

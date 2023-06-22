@@ -30,7 +30,7 @@ export const currentUser = asyncHandler(
     if (
       (!req.headers.authorization ||
         !req.headers.authorization.startsWith("Bearer")) &&
-      !req.cookies.c_aToken
+      !req.cookies?.c_aToken
     ) {
       // No access token found, continue to the next middleware or route handler
       return next();
@@ -38,10 +38,10 @@ export const currentUser = asyncHandler(
 
     // Get the access token
     const token =
-      req.headers.authorization?.split(" ")[1] || req.cookies.c_aToken;
+      req.headers.authorization?.split(" ")[1] || req.cookies?.c_aToken;
 
     // Decrypt the token
-    payload = decryptToken(token, process.env.ACCESS_SECRET as string);
+    payload = decryptToken(token, `${process.env.ACCESS_SECRET}` as string);
 
     // Set the currentUser property of the request object
     req.currentUser = payload;

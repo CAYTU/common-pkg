@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler";
-import { decryptToken, UserPayload } from "../../utils/encryptor";
+import { encryptor, UserPayload } from "../../utils/encryptor";
 
 export type AccessGrantType = "allow" | "deny" | "prompt";
 
@@ -37,13 +37,11 @@ export const currentUser = asyncHandler(
       return next();
     }
 
-
-
     // Get the access token
     token = req.headers.authorization?.split(" ")[1] || req.cookies?.c_aToken;
 
     // Decrypt the token
-    payload = decryptToken(token, `${process.env.ACCESS_SECRET}` as string);
+    payload = encryptor.decryptAccessToken(token);
 
     // Set the currentUser property of the request object
     req.currentUser = payload;

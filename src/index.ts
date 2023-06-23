@@ -24,5 +24,6 @@ export * from "./nats-events/subjects";
 export * from "./types/utils";
 
 export * from "./utils/encryptor";
+export * from "./utils/cookies";
 
 export { CTypes };

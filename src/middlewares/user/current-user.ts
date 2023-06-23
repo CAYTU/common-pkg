@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler";
 import { encryptor, UserPayload } from "../../utils/encryptor";
+import { getCookie } from "../../utils/cookies";
 
 export type AccessGrantType = "allow" | "deny" | "prompt";
 
@@ -31,14 +32,15 @@ export const currentUser = asyncHandler(
     if (
       (!req.headers.authorization ||
         !req.headers.authorization?.startsWith("Bearer")) &&
-      !req.cookies?.c_aToken
+      !getCookie(req, "c_aToken")
     ) {
       // No access token found, continue to the next middleware or route handler
       return next();
     }
 
     // Get the access token
-    token = req.headers.authorization?.split(" ")[1] || req.cookies?.c_aToken;
+    token =
+      req.headers.authorization?.split(" ")[1] || getCookie(req, "c_aToken");
 
     // Decrypt the token
     payload = encryptor.decryptAccessToken(token);

@@ -39,4 +39,24 @@ export const encryptor = {
   decryptRefreshToken: (token: string): UserPayload => {
     return jwt.verify(token, `${process.env.REFRESH_SECRET}`) as UserPayload;
   },
+
+  // This function will be used to verify an ACCESS_TOKEN and return a boolean
+  verifyAccessToken: (token: string): boolean => {
+    try {
+      jwt.verify(token, `${process.env.ACCESS_SECRET}`);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  },
+
+  // This function will be used to verify a REFRESH_TOKEN and return a boolean
+  verifyRefreshToken: (token: string): boolean => {
+    try {
+      jwt.verify(token, `${process.env.REFRESH_SECRET}`);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  },
 };

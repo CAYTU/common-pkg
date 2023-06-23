@@ -269,7 +269,7 @@ declare namespace CTypes {
     stateTracker?: Types.ObjectId;
   }
 
-  export interface AwsRobotInterface extends RobotBaseInterface {
+  export interface AwsRobotInterface {
     // If platform is "aws-iot"
     accessKeyId?: string;
     secretAccessKey?: string;
@@ -279,7 +279,7 @@ declare namespace CTypes {
     thing?: string;
   }
 
-  export interface FreedomRobotInterface extends RobotBaseInterface {
+  export interface FreedomRobotInterface {
     // If platform is "freedom-robotics"
     secret?: string;
     accountId?: string;

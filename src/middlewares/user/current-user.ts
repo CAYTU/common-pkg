@@ -42,17 +42,22 @@ export const currentUser = asyncHandler(
     token =
       req.headers.authorization?.split(" ")[1] || getCookie(req, "c_aToken");
 
-    // Decrypt the token
-    payload = encryptor.decryptAccessToken(token);
+    // Check if the access token is valid
+    if (encryptor.verifyAccessToken(token)) {
+      // Decode the access token
+      payload = encryptor.decryptAccessToken(token);
 
-    // Set the currentUser property of the request object
-    req.currentUser = payload;
+      // Set the currentUser property of the request object
+      req.currentUser = payload;
 
-    // Set the accessGrant property of the request object
-    if (payload) {
-      req.accessGrant = "allow";
+      // Set the accessGrant property of the request object
+      if (payload) {
+        req.accessGrant = "allow";
+      }
+    } else {
+      // The access token is invalid, continue to the next middleware or route handler
+      return next();
     }
-
     // Continue to the next middleware or route handler
     next();
   }

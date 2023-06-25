@@ -15,6 +15,11 @@ export const getCookie = (req: any, name: string) => {
     return undefined;
   }
 
+  if (typeof cookies !== "string") {
+    console.error("Cookies is not a string");
+    return undefined;
+  }
+
   /**
    * The cookie value matching the provided name.
    * @type {string|undefined}

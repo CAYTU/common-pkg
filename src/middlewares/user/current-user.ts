@@ -23,7 +23,7 @@ declare global {
 export const currentUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     let payload: UserPayload | undefined;
-    let token: string;
+    let token: string | undefined;
 
     // Default accessGrant to deny
     req.accessGrant = "deny";
@@ -41,6 +41,12 @@ export const currentUser = asyncHandler(
     // Get the access token
     token =
       req.headers.authorization?.split(" ")[1] || getCookie(req, "c_aToken");
+
+    if (!token) {
+      // No access token found, continue to the next middleware or route handler
+      console.error("No access token found");
+      return next();
+    }
 
     // Check if the access token is valid
     if (encryptor.verifyAccessToken(token)) {

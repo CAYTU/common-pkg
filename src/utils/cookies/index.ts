@@ -16,7 +16,6 @@ export const getCookie = (req: any, name: string) => {
   }
 
   if (typeof cookies !== "string") {
-    console.error("Cookies is not a string");
     return undefined;
   }
 

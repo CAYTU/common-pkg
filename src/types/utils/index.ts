@@ -2,11 +2,16 @@ export enum TaskStatus {
   // First state when a task is newly created. Waiting for a robot to be
   // assigned and an operator to pick up the task
   Pending = "pending",
-  // Only accepted after a robot has been assigned and an operator has picked
-  // this task
+  // When a robot has been assigned to the task
+  RobotAssigned = "robot:assigned",
+  // Only accepted after an operator has picked up the task
+  OperatorAssigned = "operator:assigned",
+  // When the operator has accepted the task
   Accepted = "accepted",
-  // If supply need to be provided in the robot to operate task
-  Processing = "processing",
+  // When the operator has rejected the task
+  Rejected = "rejected",
+  // When the operator has started the task
+  Started = "started",
   // When the operator is driving the robot in charge of executing the task
   Running = "running",
   // When the robot has reached the ending point or has finish the task duration
@@ -19,8 +24,10 @@ export enum TaskStatus {
   Refunded = "refunded",
   // Scheduled time for the task
   Scheduled = "scheduled",
-  //
+  // When the task has been completed
   Completed = "completed",
+  // When problem has been detected
+  Problem = "problem",
 }
 
 export enum TaskType {
@@ -79,6 +86,7 @@ export enum SimulationJobState {
 export enum RoboticPlatform {
   FreedomRobotics = "freedomRobotics",
   AWSCloudIoT = "awsCloudIoT",
+  Other = "other",
 }
 
 export enum SubscriptionType {

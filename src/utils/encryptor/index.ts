@@ -3,12 +3,13 @@
 // However, to shorten the token length, we'll create a function using
 
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { UserRole } from "../../types/utils";
+import { UserRole, UserState } from "../../types/utils";
 
 export interface UserPayload extends JwtPayload {
   id: string;
   username: string;
   roles?: UserRole[];
+  state?: UserState
 }
 
 export const encryptor = {
@@ -16,7 +17,7 @@ export const encryptor = {
   // It will take a user object and return a token
   encryptAccessToken: (user: UserPayload): string => {
     return jwt.sign(user, `${process.env.ACCESS_SECRET}`, {
-      expiresIn: "25m",
+      expiresIn: "60m", // 1 hour
     });
   },
 

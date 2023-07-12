@@ -381,6 +381,7 @@ declare namespace CTypes {
   export interface SimulationJobInterface extends IMongooseObjectExt {
     jobId: string;
     jobName: string;
+    taskId?: string;
     accessKeyId: string;
     secretAccessKey: string;
     sessionToken: string;
@@ -396,11 +397,9 @@ declare namespace CTypes {
   export interface SimulationJobRepInterface extends IMongooseObjectExt {
     id: string;
     jobId: string;
+    taskId?: string;
     jobName: string;
-    accessKeyId: string;
-    secretAccessKey: string;
-    sessionToken: string;
-    region: string;
+    simulationId: string;
     endpoint: string;
     thing: string;
     state?: SimulationJobState;
@@ -410,11 +409,9 @@ declare namespace CTypes {
   export interface SimulationJobEventInterface extends IMongooseObjectExt {
     id: string;
     jobId: string;
+    taskId?: string;
     jobName: string;
-    accessKeyId: string;
-    secretAccessKey: string;
-    sessionToken: string;
-    region: string;
+    simulationId: string;
     endpoint: string;
     thing: string;
     state?: SimulationJobState;

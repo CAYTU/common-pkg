@@ -259,7 +259,7 @@ declare namespace CTypes {
     privateToken?: string; // This is the token that is used to authenticate the robot in the backend
     fcmToken?: string;
     isOnline?: boolean;
-    state?: RobotStates;    
+    state?: RobotStates;
     taskCount?: number;
     assignedTaskCount?: number;
     zone?: Types.ObjectId;
@@ -445,7 +445,13 @@ declare namespace CTypes {
     itinerary: ItineraryType;
   }
 
-  export interface TaskSimulationInterface extends IMongooseObjectExt {}
+  export interface TaskSimulationInterface extends IMongooseObjectExt {
+    jobId?: string;
+    jobName?: string;
+    state?: SimulationJobState;
+    simulationId?: string;
+    thing?: string;
+  }
 
   export interface TaskCustomInterface extends IMongooseObjectExt {}
 
@@ -485,7 +491,7 @@ declare namespace CTypes {
 
     delivery?: Types.ObjectId;
     cleaning?: Types.ObjectId;
-    simulation?: Types.ObjectId;
+    simulationJob?: Types.ObjectId;
     inspection?: Types.ObjectId;
     custom?: Types.ObjectId;
   }

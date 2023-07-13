@@ -12,7 +12,7 @@ import {
   TaskStatus,
   TaskType,
   UserRole,
-  UserStatus,
+  UserStatuses,
 } from "../utils";
 
 declare namespace CTypes {
@@ -553,7 +553,7 @@ declare namespace CTypes {
     image?: string;
     roles: UserRole[];
     oauthType?: OauthType;
-    status?: UserStatus;
+    status?: UserStatuses;
     position?: mongoose.Schema.Types.Point & Point;
     subscriptionType?: SubscriptionType;
     isOnline?: boolean;

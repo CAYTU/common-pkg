@@ -126,8 +126,9 @@ export enum OauthType {
   Github = "github",
 }
 
-export enum UserState {
+export enum UserStatuses {
   Busy = "busy",
   Idle = "idle",
+  Offline = "offline",
   None = "none",
 }

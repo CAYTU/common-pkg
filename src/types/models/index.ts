@@ -391,6 +391,7 @@ declare namespace CTypes {
     thing: string;
     simulation: Types.ObjectId;
     state?: SimulationJobState;
+    subscribedTopics?: string[];
     operator?: Types.ObjectId;
     duration?: number;
   }

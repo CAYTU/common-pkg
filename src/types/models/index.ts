@@ -6,3 +6,4 @@ export * from "./robot";
 export * from "./task";
 export * from "./user";
 export * from "./zone";
+export * from "./simulation";

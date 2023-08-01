@@ -1,3 +1,5 @@
+export type IDType = "id" | "passport";
+
 export enum TaskStatus {
   // First state when a task is newly created. Waiting for a robot to be
   // assigned and an operator to pick up the task
@@ -132,3 +134,9 @@ export enum UserStatuses {
   Offline = "offline",
   None = "none",
 }
+
+// Common
+export type Point = {
+  type?: string;
+  coordinates: [number, number];
+};

@@ -1,4 +1,3 @@
-import GeoJSON from "mongoose-geojson-schema";
 import mongoose, { Types } from "mongoose";
 import {
   OauthType,
@@ -13,6 +12,7 @@ import {
   TaskType,
   UserRole,
   UserStatuses,
+  Point,
 } from "../utils";
 
 declare namespace CTypes {
@@ -27,17 +27,6 @@ declare namespace CTypes {
     updatedAt?: Date;
     createdAt?: Date;
   }
-
-  // Common
-  export type Point = {
-    type?: "Point" | string;
-    coordinates: [number, number];
-  };
-
-  export type GeoJSONType = {
-    type?: "GeoJSON" | string;
-    coordinates: [[[number, number]]];
-  };
 
   /**
    * Category:

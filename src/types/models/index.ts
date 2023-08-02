@@ -380,7 +380,7 @@ declare namespace CTypes {
     thing: string;
     simulation: Types.ObjectId;
     state?: SimulationJobState;
-    operator?: Types.ObjectId;
+    user?: Types.ObjectId;
     duration?: number;
   }
 
@@ -393,7 +393,7 @@ declare namespace CTypes {
     endpoint: string;
     thing: string;
     state?: SimulationJobState;
-    operator?: Types.ObjectId;
+    user?: Types.ObjectId;
   }
 
   export interface SimulationJobEventInterface extends IMongooseObjectExt {
@@ -405,7 +405,7 @@ declare namespace CTypes {
     endpoint: string;
     thing: string;
     state?: SimulationJobState;
-    operator?: Types.ObjectId;
+    user?: Types.ObjectId;
     version: number;
   }
 

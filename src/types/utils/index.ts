@@ -10,7 +10,7 @@ export type GeoJSONType = {
 };
 
 export enum TaskStatus {
-  // First state when a task is newly created. 
+  // First state when a task is newly created.
   Init = "init",
   // When a task is created, it is in pending state
   Pending = "pending",
@@ -91,10 +91,12 @@ export enum OperatorStatus {
 
 export enum SimulationJobState {
   // TODO: add documentation here ...
+  Init = "init",
   Pending = "pending",
   Running = "running",
   Terminated = "terminated",
   Completed = "completed",
+  Failed = "failed",
 }
 
 export enum RoboticPlatform {

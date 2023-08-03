@@ -10,8 +10,9 @@ export type GeoJSONType = {
 };
 
 export enum TaskStatus {
-  // First state when a task is newly created. Waiting for a robot to be
-  // assigned and an operator to pick up the task
+  // First state when a task is newly created. 
+  Init = "init",
+  // When a task is created, it is in pending state
   Pending = "pending",
   // When a robot has been assigned to the task
   RobotAssigned = "robot:assigned",
@@ -38,7 +39,9 @@ export enum TaskStatus {
   // When the task has been completed
   Completed = "completed",
   // When problem has been detected
-  Problem = "problem",
+  Failure = "failure",
+  // When the task has been deleted
+  Deleted = "deleted",
 }
 
 export enum TaskType {

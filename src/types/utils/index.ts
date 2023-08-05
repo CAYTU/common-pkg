@@ -156,3 +156,15 @@ export enum UserStatuses {
   Offline = "offline",
   None = "none",
 }
+
+export enum Services {
+  Notification = "notification",
+  Payment = "payment",
+  Task = "task",
+  Robot = "robot",
+  Operator = "operator",
+  Simulation = "simulation",
+  Customer = "customer",
+  Expiration = "expiration",
+  Message = "message",
+}

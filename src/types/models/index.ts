@@ -13,6 +13,7 @@ import {
   UserRole,
   UserStatuses,
   Point,
+  Services,
 } from "../utils";
 
 declare namespace CTypes {
@@ -75,18 +76,20 @@ declare namespace CTypes {
    */
 
   export interface NotificationInterface extends IMongooseObjectExt {
-    user: Types.ObjectId;
     title: string;
+    service: Services;
     body: string;
-    read?: boolean;
+    isRead?: boolean;
+    users?: Types.ObjectId[];
   }
 
   export interface NotificationRepInterface extends IMongooseObjectExt {
     id: string;
-    user: Types.ObjectId;
     title: string;
+    service: Services;
     body: string;
-    read?: boolean;
+    isRead?: boolean;
+    users?: Types.ObjectId[];
   }
 
   /**
@@ -132,6 +135,33 @@ declare namespace CTypes {
     identityNumber?: string;
     user: Types.ObjectId;
     aboutMe?: string;
+  }
+
+  /**
+   * Organization:
+   * It is used to group users together in an organization (e.g. a company)
+   */
+  export interface OrganizationInterface extends IMongooseObjectExt {
+    name: string;
+    description?: string;
+    image?: string;
+    country?: string;
+    subscriptionType?: SubscriptionType;
+  }
+
+  export interface OrganizationRepInterface extends IMongooseObjectExt {
+    id: string;
+    name: string;
+    image?: string;
+    subscriptionType?: SubscriptionType;
+  }
+
+  export interface OrganizationEventInterface {
+    id: string;
+    name: string;
+    image?: string;
+    subscriptionType?: SubscriptionType;
+    version: number;
   }
 
   /**
@@ -307,6 +337,16 @@ declare namespace CTypes {
     start: mongoose.Schema.Types.Point & Point;
     end: mongoose.Schema.Types.Point & Point;
   };
+
+  /**
+   * Setting:
+   * This is used to store the settings of the application
+   */
+  export interface SettingInterface extends IMongooseObjectExt {
+    name: string;
+    value: string;
+    description?: string;
+  }
 
   /**
    * Simulation:

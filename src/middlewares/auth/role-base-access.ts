@@ -132,6 +132,51 @@ const RbaUserACL = {
       }
     }
   ),
+
+  /**
+   * Middleware that allows access for users with UserRole.SuperAdmin or UserRole.All roles.
+   * Throws a ForbiddenErr if access is denied.
+   */
+  isSuperAdmin: asyncHandler(
+    async (req: Request, res: Response, next: NextFunction) => {
+      if (
+        req.currentUser?.roles?.includes(UserRole.SuperAdmin) ||
+        req.currentUser?.roles?.includes(UserRole.All)
+      ) {
+        next();
+      }
+      throw new ForbiddenErr("Operation is not allowed for super admins.");
+    }
+  ),
+
+  /**
+   * Middleware that allows access for users with UserRole.Developer or UserRole.All roles.
+   * Throws a ForbiddenErr if access is denied.
+   */
+  isDeveloper: asyncHandler(
+    async (req: Request, res: Response, next: NextFunction) => {
+      if (
+        req.currentUser?.roles?.includes(UserRole.Developer) ||
+        req.currentUser?.roles?.includes(UserRole.All)
+      ) {
+        next();
+      }
+      throw new ForbiddenErr("Operation is not allowed for developers.");
+    }
+  ),
+
+  /**
+   * Middleware that allows access for users with UserRole.Robot.
+   * Throws a ForbiddenErr if access is denied.
+   */
+  isRobot: asyncHandler(
+    async (req: Request, res: Response, next: NextFunction) => {
+      if (req.currentUser?.roles?.includes(UserRole.Robot)) {
+        next();
+      }
+      throw new ForbiddenErr("Operation is not allowed for robots.");
+    }
+  ),
 };
 
 export { RbaUserACL };

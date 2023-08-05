@@ -86,4 +86,41 @@ export enum Subjects {
   PaymentFailed = "payment:failed",
   PaymentSucceeded = "payment:succeeded",
   PaymentCaptured = "payment:captured",
+
+  // Organization
+  OrganizationCreated = "organization:created",
+  OrganizationUpdated = "organization:updated",
+  OrganizationDeleted = "organization:deleted",
+  OrganizationMemberAdded = "organization:member:added",
+  OrganizationMemberRemoved = "organization:member:removed",
+
+  // Billing
+  BillingCreated = "billing:created",
+  BillingUpdated = "billing:updated",
+  BillingDeleted = "billing:deleted",
+  BillingPaymentMethodCreated = "billing:payment:method:create",
+  BillingPaymentMethodUpdated = "billing:payment:method:update",
+
+  // Subscription
+  SubscriptionCreated = "subscription:created",
+  SubscriptionUpdated = "subscription:updated",
+  SubscriptionDeleted = "subscription:deleted",
+  SubscriptionActivated = "subscription:activated",
+  SubscriptionDeactivated = "subscription:deactivated",
+  SubscriptionRenewed = "subscription:renewed",
+  SubscriptionCanceled = "subscription:canceled",
+  SubscriptionPaymentFailed = "subscription:payment:failed",
+  SubscriptionPaymentSucceeded = "subscription:payment:succeeded",
+  SubscriptionPaymentCaptured = "subscription:payment:captured",
+  SubscriptionPaymentRefunded = "subscription:payment:refunded",
+
+  // Invoice
+  InvoiceCreated = "invoice:created",
+  InvoiceUpdated = "invoice:updated",
+  InvoiceDeleted = "invoice:deleted",
+
+  // Settings
+  SettingsCreated = "settings:created",
+  SettingsUpdated = "settings:updated",
+  SettingsDeleted = "settings:deleted",
 }

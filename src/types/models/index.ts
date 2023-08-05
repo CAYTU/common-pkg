@@ -143,24 +143,26 @@ declare namespace CTypes {
    */
   export interface OrganizationInterface extends IMongooseObjectExt {
     name: string;
+    domain: string;
     description?: string;
     image?: string;
     country?: string;
+    members?: Types.ObjectId[];
     subscriptionType?: SubscriptionType;
   }
 
   export interface OrganizationRepInterface extends IMongooseObjectExt {
     id: string;
+    domain: string;
     name: string;
     image?: string;
-    subscriptionType?: SubscriptionType;
   }
 
   export interface OrganizationEventInterface {
     id: string;
     name: string;
+    domain: string;
     image?: string;
-    subscriptionType?: SubscriptionType;
     version: number;
   }
 

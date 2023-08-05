@@ -586,6 +586,7 @@ declare namespace CTypes {
     oauthType?: OauthType;
     status?: UserStatuses;
     position?: mongoose.Schema.Types.Point & Point;
+    organization?: Types.ObjectId;
     subscriptionType?: SubscriptionType;
     isOnline?: boolean;
   }

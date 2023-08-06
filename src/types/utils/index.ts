@@ -69,7 +69,7 @@ export enum UserRole {
   // Not only it encapsules the 2 aboves
   Admin = "admin",
 
-  SuperAdmin = "superAdmin",
+  SuperAdmin = "super-admin",
 
   // Primitive Roles | if missing, they can prevent user to do basic operation
   Delete = "delete",

@@ -16,7 +16,8 @@ const RbaUserACL = {
       if (
         req.currentUser?.roles?.includes(UserRole.Create) ||
         req.currentUser?.roles?.includes(UserRole.All) ||
-        req.currentUser?.roles?.includes(UserRole.Admin)
+        req.currentUser?.roles?.includes(UserRole.Admin) ||
+        req.currentUser?.roles?.includes(UserRole.SuperAdmin)
       ) {
         next();
       } else {
@@ -34,7 +35,8 @@ const RbaUserACL = {
       if (
         req.currentUser?.roles?.includes(UserRole.Update) ||
         req.currentUser?.roles?.includes(UserRole.All) ||
-        req.currentUser?.roles?.includes(UserRole.Admin)
+        req.currentUser?.roles?.includes(UserRole.Admin) ||
+        req.currentUser?.roles?.includes(UserRole.SuperAdmin)
       ) {
         next();
       } else {
@@ -52,7 +54,8 @@ const RbaUserACL = {
       if (
         req.currentUser?.roles?.includes(UserRole.Delete) ||
         req.currentUser?.roles?.includes(UserRole.All) ||
-        req.currentUser?.roles?.includes(UserRole.Admin)
+        req.currentUser?.roles?.includes(UserRole.Admin) ||
+        req.currentUser?.roles?.includes(UserRole.SuperAdmin)
       ) {
         next();
       } else {
@@ -70,7 +73,8 @@ const RbaUserACL = {
       if (
         req.currentUser?.roles?.includes(UserRole.ReadOnly) ||
         req.currentUser?.roles?.includes(UserRole.All) ||
-        req.currentUser?.roles?.includes(UserRole.Admin)
+        req.currentUser?.roles?.includes(UserRole.Admin) ||
+        req.currentUser?.roles?.includes(UserRole.SuperAdmin)
       ) {
         next();
       } else {
@@ -89,7 +93,8 @@ const RbaUserACL = {
         req.currentUser?.roles?.includes(UserRole.Customer) ||
         req.currentUser?.roles?.includes(UserRole.Admin) ||
         req.currentUser?.roles?.includes(UserRole.All) ||
-        req.currentUser?.roles?.includes(UserRole.Operator)
+        req.currentUser?.roles?.includes(UserRole.Operator) ||
+        req.currentUser?.roles?.includes(UserRole.SuperAdmin)
       ) {
         next();
       } else {
@@ -107,7 +112,8 @@ const RbaUserACL = {
       if (
         req.currentUser?.roles?.includes(UserRole.Operator) ||
         req.currentUser?.roles?.includes(UserRole.Admin) ||
-        req.currentUser?.roles?.includes(UserRole.All)
+        req.currentUser?.roles?.includes(UserRole.All) ||
+        req.currentUser?.roles?.includes(UserRole.SuperAdmin)
       ) {
         next();
       } else {
@@ -124,7 +130,8 @@ const RbaUserACL = {
     async (req: Request, res: Response, next: NextFunction) => {
       if (
         req.currentUser?.roles?.includes(UserRole.Admin) ||
-        req.currentUser?.roles?.includes(UserRole.All)
+        req.currentUser?.roles?.includes(UserRole.All) ||
+        req.currentUser?.roles?.includes(UserRole.SuperAdmin)
       ) {
         next();
       } else {
@@ -171,7 +178,10 @@ const RbaUserACL = {
    */
   isRobot: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-      if (req.currentUser?.roles?.includes(UserRole.Robot)) {
+      if (
+        req.currentUser?.roles?.includes(UserRole.Robot) ||
+        req.currentUser?.roles?.includes(UserRole.All)
+      ) {
         next();
       }
       throw new ForbiddenErr("Operation is not allowed for robots.");

@@ -151,8 +151,9 @@ const RbaUserACL = {
         req.currentUser?.roles?.includes(UserRole.All)
       ) {
         next();
+      } else {
+        throw new ForbiddenErr("Operation is not allowed for super admins.");
       }
-      throw new ForbiddenErr("Operation is not allowed for super admins.");
     }
   ),
 
@@ -167,8 +168,9 @@ const RbaUserACL = {
         req.currentUser?.roles?.includes(UserRole.All)
       ) {
         next();
+      } else {
+        throw new ForbiddenErr("Operation is not allowed for developers.");
       }
-      throw new ForbiddenErr("Operation is not allowed for developers.");
     }
   ),
 
@@ -183,8 +185,9 @@ const RbaUserACL = {
         req.currentUser?.roles?.includes(UserRole.All)
       ) {
         next();
+      } else {
+        throw new ForbiddenErr("Operation is not allowed for robots.");
       }
-      throw new ForbiddenErr("Operation is not allowed for robots.");
     }
   ),
 };

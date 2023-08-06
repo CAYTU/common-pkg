@@ -600,6 +600,8 @@ declare namespace CTypes {
     roles?: UserRole[];
     lastName: string;
     fcmToken?: string;
+    organization?: Types.ObjectId;
+    oauthType?: OauthType;
     isVerified?: boolean;
     subscriptionType?: SubscriptionType;
     isOnline?: boolean;
@@ -616,6 +618,8 @@ declare namespace CTypes {
     roles?: UserRole[];
     fcmToken?: string;
     isVerified?: boolean;
+    organization?: Types.ObjectId;
+    oauthType?: OauthType;
     subscriptionType?: SubscriptionType;
     isOnline?: boolean;
     isCompleted?: boolean;

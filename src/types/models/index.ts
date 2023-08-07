@@ -14,6 +14,7 @@ import {
   UserStatuses,
   Point,
   Services,
+  UserMembershipStatus,
 } from "../utils";
 
 declare namespace CTypes {
@@ -584,6 +585,7 @@ declare namespace CTypes {
     image?: string;
     roles: UserRole[];
     oauthType?: OauthType;
+    membershipStatus?: UserMembershipStatus;
     status?: UserStatuses;
     position?: mongoose.Schema.Types.Point & Point;
     organization?: Types.ObjectId;
@@ -602,6 +604,7 @@ declare namespace CTypes {
     fcmToken?: string;
     organization?: Types.ObjectId;
     oauthType?: OauthType;
+    membershipStatus?: UserMembershipStatus;
     isVerified?: boolean;
     subscriptionType?: SubscriptionType;
     isOnline?: boolean;
@@ -618,6 +621,7 @@ declare namespace CTypes {
     roles?: UserRole[];
     fcmToken?: string;
     isVerified?: boolean;
+    membershipStatus?: UserMembershipStatus;
     organization?: Types.ObjectId;
     oauthType?: OauthType;
     subscriptionType?: SubscriptionType;

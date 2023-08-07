@@ -43,6 +43,9 @@ export enum Subjects {
   UserLogout = "user:logout",
   UserLogin = "user:login",
   UserStatus = "user:status",
+  UserMembershipInvitation = "user:membership:invitation",
+  UserMembershipInvitationAccepted = "user:membership:invitation:accepted",
+  UserMembershipInvitationRejected = "user:membership:invitation:rejected",
   // Zone Subjects
   ZoneCreated = "zone:created",
   ZoneUpdated = "zone:updated",

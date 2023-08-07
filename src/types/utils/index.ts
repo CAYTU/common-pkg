@@ -157,6 +157,12 @@ export enum UserStatuses {
   None = "none",
 }
 
+export enum UserMembershipStatus {
+  Pending = "pending",
+  Approved = "approved",
+  Denied = "denied",
+}
+
 export enum Services {
   Notification = "notification",
   Payment = "payment",

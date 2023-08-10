@@ -627,6 +627,11 @@ declare namespace CTypes {
     subscriptionType?: SubscriptionType;
     isOnline?: boolean;
     isCompleted?: boolean;
+    // In case an operator is being requested too
+    identityType?: IDType;
+    identityPhoto?: string;
+    identityNumber?: string;
+
     version: number;
   }
 

@@ -424,6 +424,8 @@ declare namespace CTypes {
     simulation: Types.ObjectId;
     state?: SimulationJobState;
     user?: Types.ObjectId;
+    runningAt?: Date;
+    completedAt?: Date;
     duration?: number;
   }
 
@@ -449,6 +451,9 @@ declare namespace CTypes {
     thing: string;
     state?: SimulationJobState;
     user?: Types.ObjectId;
+    duration?: number;
+    runningAt?: Date;
+    completedAt?: Date;
     version: number;
   }
 

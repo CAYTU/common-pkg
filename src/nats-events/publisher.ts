@@ -18,17 +18,24 @@ export abstract class Publisher<T extends Event> {
   }
 
   async publish(data: T["data"]): Promise<void> {
-    await this.publishNats(data);
-    await this.publishWs(data);
+    try {
+      await this.publishNats(data);
+      await this.publishWs(data);
+    } catch (error) {
+      console.error("Error publishing event:", error);
+      throw error; // Re-throw the error to propagate it up the stack
+    }
   }
 
   private publishNats(data: T["data"]): Promise<void> {
     return new Promise((resolve, reject) => {
       this.natsClient.publish(this.subject, JSON.stringify(data), (err) => {
         if (err) {
-          reject(err);
+          console.error("Error publishing to NATS:", err);
+          reject(err); // Reject the promise with the error
+        } else {
+          resolve();
         }
-        resolve();
       });
     });
   }
@@ -37,16 +44,18 @@ export abstract class Publisher<T extends Event> {
     return new Promise((resolve, reject) => {
       if (!this.wsClient) {
         console.error("(WS) WebSocket client is not defined.");
-        return reject(new Error("WebSocket client is not defined."));
+        reject(new Error("WebSocket client is not defined."));
+        return;
       }
 
       this.wsClient.publish(this.subject, JSON.stringify(data), (err: any) => {
         if (err) {
-          return reject(err);
+          console.error("Error publishing to WebSocket:", err);
+          reject(err); // Reject the promise with the error
+        } else {
+          console.log("(WS) Event published to subject", this.subject);
+          resolve();
         }
-
-        console.log("(WS) Event published to subject", this.subject);
-        resolve();
       });
     });
   }

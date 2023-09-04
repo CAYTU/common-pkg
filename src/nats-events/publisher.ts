@@ -1,6 +1,6 @@
 import { Stan } from "node-nats-streaming";
 import { Subjects } from "./subjects";
-import { StringCodec } from "nats";
+import { StringCodec, NatsConnection } from "nats";
 
 const sc = StringCodec();
 
@@ -31,7 +31,7 @@ export abstract class Publisher<T extends Event> {
    * The WebSocket client used for publishing to WebSocket.
    * Adjust the type based on your WebSocket client implementation.
    */
-  private wsClient: any;
+  private wsClient: NatsConnection;
 
   /**
    * Creates a new Publisher instance.
@@ -68,20 +68,30 @@ export abstract class Publisher<T extends Event> {
    * @returns A Promise that resolves when the event is successfully published or rejects if there is an error.
    */
   async publishToWs(data: T["data"]): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
+    try {
       if (!this.wsClient) {
         console.error("(WS) WebSocket client is not defined.");
-        reject(new Error("WebSocket client is not defined."));
         return;
       }
 
-      try {
-        this.wsClient.publish(this.subject, sc.encode(JSON.stringify(data)));
-        console.log("(WS) Event published to subject", this.subject);
-      } catch (err) {
-        console.error("Error publishing to WebSocket:", err);
-        reject(err);
-      }
-    });
+      // Listen for WebSocket closure
+      this.wsClient.closed().then(() => {
+        console.log("WebSocket client is closed.");
+      });
+
+      // Publish the message
+      this.wsClient.publish(this.subject, sc.encode(JSON.stringify(data)));
+
+      console.log("(WS) Event published to subject", this.subject);
+
+      // Flush and close the WebSocket connection
+      await this.wsClient.flush();
+      await this.wsClient.close();
+    } catch (err) {
+      console.error("Error during WebSocket operation:", err);
+      // Depending on the nature of the error, you can choose to reject the promise or handle it accordingly.
+      // If you want to reject the promise, you can rethrow the error like this:
+      // throw err;
+    }
   }
 }

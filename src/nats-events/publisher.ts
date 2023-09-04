@@ -1,5 +1,8 @@
 import { Stan } from "node-nats-streaming";
 import { Subjects } from "./subjects";
+import { StringCodec } from "nats";
+
+const sc = StringCodec();
 
 /**
  * An interface that defines the structure of an event.
@@ -72,15 +75,13 @@ export abstract class Publisher<T extends Event> {
         return;
       }
 
-      this.wsClient.publish(this.subject, JSON.stringify(data), (err: any) => {
-        if (err) {
-          console.error("Error publishing to WebSocket:", err);
-          reject(err);
-        } else {
-          console.log("(WS) Event published to subject", this.subject);
-          resolve();
-        }
-      });
+      try {
+        this.wsClient.publish(this.subject, sc.encode(JSON.stringify(data)));
+        console.log("(WS) Event published to subject", this.subject);
+      } catch (err) {
+        console.error("Error publishing to WebSocket:", err);
+        reject(err);
+      }
     });
   }
 }

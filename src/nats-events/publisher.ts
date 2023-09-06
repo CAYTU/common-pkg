@@ -81,14 +81,10 @@ export abstract class Publisher<T extends Event> {
 
       console.log("(WS) Event published to subject", this.subject);
 
-      // Flush and close the WebSocket connection
+      // Optionally, you can flush the message to ensure it's sent immediately
       await this.wsClient.flush();
-      await this.wsClient.close();
     } catch (err) {
       console.error("Error during WebSocket operation:", err);
-      // Depending on the nature of the error, you can choose to reject the promise or handle it accordingly.
-      // If you want to reject the promise, you can rethrow the error like this:
-      // throw err;
     }
   }
 }

@@ -1,8 +1,5 @@
 import { Stan } from "node-nats-streaming";
 import { Subjects } from "./subjects";
-import { StringCodec, NatsConnection } from "nats";
-
-const sc = StringCodec();
 
 /**
  * An interface that defines the structure of an event.
@@ -31,7 +28,7 @@ export abstract class Publisher<T extends Event> {
    * The WebSocket client used for publishing to WebSocket.
    * Adjust the type based on your WebSocket client implementation.
    */
-  private wsClient: NatsConnection;
+  private wsClient: any;
 
   /**
    * Creates a new Publisher instance.
@@ -80,7 +77,7 @@ export abstract class Publisher<T extends Event> {
       });
 
       // Publish the message
-      this.wsClient.publish(this.subject, sc.encode(JSON.stringify(data)));
+      this.wsClient.publish(this.subject, Buffer.from(JSON.stringify(data)));
 
       console.log("(WS) Event published to subject", this.subject);
 

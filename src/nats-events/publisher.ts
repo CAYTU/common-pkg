@@ -44,11 +44,11 @@ export abstract class Publisher<T extends Event> {
   }
 
   /**
-   * Publishes the event data to the NATS channel.
+   * Publishes the event data to the NATS channel through port 4222.
    * @param data - The event data to be published.
    * @returns A Promise that resolves when the event is successfully published or rejects if there is an error.
    */
-  async publishToNats(data: T["data"]): Promise<void> {
+  async publish(data: T["data"]): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       this.natsClient.publish(this.subject, JSON.stringify(data), (err) => {
         if (err) {

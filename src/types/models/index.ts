@@ -18,16 +18,12 @@ import {
 } from "../utils";
 
 declare namespace CTypes {
-  // Some common types:
-  //--------------------
-  // Coordinate type for an object coupling both latitude & longitude
-
-  // Please if any modification happens in this files then make
-  // sure to do it in the event-types as well: "src/event-types/index.ts"
-
+  /**
+   * Common properties for objects stored in MongoDB with extended data.
+   */
   export interface IMongooseObjectExt {
-    updatedAt?: Date;
-    createdAt?: Date;
+    updatedAt?: Date; // Date when the object was last updated. (Optional)
+    createdAt?: Date; // Date when the object was created. (Optional)
   }
 
   /**
@@ -52,89 +48,321 @@ declare namespace CTypes {
     version: number;
   }
 
-  /**
-   * Customer:
-   */
+  /************************
+   * Represents a customer.
+   **********************/
   export interface CustomerInterface extends IMongooseObjectExt {
+    /**
+     * The unique identifier of the associated user.
+     */
     user: Types.ObjectId;
+
+    /**
+     * The loyalty points of the customer. (Optional)
+     */
     loyaltyPoint?: number;
+
+    /**
+     * The wallet balance of the customer. (Optional)
+     */
     wallet?: number;
   }
 
+  /*********************************************
+   * CustomerRepInterface: This is the interface for the customer replica
+   * It is used to duplicate the customer model in the database of other services
+   *******************************************/
   export interface CustomerRepInterface extends IMongooseObjectExt {
+    /**
+     * Unique identifier for the customer.
+     */
     id: string;
+
+    /**
+     * The unique identifier of the associated user.
+     */
     user: Types.ObjectId;
   }
 
+  /**
+   * Represents an event related to a customer.
+   */
   export interface CustomerEventInterface {
+    /**
+     * Unique identifier for the event.
+     */
     id: string;
+
+    /**
+     * The unique identifier of the associated user.
+     */
     user: Types.ObjectId;
+
+    /**
+     * The version number of the event.
+     */
     version: number;
   }
 
-  /**
-   * Notification
-   */
-
+  /******************************************************************
+   * Notification Interface:
+   * This is the interface for the notification model in the database.
+   * It is used to store notifications that are sent to users.
+   *****************************************************************/
   export interface NotificationInterface extends IMongooseObjectExt {
+    /**
+     * The title of the notification.
+     */
     title: string;
+
+    /**
+     * The service associated with the notification.
+     */
     service: Services;
+
+    /**
+     * The main content or body of the notification.
+     */
     body: string;
+
+    /**
+     * Indicates whether the notification has been read. (Optional)
+     */
     isRead?: boolean;
-    users?: Types.ObjectId[];
+
+    /**
+     * The unique identifier of the user associated with this notification. (Optional)
+     */
+    user?: Types.ObjectId;
+
+    /**
+     * An array of user roles relevant to the notification. (Optional)
+     */
+    batchRoles?: UserRole[];
+
+    /**
+     * Indicates whether an email should be included with the notification. (Optional)
+     */
+    includeMail?: boolean;
+
+    /**
+     * An array of unique identifiers for participants related to the notification. (Optional)
+     */
+    participants?: Types.ObjectId[];
   }
 
-  export interface NotificationRepInterface extends IMongooseObjectExt {
+  /***************************
+   * NotificationRepInterface: This is the interface for the notification replica
+   **************************/
+  export interface NotificationRepInterface {
+    /**
+     * Unique identifier for the notification.
+     */
     id: string;
+
+    /**
+     * The title of the notification.
+     */
     title: string;
+
+    /**
+     * The service associated with the notification.
+     */
     service: Services;
+
+    /**
+     * The main content or body of the notification.
+     */
     body: string;
+
+    /**
+     * Indicates whether the notification has been read. (Optional)
+     */
     isRead?: boolean;
-    users?: Types.ObjectId[];
+
+    /**
+     * The unique identifier of the user associated with this notification. (Optional)
+     */
+    user?: Types.ObjectId;
+
+    /**
+     * An array of user roles relevant to the notification. (Optional)
+     */
+    batchRoles?: UserRole[];
+
+    /**
+     * Indicates whether an email should be included with the notification. (Optional)
+     */
+    includeMail?: boolean;
+
+    /**
+     * An array of unique identifiers for participants related to the notification. (Optional)
+     */
+    participant?: Types.ObjectId[];
   }
 
   /**
-   * Operator:
+   * Type representing different identity document types.
    */
   export type IDType = "id" | "passport";
 
+  /**
+   * Represents an operator.
+   */
   export interface OperatorInterface extends IMongooseObjectExt {
+    /**
+     * The type of identity document used by the operator.
+     */
     identityType: IDType;
+
+    /**
+     * The path to the operator's identity photo.
+     */
     identityPhoto: string;
+
+    /**
+     * The operator's identity number. (Optional)
+     */
     identityNumber?: string;
+
+    /**
+     * The unique identifier of the associated user.
+     */
     user: Types.ObjectId;
+
+    /**
+     * Indicates whether the operator is active. (Optional)
+     */
     active?: boolean;
+
+    /**
+     * The number of tasks assigned to the operator. (Optional)
+     */
     taskCount?: number;
+
+    /**
+     * The status of the operator. (Optional)
+     */
     status?: OperatorStatus;
+
+    /**
+     * The wallet associated with the operator. (Optional)
+     */
     wallet?: Types.ObjectId;
+
+    /**
+     * A brief description about the operator. (Optional)
+     */
     aboutMe?: string;
+
+    /**
+     * The unique identifier of the operator's current task. (Optional)
+     */
     currentTask?: Types.ObjectId;
   }
 
+  /**
+   * Represents a simplified view of an operator.
+   */
   export interface OperatorRepInterface extends IMongooseObjectExt {
+    /**
+     * Unique identifier for the operator.
+     */
     id: string;
+
+    /**
+     * The unique identifier of the associated user.
+     */
     user: Types.ObjectId;
+
+    /**
+     * Indicates whether the operator is active. (Optional)
+     */
     active?: boolean;
+
+    /**
+     * The unique identifier of the operator's current task. (Optional)
+     */
     currentTask?: Types.ObjectId;
+
+    /**
+     * The status of the operator. (Optional)
+     */
     status?: OperatorStatus;
+
+    /**
+     * The wallet associated with the operator. (Optional)
+     */
     wallet?: Types.ObjectId;
   }
 
+  /**
+   * Represents an event related to an operator.
+   */
   export interface OperatorEventInterface {
+    /**
+     * Unique identifier for the event.
+     */
     id: string;
+
+    /**
+     * The unique identifier of the associated user.
+     */
     user: Types.ObjectId;
+
+    /**
+     * Indicates whether the operator is active. (Optional)
+     */
     active?: boolean;
+
+    /**
+     * The unique identifier of the operator's current task. (Optional)
+     */
     currentTask?: Types.ObjectId;
+
+    /**
+     * The status of the operator. (Optional)
+     */
     status?: OperatorStatus;
+
+    /**
+     * The wallet associated with the operator. (Optional)
+     */
     wallet?: Types.ObjectId;
+
+    /**
+     * The version number of the event.
+     */
     version: number;
   }
 
+  /**
+   * Represents an event where an operator's identity is requested.
+   */
   export interface OperatorRequestedEventInterface {
+    /**
+     * The type of identity document requested.
+     */
     identityType: IDType;
+
+    /**
+     * The path to the requested identity photo.
+     */
     identityPhoto: string;
+
+    /**
+     * The requested identity number. (Optional)
+     */
     identityNumber?: string;
+
+    /**
+     * The unique identifier of the associated user.
+     */
     user: Types.ObjectId;
+
+    /**
+     * A brief description about the operator. (Optional)
+     */
     aboutMe?: string;
   }
 

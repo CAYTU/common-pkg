@@ -1,6 +1,6 @@
 import { Stan } from "node-nats-streaming";
 import { Subjects } from "./subjects";
-
+import { NatsConnection } from "nats";
 /**
  * An interface that defines the structure of an event.
  */
@@ -28,7 +28,7 @@ export abstract class Publisher<T extends Event> {
    * The WebSocket client used for publishing to WebSocket.
    * Adjust the type based on your WebSocket client implementation.
    */
-  private wsClient: any;
+  private wsClient: NatsConnection;
 
   /**
    * Creates a new Publisher instance.
@@ -71,10 +71,11 @@ export abstract class Publisher<T extends Event> {
         return;
       }
 
-      // Listen for WebSocket closure
-      this.wsClient.closed().then(() => {
-        console.log("WebSocket client is closed.");
-      });
+      // Check if websocket has the closed method
+      if (this.wsClient?.isClosed()) {
+        // Listen for WebSocket closure
+        console.log("(WS) WebSocket is closed. Reconnecting...");
+      }
 
       // Publish the message
       this.wsClient.publish(this.subject, Buffer.from(JSON.stringify(data)));

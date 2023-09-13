@@ -43,6 +43,7 @@ export enum Subjects {
   UserLogout = "user:logout",
   UserLogin = "user:login",
   UserStatus = "user:status",
+  UserRoleUpdated = "user:role:updated",
   UserMembershipInvitation = "user:membership:invitation",
   UserMembershipInvitationAccepted = "user:membership:invitation:accepted",
   UserMembershipInvitationRejected = "user:membership:invitation:rejected",

@@ -684,130 +684,409 @@ declare namespace CTypes {
     completedAt?: Date;
     version: number;
   }
-    
 
+  /**
+   * Interface representing a Task Delivery.
+   */
   export interface TaskDeliveryInterface extends IMongooseObjectExt {
-    // Ref to a Product
+    /**
+     * Reference to a Product.
+     */
     product?: Types.ObjectId;
-    // Ref to a Vendor
+
+    /**
+     * Reference to a Vendor.
+     */
     vendor?: Types.ObjectId;
-    // Delivery Attrs
+
+    /**
+     * Delivery Attributes
+     */
     itinerary: ItineraryType;
   }
 
+  /**
+   * Interface representing a Task Cleaning.
+   */
   export interface TaskCleaningInterface extends IMongooseObjectExt {
-    // Cleaning Attrs
+    /**
+     * Cleaning Attributes
+     */
     name?: string;
+
+    /**
+     * Cleaning Type
+     */
     cleaningOf?: string;
+
+    /**
+     * Description of the cleaning task.
+     */
     description?: string;
+
+    /**
+     * Area to be cleaned (as a polygon).
+     */
     area?: mongoose.Schema.Types.Polygon;
+
+    /**
+     * Zone reference for the cleaning task.
+     */
     zone?: Types.ObjectId;
   }
 
+  /**
+   * Interface representing a Task Inspection.
+   */
   export interface TaskInspectionInterface extends IMongooseObjectExt {
+    /**
+     * Name of the inspection task.
+     */
     name?: string;
+
+    /**
+     * Description of the inspection task.
+     */
     description?: string;
-    // Inspection Attrs
+
+    /**
+     * Inspection Attributes
+     */
     itinerary: ItineraryType;
   }
 
+  /**
+   * Interface representing a Task Simulation.
+   */
   export interface TaskSimulationInterface extends IMongooseObjectExt {
+    /**
+     * ID of the associated job.
+     */
     jobId?: string;
+
+    /**
+     * Name of the associated job.
+     */
     jobName?: string;
+
+    /**
+     * State of the simulation job.
+     */
     state?: SimulationJobState;
+
+    /**
+     * ID of the associated simulation.
+     */
     simulationId?: string;
+
+    /**
+     * Thing related to the simulation.
+     */
     thing?: string;
   }
 
+  /**
+   * Interface representing a Task Survey.
+   */
   export interface TaskSurveyInterface extends IMongooseObjectExt {
+    /**
+     * Name of the survey task.
+     */
     name: string;
+
+    /**
+     * Description of the survey task.
+     */
     description?: string;
+
+    /**
+     * Area to be surveyed (as a polygon).
+     */
     area?: mongoose.Schema.Types.Polygon;
+
+    /**
+     * Zone reference for the survey task.
+     */
     zone?: Types.ObjectId;
   }
 
+  /**
+   * Interface representing a Task Custom.
+   */
   export interface TaskCustomInterface extends IMongooseObjectExt {}
 
+  /**
+   * Interface representing a Task Status Tracker.
+   */
   export interface TaskStatusTracker extends IMongooseObjectExt {
+    /**
+     * Timestamp when the task was accepted.
+     */
     acceptedAt?: Date;
+
+    /**
+     * Timestamp when the task started running.
+     */
     runningAt?: Date;
+
+    /**
+     * Timestamp when the task arrived.
+     */
     arrivedAt?: Date;
+
+    /**
+     * Timestamp when the task was in processing state.
+     */
     processingAt?: Date;
+
+    /**
+     * Timestamp when the task was cancelled.
+     */
     cancelledAt?: Date;
+
+    /**
+     * Timestamp when the task payment failed.
+     */
     paymentFailedAt?: Date;
+
+    /**
+     * Timestamp when the task was refunded.
+     */
     refundedAt?: Date;
+
+    /**
+     * Timestamp when the task was completed.
+     */
     completedAt?: Date;
   }
 
+  /**
+   * Interface representing a Task.
+   */
   export interface TaskInterface extends IMongooseObjectExt {
+    /**
+     * Type of the task.
+     */
     type: TaskType;
+
+    /**
+     * Fare associated with the task.
+     */
     fare?: number;
-    // Code to deactivate or open the robot
+
+    /**
+     * Code to deactivate or open the robot.
+     */
     code?: number;
-    // Count Id for number of tasks with padded number
+
+    /**
+     * Count ID for the number of tasks with padded numbers.
+     */
     taskId: string;
-    //   Ref to Operator Model
+
+    /**
+     * Reference to an Operator model.
+     */
     operator?: Types.ObjectId;
-    //   Ref to Customer Model
+
+    /**
+     * Reference to a Customer model.
+     */
     customer?: Types.ObjectId;
-    //   Ref to Robot Model
+
+    /**
+     * Reference to a Robot model.
+     */
     robot?: Types.ObjectId;
+
+    /**
+     * Status of the task.
+     */
     status?: TaskStatus;
+
+    /**
+     * Reference to a Task Status Tracker.
+     * This is used to track the status of the task.
+     */
     statusTracker?: Types.ObjectId;
+
+    /**
+     * Duration of the task.
+     */
     duration?: number;
-    // Number of assignment trial for a robot
-    // This is only needed for a robot as the
-    // process is automated
-    // As, for an operator, the assignment is done
-    // by the operator
+
+    /**
+     * Number of assignment trial for a robot.
+     */
     robotAssignmentTrial?: number;
 
+    /**
+     * Indicates whether the task has failed.
+     */
+    hasFailed?: boolean;
+
+    /**
+     * Tells why the task failed.
+     * This is only used when the task has failed.
+     */
+    failureReason?: string;
+
+    /**
+     * Reference to a Delivery task.
+     */
     delivery?: Types.ObjectId;
+
+    /**
+     * Reference to a Cleaning task.
+     */
     cleaning?: Types.ObjectId;
+
+    /**
+     * Reference to a Simulation job task.
+     */
     simulationJob?: Types.ObjectId;
+
+    /**
+     * Reference to an Inspection task.
+     */
     inspection?: Types.ObjectId;
+
+    /**
+     * Reference to a Custom task.
+     */
     custom?: Types.ObjectId;
   }
 
+  /**
+   * Interface representing a Task Rep.
+   */
   export interface TaskRepInterface extends IMongooseObjectExt {
+    /**
+     * ID of the task.
+     */
     id: string;
+
+    /**
+     * Type of the task.
+     */
     type: TaskType;
+
+    /**
+     * Fare associated with the task.
+     */
     fare: number;
+
+    /**
+     * Code to deactivate or open the robot.
+     * This is only used when the task is a delivery task.
+     */
     code?: number;
-    // Count Id for number of tasks with padded number
+
+    /**
+     * Count ID for the number of tasks with padded numbers.
+     */
     taskId: string;
+
+    /**
+     * Status of the task.
+     */
     status: TaskStatus;
-    //   Ref to Robot Model
+
+    /**
+     * Reference to a Robot model.
+     */
     robot?: Types.ObjectId;
-    //   Ref to Operator Model
+
+    /**
+     * Reference to an Operator model.
+     */
     operator?: Types.ObjectId;
 
+    /**
+     * Reference to a Customer model.
+     */
     customer: Types.ObjectId;
   }
 
+  /**
+   * Interface representing a Task Event.
+   */
   export interface TaskEventInterface {
+    /**
+     * ID of the task.
+     */
     id: string;
+
+    /**
+     * Type of the task.
+     */
     type: TaskType;
+
+    /**
+     * Fare associated with the task.
+     */
     fare: number;
+
+    /**
+     * Code to deactivate or open the robot.
+     * This is only used when the task is a delivery task.
+     */
     code?: number;
-    // Count Id for number of tasks with padded number
+
+    /**
+     * Count ID for the number of tasks with padded numbers.
+     */
     taskId: string;
+
+    /**
+     * Status of the task.
+     */
     status: TaskStatus;
-    //   Ref to Robot Model
+
+    /**
+     * Reference to a Robot model.
+     */
     robot?: Types.ObjectId;
-    //   Ref to Operator Model
+
+    /**
+     * Reference to an Operator model.
+     */
     operator?: Types.ObjectId;
 
+    /**
+     * Reference to a Customer model.
+     */
     customer: Types.ObjectId;
+
+    /**
+     * Version number of the task.
+     */
     version: number;
   }
 
-  // TODO: Must be removed from here in the future
+  /**
+   * Interface representing a Task Get Robot Candidate Event.
+   * TODO: Must be removed from here in the future.
+   */
   export interface TaskGetRobotCandidateEventInterface {
+    /**
+     * ID of the task.
+     */
     id: string;
+
+    /**
+     * Type of the task.
+     */
     type: TaskType;
-    // Count Id for number of tasks with padded number
+
+    /**
+     * Count ID for the number of tasks with padded numbers.
+     */
     taskId: string;
+
+    /**
+     * Version number of the task.
+     */
     version: number;
   }
 

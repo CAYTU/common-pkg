@@ -952,6 +952,11 @@ declare namespace CTypes {
     inspection?: Types.ObjectId;
 
     /**
+     * Reference to a Survey task.
+     */
+    survey?: Types.ObjectId;
+
+    /**
      * Reference to a Custom task.
      */
     custom?: Types.ObjectId;

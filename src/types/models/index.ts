@@ -684,6 +684,7 @@ declare namespace CTypes {
     completedAt?: Date;
     version: number;
   }
+    
 
   export interface TaskDeliveryInterface extends IMongooseObjectExt {
     // Ref to a Product
@@ -696,9 +697,11 @@ declare namespace CTypes {
 
   export interface TaskCleaningInterface extends IMongooseObjectExt {
     // Cleaning Attrs
+    name?: string;
     cleaningOf?: string;
     description?: string;
-    area: mongoose.Schema.Types.Polygon;
+    area?: mongoose.Schema.Types.Polygon;
+    zone?: Types.ObjectId;
   }
 
   export interface TaskInspectionInterface extends IMongooseObjectExt {
@@ -714,6 +717,13 @@ declare namespace CTypes {
     state?: SimulationJobState;
     simulationId?: string;
     thing?: string;
+  }
+
+  export interface TaskSurveyInterface extends IMongooseObjectExt {
+    name: string;
+    description?: string;
+    area?: mongoose.Schema.Types.Polygon;
+    zone?: Types.ObjectId;
   }
 
   export interface TaskCustomInterface extends IMongooseObjectExt {}

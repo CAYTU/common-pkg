@@ -21,30 +21,83 @@ declare namespace CTypes {
   /**
    * Common properties for objects stored in MongoDB with extended data.
    */
+  /**
+   * Represents an object with extended properties typically used in Mongoose models.
+   */
   export interface IMongooseObjectExt {
-    updatedAt?: Date; // Date when the object was last updated. (Optional)
-    createdAt?: Date; // Date when the object was created. (Optional)
+    /**
+     * The date when the object was last updated (optional).
+     */
+    updatedAt?: Date;
+
+    /**
+     * The date when the object was created (optional).
+     */
+    createdAt?: Date;
   }
 
   /**
-   * Category:
+   * Represents a category object.
    */
   export interface CategoryInterface {
+    /**
+     * The name of the category.
+     */
     name: string;
+
+    /**
+     * The URL or path to the image associated with the category.
+     */
     image: string;
+
+    /**
+     * An optional description of the category.
+     */
     description?: string;
   }
 
+  /**
+   * Represents a simplified category object for representation purposes.
+   */
   export interface CategoryRepInterface extends IMongooseObjectExt {
+    /**
+     * The unique identifier of the category.
+     */
     id: string;
+
+    /**
+     * The name of the category.
+     */
     name: string;
+
+    /**
+     * The URL or path to the image associated with the category.
+     */
     image: string;
   }
 
+  /**
+   * Represents a category object for events with additional information.
+   */
   export interface CategoryEventInterface {
+    /**
+     * The unique identifier of the category.
+     */
     id: string;
+
+    /**
+     * The name of the category.
+     */
     name: string;
+
+    /**
+     * The URL or path to the image associated with the category.
+     */
     image: string;
+
+    /**
+     * The version number of the category event.
+     */
     version: number;
   }
 
@@ -370,28 +423,98 @@ declare namespace CTypes {
    * Organization:
    * It is used to group users together in an organization (e.g. a company)
    */
+  /**
+   * Represents an organization object with extended properties.
+   */
   export interface OrganizationInterface extends IMongooseObjectExt {
+    /**
+     * The name of the organization.
+     */
     name: string;
+
+    /**
+     * The domain associated with the organization.
+     */
     domain: string;
+
+    /**
+     * An optional description of the organization.
+     */
     description?: string;
+
+    /**
+     * The URL or path to the image associated with the organization (optional).
+     */
     image?: string;
+
+    /**
+     * The country where the organization is located (optional).
+     */
     country?: string;
+
+    /**
+     * An array of user IDs representing the members of the organization (optional).
+     */
     members?: Types.ObjectId[];
+
+    /**
+     * The type of subscription the organization has (optional).
+     */
     subscriptionType?: SubscriptionType;
   }
 
+  /**
+   * Represents a simplified organization object for representation purposes.
+   */
   export interface OrganizationRepInterface extends IMongooseObjectExt {
+    /**
+     * The unique identifier of the organization.
+     */
     id: string;
+
+    /**
+     * The domain associated with the organization.
+     */
     domain: string;
+
+    /**
+     * The name of the organization.
+     */
     name: string;
+
+    /**
+     * The URL or path to the image associated with the organization (optional).
+     */
     image?: string;
   }
 
+  /**
+   * Represents an organization object for events with additional information.
+   */
   export interface OrganizationEventInterface {
+    /**
+     * The unique identifier of the organization.
+     */
     id: string;
+
+    /**
+     * The name of the organization.
+     */
     name: string;
+
+    /**
+     * The domain associated with the organization.
+     */
     domain: string;
+
+    /**
+     * The URL or path to the image associated with the organization (optional).
+     */
     image?: string;
+
+    /**
+     * The version number of the organization event.
+     */
     version: number;
   }
 
@@ -463,26 +586,86 @@ declare namespace CTypes {
    * Robot:
    */
 
+  /**
+   * Represents metadata associated with a robot.
+   */
   export interface RobotMetaDataInterface extends IMongooseObjectExt {
+    /**
+     * The unique identifier of the robot.
+     */
     robot: Types.ObjectId;
+
+    /**
+     * The battery level of the robot (optional).
+     */
     batteryLevel?: number;
+
+    /**
+     * The speed of the robot (optional).
+     */
     speed?: number;
+
+    /**
+     * The control mode of the robot, which can be a string or number (optional).
+     */
     controlMode?: string | number;
+
+    /**
+     * The fault code indicating any issues with the robot (optional).
+     */
     faultCode?: number | string;
+
+    /**
+     * The unique identifier of the current task assigned to the robot (optional).
+     */
     currentTask?: Types.ObjectId;
+
+    /**
+     * The linear velocity of the robot (optional).
+     */
     linearVelocity?: number;
+
+    /**
+     * The angular velocity of the robot (optional).
+     */
     angularVelocity?: number;
+
+    /**
+     * The geographical position of the robot, specified by longitude and latitude (optional).
+     */
     position?: {
       lng: number;
       lat: number;
     };
+
+    /**
+     * Additional data associated with the robot (optional).
+     */
     data?: any;
   }
 
+  /**
+   * Represents a state tracker for a robot, indicating its availability and status.
+   */
   export interface RobotStateTrackerInterface extends IMongooseObjectExt {
+    /**
+     * The date and time when the robot is marked as unavailable (optional).
+     */
     unavailable?: Date;
+
+    /**
+     * The date and time when the robot is in a running state (optional).
+     */
     running?: Date;
-    faile?: Date;
+
+    /**
+     * The date and time when the robot has failed (optional).
+     */
+    failed?: Date;
+
+    /**
+     * The date and time when the robot is marked as available (optional).
+     */
     available?: Date;
   }
 
@@ -501,105 +684,314 @@ declare namespace CTypes {
   // models. This is because the two models have different attributes
   // and it would be hard to maintain the code if we use one model
   // for both of them.
+  /**
+   * Represents the base information for a robot.
+   */
   export interface RobotBaseInterface extends IMongooseObjectExt {
+    /**
+     * The name of the robot.
+     */
     name: string;
+
+    /**
+     * The type of the robot.
+     */
     type: string;
+
+    /**
+     * The platform on which the robot operates (optional).
+     */
     platform?: RoboticPlatform;
+
+    /**
+     * The unique identifier for the robot on its platform.
+     */
     platformRobotId: Types.ObjectId;
+
+    /**
+     * The URL or path to the image associated with the robot.
+     */
     image: string;
-    privateToken?: string; // This is the token that is used to authenticate the robot in the backend
+
+    /**
+     * The private token used to authenticate the robot in the backend (optional).
+     */
+    privateToken?: string;
+
+    /**
+     * The Firebase Cloud Messaging (FCM) token associated with the robot (optional).
+     */
     fcmToken?: string;
+
+    /**
+     * Indicates whether the robot is currently online (optional).
+     */
     isOnline?: boolean;
+
+    /**
+     * The current state of the robot.
+     */
     state?: RobotStates;
+
+    /**
+     * The total count of tasks associated with the robot (optional).
+     */
     taskCount?: number;
+
+    /**
+     * The count of tasks currently assigned to the robot (optional).
+     */
     assignedTaskCount?: number;
+
+    /**
+     * The zone to which the robot belongs (optional).
+     */
     zone?: Types.ObjectId;
+
+    /**
+     * The last recorded geographical location of the robot (optional).
+     */
     lastRecordedLocation?: mongoose.Schema.Types.Point & Point;
+
+    /**
+     * The unique identifier of the current task assigned to the robot (optional).
+     */
     currentTask?: Types.ObjectId;
-    // Time Tracker
+
+    /**
+     * The unique identifier of the state tracker associated with the robot (optional).
+     */
     stateTracker?: Types.ObjectId;
   }
 
+  /**
+   * Represents AWS-specific configuration for a robot.
+   */
   export interface AwsRobotInterface {
-    // If platform is "aws-iot"
+    /**
+     * The AWS access key ID for authenticating with AWS services (optional).
+     */
     accessKeyId?: string;
+
+    /**
+     * The AWS secret access key for authenticating with AWS services (optional).
+     */
     secretAccessKey?: string;
+
+    /**
+     * The session token for temporary AWS credentials (optional).
+     */
     sessionToken?: string;
+
+    /**
+     * The AWS region where the robot is deployed (optional).
+     */
     region?: string;
+
+    /**
+     * The AWS IoT endpoint for the robot (optional).
+     */
     endpoint?: string;
+
+    /**
+     * The name of the AWS IoT thing associated with the robot (optional).
+     */
     thing?: string;
   }
 
+  /**
+   * Represents Freedom Robotics-specific configuration for a robot.
+   */
   export interface FreedomRobotInterface {
-    // If platform is "freedom-robotics"
+    /**
+     * The secret key used for authentication with Freedom Robotics (optional).
+     */
     secret?: string;
+
+    /**
+     * The account ID associated with the robot on the Freedom Robotics platform (optional).
+     */
     accountId?: string;
+
+    /**
+     * The unique device ID for the robot on the Freedom Robotics platform (optional).
+     */
     deviceId?: string;
-    privateToken?: string; // This is the token that is used to authenticate the robot in the backend
+
+    /**
+     * The private token used to authenticate the robot in the backend (optional).
+     */
+    privateToken?: string;
   }
 
+  /**
+   * Represents a simplified robot object for representation purposes.
+   */
   export interface RobotRepInterface extends IMongooseObjectExt {
+    /**
+     * The unique identifier of the robot.
+     */
     id: string;
+
+    /**
+     * The name of the robot.
+     */
     name: string;
+
+    /**
+     * The platform on which the robot operates (optional).
+     */
     platform?: RoboticPlatform;
+
+    /**
+     * The type of the robot.
+     */
     type: string;
+
+    /**
+     * The URL or path to the image associated with the robot.
+     */
     image: string;
+
+    /**
+     * The Firebase Cloud Messaging (FCM) token associated with the robot (optional).
+     */
     fcmToken?: string;
+
+    /**
+     * The last recorded geographical location of the robot (optional).
+     */
     lastRecordedLocation?: mongoose.Schema.Types.Point & Point;
   }
 
+  /**
+   * Represents a robot object for events with additional information.
+   */
   export interface RobotEventInterface {
+    /**
+     * The unique identifier of the robot.
+     */
     id: string;
+
+    /**
+     * The name of the robot.
+     */
     name: string;
+
+    /**
+     * The type of the robot.
+     */
     type: string;
+
+    /**
+     * The platform on which the robot operates (optional).
+     */
     platform?: RoboticPlatform;
+
+    /**
+     * The URL or path to the image associated with the robot.
+     */
     image: string;
+
+    /**
+     * The Firebase Cloud Messaging (FCM) token associated with the robot (optional).
+     */
     fcmToken?: string;
+
+    /**
+     * The last recorded geographical location of the robot (optional).
+     */
     lastRecordedLocation?: mongoose.Schema.Types.Point & Point;
+
+    /**
+     * The version number of the robot event.
+     */
     version: number;
   }
 
   /**
-   * Task:
-   *
+   * Represents an itinerary type used for defining start and end points.
    */
-
   export type ItineraryType = {
+    /**
+     * The geographical point representing the start of the itinerary.
+     */
     start: mongoose.Schema.Types.Point & Point;
+
+    /**
+     * The geographical point representing the end of the itinerary.
+     */
     end: mongoose.Schema.Types.Point & Point;
   };
 
   /**
-   * Setting:
-   * This is used to store the settings of the application
+   * Represents a setting used to store application configurations.
+   * @remarks This interface is used to store various settings for the application.
    */
   export interface SettingInterface extends IMongooseObjectExt {
+    /**
+     * The name of the setting.
+     */
     name: string;
+
+    /**
+     * The value associated with the setting.
+     */
     value: string;
+
+    /**
+     * An optional description of the setting.
+     */
     description?: string;
   }
 
   /**
-   * Simulation:
+   * Represents a category for simulation-related data.
    */
-
   export interface SimulationCategoryInterface extends IMongooseObjectExt {
+    /**
+     * The value of the simulation category.
+     */
     value: string;
+
+    /**
+     * The display name for the simulation category.
+     */
     displayName: string;
   }
 
+  /**
+   * Represents a category for simulation regions.
+   * @remarks This interface is used to define simulation regions for virtual environments.
+   */
   export interface SimulationRegionInterface
     extends SimulationCategoryInterface {}
 
+  /**
+   * Represents a category for simulation job queues.
+   * @remarks This interface is used to define job queues for simulation tasks.
+   */
   export interface SimulationJobQueueInterface
     extends SimulationCategoryInterface {}
 
+  /**
+   * Represents a category for simulation job definitions.
+   * @remarks This interface is used to define job definitions for simulation tasks.
+   */
   export interface SimulationJobDefinitionInterface
     extends SimulationCategoryInterface {}
 
+  /**
+   * Represents a category for simulation roles.
+   * @remarks This interface is used to define roles for simulation users or entities.
+   */
   export interface SimulationRoleInterface
     extends SimulationCategoryInterface {}
 
+  /**
+   * Represents a category for simulation template URLs.
+   * @remarks This interface is used to define URLs for simulation templates.
+   */
   export interface SimulationTemplateURLInterface
     extends SimulationCategoryInterface {}
 
@@ -927,9 +1319,13 @@ declare namespace CTypes {
 
     /**
      * Tells why the task failed.
-     * This is only used when the task has failed.
      */
     failureReason?: string;
+
+    /**
+     * Number of times the task has failed.
+     */
+    failureCount?: number;
 
     /**
      * Reference to a Delivery task.
@@ -1099,69 +1495,293 @@ declare namespace CTypes {
    * User:
    */
 
+  /**
+   * Represents a user object with extended properties.
+   */
   export interface UserInterface extends IMongooseObjectExt {
+    /**
+     * The username of the user.
+     */
     username: string;
+
+    /**
+     * The first name of the user.
+     */
     firstName: string;
+
+    /**
+     * The last name of the user.
+     */
     lastName: string;
+
+    /**
+     * The phone number of the user (optional).
+     */
     phone?: string;
+
+    /**
+     * The email address of the user.
+     */
     email: string;
+
+    /**
+     * Indicates if the user's account is verified (optional).
+     */
     isVerified?: boolean;
+
+    /**
+     * Indicates if the user's profile is completed (optional).
+     */
     isCompleted?: boolean;
+
+    /**
+     * The Firebase Cloud Messaging (FCM) token of the user (optional).
+     */
     fcmToken?: string;
+
+    /**
+     * The password of the user.
+     */
     password: string;
+
+    /**
+     * The URL of the user's profile image (optional).
+     */
     image?: string;
+
+    /**
+     * An array of user roles.
+     */
     roles: UserRole[];
+
+    /**
+     * The type of OAuth authentication used by the user (optional).
+     */
     oauthType?: OauthType;
+
+    /**
+     * The membership status of the user (optional).
+     */
     membershipStatus?: UserMembershipStatus;
+
+    /**
+     * The status of the user.
+     */
     status?: UserStatuses;
+
+    /**
+     * The overall rating of the user (optional).
+     */
     overallRating?: number;
+
+    /**
+     * The total time used by the user (optional).
+     */
     overallTimeUsed?: number;
+
+    /**
+     * The total count of tasks completed by the user (optional).
+     */
     overallTaskCount?: number;
+
+    /**
+     * The geographical position of the user (optional).
+     */
     position?: mongoose.Schema.Types.Point & Point;
+
+    /**
+     * The organization to which the user belongs (optional).
+     */
     organization?: Types.ObjectId;
+
+    /**
+     * The type of subscription the user has (optional).
+     */
     subscriptionType?: SubscriptionType;
+
+    /**
+     * Indicates whether the user is currently online (optional).
+     */
     isOnline?: boolean;
   }
 
+  /**
+   * Represents a simplified user object for representation purposes.
+   */
   export interface UserRepInterface extends IMongooseObjectExt {
+    /**
+     * The unique identifier of the user.
+     */
     id: string;
+
+    /**
+     * The username of the user.
+     */
     username: string;
+
+    /**
+     * The first name of the user.
+     */
     firstName: string;
+
+    /**
+     * The email address of the user.
+     */
     email: string;
+
+    /**
+     * The URL of the user's profile image (optional).
+     */
     image?: string;
+
+    /**
+     * An array of user roles (optional).
+     */
     roles?: UserRole[];
+
+    /**
+     * The last name of the user.
+     */
     lastName: string;
+
+    /**
+     * The Firebase Cloud Messaging (FCM) token of the user (optional).
+     */
     fcmToken?: string;
+
+    /**
+     * The organization to which the user belongs (optional).
+     */
     organization?: Types.ObjectId;
+
+    /**
+     * The type of OAuth authentication used by the user (optional).
+     */
     oauthType?: OauthType;
+
+    /**
+     * The membership status of the user (optional).
+     */
     membershipStatus?: UserMembershipStatus;
+
+    /**
+     * Indicates if the user's account is verified (optional).
+     */
     isVerified?: boolean;
+
+    /**
+     * The type of subscription the user has (optional).
+     */
     subscriptionType?: SubscriptionType;
+
+    /**
+     * Indicates whether the user is currently online (optional).
+     */
     isOnline?: boolean;
+
+    /**
+     * Indicates if the user's profile is completed (optional).
+     */
     isCompleted?: boolean;
   }
 
+  /**
+   * Represents a user object for events with additional information.
+   */
   export interface UserEventInterface {
+    /**
+     * The unique identifier of the user.
+     */
     id: string;
+
+    /**
+     * The username of the user.
+     */
     username: string;
+
+    /**
+     * The first name of the user.
+     */
     firstName: string;
+
+    /**
+     * The email address of the user.
+     */
     email: string;
+
+    /**
+     * The URL of the user's profile image (optional).
+     */
     image?: string;
+
+    /**
+     * The last name of the user.
+     */
     lastName: string;
+
+    /**
+     * An array of user roles (optional).
+     */
     roles?: UserRole[];
+
+    /**
+     * The Firebase Cloud Messaging (FCM) token of the user (optional).
+     */
     fcmToken?: string;
+
+    /**
+     * Indicates if the user's account is verified (optional).
+     */
     isVerified?: boolean;
+
+    /**
+     * The membership status of the user (optional).
+     */
     membershipStatus?: UserMembershipStatus;
+
+    /**
+     * The organization to which the user belongs (optional).
+     */
     organization?: Types.ObjectId;
+
+    /**
+     * The type of OAuth authentication used by the user (optional).
+     */
     oauthType?: OauthType;
+
+    /**
+     * The type of subscription the user has (optional).
+     */
     subscriptionType?: SubscriptionType;
+
+    /**
+     * Indicates whether the user is currently online (optional).
+     */
     isOnline?: boolean;
+
+    /**
+     * Indicates if the user's profile is completed (optional).
+     */
     isCompleted?: boolean;
-    // In case an operator is being requested too
+
+    /**
+     * The type of identity document being requested (optional).
+     */
     identityType?: IDType;
+
+    /**
+     * The URL of the user's identity document photo (optional).
+     */
     identityPhoto?: string;
+
+    /**
+     * The identity number associated with the user (optional).
+     */
     identityNumber?: string;
 
+    /**
+     * The version number of the user event.
+     */
     version: number;
   }
 

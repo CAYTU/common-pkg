@@ -53,6 +53,8 @@ export enum TaskType {
   Inspection = "inspection",
   // Run a simulation
   Simulation = "simulation",
+  // If task is for a survey
+  Survey = "survey",
   // If task is none of the above (delivery, cleaning, ...)
   Custom = "custom",
 }

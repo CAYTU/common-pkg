@@ -15,6 +15,7 @@ import {
   Point,
   Services,
   UserMembershipStatus,
+  OrganizationType,
 } from "../utils";
 
 declare namespace CTypes {
@@ -458,6 +459,13 @@ declare namespace CTypes {
     members?: Types.ObjectId[];
 
     /**
+     * The type of organization (optional).
+     * @remarks This property is used to differentiate between different types of organizations.
+     * For example, one can be a principal organization while another can be a subsidiary.
+     */
+    type?: OrganizationType;
+
+    /**
      * The type of subscription the organization has (optional).
      */
     subscriptionType?: SubscriptionType;
@@ -483,6 +491,11 @@ declare namespace CTypes {
     name: string;
 
     /**
+     * The type of organization (optional).
+     */
+    type?: OrganizationType;
+
+    /**
      * The URL or path to the image associated with the organization (optional).
      */
     image?: string;
@@ -506,6 +519,11 @@ declare namespace CTypes {
      * The domain associated with the organization.
      */
     domain: string;
+
+    /**
+     * The type of organization (optional).
+     */
+    type?: OrganizationType;
 
     /**
      * The URL or path to the image associated with the organization (optional).

@@ -146,6 +146,11 @@ export enum PaymentMethod {
   Wari = "wari",
 }
 
+export enum OrganizationType {
+  Principal = "principal",
+  Subsidiary = "subsidiary",
+}
+
 export enum OauthType {
   Default = "default",
   Google = "google",

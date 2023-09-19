@@ -16,6 +16,7 @@ import {
   Services,
   UserMembershipStatus,
   OrganizationType,
+  RobotType,
 } from "../utils";
 
 declare namespace CTypes {
@@ -454,6 +455,11 @@ declare namespace CTypes {
     country?: string;
 
     /**
+     * Array of task types allowed for the organization (optional).
+     */
+    allowedTaskTypes?: TaskType[];
+
+    /**
      * An array of user IDs representing the members of the organization (optional).
      */
     members?: Types.ObjectId[];
@@ -491,6 +497,11 @@ declare namespace CTypes {
     name: string;
 
     /**
+     * Array of task types allowed for the organization (optional).
+     */
+    allowedTaskTypes?: TaskType[];
+
+    /**
      * The type of organization (optional).
      */
     type?: OrganizationType;
@@ -514,6 +525,11 @@ declare namespace CTypes {
      * The name of the organization.
      */
     name: string;
+
+    /**
+     * Array of task types allowed for the organization (optional).
+     */
+    allowedTaskTypes?: TaskType[];
 
     /**
      * The domain associated with the organization.
@@ -714,7 +730,7 @@ declare namespace CTypes {
     /**
      * The type of the robot.
      */
-    type: string;
+    type?: RobotType;
 
     /**
      * The platform on which the robot operates (optional).
@@ -864,7 +880,7 @@ declare namespace CTypes {
     /**
      * The type of the robot.
      */
-    type: string;
+    type?: RobotType;
 
     /**
      * The URL or path to the image associated with the robot.
@@ -899,7 +915,7 @@ declare namespace CTypes {
     /**
      * The type of the robot.
      */
-    type: string;
+    type?: RobotType;
 
     /**
      * The platform on which the robot operates (optional).
@@ -1573,6 +1589,11 @@ declare namespace CTypes {
     roles: UserRole[];
 
     /**
+     * Array of user's allowed task types (optional).
+     */
+    allowedTaskTypes?: TaskType[] | string[];
+
+    /**
      * The type of OAuth authentication used by the user (optional).
      */
     oauthType?: OauthType;
@@ -1658,6 +1679,11 @@ declare namespace CTypes {
     roles?: UserRole[];
 
     /**
+     * Array of user's allowed task types (optional).
+     */
+    allowedTaskTypes?: TaskType[] | string[];
+
+    /**
      * The last name of the user.
      */
     lastName: string;
@@ -1741,6 +1767,11 @@ declare namespace CTypes {
      * An array of user roles (optional).
      */
     roles?: UserRole[];
+
+    /**
+     * Array of user's allowed task types (optional).
+     */
+    allowedTaskTypes?: TaskType[] | string[];
 
     /**
      * The Firebase Cloud Messaging (FCM) token of the user (optional).

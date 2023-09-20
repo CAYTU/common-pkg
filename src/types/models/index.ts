@@ -17,6 +17,7 @@ import {
   UserMembershipStatus,
   OrganizationType,
   RobotType,
+  RobotCategory,
 } from "../utils";
 
 declare namespace CTypes {
@@ -731,6 +732,11 @@ declare namespace CTypes {
      * The type of the robot.
      */
     type?: RobotType;
+
+    /**
+     * The category of the robot
+     */
+    category?: RobotCategory;
 
     /**
      * The platform on which the robot operates (optional).

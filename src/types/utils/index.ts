@@ -295,23 +295,18 @@ export enum Services {
 
 /**
  * @description
- * This enum is used to define the type of robot
+ * This enum is used to define the category of a robot
  * that is being used to execute a task.
  */
-export enum RobotType {
+export enum RobotCategory {
   /**
    * Drones (Unmanned Aerial Vehicles)
    */
-  UAV = "uav",
+  Drone = "drone",
   /**
    * Industrial Robots
    */
   Industrial = "industrial",
-  /**
-   * Agricultural Robots
-   * (e.g. Harvest Automation, Harvest Croo, Blue River Technology)
-   */
-  Agribot = "agribot",
   /**
    * Caytu Robots
    */
@@ -319,9 +314,31 @@ export enum RobotType {
   /**
    * Underwater Robots (e.g. OpenROV, SeaDrone, Bluefin Robotics)
    */
-  ROV = "rov",
+  Underwater = "underwater",
   /**
    * Autonomous Underwater Vehicles (AUVs)
    */
-  AUV = "auv",
+  Vehicle = "vehicle",
+}
+
+/**
+ * @description
+ * This enum is used to define the type of robot
+ * that is being used to execute a task.
+ */
+export enum RobotType {
+  /**
+   * Semi-autonomous robots
+   * (e.g. robots that can be controlled remotely)
+   */
+  SemiAutonomous = "semi-autonomous",
+  /**
+   * Fully autonomous robots
+   * (e.g. robots that can operate without human intervention)
+   */
+  FullyAutonomous = "fully-autonomous",
+  /**
+   * Bared robots
+   */
+  Bared = "bared",
 }

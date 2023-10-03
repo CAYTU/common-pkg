@@ -1378,6 +1378,11 @@ declare namespace CTypes {
     cleaning?: Types.ObjectId;
 
     /**
+     * Reference to a Simulation for the selected job.
+     */
+    simulationId?: Types.ObjectId;
+
+    /**
      * Reference to a Simulation job task.
      */
     simulationJob?: Types.ObjectId;

@@ -1046,31 +1046,62 @@ declare namespace CTypes {
     region: string;
   }
 
+  /**
+   * Represents the interface for a simulation representation.
+   * @interface
+   */
   export interface SimulationRepInterface extends IMongooseObjectExt {
+    /** The ID of the simulation. */
     id: string;
+    /** The name of the simulation. */
     name: string;
+    /** The image of the simulation. */
     image?: string;
+    /** The description of the simulation. */
     description?: string;
+    /** The job definition of the simulation. */
     jobDefinition: string;
+    /** The job queue of the simulation. */
     jobQueue: string;
+    /** The template URL of the simulation. */
     templateURL: string;
+    /** The role of the simulation. */
     role: string;
+    /** The region of the simulation. */
     region: string;
   }
 
+  /**
+   * Interface for a simulation event object.
+   * @interface
+   */
   export interface SimulationEventInterface extends IMongooseObjectExt {
+    /** The unique identifier for the simulation event. */
     id: string;
+    /** The name of the simulation event. */
     name: string;
+    /** The URL of the image associated with the simulation event. */
     image?: string;
+    /** A description of the simulation event. */
     description?: string;
+    /** The job definition for the simulation event. */
     jobDefinition: string;
+    /** The job queue for the simulation event. */
     jobQueue: string;
+    /** The URL of the simulation event template. */
     templateURL: string;
+    /** The role associated with the simulation event. */
     role: string;
+    /** The region associated with the simulation event. */
     region: string;
+    /** The version number of the simulation event. */
     version: number;
   }
 
+  /**
+   * Interface for a simulation job.
+   * @interface
+   */
   export interface SimulationJobInterface extends IMongooseObjectExt {
     jobId: string;
     jobName: string;
@@ -1512,7 +1543,6 @@ declare namespace CTypes {
 
   /**
    * Interface representing a Task Get Robot Candidate Event.
-   * TODO: Must be removed from here in the future.
    */
   export interface TaskGetRobotCandidateEventInterface {
     /**
@@ -1878,29 +1908,82 @@ declare namespace CTypes {
   }
 
   /**
+   * Represents an area with a name and a location.
+   */
+  export type Area = {
+    /**
+     * The name of the area.
+     */
+    name: string;
+    /**
+     * The location of the area, represented as a nested array of coordinates.
+     */
+    location: [[[number, number]]];
+  };
+
+  /**
    * Zone:
    */
 
+  /**
+   * Interface representing a geographic zone.
+   * @interface
+   */
   export interface ZoneInterface extends IMongooseObjectExt {
+    /** The region of the zone. */
     region?: string;
+    /** The country of the zone. */
     country?: string;
+    /** The name of the zone. */
     name: string;
+    /** The surface of the zone. */
     surface?: number;
-    area: mongoose.Schema.Types.Polygon;
+    /** The area of the zone. */
+    area: Area;
   }
 
+  /**
+   * Represents a zone object with additional properties.
+   * @interface
+   */
   export interface ZoneRepInterface extends IMongooseObjectExt {
+    /** The unique identifier for the zone. */
     id: string;
+    /** The name of the zone. */
     name: string;
-    area: mongoose.Schema.Types.Polygon;
+    /** The area that the zone belongs to. */
+    area: Area;
+    /** The country that the zone belongs to. */
     country?: string;
   }
 
+  /**
+   * Represents a zone event.
+   */
   export interface ZoneEventInterface {
+    /**
+     * The unique identifier of the zone event.
+     */
     id: string;
+
+    /**
+     * The name of the zone event.
+     */
     name: string;
-    area: mongoose.Schema.Types.Polygon;
+
+    /**
+     * The area where the zone event takes place.
+     */
+    area: Area;
+
+    /**
+     * The country where the zone event takes place.
+     */
     country?: string;
+
+    /**
+     * The version of the zone event.
+     */
     version: number;
   }
 }

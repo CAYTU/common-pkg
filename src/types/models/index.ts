@@ -1910,7 +1910,7 @@ declare namespace CTypes {
   /**
    * Represents an area with a name and a location.
    */
-  export type Area = {
+  export interface Area {
     /**
      * The name of the area.
      */
@@ -1919,7 +1919,7 @@ declare namespace CTypes {
      * The location of the area, represented as a nested array of coordinates.
      */
     location: [[[number, number]]];
-  };
+  }
 
   /**
    * Zone:
@@ -1951,8 +1951,8 @@ declare namespace CTypes {
     id: string;
     /** The name of the zone. */
     name: string;
-    /** The area that the zone belongs to. */
-    area: Area;
+    /** Only use the location property */
+    location: [[[number, number]]];
     /** The country that the zone belongs to. */
     country?: string;
   }
@@ -1972,9 +1972,9 @@ declare namespace CTypes {
     name: string;
 
     /**
-     * The area where the zone event takes place.
+     * Only use the location property if the zone event is a polygon.
      */
-    area: Area;
+    location: [[[number, number]]];
 
     /**
      * The country where the zone event takes place.

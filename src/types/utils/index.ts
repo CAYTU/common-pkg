@@ -319,6 +319,10 @@ export enum RobotCategory {
    * Autonomous Underwater Vehicles (AUVs)
    */
   Vehicle = "vehicle",
+  /**
+   * Telepresence Robots
+   */
+  Telepresence = "telepresence",
 }
 
 /**

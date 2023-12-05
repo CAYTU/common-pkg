@@ -215,7 +215,7 @@ export enum RoboticPlatform {
   /** The robot is connected to Freedom Robotics platform. */
   FreedomRobotics = "freedomRobotics",
   /** The robot is connected to AWS Cloud IoT platform. */
-  AWSCloudIoT = "awsCloudIoT",
+  AWS = "aws",
   /** The robot is connected to another platform not specified here. */
   Other = "other",
 }

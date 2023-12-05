@@ -809,6 +809,18 @@ declare namespace CTypes {
    */
   export interface AwsRobotInterface {
     /**
+     * The AWS Stack name for the robot (optional).
+     * if cloudFormation was used to create the robot, this is the stack name
+     */
+    stackName?: string;
+
+    /**
+     * The Stack ID for the robot (optional).
+     * In case of stack creation, this is the stack ID
+     */
+    stackId?: string;
+
+    /**
      * The AWS access key ID for authenticating with AWS services (optional).
      */
     accessKeyId?: string;
@@ -832,6 +844,12 @@ declare namespace CTypes {
      * The AWS IoT endpoint for the robot (optional).
      */
     endpoint?: string;
+
+    /**
+     * The Channel Name for the robot (optional).
+     * This is used for AWS IoT Core
+     */
+    channelName?: string;
 
     /**
      * The name of the AWS IoT thing associated with the robot (optional).

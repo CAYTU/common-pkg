@@ -1,6 +1,5 @@
 import { Stan } from "node-nats-streaming";
 import { Subjects } from "./subjects";
-import { NatsConnection } from "nats";
 /**
  * An interface that defines the structure of an event.
  */
@@ -25,19 +24,12 @@ export abstract class Publisher<T extends Event> {
   private natsClient: Stan;
 
   /**
-   * The WebSocket client used for publishing to WebSocket.
-   * Adjust the type based on your WebSocket client implementation.
-   */
-  private wsClient: NatsConnection;
-
-  /**
    * Creates a new Publisher instance.
    * @param natsClient - The NATS Streaming client instance.
    * @param wsClient - (Optional) The WebSocket client instance for WebSocket communication.
    */
-  constructor(natsClient: Stan, wsClient?: any) {
+  constructor(natsClient: Stan) {
     this.natsClient = natsClient;
-    this.wsClient = wsClient;
   }
 
   /**
@@ -57,35 +49,5 @@ export abstract class Publisher<T extends Event> {
         }
       });
     });
-  }
-
-  /**
-   * Publishes the event data to the WebSocket channel.
-   * @param data - The event data to be published.
-   * @returns A Promise that resolves when the event is successfully published or rejects if there is an error.
-   */
-  async publishToWs(data: T["data"]): Promise<void> {
-    try {
-      if (!this.wsClient) {
-        console.error("(WS) WebSocket client is not defined.");
-        return;
-      }
-
-      // Check if websocket has the closed method
-      if (this.wsClient?.isClosed()) {
-        // Listen for WebSocket closure
-        console.log("(WS) WebSocket is closed. Reconnecting...");
-      }
-
-      // Publish the message
-      this.wsClient.publish(this.subject, Buffer.from(JSON.stringify(data)));
-
-      console.log("(WS) Event published to subject", this.subject);
-
-      // Optionally, you can flush the message to ensure it's sent immediately
-      await this.wsClient.flush();
-    } catch (err) {
-      console.error("Error during WebSocket operation:", err);
-    }
   }
 }

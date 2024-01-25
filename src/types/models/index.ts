@@ -1585,6 +1585,37 @@ declare namespace CTypes {
   }
 
   /**
+   * URL SHORTENER INTERFACE
+   */
+  export interface UrlShortenerInterface extends IMongooseObjectExt {
+    /**
+     * The original URL.
+     */
+    longUrl: string;
+
+    /**
+     * The short appended unique identifier.
+     */
+    shortKey: string;
+
+    /**
+     * The domain associated with the URL.
+     */
+    domain?: string;
+
+    /**
+     *  Indicates whether the URL is permanent.
+     */
+    permanent?: boolean;
+
+    /**
+     * The duration of the URL. (in days)
+     */
+    duration?: number;
+  }
+
+
+  /**
    * User:
    */
 

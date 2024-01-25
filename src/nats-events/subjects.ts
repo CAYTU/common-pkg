@@ -127,4 +127,9 @@ export enum Subjects {
   SettingsCreated = "settings:created",
   SettingsUpdated = "settings:updated",
   SettingsDeleted = "settings:deleted",
+
+  // URL Shortener Expiration
+  UrlExpirationCreated = "url:expiration:created",
+  UrlExpirationUpdated = "url:expiration:updated",
+  UrlExpirationDeleted = "url:expiration:deleted",
 }

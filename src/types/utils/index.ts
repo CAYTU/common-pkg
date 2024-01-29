@@ -38,6 +38,16 @@ export enum TaskStatus {
   Started = "started",
   /** When the operator is driving the robot in charge of executing the task. */
   Running = "running",
+
+  /** When the task is in simulation mode. */
+  SimulationStarting = "simulation:starting",
+  SimulationRunning = "simulation:running",
+  SimulationCompleted = "simulation:completed",
+  SimulationFailed = "simulation:failed",
+  SimulationTerminated = "simulation:terminated",
+  SimulationTerminating = "simulation:terminating",
+  SimulationCanceled = "simulation:canceled",
+
   /** When the robot has reached the ending point or has finished the task duration. */
   Arrived = "arrived",
   /** If the task has been canceled before reaching the final goal. */
@@ -198,10 +208,16 @@ export enum SimulationJobState {
   Init = "init",
   /** The simulation job is pending and waiting to start. */
   Pending = "pending",
+  /** The simulation job is starting. */
+  Starting = "starting",
   /** The simulation job is currently running. */
   Running = "running",
   /** The simulation job has been terminated. */
   Terminated = "terminated",
+  /** The simulation job has been canceled. */
+  Canceled = "canceled",
+  /** The simulation job is terminating */
+  Terminating = "terminating",
   /** The simulation job has been successfully completed. */
   Completed = "completed",
   /** The simulation job has failed to execute. */

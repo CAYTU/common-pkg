@@ -67,6 +67,7 @@ export enum Subjects {
   SimulationJobUpdated = "simulationjob:updated",
   SimulationJobDeleted = "simulationjob:deleted",
   SimulationJobSendCreds = "simulationjob:send:creds",
+  SimulationJobTerminating = "simulationjob:terminating",
   // Operators Subjects
   OperatorCreated = "operator:created",
   OperatorUpdated = "operator:updated",

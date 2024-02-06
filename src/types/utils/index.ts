@@ -320,27 +320,28 @@ export enum RobotCategory {
   /**
    * Drones (Unmanned Aerial Vehicles)
    */
-  Drone = "drone",
+  UAV = "uav",
   /**
-   * Industrial Robots
+   * (Unmanned Ground Vehicles)
    */
-  Industrial = "industrial",
+  UGV = "ugv",
   /**
-   * Caytu Robots
+   * For Simulation Robots
    */
-  Caytubot = "caytuBot",
-  /**
-   * Underwater Robots (e.g. OpenROV, SeaDrone, Bluefin Robotics)
-   */
-  Underwater = "underwater",
-  /**
-   * Autonomous Underwater Vehicles (AUVs)
-   */
-  Vehicle = "vehicle",
+  Simulation = "sim",
   /**
    * Telepresence Robots
    */
   Telepresence = "telepresence",
+  /**
+   * Senelec Robot
+   */
+  Senelec = "senelec",
+  /**
+   * Forklifts
+   * (e.g. robots that can be controlled remotely)
+   */
+  Forklift = "forklift",
 }
 
 /**

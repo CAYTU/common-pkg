@@ -1493,6 +1493,11 @@ declare namespace CTypes {
     robot?: Types.ObjectId;
 
     /**
+     * Reference to a Simulation job task.
+     */
+    simulationJob?: Types.ObjectId;
+
+    /**
      * Reference to an Operator model.
      */
     operator?: Types.ObjectId;
@@ -1547,6 +1552,11 @@ declare namespace CTypes {
      * Reference to an Operator model.
      */
     operator?: Types.ObjectId;
+
+    /**
+     * Reference to a Simulation job task.
+     */
+    simulationJob?: Types.ObjectId;
 
     /**
      * Reference to a Customer model.
@@ -1613,7 +1623,6 @@ declare namespace CTypes {
      */
     duration?: number;
   }
-
 
   /**
    * User:

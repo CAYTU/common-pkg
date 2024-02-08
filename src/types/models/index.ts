@@ -1361,11 +1361,6 @@ declare namespace CTypes {
     code?: number;
 
     /**
-     * Count ID for the number of tasks with padded numbers.
-     */
-    taskId: string;
-
-    /**
      * Reference to an Operator model.
      */
     operator?: Types.ObjectId;
@@ -1478,11 +1473,6 @@ declare namespace CTypes {
     code?: number;
 
     /**
-     * Count ID for the number of tasks with padded numbers.
-     */
-    taskId: string;
-
-    /**
      * Status of the task.
      */
     status: TaskStatus;
@@ -1534,11 +1524,6 @@ declare namespace CTypes {
     code?: number;
 
     /**
-     * Count ID for the number of tasks with padded numbers.
-     */
-    taskId: string;
-
-    /**
      * Status of the task.
      */
     status: TaskStatus;
@@ -1582,11 +1567,6 @@ declare namespace CTypes {
      * Type of the task.
      */
     type: TaskType;
-
-    /**
-     * Count ID for the number of tasks with padded numbers.
-     */
-    taskId: string;
 
     /**
      * Version number of the task.
@@ -1978,10 +1958,6 @@ declare namespace CTypes {
      */
     location: [[[number, number]]];
   }
-
-  /**
-   * Zone:
-   */
 
   /**
    * Interface representing a geographic zone.

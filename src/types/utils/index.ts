@@ -365,3 +365,14 @@ export enum RobotType {
    */
   Bared = "bared",
 }
+
+/**
+ * @description
+ * This enum is used to define different types of missions
+ * that can be executed by a robot to complete a task.
+ */
+export enum MissionType {
+  Waypoint = "waypoint",
+  Area = "area",
+  Path = "path",
+}

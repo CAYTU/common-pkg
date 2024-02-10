@@ -18,6 +18,7 @@ import {
   OrganizationType,
   RobotType,
   RobotCategory,
+  MissionType,
 } from "../utils";
 
 declare namespace CTypes {
@@ -564,23 +565,11 @@ declare namespace CTypes {
     currency: string;
     status: PaymentStatus;
     transactionId?: string;
+    organizationId?: Types.ObjectId;
     paymentMethod?: PaymentMethod; // Can be "card" or "wallet"
     isSubscribed?: boolean;
     description?: string;
     subscriptionPlan?: SubscriptionType; // Can be "monthly" or "yearly"
-  }
-
-  export interface PaymentRepInterface extends IMongooseObjectExt {
-    id: string;
-    // Ref to Customer Model
-    customer: Types.ObjectId;
-    status: PaymentStatus;
-    description?: string;
-    subscriptionPlan?: SubscriptionType; // Can be "monthly" or "yearly"
-  }
-
-  export interface PaymentEventInterface extends PaymentRepInterface {
-    version: number;
   }
 
   /**
@@ -787,6 +776,11 @@ declare namespace CTypes {
      * The zone to which the robot belongs (optional).
      */
     zone?: Types.ObjectId;
+
+    /**
+     * The organization to which the robot belongs (optional).
+     */
+    organizationId?: Types.ObjectId;
 
     /**
      * The last recorded geographical location of the robot (optional).
@@ -998,6 +992,11 @@ declare namespace CTypes {
     value: string;
 
     /**
+     * The organization to which the setting belongs (optional).
+     */
+    organizationId?: Types.ObjectId;
+
+    /**
      * An optional description of the setting.
      */
     description?: string;
@@ -1054,13 +1053,55 @@ declare namespace CTypes {
     extends SimulationCategoryInterface {}
 
   export interface SimulationInterface extends IMongooseObjectExt {
+    /**
+     * Name of the simulation.
+     */
     name: string;
+
+    /**
+     * The image of the simulation.
+     */
     image?: string;
+
+    /**
+     * Description of the simulation.
+     */
     description?: string;
+
+    /**
+     * The ID of the organization to which the simulation belongs.
+     */
+    organizationId: Types.ObjectId;
+
+    /**
+     * The job definition of the simulation.
+     * @desc A job definition is a blueprint for a job that
+     * specifies parameters for jobs that run on AWS Batch.
+     */
     jobDefinition: string;
+
+    /**
+     * The job queue of the simulation.
+     * @desc A job queue is a collection of jobs with the same job priority.
+     */
     jobQueue: string;
+
+    /**
+     * The template URL of the simulation.
+     * @desc The URL of the simulation template.
+     */
     templateURL: string;
+
+    /**
+     * The role of the simulation.
+     * @desc The role associated with the simulation.
+     */
     role: string;
+
+    /**
+     * The region of the simulation.
+     * @desc The region where the simulation is located.
+     */
     region: string;
   }
 
@@ -1283,12 +1324,18 @@ declare namespace CTypes {
     /**
      * Area to be surveyed (as a polygon).
      */
-    area?: mongoose.Schema.Types.Polygon;
+    // area?: mongoose.Schema.Types.Polygon; (In the mission)
 
     /**
      * Zone reference for the survey task.
      */
     zone?: Types.ObjectId;
+  }
+
+  export interface MissionInterface extends IMongooseObjectExt {
+    reference: string;
+    type: MissionType;
+    zone: Types.ObjectId;
   }
 
   /**
@@ -1430,6 +1477,11 @@ declare namespace CTypes {
      * Reference to a Simulation job task.
      */
     simulationJob?: Types.ObjectId;
+
+    /**
+     * The organization to which the robot belongs (optional).
+     */
+    organizationId?: Types.ObjectId;
 
     /**
      * Reference to an Inspection task.
@@ -1708,9 +1760,10 @@ declare namespace CTypes {
     position?: mongoose.Schema.Types.Point & Point;
 
     /**
-     * The organization to which the user belongs (optional).
+     * An array of organization IDs representing the
+     * organizations to which the user belongs (optional).
      */
-    organization?: Types.ObjectId;
+    organizationId?: Types.ObjectId[];
 
     /**
      * The type of subscription the user has (optional).
@@ -1775,7 +1828,7 @@ declare namespace CTypes {
     /**
      * The organization to which the user belongs (optional).
      */
-    organization?: Types.ObjectId;
+    organizationId?: Types.ObjectId;
 
     /**
      * The type of OAuth authentication used by the user (optional).
@@ -1870,7 +1923,7 @@ declare namespace CTypes {
     /**
      * The organization to which the user belongs (optional).
      */
-    organization?: Types.ObjectId;
+    organizationId?: Types.ObjectId;
 
     /**
      * The type of OAuth authentication used by the user (optional).
@@ -1970,10 +2023,19 @@ declare namespace CTypes {
     country?: string;
     /** The name of the zone. */
     name: string;
+
+    /**
+     * The organization to which the robot belongs (optional).
+     */
+    organizationId?: Types.ObjectId;
+
     /** The surface of the zone. */
     surface?: number;
     /** The area of the zone. */
-    area: Area;
+    area?: Area;
+    
+    /** Group of points */
+    groupOfPoints?: [[number, number]],
   }
 
   /**

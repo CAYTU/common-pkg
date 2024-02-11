@@ -198,6 +198,11 @@ declare namespace CTypes {
     batchRoles?: UserRole[];
 
     /**
+     * A unique identifier of the organization to which the notification is sent. (Optional)
+     */
+    organizationId?: Types.ObjectId;
+
+    /**
      * Indicates whether an email should be included with the notification. (Optional)
      */
     includeMail?: boolean;
@@ -2033,9 +2038,9 @@ declare namespace CTypes {
     surface?: number;
     /** The area of the zone. */
     area?: Area;
-    
+
     /** Group of points */
-    groupOfPoints?: [[number, number]],
+    groupOfPoints?: [[number, number]];
   }
 
   /**

@@ -1327,19 +1327,24 @@ declare namespace CTypes {
     description?: string;
 
     /**
-     * Area to be surveyed (as a polygon).
+     * Choose a mission for the survey task.
      */
-    // area?: mongoose.Schema.Types.Polygon; (In the mission)
-
-    /**
-     * Zone reference for the survey task.
-     */
-    zone?: Types.ObjectId;
+    mission?: Types.ObjectId;
   }
 
   export interface MissionInterface extends IMongooseObjectExt {
+    /**
+     * Name of the mission. Must be unique.
+     */
     reference: string;
+    /**
+     * Type of the mission.
+     */
     type: MissionType;
+
+    /**
+     * Zone reference for the mission.
+     */
     zone: Types.ObjectId;
   }
 

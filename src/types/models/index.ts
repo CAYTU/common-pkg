@@ -444,7 +444,7 @@ declare namespace CTypes {
     /**
      * The domain associated with the organization.
      */
-    domain: string;
+    domain?: string;
 
     /**
      * An optional description of the organization.
@@ -496,7 +496,7 @@ declare namespace CTypes {
     /**
      * The domain associated with the organization.
      */
-    domain: string;
+    domain?: string;
 
     /**
      * The name of the organization.
@@ -541,7 +541,7 @@ declare namespace CTypes {
     /**
      * The domain associated with the organization.
      */
-    domain: string;
+    domain?: string;
 
     /**
      * The type of organization (optional).

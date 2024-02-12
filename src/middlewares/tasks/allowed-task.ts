@@ -27,18 +27,29 @@ const allowedTask = asyncHandler(
 
     // If currentUser does not have `allowedTaskTypes` in the payload,
     // the user is allowed to perform any task.
-    if (!currentUser?.allowedTaskTypes) {
+    if (
+      !currentUser?.allowedTaskTypes &&
+      !currentUser?.rolesInCurrentOrganization
+    ) {
       return next();
     }
 
-    // If the user is allowed to perform any task, grant access.
-    if (currentUser.allowedTaskTypes.includes("all" as any)) {
-      return next();
-    }
+    // check if connected to his own organization or not
+    const connectedToOwnOrganization =
+      currentUser?.currentOrganizationId === currentUser?.ownedOrganizationId;
 
-    // If the user is allowed to perform the specific task, grant access.
-    if (currentUser.allowedTaskTypes.includes(type)) {
-      return next();
+    if (connectedToOwnOrganization) {
+      // If the user is allowed to perform the specific task, grant access.
+      if (currentUser.allowedTaskTypes?.includes(type)) {
+        return next();
+      }
+    } else {
+      // If the user is allowed to perform the specific task, grant access.
+      if (
+        currentUser.rolesInCurrentOrganization?.allowedTaskTypes?.includes(type)
+      ) {
+        return next();
+      }
     }
 
     // If the user is not allowed to perform the task, throw an error.

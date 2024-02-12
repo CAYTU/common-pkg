@@ -1774,6 +1774,16 @@ declare namespace CTypes {
      * organizations to which the user belongs (optional).
      */
     organizationId?: Types.ObjectId[];
+    // The id of the organization that the user owns
+    ownedOrganizationId?: Types.ObjectId;
+    // The id of the organization that the user is connected to
+    currentOrganizationId?: Types.ObjectId;
+    // Roles and allowed task types in the organization
+    rolesInOrganization?: {
+      organizationId: Types.ObjectId;
+      roles: UserRole[];
+      allowedTaskTypes?: TaskType[] | string[];
+    }[];
 
     /**
      * The type of subscription the user has (optional).

@@ -463,14 +463,29 @@ declare namespace CTypes {
     country?: string;
 
     /**
-     * Array of task types allowed for the organization (optional).
+     * The state where the organization is located (optional).
      */
-    allowedTaskTypes?: TaskType[];
+    state?: string;
 
     /**
-     * An array of user IDs representing the members of the organization (optional).
+     * The city where the organization is located (optional).
      */
-    members?: Types.ObjectId[];
+    city?: string;
+
+    /**
+     * The address of the organization (optional).
+     */
+    address?: string;
+
+    /**
+     * Array of task types allowed for the organization (optional).
+     */
+    defaultAllowedTaskTypes?: TaskType[];
+
+    /**
+     * The unique identifier of the owner of the organization (optional).
+     */
+    owner?: Types.ObjectId;
 
     /**
      * The type of organization (optional).
@@ -478,16 +493,6 @@ declare namespace CTypes {
      * For example, one can be a principal organization while another can be a subsidiary.
      */
     type?: OrganizationType;
-
-    /**
-     * The type of subscription the organization has (optional).
-     */
-    subscriptionType?: SubscriptionType;
-
-    /**
-     * The subscription tier of the organization (optional).
-     */
-    subscriptionTier?: SubscriptionTier;
   }
 
   /**
@@ -512,7 +517,7 @@ declare namespace CTypes {
     /**
      * Array of task types allowed for the organization (optional).
      */
-    allowedTaskTypes?: TaskType[];
+    defaultAllowedTaskTypes?: TaskType[];
 
     /**
      * The type of organization (optional).
@@ -542,7 +547,7 @@ declare namespace CTypes {
     /**
      * Array of task types allowed for the organization (optional).
      */
-    allowedTaskTypes?: TaskType[];
+    defaultAllowedTaskTypes?: TaskType[];
 
     /**
      * The domain associated with the organization.

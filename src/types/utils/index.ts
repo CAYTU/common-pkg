@@ -241,15 +241,16 @@ export enum RoboticPlatform {
 /**
  * Enumerates the possible subscription types for a service.
  */
-export enum SubscriptionType {
-  /** Free subscription type. */
+export enum SubscriptionTier {
   Free = "free",
-  /** Monthly subscription type. */
+  Professional = "professional",
+  Enterprise = "enterprise",
+}
+
+export enum SubscriptionType {
   Monthly = "monthly",
-  /** Yearly subscription type. */
-  Yearly = "yearly",
-  /** Pay-as-you-go subscription type. */
-  asYouGo = "asYouGo",
+  Annually = "annually",
+  AsYouGo = "asYouGo",
 }
 
 export enum PaymentStatus {
@@ -297,6 +298,7 @@ export enum UserMembershipStatus {
   Pending = "pending",
   Approved = "approved",
   Denied = "denied",
+  Expired = "expired",
 }
 
 export enum Services {

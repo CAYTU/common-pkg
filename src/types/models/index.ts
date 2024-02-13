@@ -19,6 +19,7 @@ import {
   RobotType,
   RobotCategory,
   MissionType,
+  SubscriptionTier,
 } from "../utils";
 
 declare namespace CTypes {
@@ -482,6 +483,11 @@ declare namespace CTypes {
      * The type of subscription the organization has (optional).
      */
     subscriptionType?: SubscriptionType;
+
+    /**
+     * The subscription tier of the organization (optional).
+     */
+    subscriptionTier?: SubscriptionTier;
   }
 
   /**
@@ -575,6 +581,7 @@ declare namespace CTypes {
     isSubscribed?: boolean;
     description?: string;
     subscriptionPlan?: SubscriptionType; // Can be "monthly" or "yearly"
+    subscriptionTier?: SubscriptionTier; // Can be "basic" or "premium"
   }
 
   /**
@@ -1788,7 +1795,7 @@ declare namespace CTypes {
     /**
      * The type of subscription the user has (optional).
      */
-    subscriptionType?: SubscriptionType;
+    subscriptionTier?: SubscriptionTier;
 
     /**
      * Indicates whether the user is currently online (optional).
@@ -1868,7 +1875,7 @@ declare namespace CTypes {
     /**
      * The type of subscription the user has (optional).
      */
-    subscriptionType?: SubscriptionType;
+    subscriptionTier?: SubscriptionTier;
 
     /**
      * Indicates whether the user is currently online (optional).
@@ -1953,7 +1960,7 @@ declare namespace CTypes {
     /**
      * The type of subscription the user has (optional).
      */
-    subscriptionType?: SubscriptionType;
+    subscriptionTier?: SubscriptionTier;
 
     /**
      * Indicates whether the user is currently online (optional).

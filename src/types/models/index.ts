@@ -1795,6 +1795,11 @@ declare namespace CTypes {
     /**
      * The type of subscription the user has (optional).
      */
+    subscriptionType?: SubscriptionType;
+
+    /**
+     * The tier of the subscription the user has (optional).
+     */
     subscriptionTier?: SubscriptionTier;
 
     /**
@@ -1874,6 +1879,11 @@ declare namespace CTypes {
 
     /**
      * The type of subscription the user has (optional).
+     */
+    subscriptionType?: SubscriptionType;
+
+    /**
+     * The tier of subscription the user has (optional).
      */
     subscriptionTier?: SubscriptionTier;
 
@@ -1959,6 +1969,11 @@ declare namespace CTypes {
 
     /**
      * The type of subscription the user has (optional).
+     */
+    subscriptionType?: SubscriptionType;
+
+    /**
+     * The tier of subscription the user has (optional).
      */
     subscriptionTier?: SubscriptionTier;
 

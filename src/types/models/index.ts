@@ -483,6 +483,16 @@ declare namespace CTypes {
     defaultAllowedTaskTypes?: TaskType[];
 
     /**
+     * The number of members in the organization (optional).
+     */
+    membersCount?: number;
+
+    /**
+     * The maximum number of members allowed in the organization (optional).
+     */
+    memberLimitReached?: boolean;
+
+    /**
      * The unique identifier of the owner of the organization (optional).
      */
     owner?: Types.ObjectId;
@@ -1796,6 +1806,11 @@ declare namespace CTypes {
       roles: UserRole[];
       allowedTaskTypes?: TaskType[] | string[];
     }[];
+
+    /**
+     * The payment object associated with the user (optional).
+     */
+    paymentId?: Types.ObjectId;
 
     /**
      * The type of subscription the user has (optional).

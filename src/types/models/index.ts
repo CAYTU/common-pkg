@@ -585,18 +585,41 @@ declare namespace CTypes {
    */
   export interface PaymentInterface extends IMongooseObjectExt {
     // Ref to Customer Model
-    customer: Types.ObjectId;
-    accountId: string;
-    amount: number;
-    currency: string;
-    status: PaymentStatus;
-    transactionId?: string;
-    organizationId?: Types.ObjectId;
+    user: Types.ObjectId;
+    amount?: number;
+    currency?: string;
+    status?: PaymentStatus;
     paymentMethod?: PaymentMethod; // Can be "card" or "wallet"
     isSubscribed?: boolean;
     description?: string;
-    subscriptionPlan?: SubscriptionType; // Can be "monthly" or "yearly"
-    subscriptionTier?: SubscriptionTier; // Can be "basic" or "premium"
+
+    stripeId?: Types.ObjectId;
+
+    /**
+     * The type of subscription the user has (optional).
+     */
+    subscriptionType?: SubscriptionType;
+
+    /**
+     * The tier of subscription the user has (optional).
+     */
+    subscriptionTier?: SubscriptionTier;
+
+    /**
+     * A boolean to tell if the user wants a
+     * change of plan
+     */
+    requestSubscriptionChange?: boolean;
+
+    /**
+     * The type of subscription the user wants to change to
+     */
+    subscriptionChangeType?: SubscriptionType;
+
+    /**
+     *  The tier of subscription the user wants to change to
+     */
+    subscriptionChangeTier?: SubscriptionTier;
   }
 
   /**
@@ -1996,7 +2019,6 @@ declare namespace CTypes {
      * The tier of subscription the user has (optional).
      */
     subscriptionTier?: SubscriptionTier;
-
     /**
      * Indicates whether the user is currently online (optional).
      */

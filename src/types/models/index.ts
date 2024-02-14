@@ -1335,21 +1335,21 @@ declare namespace CTypes {
   }
 
   /**
-   * Interface representing a Task Survey.
+   * Interface representing a Task Flight.
    */
-  export interface TaskSurveyInterface extends IMongooseObjectExt {
+  export interface TaskFlightInterface extends IMongooseObjectExt {
     /**
-     * Name of the survey task.
+     * Name of the flight task.
      */
     name: string;
 
     /**
-     * Description of the survey task.
+     * Description of the flight task.
      */
     description?: string;
 
     /**
-     * Choose a mission for the survey task.
+     * Choose a mission for the flight task.
      */
     mission?: Types.ObjectId;
   }
@@ -1521,9 +1521,9 @@ declare namespace CTypes {
     inspection?: Types.ObjectId;
 
     /**
-     * Reference to a Survey task.
+     * Reference to a Flight task.
      */
-    survey?: Types.ObjectId;
+    flight?: Types.ObjectId;
 
     /**
      * Reference to a Custom task.

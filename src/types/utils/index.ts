@@ -78,8 +78,8 @@ export enum TaskType {
   Inspection = "inspection",
   /** Run a simulation. */
   Simulation = "simulation",
-  /** If the task is for a survey. */
-  Survey = "survey",
+  /** If the task is for a flight. */
+  Flight = "flight",
   /** If the task is none of the above (delivery, cleaning, ...). */
   Custom = "custom",
 }
@@ -243,7 +243,7 @@ export enum RoboticPlatform {
  */
 export enum SubscriptionTier {
   Free = "free",
-  Professional = "professional",
+  // Professional = "professional",
   Enterprise = "enterprise",
 }
 

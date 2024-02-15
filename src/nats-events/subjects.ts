@@ -112,6 +112,7 @@ export enum Subjects {
   SubscriptionCreated = "subscription:created",
   SubscriptionUpdated = "subscription:updated",
   SubscriptionDeleted = "subscription:deleted",
+  SubscriptionChangeRequest = "subscription:change:request",
   SubscriptionActivated = "subscription:activated",
   SubscriptionDeactivated = "subscription:deactivated",
   SubscriptionRenewed = "subscription:renewed",

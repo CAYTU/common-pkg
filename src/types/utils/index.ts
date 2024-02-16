@@ -373,8 +373,20 @@ export enum RobotType {
  * This enum is used to define different types of missions
  * that can be executed by a robot to complete a task.
  */
-export enum MissionType {
+export enum ItineraryType {
+  /**
+   * Multi-Point Mission Type
+   */
   Waypoint = "waypoint",
+
+  /**
+   * Single-Point Mission Type
+   */
+  Point = "point",
+
+  /**
+   * A surface area mission type
+   * (e.g. a cleaning robot cleaning a surface area)
+   */
   Area = "area",
-  Path = "path",
 }

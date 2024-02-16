@@ -26,12 +26,16 @@ const allowedTask = asyncHandler(
     const { type } = req.body;
 
     // If currentUser does not have `allowedTaskTypes` in the payload,
-    // the user is allowed to perform any task.
+    // the user is not allowed to perform any task.
     if (
-      !currentUser?.allowedTaskTypes &&
-      !currentUser?.rolesInCurrentOrganization
+      (!currentUser?.allowedTaskTypes ||
+        currentUser?.allowedTaskTypes?.length === 0) &&
+      (!currentUser?.rolesInCurrentOrganization ||
+        currentUser?.rolesInCurrentOrganization?.allowedTaskTypes?.length === 0)
     ) {
-      return next();
+      throw new NotAuthorizedErr(
+        "You are not allowed to perform any task in this organization."
+      );
     }
 
     // check if connected to his own organization or not

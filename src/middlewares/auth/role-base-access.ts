@@ -23,19 +23,35 @@ const RbaUserACL = {
         ? req.currentUser?.roles
         : req.currentUser?.rolesInCurrentOrganization?.roles;
 
-      if (
-        userRoles?.some((role) =>
-          [
-            UserRole.Create,
-            UserRole.All,
-            UserRole.Admin,
-            UserRole.SuperAdmin,
-          ].includes(role)
-        )
-      ) {
+      let hasSufficientPermissions = false;
+      let lackingRole: string | undefined;
+
+      if (userRoles) {
+        for (const role of userRoles) {
+          if (
+            [
+              UserRole.Create,
+              UserRole.All,
+              UserRole.Create,
+              UserRole.Operator,
+              UserRole.Admin,
+              UserRole.SuperAdmin,
+            ].includes(role)
+          ) {
+            hasSufficientPermissions = true;
+            break;
+          } else {
+            lackingRole = role;
+          }
+        }
+      }
+
+      if (hasSufficientPermissions) {
         next();
       } else {
-        throw new ForbiddenErr("Cannot create.");
+        throw new ForbiddenErr(
+          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+        );
       }
     }
   ),
@@ -56,19 +72,35 @@ const RbaUserACL = {
         ? req.currentUser?.roles
         : req.currentUser?.rolesInCurrentOrganization?.roles;
 
-      if (
-        userRoles?.some((role) =>
-          [
-            UserRole.Update,
-            UserRole.All,
-            UserRole.Admin,
-            UserRole.SuperAdmin,
-          ].includes(role)
-        )
-      ) {
+      let hasSufficientPermissions = false;
+      let lackingRole: string | undefined;
+
+      if (userRoles) {
+        for (const role of userRoles) {
+          if (
+            [
+              UserRole.Update,
+              UserRole.All,
+              UserRole.Admin,
+              UserRole.Customer,
+              UserRole.Operator,
+              UserRole.SuperAdmin,
+            ].includes(role)
+          ) {
+            hasSufficientPermissions = true;
+            break;
+          } else {
+            lackingRole = role;
+          }
+        }
+      }
+
+      if (hasSufficientPermissions) {
         next();
       } else {
-        throw new ForbiddenErr("Cannot edit.");
+        throw new ForbiddenErr(
+          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+        );
       }
     }
   ),
@@ -89,19 +121,35 @@ const RbaUserACL = {
         ? req.currentUser?.roles
         : req.currentUser?.rolesInCurrentOrganization?.roles;
 
-      if (
-        userRoles?.some((role) =>
-          [
-            UserRole.Delete,
-            UserRole.All,
-            UserRole.Admin,
-            UserRole.SuperAdmin,
-          ].includes(role)
-        )
-      ) {
+      let hasSufficientPermissions = false;
+      let lackingRole: string | undefined;
+
+      if (userRoles) {
+        for (const role of userRoles) {
+          if (
+            [
+              UserRole.Delete,
+              UserRole.All,
+              UserRole.Admin,
+              UserRole.Customer,
+              UserRole.Operator,
+              UserRole.SuperAdmin,
+            ].includes(role)
+          ) {
+            hasSufficientPermissions = true;
+            break;
+          } else {
+            lackingRole = role;
+          }
+        }
+      }
+
+      if (hasSufficientPermissions) {
         next();
       } else {
-        throw new ForbiddenErr("Cannot delete.");
+        throw new ForbiddenErr(
+          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+        );
       }
     }
   ),
@@ -122,19 +170,35 @@ const RbaUserACL = {
         ? req.currentUser?.roles
         : req.currentUser?.rolesInCurrentOrganization?.roles;
 
-      if (
-        userRoles?.some((role) =>
-          [
-            UserRole.ReadOnly,
-            UserRole.All,
-            UserRole.Admin,
-            UserRole.SuperAdmin,
-          ].includes(role)
-        )
-      ) {
+      let hasSufficientPermissions = false;
+      let lackingRole: string | undefined;
+
+      if (userRoles) {
+        for (const role of userRoles) {
+          if (
+            [
+              UserRole.ReadOnly,
+              UserRole.All,
+              UserRole.Admin,
+              UserRole.Customer,
+              UserRole.Operator,
+              UserRole.SuperAdmin,
+            ].includes(role)
+          ) {
+            hasSufficientPermissions = true;
+            break;
+          } else {
+            lackingRole = role;
+          }
+        }
+      }
+
+      if (hasSufficientPermissions) {
         next();
       } else {
-        throw new ForbiddenErr("Cannot read content.");
+        throw new ForbiddenErr(
+          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+        );
       }
     }
   ),
@@ -155,20 +219,34 @@ const RbaUserACL = {
         ? req.currentUser?.roles
         : req.currentUser?.rolesInCurrentOrganization?.roles;
 
-      if (
-        userRoles?.some((role) =>
-          [
-            UserRole.Customer,
-            UserRole.Admin,
-            UserRole.All,
-            UserRole.Operator,
-            UserRole.SuperAdmin,
-          ].includes(role)
-        )
-      ) {
+      let hasSufficientPermissions = false;
+      let lackingRole: string | undefined;
+
+      if (userRoles) {
+        for (const role of userRoles) {
+          if (
+            [
+              UserRole.Customer,
+              UserRole.Admin,
+              UserRole.All,
+              UserRole.Operator,
+              UserRole.SuperAdmin,
+            ].includes(role)
+          ) {
+            hasSufficientPermissions = true;
+            break;
+          } else {
+            lackingRole = role;
+          }
+        }
+      }
+
+      if (hasSufficientPermissions) {
         next();
       } else {
-        throw new ForbiddenErr("Operation is not allowed for customers.");
+        throw new ForbiddenErr(
+          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+        );
       }
     }
   ),
@@ -189,19 +267,33 @@ const RbaUserACL = {
         ? req.currentUser?.roles
         : req.currentUser?.rolesInCurrentOrganization?.roles;
 
-      if (
-        userRoles?.some((role) =>
-          [
-            UserRole.Operator,
-            UserRole.Admin,
-            UserRole.All,
-            UserRole.SuperAdmin,
-          ].includes(role)
-        )
-      ) {
+      let hasSufficientPermissions = false;
+      let lackingRole: string | undefined;
+
+      if (userRoles) {
+        for (const role of userRoles) {
+          if (
+            [
+              UserRole.Operator,
+              UserRole.Admin,
+              UserRole.All,
+              UserRole.SuperAdmin,
+            ].includes(role)
+          ) {
+            hasSufficientPermissions = true;
+            break;
+          } else {
+            lackingRole = role;
+          }
+        }
+      }
+
+      if (hasSufficientPermissions) {
         next();
       } else {
-        throw new ForbiddenErr("Operation is not allowed for operators.");
+        throw new ForbiddenErr(
+          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+        );
       }
     }
   ),
@@ -222,14 +314,28 @@ const RbaUserACL = {
         ? req.currentUser?.roles
         : req.currentUser?.rolesInCurrentOrganization?.roles;
 
-      if (
-        userRoles?.some((role) =>
-          [UserRole.Admin, UserRole.All, UserRole.SuperAdmin].includes(role)
-        )
-      ) {
+      let hasSufficientPermissions = false;
+      let lackingRole: string | undefined;
+
+      if (userRoles) {
+        for (const role of userRoles) {
+          if (
+            [UserRole.Admin, UserRole.All, UserRole.SuperAdmin].includes(role)
+          ) {
+            hasSufficientPermissions = true;
+            break;
+          } else {
+            lackingRole = role;
+          }
+        }
+      }
+
+      if (hasSufficientPermissions) {
         next();
       } else {
-        throw new ForbiddenErr("Operation is not allowed for admins.");
+        throw new ForbiddenErr(
+          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+        );
       }
     }
   ),
@@ -250,14 +356,26 @@ const RbaUserACL = {
         ? req.currentUser?.roles
         : req.currentUser?.rolesInCurrentOrganization?.roles;
 
-      if (
-        userRoles?.some((role) =>
-          [UserRole.SuperAdmin, UserRole.All].includes(role)
-        )
-      ) {
+      let hasSufficientPermissions = false;
+      let lackingRole: string | undefined;
+
+      if (userRoles) {
+        for (const role of userRoles) {
+          if ([UserRole.SuperAdmin, UserRole.All].includes(role)) {
+            hasSufficientPermissions = true;
+            break;
+          } else {
+            lackingRole = role;
+          }
+        }
+      }
+
+      if (hasSufficientPermissions) {
         next();
       } else {
-        throw new ForbiddenErr("Operation is not allowed for super admins.");
+        throw new ForbiddenErr(
+          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+        );
       }
     }
   ),
@@ -278,14 +396,30 @@ const RbaUserACL = {
         ? req.currentUser?.roles
         : req.currentUser?.rolesInCurrentOrganization?.roles;
 
-      if (
-        userRoles?.some((role) =>
-          [UserRole.Developer, UserRole.All, UserRole.SuperAdmin].includes(role)
-        )
-      ) {
+      let hasSufficientPermissions = false;
+      let lackingRole: string | undefined;
+
+      if (userRoles) {
+        for (const role of userRoles) {
+          if (
+            [UserRole.Developer, UserRole.All, UserRole.SuperAdmin].includes(
+              role
+            )
+          ) {
+            hasSufficientPermissions = true;
+            break;
+          } else {
+            lackingRole = role;
+          }
+        }
+      }
+
+      if (hasSufficientPermissions) {
         next();
       } else {
-        throw new ForbiddenErr("Operation is not allowed for developers.");
+        throw new ForbiddenErr(
+          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+        );
       }
     }
   ),

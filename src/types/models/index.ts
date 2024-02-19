@@ -114,6 +114,11 @@ declare namespace CTypes {
     service: Services;
 
     /**
+     * The unique identifier of the service reference associated with the notification. (Optional)
+     */
+    serviceRefId?: string;
+
+    /**
      * The main content or body of the notification.
      */
     body: string;

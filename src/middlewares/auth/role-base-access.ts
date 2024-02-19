@@ -29,14 +29,7 @@ const RbaUserACL = {
       if (userRoles) {
         for (const role of userRoles) {
           if (
-            [
-              UserRole.Create,
-              UserRole.All,
-              UserRole.Create,
-              UserRole.Operator,
-              UserRole.Admin,
-              UserRole.SuperAdmin,
-            ].includes(role)
+            [UserRole.Create, UserRole.All, UserRole.SuperAdmin].includes(role)
           ) {
             hasSufficientPermissions = true;
             break;
@@ -78,14 +71,7 @@ const RbaUserACL = {
       if (userRoles) {
         for (const role of userRoles) {
           if (
-            [
-              UserRole.Update,
-              UserRole.All,
-              UserRole.Admin,
-              UserRole.Customer,
-              UserRole.Operator,
-              UserRole.SuperAdmin,
-            ].includes(role)
+            [UserRole.All, UserRole.Update, UserRole.SuperAdmin].includes(role)
           ) {
             hasSufficientPermissions = true;
             break;
@@ -127,14 +113,7 @@ const RbaUserACL = {
       if (userRoles) {
         for (const role of userRoles) {
           if (
-            [
-              UserRole.Delete,
-              UserRole.All,
-              UserRole.Admin,
-              UserRole.Customer,
-              UserRole.Operator,
-              UserRole.SuperAdmin,
-            ].includes(role)
+            [UserRole.All, UserRole.Delete, UserRole.SuperAdmin].includes(role)
           ) {
             hasSufficientPermissions = true;
             break;
@@ -180,8 +159,13 @@ const RbaUserACL = {
               UserRole.ReadOnly,
               UserRole.All,
               UserRole.Admin,
+
+              // By the read-only role is attributed to all basic roles
               UserRole.Customer,
               UserRole.Operator,
+              UserRole.Developer,
+              UserRole.Robot,
+
               UserRole.SuperAdmin,
             ].includes(role)
           ) {
@@ -228,8 +212,8 @@ const RbaUserACL = {
             [
               UserRole.Customer,
               UserRole.Admin,
-              UserRole.All,
               UserRole.Operator,
+              UserRole.Developer,
               UserRole.SuperAdmin,
             ].includes(role)
           ) {
@@ -273,12 +257,9 @@ const RbaUserACL = {
       if (userRoles) {
         for (const role of userRoles) {
           if (
-            [
-              UserRole.Operator,
-              UserRole.Admin,
-              UserRole.All,
-              UserRole.SuperAdmin,
-            ].includes(role)
+            [UserRole.Admin, UserRole.Operator, UserRole.SuperAdmin].includes(
+              role
+            )
           ) {
             hasSufficientPermissions = true;
             break;
@@ -319,9 +300,7 @@ const RbaUserACL = {
 
       if (userRoles) {
         for (const role of userRoles) {
-          if (
-            [UserRole.Admin, UserRole.All, UserRole.SuperAdmin].includes(role)
-          ) {
+          if ([UserRole.Admin, UserRole.SuperAdmin].includes(role)) {
             hasSufficientPermissions = true;
             break;
           } else {
@@ -361,7 +340,7 @@ const RbaUserACL = {
 
       if (userRoles) {
         for (const role of userRoles) {
-          if ([UserRole.SuperAdmin, UserRole.All].includes(role)) {
+          if ([UserRole.SuperAdmin].includes(role)) {
             hasSufficientPermissions = true;
             break;
           } else {
@@ -401,11 +380,7 @@ const RbaUserACL = {
 
       if (userRoles) {
         for (const role of userRoles) {
-          if (
-            [UserRole.Developer, UserRole.All, UserRole.SuperAdmin].includes(
-              role
-            )
-          ) {
+          if ([UserRole.Developer, UserRole.SuperAdmin].includes(role)) {
             hasSufficientPermissions = true;
             break;
           } else {
@@ -440,9 +415,7 @@ const RbaUserACL = {
         ? req.currentUser?.roles
         : req.currentUser?.rolesInCurrentOrganization?.roles;
 
-      if (
-        userRoles?.some((role) => [UserRole.Robot, UserRole.All].includes(role))
-      ) {
+      if (userRoles?.some((role) => [UserRole.Robot].includes(role))) {
         next();
       } else {
         throw new ForbiddenErr("Operation is not allowed for robots.");

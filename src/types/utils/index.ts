@@ -311,6 +311,11 @@ export enum Services {
   Customer = "customer",
   Expiration = "expiration",
   Message = "message",
+  Zone = "zone",
+  User = "user",
+  Organization = "organization",
+  Subscription = "subscription",
+  SimulationJob = "simulationJob",
 }
 
 /**

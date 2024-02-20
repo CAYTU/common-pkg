@@ -100,6 +100,12 @@ export enum Subjects {
   OrganizationMemberInviteExpired = "organization:member:invite:expired",
   OrganizationMemberAdded = "organization:member:added",
   OrganizationMemberRemoved = "organization:member:removed",
+  OrganizationMemberRoleUpdated = "organization:member:role:updated",
+  OrganizationMemberStatusUpdated = "organization:member:status:updated",
+  OrganizationMemberInviteCanceled = "organization:member:invite:canceled",
+  OrganizationMemberInviteAccepted = "organization:member:invite:accepted",
+  OrganizationMemberInviteRejected = "organization:member:invite:rejected",
+  OrganizationMemberInviteResend = "organization:member:invite:resend",
 
   // Billing
   BillingCreated = "billing:created",

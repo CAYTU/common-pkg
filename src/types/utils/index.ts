@@ -88,6 +88,7 @@ export enum TaskType {
  * Enumerates the possible roles for users.
  */
 export enum UserRole {
+  Invited = "invited",
   /** This is the most basic role that any user that creates an account through the API will have. This role is for the robot. */
   Robot = "robot",
   /** Basic operations are allowed: Read & Create Task. */

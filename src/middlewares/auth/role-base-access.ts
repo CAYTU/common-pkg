@@ -43,7 +43,9 @@ const RbaUserACL = {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+          `You do not have sufficient permissions as ${
+            lackingRole ?? "user"
+          } to perform this operation.`
         );
       }
     }
@@ -85,7 +87,9 @@ const RbaUserACL = {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+          `You do not have sufficient permissions as ${
+            lackingRole ?? "user"
+          } to perform this operation.`
         );
       }
     }
@@ -127,7 +131,9 @@ const RbaUserACL = {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+          `You do not have sufficient permissions as ${
+            lackingRole ?? "user"
+          } to perform this operation.`
         );
       }
     }
@@ -165,6 +171,7 @@ const RbaUserACL = {
               UserRole.Operator,
               UserRole.Developer,
               UserRole.Robot,
+              UserRole.Invited,
 
               UserRole.SuperAdmin,
             ].includes(role)
@@ -181,7 +188,9 @@ const RbaUserACL = {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+          `You do not have sufficient permissions as ${
+            lackingRole ?? "user"
+          } to perform this operation.`
         );
       }
     }
@@ -229,7 +238,9 @@ const RbaUserACL = {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+          `You do not have sufficient permissions as ${
+            lackingRole ?? "user"
+          } to perform this operation.`
         );
       }
     }
@@ -273,7 +284,9 @@ const RbaUserACL = {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+          `You do not have sufficient permissions as ${
+            lackingRole ?? "user"
+          } to perform this operation.`
         );
       }
     }
@@ -313,7 +326,9 @@ const RbaUserACL = {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+          `You do not have sufficient permissions as ${
+            lackingRole ?? "user"
+          } to perform this operation.`
         );
       }
     }
@@ -353,7 +368,9 @@ const RbaUserACL = {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+          `You do not have sufficient permissions as ${
+            lackingRole ?? "user"
+          } to perform this operation.`
         );
       }
     }
@@ -393,7 +410,9 @@ const RbaUserACL = {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${lackingRole} to perform this operation.`
+          `You do not have sufficient permissions as ${
+            lackingRole ?? "user"
+          } to perform this operation.`
         );
       }
     }
@@ -418,7 +437,9 @@ const RbaUserACL = {
       if (userRoles?.some((role) => [UserRole.Robot].includes(role))) {
         next();
       } else {
-        throw new ForbiddenErr("Operation is not allowed for robots.");
+        throw new ForbiddenErr(
+          `You do not have sufficient permissions as user to perform this operation.`
+        );
       }
     }
   ),

@@ -1113,24 +1113,23 @@ declare namespace CTypes {
     version: number;
   }
 
+  export type DeliveryType = "indoor" | "outdoor";
+
   /**
    * Interface representing a Task Delivery.
    */
   export interface TaskDeliveryInterface extends IMongooseObjectExt {
     /**
-     * Reference to a Product.
+     * Reference to the order.
      */
-    product?: Types.ObjectId;
+    order?: Types.ObjectId;
 
-    /**
-     * Reference to a Vendor.
-     */
-    vendor?: Types.ObjectId;
+    deliveryType?: DeliveryType;
 
     /**
      * Delivery Attributes
      */
-    itinerary: {
+    itinerary?: {
       from: {
         lat: number;
         lng: number;

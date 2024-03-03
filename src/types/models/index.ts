@@ -391,6 +391,12 @@ declare namespace CTypes {
     products?: Types.ObjectId[];
 
     /**
+     * The deviceId (if any) associated with the order.
+     * Can be a robot
+     */
+    deviceId?: Types.ObjectId;
+
+    /**
      * The total amount of the order.
      */
     totalAmount: number;

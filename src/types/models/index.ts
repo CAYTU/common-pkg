@@ -371,9 +371,19 @@ declare namespace CTypes {
    */
   export interface OrderInterface extends IMongooseObjectExt {
     /**
-     * The unique identifier of the user who placed the order.
+     * The first name of the user who placed the order.
      */
-    user?: Types.ObjectId;
+    firstName?: string;
+
+    /**
+     * The last name of the user who placed the order.
+     */
+    lastName?: string;
+
+    /**
+     * The email of the user who placed the order.
+     */
+    email?: string;
 
     /**
      * The unique identifier of the product in the order.

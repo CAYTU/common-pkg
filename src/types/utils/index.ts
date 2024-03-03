@@ -201,6 +201,13 @@ export enum OperatorStatus {
   Revoked = "Revoked",
 }
 
+export enum OrderStatus {
+  Created = "created",
+  Pending = "pending",
+  Succeeded = "succeeded",
+  Failed = "failed",
+}
+
 /**
  * Enumerates the possible states of a simulation job.
  */

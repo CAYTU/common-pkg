@@ -107,6 +107,11 @@ export enum Subjects {
   OrganizationMemberInviteRejected = "organization:member:invite:rejected",
   OrganizationMemberInviteResend = "organization:member:invite:resend",
 
+  // Order Subjects
+  OrderCreated = "order:created",
+  OrderUpdated = "order:updated",
+  OrderDeleted = "order:deleted",
+
   // Billing
   BillingCreated = "billing:created",
   BillingUpdated = "billing:updated",

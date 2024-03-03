@@ -20,6 +20,7 @@ import {
   RobotCategory,
   SubscriptionTier,
   ItineraryType,
+  OrderStatus,
 } from "../utils";
 
 declare namespace CTypes {
@@ -362,6 +363,32 @@ declare namespace CTypes {
      * A brief description about the operator. (Optional)
      */
     aboutMe?: string;
+  }
+
+  /**
+   * Order:
+   * A model to save user's orders
+   */
+  export interface OrderInterface extends IMongooseObjectExt {
+    /**
+     * The unique identifier of the user who placed the order.
+     */
+    user?: Types.ObjectId;
+
+    /**
+     * The unique identifier of the product in the order.
+     */
+    products?: Types.ObjectId[];
+
+    /**
+     * The total amount of the order.
+     */
+    totalAmount: number;
+
+    /**
+     * The status of the order.
+     */
+    status: OrderStatus;
   }
 
   /**

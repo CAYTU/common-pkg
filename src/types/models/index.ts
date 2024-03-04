@@ -525,6 +525,11 @@ declare namespace CTypes {
     user?: Types.ObjectId;
 
     /**
+     * The id of the order for which the payment is made.
+     */
+    orderId?: Types.ObjectId;
+
+    /**
      * If payment is not from a user who is registered in the system
      * then the user must be a transient user.
      */

@@ -522,7 +522,13 @@ declare namespace CTypes {
      * The unique identifier of the user making the payment.
      * The organization is already known from the user.
      */
-    user: Types.ObjectId;
+    user?: Types.ObjectId;
+
+    /**
+     * If payment is not from a user who is registered in the system
+     * then the user must be a transient user.
+     */
+    transientUser?: Types.ObjectId;
 
     /**
      * The amount of the payment.
@@ -574,6 +580,13 @@ declare namespace CTypes {
      * change of plan
      */
     requestSubscriptionChange?: boolean;
+
+    /**
+     * Organization to which the payment is made to. (optional)
+     * Let's say a customer is paying for a service for which the device that
+     * was used belongs to an organization, then the payment is made to the organization
+     */
+    organizationId?: Types.ObjectId;
 
     /**
      * The type of subscription the user wants to change to

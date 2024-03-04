@@ -366,6 +366,37 @@ declare namespace CTypes {
   }
 
   /**
+   * Transient user:
+   * Represents users who are not registered in the system but have access to some features.
+   */
+  export interface TransientUserInterface extends IMongooseObjectExt {
+    /**
+     * The email address of the transient user.
+     */
+    email: string;
+
+    /**
+     * First name of the transient user.
+     */
+    firstName?: string;
+
+    /**
+     * Last name of the transient user.
+     */
+    lastName?: string;
+
+    /**
+     * Full name of the transient user (in case the first and last names are not provided).
+     */
+    fullName?: string;
+
+    /**
+     * Address of the transient user.
+     */
+    address?: string;
+  }
+
+  /**
    * Order:
    * A model to save user's orders
    */

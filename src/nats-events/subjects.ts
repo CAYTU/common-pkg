@@ -47,6 +47,12 @@ export enum Subjects {
   UserMembershipInvitation = "user:membership:invitation",
   UserMembershipInvitationAccepted = "user:membership:invitation:accepted",
   UserMembershipInvitationRejected = "user:membership:invitation:rejected",
+
+  // Transient User
+  TransientUserCreated = "transient:user:created",
+  TransientUserUpdated = "transient:user:updated",
+  TransientUserDeleted = "transient:user:deleted",
+  
   // Zone Subjects
   ZoneCreated = "zone:created",
   ZoneUpdated = "zone:updated",

@@ -18,6 +18,9 @@ import {
   OrganizationType,
   RobotType,
   RobotCategory,
+  SubscriptionTier,
+  ItineraryType,
+  OrderStatus,
 } from "../utils";
 
 declare namespace CTypes {
@@ -37,71 +40,6 @@ declare namespace CTypes {
      * The date when the object was created (optional).
      */
     createdAt?: Date;
-  }
-
-  /**
-   * Represents a category object.
-   */
-  export interface CategoryInterface {
-    /**
-     * The name of the category.
-     */
-    name: string;
-
-    /**
-     * The URL or path to the image associated with the category.
-     */
-    image: string;
-
-    /**
-     * An optional description of the category.
-     */
-    description?: string;
-  }
-
-  /**
-   * Represents a simplified category object for representation purposes.
-   */
-  export interface CategoryRepInterface extends IMongooseObjectExt {
-    /**
-     * The unique identifier of the category.
-     */
-    id: string;
-
-    /**
-     * The name of the category.
-     */
-    name: string;
-
-    /**
-     * The URL or path to the image associated with the category.
-     */
-    image: string;
-  }
-
-  /**
-   * Represents a category object for events with additional information.
-   */
-  export interface CategoryEventInterface {
-    /**
-     * The unique identifier of the category.
-     */
-    id: string;
-
-    /**
-     * The name of the category.
-     */
-    name: string;
-
-    /**
-     * The URL or path to the image associated with the category.
-     */
-    image: string;
-
-    /**
-     * The version number of the category event.
-     */
-    version: number;
   }
 
   /************************
@@ -177,6 +115,11 @@ declare namespace CTypes {
     service: Services;
 
     /**
+     * The unique identifier of the service reference associated with the notification. (Optional)
+     */
+    serviceRefId?: string;
+
+    /**
      * The main content or body of the notification.
      */
     body: string;
@@ -195,6 +138,11 @@ declare namespace CTypes {
      * An array of user roles relevant to the notification. (Optional)
      */
     batchRoles?: UserRole[];
+
+    /**
+     * A unique identifier of the organization to which the notification is sent. (Optional)
+     */
+    organizationId?: Types.ObjectId;
 
     /**
      * Indicates whether an email should be included with the notification. (Optional)
@@ -258,23 +206,18 @@ declare namespace CTypes {
   }
 
   /**
-   * Type representing different identity document types.
-   */
-  export type IDType = "id" | "passport";
-
-  /**
    * Represents an operator.
    */
   export interface OperatorInterface extends IMongooseObjectExt {
     /**
      * The type of identity document used by the operator.
      */
-    identityType: IDType;
+    identityType?: "nationalId" | "passport" | "driverLicense";
 
     /**
      * The path to the operator's identity photo.
      */
-    identityPhoto: string;
+    identityPhoto?: string;
 
     /**
      * The operator's identity number. (Optional)
@@ -399,12 +342,12 @@ declare namespace CTypes {
     /**
      * The type of identity document requested.
      */
-    identityType: IDType;
+    identityType?: "nationalId" | "passport" | "driverLicense";
 
     /**
      * The path to the requested identity photo.
      */
-    identityPhoto: string;
+    identityPhoto?: string;
 
     /**
      * The requested identity number. (Optional)
@@ -423,6 +366,79 @@ declare namespace CTypes {
   }
 
   /**
+   * Transient user:
+   * Represents users who are not registered in the system but have access to some features.
+   */
+  export interface TransientUserInterface extends IMongooseObjectExt {
+    /**
+     * The email address of the transient user.
+     */
+    email: string;
+
+    /**
+     * First name of the transient user.
+     */
+    firstName?: string;
+
+    /**
+     * Last name of the transient user.
+     */
+    lastName?: string;
+
+    /**
+     * Full name of the transient user (in case the first and last names are not provided).
+     */
+    fullName?: string;
+
+    /**
+     * Address of the transient user.
+     */
+    address?: string;
+  }
+
+  /**
+   * Order:
+   * A model to save user's orders
+   */
+  export interface OrderInterface extends IMongooseObjectExt {
+    /**
+     * The first name of the user who placed the order.
+     */
+    firstName?: string;
+
+    /**
+     * The last name of the user who placed the order.
+     */
+    lastName?: string;
+
+    /**
+     * The email of the user who placed the order.
+     */
+    email?: string;
+
+    /**
+     * The unique identifier of the product in the order.
+     */
+    products?: Types.ObjectId[];
+
+    /**
+     * The deviceId (if any) associated with the order.
+     * Can be a robot
+     */
+    deviceId?: Types.ObjectId;
+
+    /**
+     * The total amount of the order.
+     */
+    totalAmount: number;
+
+    /**
+     * The status of the order.
+     */
+    status: OrderStatus;
+  }
+
+  /**
    * Organization:
    * It is used to group users together in an organization (e.g. a company)
    */
@@ -438,7 +454,7 @@ declare namespace CTypes {
     /**
      * The domain associated with the organization.
      */
-    domain: string;
+    domain?: string;
 
     /**
      * An optional description of the organization.
@@ -456,14 +472,39 @@ declare namespace CTypes {
     country?: string;
 
     /**
-     * Array of task types allowed for the organization (optional).
+     * The state where the organization is located (optional).
      */
-    allowedTaskTypes?: TaskType[];
+    state?: string;
 
     /**
-     * An array of user IDs representing the members of the organization (optional).
+     * The city where the organization is located (optional).
      */
-    members?: Types.ObjectId[];
+    city?: string;
+
+    /**
+     * The address of the organization (optional).
+     */
+    address?: string;
+
+    /**
+     * Array of task types allowed for the organization (optional).
+     */
+    defaultAllowedTaskTypes?: TaskType[];
+
+    /**
+     * The number of members in the organization (optional).
+     */
+    membersCount?: number;
+
+    /**
+     * The maximum number of members allowed in the organization (optional).
+     */
+    memberLimitReached?: boolean;
+
+    /**
+     * The unique identifier of the owner of the organization (optional).
+     */
+    owner?: Types.ObjectId;
 
     /**
      * The type of organization (optional).
@@ -471,150 +512,91 @@ declare namespace CTypes {
      * For example, one can be a principal organization while another can be a subsidiary.
      */
     type?: OrganizationType;
-
-    /**
-     * The type of subscription the organization has (optional).
-     */
-    subscriptionType?: SubscriptionType;
-  }
-
-  /**
-   * Represents a simplified organization object for representation purposes.
-   */
-  export interface OrganizationRepInterface extends IMongooseObjectExt {
-    /**
-     * The unique identifier of the organization.
-     */
-    id: string;
-
-    /**
-     * The domain associated with the organization.
-     */
-    domain: string;
-
-    /**
-     * The name of the organization.
-     */
-    name: string;
-
-    /**
-     * Array of task types allowed for the organization (optional).
-     */
-    allowedTaskTypes?: TaskType[];
-
-    /**
-     * The type of organization (optional).
-     */
-    type?: OrganizationType;
-
-    /**
-     * The URL or path to the image associated with the organization (optional).
-     */
-    image?: string;
-  }
-
-  /**
-   * Represents an organization object for events with additional information.
-   */
-  export interface OrganizationEventInterface {
-    /**
-     * The unique identifier of the organization.
-     */
-    id: string;
-
-    /**
-     * The name of the organization.
-     */
-    name: string;
-
-    /**
-     * Array of task types allowed for the organization (optional).
-     */
-    allowedTaskTypes?: TaskType[];
-
-    /**
-     * The domain associated with the organization.
-     */
-    domain: string;
-
-    /**
-     * The type of organization (optional).
-     */
-    type?: OrganizationType;
-
-    /**
-     * The URL or path to the image associated with the organization (optional).
-     */
-    image?: string;
-
-    /**
-     * The version number of the organization event.
-     */
-    version: number;
   }
 
   /**
    * Payment
    */
   export interface PaymentInterface extends IMongooseObjectExt {
-    // Ref to Customer Model
-    customer: Types.ObjectId;
-    accountId: string;
-    amount: number;
-    currency: string;
-    status: PaymentStatus;
-    transactionId?: string;
+    /**
+     * The unique identifier of the user making the payment.
+     * The organization is already known from the user.
+     */
+    user?: Types.ObjectId;
+
+    /**
+     * If payment is not from a user who is registered in the system
+     * then the user must be a transient user.
+     */
+    transientUser?: Types.ObjectId;
+
+    /**
+     * The amount of the payment.
+     */
+    amount?: number;
+
+    /**
+     * The currency of the payment.
+     */
+    currency?: string;
+
+    /**
+     * The status of the payment.
+     */
+    status?: PaymentStatus;
+
+    /**
+     * The method of payment.
+     */
     paymentMethod?: PaymentMethod; // Can be "card" or "wallet"
+
+    /**
+     * Whether the user is subscribed to a plan or not.
+     */
     isSubscribed?: boolean;
+
+    /**
+     * A description of the payment (optional).
+     */
     description?: string;
-    subscriptionPlan?: SubscriptionType; // Can be "monthly" or "yearly"
-  }
 
-  export interface PaymentRepInterface extends IMongooseObjectExt {
-    id: string;
-    // Ref to Customer Model
-    customer: Types.ObjectId;
-    status: PaymentStatus;
-    description?: string;
-    subscriptionPlan?: SubscriptionType; // Can be "monthly" or "yearly"
-  }
+    /**
+     * If the payment is from stripe, this is the stripe payment intent id.
+     */
+    stripeId?: Types.ObjectId;
 
-  export interface PaymentEventInterface extends PaymentRepInterface {
-    version: number;
-  }
+    /**
+     * The type of subscription the user has (optional).
+     */
+    subscriptionType?: SubscriptionType;
 
-  /**
-   * Product:
-   */
-  export interface ProductInterface extends IMongooseObjectExt {
-    name: string;
-    type: string;
-    quantity: number;
-    agent: Types.ObjectId;
-    price: number;
-    discountType: string;
-    discount: number;
-    category: Types.ObjectId;
-    image: string;
-    vendor: Types.ObjectId;
-    description?: string;
-  }
+    /**
+     * The tier of subscription the user has (optional).
+     */
+    subscriptionTier?: SubscriptionTier;
 
-  export interface ProductRepInterface extends IMongooseObjectExt {
-    id: string;
-    name: string;
-    price: number;
-    description: string;
-    image?: string;
-  }
+    /**
+     * A boolean to tell if the user wants a
+     * change of plan
+     */
+    requestSubscriptionChange?: boolean;
 
-  export interface ProductEventInterface {
-    id: string;
-    name: string;
-    price: number;
-    description: string;
-    image?: string;
-    version: number;
+    /**
+     * Organization to which the payment is made to. (optional)
+     * Let's say a customer is paying for a service for which the device that
+     * was used belongs to an organization, then the payment is made to the organization
+     */
+    organizationId?: Types.ObjectId;
+
+    /**
+     * The type of subscription the user wants to change to
+     */
+    subscriptionChangeType?: SubscriptionType;
+
+    /**
+     *  The tier of subscription the user wants to change to
+     */
+    subscriptionChangeTier?: SubscriptionTier;
   }
 
   /**
@@ -677,31 +659,6 @@ declare namespace CTypes {
      * Additional data associated with the robot (optional).
      */
     data?: any;
-  }
-
-  /**
-   * Represents a state tracker for a robot, indicating its availability and status.
-   */
-  export interface RobotStateTrackerInterface extends IMongooseObjectExt {
-    /**
-     * The date and time when the robot is marked as unavailable (optional).
-     */
-    unavailable?: Date;
-
-    /**
-     * The date and time when the robot is in a running state (optional).
-     */
-    running?: Date;
-
-    /**
-     * The date and time when the robot has failed (optional).
-     */
-    failed?: Date;
-
-    /**
-     * The date and time when the robot is marked as available (optional).
-     */
-    available?: Date;
   }
 
   // You can generate doc like this for an interface
@@ -789,6 +746,11 @@ declare namespace CTypes {
     zone?: Types.ObjectId;
 
     /**
+     * The organization to which the robot belongs (optional).
+     */
+    organizationId?: Types.ObjectId;
+
+    /**
      * The last recorded geographical location of the robot (optional).
      */
     lastRecordedLocation?: mongoose.Schema.Types.Point & Point;
@@ -801,7 +763,10 @@ declare namespace CTypes {
     /**
      * The unique identifier of the state tracker associated with the robot (optional).
      */
-    stateTracker?: Types.ObjectId;
+    stateTracker?: {
+      currentStatus: RobotStates;
+      startedAt: Date;
+    };
   }
 
   /**
@@ -968,21 +933,6 @@ declare namespace CTypes {
   }
 
   /**
-   * Represents an itinerary type used for defining start and end points.
-   */
-  export type ItineraryType = {
-    /**
-     * The geographical point representing the start of the itinerary.
-     */
-    start: mongoose.Schema.Types.Point & Point;
-
-    /**
-     * The geographical point representing the end of the itinerary.
-     */
-    end: mongoose.Schema.Types.Point & Point;
-  };
-
-  /**
    * Represents a setting used to store application configurations.
    * @remarks This interface is used to store various settings for the application.
    */
@@ -996,6 +946,11 @@ declare namespace CTypes {
      * The value associated with the setting.
      */
     value: string;
+
+    /**
+     * The organization to which the setting belongs (optional).
+     */
+    organizationId?: Types.ObjectId;
 
     /**
      * An optional description of the setting.
@@ -1054,13 +1009,55 @@ declare namespace CTypes {
     extends SimulationCategoryInterface {}
 
   export interface SimulationInterface extends IMongooseObjectExt {
+    /**
+     * Name of the simulation.
+     */
     name: string;
+
+    /**
+     * The image of the simulation.
+     */
     image?: string;
+
+    /**
+     * Description of the simulation.
+     */
     description?: string;
+
+    /**
+     * The ID of the organization to which the simulation belongs.
+     */
+    organizationId: Types.ObjectId;
+
+    /**
+     * The job definition of the simulation.
+     * @desc A job definition is a blueprint for a job that
+     * specifies parameters for jobs that run on AWS Batch.
+     */
     jobDefinition: string;
+
+    /**
+     * The job queue of the simulation.
+     * @desc A job queue is a collection of jobs with the same job priority.
+     */
     jobQueue: string;
+
+    /**
+     * The template URL of the simulation.
+     * @desc The URL of the simulation template.
+     */
     templateURL: string;
+
+    /**
+     * The role of the simulation.
+     * @desc The role associated with the simulation.
+     */
     role: string;
+
+    /**
+     * The region of the simulation.
+     * @desc The region where the simulation is located.
+     */
     region: string;
   }
 
@@ -1166,24 +1163,32 @@ declare namespace CTypes {
     version: number;
   }
 
+  export type DeliveryType = "indoor" | "outdoor";
+
   /**
    * Interface representing a Task Delivery.
    */
   export interface TaskDeliveryInterface extends IMongooseObjectExt {
     /**
-     * Reference to a Product.
+     * Reference to the order.
      */
-    product?: Types.ObjectId;
+    order?: Types.ObjectId;
 
-    /**
-     * Reference to a Vendor.
-     */
-    vendor?: Types.ObjectId;
+    deliveryType?: DeliveryType;
 
     /**
      * Delivery Attributes
      */
-    itinerary: ItineraryType;
+    itinerary?: {
+      from: {
+        lat: number;
+        lng: number;
+      };
+      to: {
+        lat: number;
+        lng: number;
+      };
+    };
   }
 
   /**
@@ -1234,6 +1239,11 @@ declare namespace CTypes {
      * Inspection Attributes
      */
     itinerary: ItineraryType;
+
+    /**
+     * Choose a mission for the flight task.
+     */
+    mission?: Types.ObjectId;
   }
 
   /**
@@ -1267,79 +1277,45 @@ declare namespace CTypes {
   }
 
   /**
-   * Interface representing a Task Survey.
+   * Interface representing a Task Flight.
    */
-  export interface TaskSurveyInterface extends IMongooseObjectExt {
+  export interface TaskFlightInterface extends IMongooseObjectExt {
     /**
-     * Name of the survey task.
+     * Name of the flight task.
      */
     name: string;
 
     /**
-     * Description of the survey task.
+     * Description of the flight task.
      */
     description?: string;
 
     /**
-     * Area to be surveyed (as a polygon).
+     * Choose a mission for the flight task.
      */
-    area?: mongoose.Schema.Types.Polygon;
+    mission?: Types.ObjectId;
+  }
+
+  export interface MissionInterface extends IMongooseObjectExt {
+    /**
+     * Name of the mission. Must be unique.
+     */
+    reference: string;
+    /**
+     * Type of the mission.
+     */
+    type: ItineraryType;
 
     /**
-     * Zone reference for the survey task.
+     * Zone reference for the mission.
      */
-    zone?: Types.ObjectId;
+    zone: Types.ObjectId;
   }
 
   /**
    * Interface representing a Task Custom.
    */
   export interface TaskCustomInterface extends IMongooseObjectExt {}
-
-  /**
-   * Interface representing a Task Status Tracker.
-   */
-  export interface TaskStatusTracker extends IMongooseObjectExt {
-    /**
-     * Timestamp when the task was accepted.
-     */
-    acceptedAt?: Date;
-
-    /**
-     * Timestamp when the task started running.
-     */
-    runningAt?: Date;
-
-    /**
-     * Timestamp when the task arrived.
-     */
-    arrivedAt?: Date;
-
-    /**
-     * Timestamp when the task was in processing state.
-     */
-    processingAt?: Date;
-
-    /**
-     * Timestamp when the task was cancelled.
-     */
-    cancelledAt?: Date;
-
-    /**
-     * Timestamp when the task payment failed.
-     */
-    paymentFailedAt?: Date;
-
-    /**
-     * Timestamp when the task was refunded.
-     */
-    refundedAt?: Date;
-
-    /**
-     * Timestamp when the task was completed.
-     */
-    completedAt?: Date;
-  }
 
   /**
    * Interface representing a Task.
@@ -1359,11 +1335,6 @@ declare namespace CTypes {
      * Code to deactivate or open the robot.
      */
     code?: number;
-
-    /**
-     * Count ID for the number of tasks with padded numbers.
-     */
-    taskId: string;
 
     /**
      * Reference to an Operator model.
@@ -1389,7 +1360,10 @@ declare namespace CTypes {
      * Reference to a Task Status Tracker.
      * This is used to track the status of the task.
      */
-    statusTracker?: Types.ObjectId;
+    statusTracker?: {
+      currentStatus: TaskStatus;
+      startedAt: Date;
+    };
 
     /**
      * Duration of the task.
@@ -1437,14 +1411,19 @@ declare namespace CTypes {
     simulationJob?: Types.ObjectId;
 
     /**
+     * The organization to which the robot belongs (optional).
+     */
+    organizationId?: Types.ObjectId;
+
+    /**
      * Reference to an Inspection task.
      */
     inspection?: Types.ObjectId;
 
     /**
-     * Reference to a Survey task.
+     * Reference to a Flight task.
      */
-    survey?: Types.ObjectId;
+    flight?: Types.ObjectId;
 
     /**
      * Reference to a Custom task.
@@ -1478,11 +1457,6 @@ declare namespace CTypes {
     code?: number;
 
     /**
-     * Count ID for the number of tasks with padded numbers.
-     */
-    taskId: string;
-
-    /**
      * Status of the task.
      */
     status: TaskStatus;
@@ -1491,6 +1465,11 @@ declare namespace CTypes {
      * Reference to a Robot model.
      */
     robot?: Types.ObjectId;
+
+    /**
+     * Reference to a Simulation job task.
+     */
+    simulationJob?: Types.ObjectId;
 
     /**
      * Reference to an Operator model.
@@ -1529,11 +1508,6 @@ declare namespace CTypes {
     code?: number;
 
     /**
-     * Count ID for the number of tasks with padded numbers.
-     */
-    taskId: string;
-
-    /**
      * Status of the task.
      */
     status: TaskStatus;
@@ -1547,6 +1521,11 @@ declare namespace CTypes {
      * Reference to an Operator model.
      */
     operator?: Types.ObjectId;
+
+    /**
+     * Reference to a Simulation job task.
+     */
+    simulationJob?: Types.ObjectId;
 
     /**
      * Reference to a Customer model.
@@ -1574,14 +1553,39 @@ declare namespace CTypes {
     type: TaskType;
 
     /**
-     * Count ID for the number of tasks with padded numbers.
-     */
-    taskId: string;
-
-    /**
      * Version number of the task.
      */
     version: number;
+  }
+
+  /**
+   * URL SHORTENER INTERFACE
+   */
+  export interface UrlShortenerInterface extends IMongooseObjectExt {
+    /**
+     * The original URL.
+     */
+    longUrl: string;
+
+    /**
+     * The short appended unique identifier.
+     */
+    shortKey: string;
+
+    /**
+     * The domain associated with the URL.
+     */
+    domain?: string;
+
+    /**
+     *  Indicates whether the URL is permanent.
+     */
+    permanent?: boolean;
+
+    /**
+     * The duration of the URL. (in days)
+     */
+    duration?: number;
   }
 
   /**
@@ -1685,17 +1689,31 @@ declare namespace CTypes {
     /**
      * The geographical position of the user (optional).
      */
-    position?: mongoose.Schema.Types.Point & Point;
+    position?: [number, number];
 
     /**
      * The organization to which the user belongs (optional).
      */
-    organization?: Types.ObjectId;
+    ownedOrganizationId?: Types.ObjectId;
 
     /**
-     * The type of subscription the user has (optional).
+     * The current organization that the user is connected to (optional).
      */
-    subscriptionType?: SubscriptionType;
+    currentOrganizationId?: Types.ObjectId;
+
+    /**
+     * Roles in the organization.
+     */
+    rolesInOrganization?: {
+      organizationId: Types.ObjectId;
+      roles: UserRole[];
+      allowedTaskTypes?: TaskType[] | string[];
+    }[];
+
+    /**
+     * The payment object associated with the user (optional).
+     */
+    paymentId?: Types.ObjectId;
 
     /**
      * Indicates whether the user is currently online (optional).
@@ -1755,7 +1773,7 @@ declare namespace CTypes {
     /**
      * The organization to which the user belongs (optional).
      */
-    organization?: Types.ObjectId;
+    organizationId?: Types.ObjectId;
 
     /**
      * The type of OAuth authentication used by the user (optional).
@@ -1776,6 +1794,11 @@ declare namespace CTypes {
      * The type of subscription the user has (optional).
      */
     subscriptionType?: SubscriptionType;
+
+    /**
+     * The tier of subscription the user has (optional).
+     */
+    subscriptionTier?: SubscriptionTier;
 
     /**
      * Indicates whether the user is currently online (optional).
@@ -1850,7 +1873,7 @@ declare namespace CTypes {
     /**
      * The organization to which the user belongs (optional).
      */
-    organization?: Types.ObjectId;
+    organizationId?: Types.ObjectId;
 
     /**
      * The type of OAuth authentication used by the user (optional).
@@ -1862,6 +1885,10 @@ declare namespace CTypes {
      */
     subscriptionType?: SubscriptionType;
 
+    /**
+     * The tier of subscription the user has (optional).
+     */
+    subscriptionTier?: SubscriptionTier;
     /**
      * Indicates whether the user is currently online (optional).
      */
@@ -1875,7 +1902,7 @@ declare namespace CTypes {
     /**
      * The type of identity document being requested (optional).
      */
-    identityType?: IDType;
+    identityType?: "nationalId" | "passport" | "driverLicense";
 
     /**
      * The URL of the user's identity document photo (optional).
@@ -1894,56 +1921,6 @@ declare namespace CTypes {
   }
 
   /**
-   * Vendor:
-   */
-  export interface VendorInterface extends IMongooseObjectExt {
-    name: string;
-    businessField: string;
-    vaxOrTax: number;
-    address: string;
-    maxDeliveryTime: number;
-    minDeliveryTime: number;
-    coverImage: string;
-    logo: string;
-    zone: Types.ObjectId;
-    location: mongoose.Schema.Types.Point & Point;
-    owner: Types.ObjectId;
-  }
-
-  export interface VendorRepInterface extends IMongooseObjectExt {
-    id: string;
-    name: string;
-    address: string;
-    logo: string;
-  }
-
-  export interface VendorEventInterface {
-    id: string;
-    name: string;
-    address: string;
-    logo: string;
-    version: number;
-  }
-
-  /**
-   * Represents an area with a name and a location.
-   */
-  export interface Area {
-    /**
-     * The name of the area.
-     */
-    name: string;
-    /**
-     * The location of the area, represented as a nested array of coordinates.
-     */
-    location: [[[number, number]]];
-  }
-
-  /**
-   * Zone:
-   */
-
-  /**
    * Interface representing a geographic zone.
    * @interface
    */
@@ -1954,55 +1931,31 @@ declare namespace CTypes {
     country?: string;
     /** The name of the zone. */
     name: string;
-    /** The surface of the zone. */
+
+    type: ItineraryType;
+
+    /** The surface of the zone if it's an area. */
     surface?: number;
-    /** The area of the zone. */
-    area: Area;
-  }
 
-  /**
-   * Represents a zone object with additional properties.
-   * @interface
-   */
-  export interface ZoneRepInterface extends IMongooseObjectExt {
-    /** The unique identifier for the zone. */
-    id: string;
-    /** The name of the zone. */
-    name: string;
-    /** Only use the location property */
-    location: [[[number, number]]];
-    /** The country that the zone belongs to. */
-    country?: string;
-  }
-
-  /**
-   * Represents a zone event.
-   */
-  export interface ZoneEventInterface {
-    /**
-     * The unique identifier of the zone event.
-     */
-    id: string;
+    /** The distance of the zone if it's a line. */
+    distance?: number;
 
     /**
-     * The name of the zone event.
+     * The organization to which the robot belongs (optional).
      */
-    name: string;
+    organizationId?: Types.ObjectId;
 
     /**
-     * Only use the location property if the zone event is a polygon.
+     * The geographical position of the zone,
+     * specified by longitude and latitude (optional).
      */
-    location: [[[number, number]]];
+    zoneCenter?: [number, number];
 
     /**
-     * The country where the zone event takes place.
+     * Based on the type of the zone, the location can be an Area or way points,
+     * or a Point.
      */
-    country?: string;
-
-    /**
-     * The version of the zone event.
-     */
-    version: number;
+    location: mongoose.Schema.Types.Mixed;
   }
 }
 

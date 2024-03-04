@@ -38,6 +38,16 @@ export enum TaskStatus {
   Started = "started",
   /** When the operator is driving the robot in charge of executing the task. */
   Running = "running",
+
+  /** When the task is in simulation mode. */
+  SimulationStarting = "simulation:starting",
+  SimulationRunning = "simulation:running",
+  SimulationCompleted = "simulation:completed",
+  SimulationFailed = "simulation:failed",
+  SimulationTerminated = "simulation:terminated",
+  SimulationTerminating = "simulation:terminating",
+  SimulationCanceled = "simulation:canceled",
+
   /** When the robot has reached the ending point or has finished the task duration. */
   Arrived = "arrived",
   /** If the task has been canceled before reaching the final goal. */
@@ -68,8 +78,8 @@ export enum TaskType {
   Inspection = "inspection",
   /** Run a simulation. */
   Simulation = "simulation",
-  /** If the task is for a survey. */
-  Survey = "survey",
+  /** If the task is for a flight. */
+  Flight = "flight",
   /** If the task is none of the above (delivery, cleaning, ...). */
   Custom = "custom",
 }
@@ -78,6 +88,7 @@ export enum TaskType {
  * Enumerates the possible roles for users.
  */
 export enum UserRole {
+  Invited = "invited",
   /** This is the most basic role that any user that creates an account through the API will have. This role is for the robot. */
   Robot = "robot",
   /** Basic operations are allowed: Read & Create Task. */
@@ -190,6 +201,13 @@ export enum OperatorStatus {
   Revoked = "Revoked",
 }
 
+export enum OrderStatus {
+  Created = "created",
+  Pending = "pending",
+  Succeeded = "succeeded",
+  Failed = "failed",
+}
+
 /**
  * Enumerates the possible states of a simulation job.
  */
@@ -198,10 +216,16 @@ export enum SimulationJobState {
   Init = "init",
   /** The simulation job is pending and waiting to start. */
   Pending = "pending",
+  /** The simulation job is starting. */
+  Starting = "starting",
   /** The simulation job is currently running. */
   Running = "running",
   /** The simulation job has been terminated. */
   Terminated = "terminated",
+  /** The simulation job has been canceled. */
+  Canceled = "canceled",
+  /** The simulation job is terminating */
+  Terminating = "terminating",
   /** The simulation job has been successfully completed. */
   Completed = "completed",
   /** The simulation job has failed to execute. */
@@ -216,6 +240,8 @@ export enum RoboticPlatform {
   FreedomRobotics = "freedomRobotics",
   /** The robot is connected to AWS Cloud IoT platform. */
   AWS = "aws",
+  // or
+  AWSCloudIoT = "awsCloudIoT",
   /** The robot is connected to another platform not specified here. */
   Other = "other",
 }
@@ -223,15 +249,16 @@ export enum RoboticPlatform {
 /**
  * Enumerates the possible subscription types for a service.
  */
-export enum SubscriptionType {
-  /** Free subscription type. */
+export enum SubscriptionTier {
   Free = "free",
-  /** Monthly subscription type. */
+  // Professional = "professional",
+  Enterprise = "enterprise",
+}
+
+export enum SubscriptionType {
   Monthly = "monthly",
-  /** Yearly subscription type. */
-  Yearly = "yearly",
-  /** Pay-as-you-go subscription type. */
-  asYouGo = "asYouGo",
+  Annually = "annually",
+  AsYouGo = "asYouGo",
 }
 
 export enum PaymentStatus {
@@ -279,6 +306,7 @@ export enum UserMembershipStatus {
   Pending = "pending",
   Approved = "approved",
   Denied = "denied",
+  Expired = "expired",
 }
 
 export enum Services {
@@ -291,6 +319,11 @@ export enum Services {
   Customer = "customer",
   Expiration = "expiration",
   Message = "message",
+  Zone = "zone",
+  User = "user",
+  Organization = "organization",
+  Subscription = "subscription",
+  SimulationJob = "simulationJob",
 }
 
 /**
@@ -302,27 +335,28 @@ export enum RobotCategory {
   /**
    * Drones (Unmanned Aerial Vehicles)
    */
-  Drone = "drone",
+  UAV = "uav",
   /**
-   * Industrial Robots
+   * (Unmanned Ground Vehicles)
    */
-  Industrial = "industrial",
+  UGV = "ugv",
   /**
-   * Caytu Robots
+   * For Simulation Robots
    */
-  Caytubot = "caytuBot",
-  /**
-   * Underwater Robots (e.g. OpenROV, SeaDrone, Bluefin Robotics)
-   */
-  Underwater = "underwater",
-  /**
-   * Autonomous Underwater Vehicles (AUVs)
-   */
-  Vehicle = "vehicle",
+  Simulation = "sim",
   /**
    * Telepresence Robots
    */
   Telepresence = "telepresence",
+  /**
+   * Senelec Robot
+   */
+  Senelec = "senelec",
+  /**
+   * Forklifts
+   * (e.g. robots that can be controlled remotely)
+   */
+  Forklift = "forklift",
 }
 
 /**
@@ -345,4 +379,27 @@ export enum RobotType {
    * Bared robots
    */
   Bared = "bared",
+}
+
+/**
+ * @description
+ * This enum is used to define different types of missions
+ * that can be executed by a robot to complete a task.
+ */
+export enum ItineraryType {
+  /**
+   * Multi-Point Mission Type
+   */
+  Waypoint = "waypoint",
+
+  /**
+   * Single-Point Mission Type
+   */
+  Point = "point",
+
+  /**
+   * A surface area mission type
+   * (e.g. a cleaning robot cleaning a surface area)
+   */
+  Area = "area",
 }

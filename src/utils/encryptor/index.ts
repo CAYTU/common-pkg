@@ -10,7 +10,13 @@ export interface UserPayload extends JwtPayload {
   username: string;
   roles?: UserRole[];
   allowedTaskTypes?: TaskType[] | string[];
-  organizationName?: string;
+  currentOrganizationId?: string;
+  ownedOrganizationId?: string;
+  rolesInCurrentOrganization?: {
+    organizationId: string;
+    roles: UserRole[];
+    allowedTaskTypes?: TaskType[] | string[];
+  };
 }
 
 export const encryptor = {

@@ -1,6 +1,6 @@
 {
     "name": "@caytu/shared",
-    "version": "1.2.2",
+    "version": "2.0.37",
     "description": "Shared Packages",
     "main": "./build/index.js",
     "types": "./build/index.d.ts",
@@ -39,7 +39,6 @@
         "jsonwebtoken": "^9.0.0",
         "mongoose": "^6.6.2",
         "mongoose-geojson-schema": "^2.2.3",
-        "nats": "^2.16.0",
         "node-nats-streaming": "^0.3.2"
     }
 }

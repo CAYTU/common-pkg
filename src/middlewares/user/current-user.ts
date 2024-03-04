@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler";
 import { encryptor, UserPayload } from "../../utils/encryptor";
 import { getCookie } from "../../utils/cookies";
+import { NotAuthorizedErr } from "../../errors/not-authorized";
 
 export type AccessGrantType = "allow" | "deny" | "prompt";
 
@@ -35,7 +36,7 @@ export const currentUser = asyncHandler(
       !getCookie(req, "c_aToken")
     ) {
       // No access token found, continue to the next middleware or route handler
-      return next();
+      throw new NotAuthorizedErr("Access denied. Please log in.");
     }
 
     // Get the access token
@@ -45,7 +46,7 @@ export const currentUser = asyncHandler(
     if (!token) {
       // No access token found, continue to the next middleware or route handler
       console.error("No access token found");
-      return next();
+      throw new NotAuthorizedErr("Access denied. No token found.");
     }
 
     // Check if the access token is valid

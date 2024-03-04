@@ -47,6 +47,12 @@ export enum Subjects {
   UserMembershipInvitation = "user:membership:invitation",
   UserMembershipInvitationAccepted = "user:membership:invitation:accepted",
   UserMembershipInvitationRejected = "user:membership:invitation:rejected",
+
+  // Transient User
+  TransientUserCreated = "transient:user:created",
+  TransientUserUpdated = "transient:user:updated",
+  TransientUserDeleted = "transient:user:deleted",
+  
   // Zone Subjects
   ZoneCreated = "zone:created",
   ZoneUpdated = "zone:updated",
@@ -67,6 +73,7 @@ export enum Subjects {
   SimulationJobUpdated = "simulationjob:updated",
   SimulationJobDeleted = "simulationjob:deleted",
   SimulationJobSendCreds = "simulationjob:send:creds",
+  SimulationJobTerminating = "simulationjob:terminating",
   // Operators Subjects
   OperatorCreated = "operator:created",
   OperatorUpdated = "operator:updated",
@@ -95,8 +102,21 @@ export enum Subjects {
   OrganizationCreated = "organization:created",
   OrganizationUpdated = "organization:updated",
   OrganizationDeleted = "organization:deleted",
+  OrganizationMemberInvited = "organization:member:invited",
+  OrganizationMemberInviteExpired = "organization:member:invite:expired",
   OrganizationMemberAdded = "organization:member:added",
   OrganizationMemberRemoved = "organization:member:removed",
+  OrganizationMemberRoleUpdated = "organization:member:role:updated",
+  OrganizationMemberStatusUpdated = "organization:member:status:updated",
+  OrganizationMemberInviteCanceled = "organization:member:invite:canceled",
+  OrganizationMemberInviteAccepted = "organization:member:invite:accepted",
+  OrganizationMemberInviteRejected = "organization:member:invite:rejected",
+  OrganizationMemberInviteResend = "organization:member:invite:resend",
+
+  // Order Subjects
+  OrderCreated = "order:created",
+  OrderUpdated = "order:updated",
+  OrderDeleted = "order:deleted",
 
   // Billing
   BillingCreated = "billing:created",
@@ -109,6 +129,7 @@ export enum Subjects {
   SubscriptionCreated = "subscription:created",
   SubscriptionUpdated = "subscription:updated",
   SubscriptionDeleted = "subscription:deleted",
+  SubscriptionChangeRequest = "subscription:change:request",
   SubscriptionActivated = "subscription:activated",
   SubscriptionDeactivated = "subscription:deactivated",
   SubscriptionRenewed = "subscription:renewed",
@@ -127,4 +148,9 @@ export enum Subjects {
   SettingsCreated = "settings:created",
   SettingsUpdated = "settings:updated",
   SettingsDeleted = "settings:deleted",
+
+  // URL Shortener Expiration
+  UrlExpirationCreated = "url:expiration:created",
+  UrlExpirationUpdated = "url:expiration:updated",
+  UrlExpirationDeleted = "url:expiration:deleted",
 }

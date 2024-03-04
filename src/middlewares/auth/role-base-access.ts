@@ -11,41 +11,21 @@ const RbaUserACL = {
    * Middleware that allows access for users with UserRole.Create, UserRole.All, or UserRole.Admin roles.
    * Throws a ForbiddenErr if access is denied.
    */
+
+  // Helper function to check platform and organization level roles
+  hasRequiredRole: (user: any, roles: UserRole[]) => {
+    const platformRoles = user?.roles || [];
+    const orgRoles = user?.rolesInCurrentOrganization?.roles || [];
+    return roles.some(role => platformRoles.includes(role) || orgRoles.includes(role));
+  },
   canCreate: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-      // Check if the user is connected to their own organization
-      const connectedToOwnOrganization =
-        !req.currentUser?.currentOrganizationId ||
-        req.currentUser.currentOrganizationId ===
-          req.currentUser.ownedOrganizationId;
-
-      const userRoles = connectedToOwnOrganization
-        ? req.currentUser?.roles
-        : req.currentUser?.rolesInCurrentOrganization?.roles;
-
-      let hasSufficientPermissions = false;
-      let lackingRole: string | undefined;
-
-      if (userRoles) {
-        for (const role of userRoles) {
-          if (
-            [UserRole.Create, UserRole.All, UserRole.SuperAdmin].includes(role)
-          ) {
-            hasSufficientPermissions = true;
-            break;
-          } else {
-            lackingRole = role;
-          }
-        }
-      }
-
-      if (hasSufficientPermissions) {
+        
+      if (RbaUserACL.hasRequiredRole(req.currentUser, [UserRole.Create, UserRole.All, UserRole.SuperAdmin])) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${
-            lackingRole ?? "user"
-          } to perform this operation.`
+          `You are not allowed to perform this operation.`
         );
       }
     }
@@ -57,39 +37,12 @@ const RbaUserACL = {
    */
   canEdit: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-      // Check if the user is connected to their own organization
-      const connectedToOwnOrganization =
-        !req.currentUser?.currentOrganizationId ||
-        req.currentUser.currentOrganizationId ===
-          req.currentUser.ownedOrganizationId;
 
-      const userRoles = connectedToOwnOrganization
-        ? req.currentUser?.roles
-        : req.currentUser?.rolesInCurrentOrganization?.roles;
-
-      let hasSufficientPermissions = false;
-      let lackingRole: string | undefined;
-
-      if (userRoles) {
-        for (const role of userRoles) {
-          if (
-            [UserRole.All, UserRole.Update, UserRole.SuperAdmin].includes(role)
-          ) {
-            hasSufficientPermissions = true;
-            break;
-          } else {
-            lackingRole = role;
-          }
-        }
-      }
-
-      if (hasSufficientPermissions) {
+      if (RbaUserACL.hasRequiredRole(req.currentUser, [UserRole.All, UserRole.Update, UserRole.SuperAdmin])) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${
-            lackingRole ?? "user"
-          } to perform this operation.`
+          `You are not allowed to perform this operation.`
         );
       }
     }
@@ -101,39 +54,12 @@ const RbaUserACL = {
    */
   canDelete: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-      // Check if the user is connected to their own organization
-      const connectedToOwnOrganization =
-        !req.currentUser?.currentOrganizationId ||
-        req.currentUser.currentOrganizationId ===
-          req.currentUser.ownedOrganizationId;
 
-      const userRoles = connectedToOwnOrganization
-        ? req.currentUser?.roles
-        : req.currentUser?.rolesInCurrentOrganization?.roles;
-
-      let hasSufficientPermissions = false;
-      let lackingRole: string | undefined;
-
-      if (userRoles) {
-        for (const role of userRoles) {
-          if (
-            [UserRole.All, UserRole.Delete, UserRole.SuperAdmin].includes(role)
-          ) {
-            hasSufficientPermissions = true;
-            break;
-          } else {
-            lackingRole = role;
-          }
-        }
-      }
-
-      if (hasSufficientPermissions) {
+      if (RbaUserACL.hasRequiredRole(req.currentUser, [UserRole.All, UserRole.Delete, UserRole.SuperAdmin])) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${
-            lackingRole ?? "user"
-          } to perform this operation.`
+          `You are not allowed to perform this operation.`
         );
       }
     }
@@ -145,52 +71,27 @@ const RbaUserACL = {
    */
   canReadOnly: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-      // Check if the user is connected to their own organization
-      const connectedToOwnOrganization =
-        !req.currentUser?.currentOrganizationId ||
-        req.currentUser.currentOrganizationId ===
-          req.currentUser.ownedOrganizationId;
 
-      const userRoles = connectedToOwnOrganization
-        ? req.currentUser?.roles
-        : req.currentUser?.rolesInCurrentOrganization?.roles;
-
-      let hasSufficientPermissions = false;
-      let lackingRole: string | undefined;
-
-      if (userRoles) {
-        for (const role of userRoles) {
-          if (
-            [
-              UserRole.ReadOnly,
-              UserRole.All,
-              UserRole.Admin,
-
-              // By the read-only role is attributed to all basic roles
-              UserRole.Customer,
-              UserRole.Operator,
-              UserRole.Developer,
-              UserRole.Robot,
-              UserRole.Invited,
-
-              UserRole.SuperAdmin,
-            ].includes(role)
-          ) {
-            hasSufficientPermissions = true;
-            break;
-          } else {
-            lackingRole = role;
-          }
-        }
-      }
-
-      if (hasSufficientPermissions) {
+      if (
+        RbaUserACL.hasRequiredRole(
+          req.currentUser,
+          [
+            UserRole.ReadOnly,
+            UserRole.All,
+            UserRole.Admin,
+            UserRole.Customer,
+            UserRole.Operator,
+            UserRole.Developer,
+            UserRole.Robot,
+            UserRole.Invited,
+            UserRole.SuperAdmin,
+          ]
+        )
+      ) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${
-            lackingRole ?? "user"
-          } to perform this operation.`
+          `You are not allowed to perform this operation.`
         );
       }
     }
@@ -202,45 +103,23 @@ const RbaUserACL = {
    */
   isCustomer: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-      // Check if the user is connected to their own organization
-      const connectedToOwnOrganization =
-        !req.currentUser?.currentOrganizationId ||
-        req.currentUser.currentOrganizationId ===
-          req.currentUser.ownedOrganizationId;
 
-      const userRoles = connectedToOwnOrganization
-        ? req.currentUser?.roles
-        : req.currentUser?.rolesInCurrentOrganization?.roles;
-
-      let hasSufficientPermissions = false;
-      let lackingRole: string | undefined;
-
-      if (userRoles) {
-        for (const role of userRoles) {
-          if (
-            [
-              UserRole.Customer,
-              UserRole.Admin,
-              UserRole.Operator,
-              UserRole.Developer,
-              UserRole.SuperAdmin,
-            ].includes(role)
-          ) {
-            hasSufficientPermissions = true;
-            break;
-          } else {
-            lackingRole = role;
-          }
-        }
-      }
-
-      if (hasSufficientPermissions) {
+      if (
+        RbaUserACL.hasRequiredRole(
+          req.currentUser,
+          [
+            UserRole.Customer,
+            UserRole.Admin,
+            UserRole.Operator,
+            UserRole.Developer,
+            UserRole.SuperAdmin,
+          ]
+        )
+      ) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${
-            lackingRole ?? "user"
-          } to perform this operation.`
+          `You are not allowed to perform this operation.`
         );
       }
     }
@@ -252,41 +131,12 @@ const RbaUserACL = {
    */
   isOperator: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-      // Check if the user is connected to their own organization
-      const connectedToOwnOrganization =
-        !req.currentUser?.currentOrganizationId ||
-        req.currentUser.currentOrganizationId ===
-          req.currentUser.ownedOrganizationId;
 
-      const userRoles = connectedToOwnOrganization
-        ? req.currentUser?.roles
-        : req.currentUser?.rolesInCurrentOrganization?.roles;
-
-      let hasSufficientPermissions = false;
-      let lackingRole: string | undefined;
-
-      if (userRoles) {
-        for (const role of userRoles) {
-          if (
-            [UserRole.Admin, UserRole.Operator, UserRole.SuperAdmin].includes(
-              role
-            )
-          ) {
-            hasSufficientPermissions = true;
-            break;
-          } else {
-            lackingRole = role;
-          }
-        }
-      }
-
-      if (hasSufficientPermissions) {
+      if (RbaUserACL.hasRequiredRole(req.currentUser, [UserRole.Admin, UserRole.Operator, UserRole.SuperAdmin])) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${
-            lackingRole ?? "user"
-          } to perform this operation.`
+          `You are not allowed to perform this operation.`
         );
       }
     }
@@ -298,37 +148,12 @@ const RbaUserACL = {
    */
   isAdmin: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-      // Check if the user is connected to their own organization
-      const connectedToOwnOrganization =
-        !req.currentUser?.currentOrganizationId ||
-        req.currentUser.currentOrganizationId ===
-          req.currentUser.ownedOrganizationId;
 
-      const userRoles = connectedToOwnOrganization
-        ? req.currentUser?.roles
-        : req.currentUser?.rolesInCurrentOrganization?.roles;
-
-      let hasSufficientPermissions = false;
-      let lackingRole: string | undefined;
-
-      if (userRoles) {
-        for (const role of userRoles) {
-          if ([UserRole.Admin, UserRole.SuperAdmin].includes(role)) {
-            hasSufficientPermissions = true;
-            break;
-          } else {
-            lackingRole = role;
-          }
-        }
-      }
-
-      if (hasSufficientPermissions) {
+      if (RbaUserACL.hasRequiredRole(req.currentUser, [UserRole.Admin, UserRole.SuperAdmin])) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${
-            lackingRole ?? "user"
-          } to perform this operation.`
+          `You are not allowed to perform this operation.`
         );
       }
     }
@@ -340,37 +165,12 @@ const RbaUserACL = {
    */
   isSuperAdmin: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-      // Check if the user is connected to their own organization
-      const connectedToOwnOrganization =
-        !req.currentUser?.currentOrganizationId ||
-        req.currentUser.currentOrganizationId ===
-          req.currentUser.ownedOrganizationId;
 
-      const userRoles = connectedToOwnOrganization
-        ? req.currentUser?.roles
-        : req.currentUser?.rolesInCurrentOrganization?.roles;
-
-      let hasSufficientPermissions = false;
-      let lackingRole: string | undefined;
-
-      if (userRoles) {
-        for (const role of userRoles) {
-          if ([UserRole.SuperAdmin].includes(role)) {
-            hasSufficientPermissions = true;
-            break;
-          } else {
-            lackingRole = role;
-          }
-        }
-      }
-
-      if (hasSufficientPermissions) {
+      if (RbaUserACL.hasRequiredRole(req.currentUser, [UserRole.SuperAdmin])) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${
-            lackingRole ?? "user"
-          } to perform this operation.`
+          `You are not allowed to perform this operation.`
         );
       }
     }
@@ -382,37 +182,12 @@ const RbaUserACL = {
    */
   isDeveloper: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-      // Check if the user is connected to their own organization
-      const connectedToOwnOrganization =
-        !req.currentUser?.currentOrganizationId ||
-        req.currentUser.currentOrganizationId ===
-          req.currentUser.ownedOrganizationId;
 
-      const userRoles = connectedToOwnOrganization
-        ? req.currentUser?.roles
-        : req.currentUser?.rolesInCurrentOrganization?.roles;
-
-      let hasSufficientPermissions = false;
-      let lackingRole: string | undefined;
-
-      if (userRoles) {
-        for (const role of userRoles) {
-          if ([UserRole.Developer, UserRole.SuperAdmin].includes(role)) {
-            hasSufficientPermissions = true;
-            break;
-          } else {
-            lackingRole = role;
-          }
-        }
-      }
-
-      if (hasSufficientPermissions) {
+      if (RbaUserACL.hasRequiredRole(req.currentUser, [UserRole.Developer, UserRole.SuperAdmin])) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as ${
-            lackingRole ?? "user"
-          } to perform this operation.`
+          `You are not allowed to perform this operation.`
         );
       }
     }
@@ -424,21 +199,12 @@ const RbaUserACL = {
    */
   isRobot: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-      // Check if the user is connected to their own organization
-      const connectedToOwnOrganization =
-        !req.currentUser?.currentOrganizationId ||
-        req.currentUser.currentOrganizationId ===
-          req.currentUser.ownedOrganizationId;
 
-      const userRoles = connectedToOwnOrganization
-        ? req.currentUser?.roles
-        : req.currentUser?.rolesInCurrentOrganization?.roles;
-
-      if (userRoles?.some((role) => [UserRole.Robot].includes(role))) {
+      if (RbaUserACL.hasRequiredRole(req.currentUser, [UserRole.Robot, UserRole.SuperAdmin])) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You do not have sufficient permissions as user to perform this operation.`
+          `You are not allowed to perform this operation.`
         );
       }
     }

@@ -397,6 +397,57 @@ declare namespace CTypes {
   }
 
   /**
+   * Product Interface:
+   * Defines the structure of a product model
+   */
+  export interface ProductInterface extends IMongooseObjectExt {
+    /**
+     * Name of the product
+     */
+    name: string;
+
+    /**
+     * Description of the product (optional)
+     */
+    description?: string;
+
+    /**
+     * Price of the product
+     */
+    price: number;
+
+    /**
+     * Keywords associated with the product (optional)
+     */
+    keywords?: string[];
+
+    /**
+     * Image URL of the product (optional)
+     */
+    imageUrl?: string;
+
+    /**
+     * Organization to which the product belongs (optional)
+     */
+    organizationId?: Types.ObjectId;
+
+    /**
+     * Category to which the product belongs (optional)
+     */
+    category?: string;
+
+    /**
+     * Tags associated with the product (optional)
+     */
+    tags?: string[];
+
+    /**
+     * Stock quantity of the product (optional)
+     */
+    stock?: number;
+  }
+
+  /**
    * Order:
    * A model to save user's orders
    */

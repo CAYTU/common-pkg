@@ -442,6 +442,11 @@ declare namespace CTypes {
     tags?: string[];
 
     /**
+     * Options associated with the product (optional)
+     * Must be an array of objects with dynamic properties
+     */
+    options?: any[];
+    /**
      * Stock quantity of the product (optional)
      */
     stock?: number;
@@ -477,6 +482,11 @@ declare namespace CTypes {
      * Can be a robot
      */
     deviceId?: Types.ObjectId;
+
+    /**
+     * The options associated with the order.
+     */
+    options?: any[];
 
     /**
      * The total amount of the order.
@@ -1351,6 +1361,12 @@ declare namespace CTypes {
      */
     mission?: Types.ObjectId;
   }
+
+  /**
+   * Interface representing a Telepresence Task 
+   */
+  export interface TaskTelepresenceInterface extends IMongooseObjectExt {}
+    
 
   export interface MissionInterface extends IMongooseObjectExt {
     /**

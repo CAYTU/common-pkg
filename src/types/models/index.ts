@@ -21,6 +21,7 @@ import {
   SubscriptionTier,
   ItineraryType,
   OrderStatus,
+  TelepresenceType,
 } from "../utils";
 
 declare namespace CTypes {
@@ -1363,10 +1364,48 @@ declare namespace CTypes {
   }
 
   /**
-   * Interface representing a Telepresence Task 
+   * Interface representing a Telepresence Task
    */
-  export interface TaskTelepresenceInterface extends IMongooseObjectExt {}
-    
+  export interface TaskTelepresenceInterface extends IMongooseObjectExt {
+    /**
+     * Name of the telepresence task.
+     */
+    name: string;
+
+    /**
+     * Connection link for the telepresence task.
+     */
+    connectionLink?: string;
+
+    /**
+     * Description of the telepresence task.
+     */
+    description?: string;
+
+    type: TelepresenceType;
+
+    /**
+     * Video data
+     */
+    videoData?: {
+      url: string;
+      duration: number;
+    };
+
+    /**
+     * Shop data
+     */
+    shopData?: {
+      shopId?: string;
+      shopName: string;
+      paymentLink?: string;
+    };
+
+    /**
+     * Sub-Task that can be performed by the robot
+     */
+    subTasks?: Types.ObjectId[];
+  }
 
   export interface MissionInterface extends IMongooseObjectExt {
     /**

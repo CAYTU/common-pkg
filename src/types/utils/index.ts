@@ -403,3 +403,13 @@ export enum ItineraryType {
    */
   Area = "area",
 }
+
+/**
+ * @description
+ * This enum is used to define the type of telepresence robot
+ * that is being used to execute a task.
+ */
+export enum TelepresenceType {
+  Video = "video",
+  Shop = "shop",
+}

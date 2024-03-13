@@ -813,9 +813,19 @@ declare namespace CTypes {
     zone?: Types.ObjectId;
 
     /**
-     * The organization to which the robot belongs (optional).
+     * The organization where the robot belongs.
      */
     organizationId?: Types.ObjectId;
+
+    /**
+     * Indicates whether the robot is public.
+     */
+    public?: boolean;
+
+    /**
+     * The organizations with which the robot is shared.
+     */
+    sharedWith?: Types.ObjectId[];
 
     /**
      * The last recorded geographical location of the robot (optional).
@@ -1092,9 +1102,19 @@ declare namespace CTypes {
     description?: string;
 
     /**
-     * The ID of the organization to which the simulation belongs.
+     * The ID of the organization where the simulation belongs.
      */
     organizationId: Types.ObjectId;
+
+    /**
+     * Indicates whether the simulation is public.
+     */
+    public?: boolean;
+
+    /**
+     * The organizations with which the simulation is shared.
+     */
+    sharedWith?: Types.ObjectId[];
 
     /**
      * The job definition of the simulation.
@@ -1522,9 +1542,19 @@ declare namespace CTypes {
     simulationJob?: Types.ObjectId;
 
     /**
-     * The organization to which the robot belongs (optional).
+     * The organization where the task belong.
      */
     organizationId?: Types.ObjectId;
+
+    /**
+     * Indicates whether the task is public.
+     */
+    public?: boolean;
+
+    /**
+     * The organizations with which the task is shared.
+     */
+    sharedWith?: Types.ObjectId[];
 
     /**
      * Reference to an Inspection task.

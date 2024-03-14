@@ -1567,6 +1567,11 @@ declare namespace CTypes {
     flight?: Types.ObjectId;
 
     /**
+     * Reference to a Telepresence task.
+     */
+    telepresence?: Types.ObjectId;
+
+    /**
      * Reference to a Custom task.
      */
     custom?: Types.ObjectId;

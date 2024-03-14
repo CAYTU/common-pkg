@@ -1438,9 +1438,14 @@ declare namespace CTypes {
     type: ItineraryType;
 
     /**
-     * Zone reference for the mission.
+     * Extra mission configuration.
      */
-    zone: Types.ObjectId;
+    configuration?: any;
+
+    /**
+     * Mission data
+     */
+    missionData?: any;
   }
 
   /**

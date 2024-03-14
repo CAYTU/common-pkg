@@ -44,20 +44,6 @@ const allowedTask = asyncHandler(
       currentUser?.currentOrganizationId === currentUser?.ownedOrganizationId;
 
     if (connectedToOwnOrganization) {
-      const typeOfTaskInArray = currentUser?.allowedTaskTypes
-        ? typeof currentUser?.allowedTaskTypes[0]
-        : null;
-      const typeOfTaskInRoles = currentUser?.rolesInCurrentOrganization
-        ?.allowedTaskTypes
-        ? typeof currentUser?.rolesInCurrentOrganization?.allowedTaskTypes[0]
-        : null;
-
-      const typeOfTaskInBody = typeof type;
-
-      console.log("typeOfTaskInArray", typeOfTaskInArray);
-      console.log("typeOfTaskInRoles", typeOfTaskInRoles);
-      console.log("typeOfTaskInBody", typeOfTaskInBody);
-
       // If the user is allowed to perform the specific task, grant access.
       if (currentUser.allowedTaskTypes?.includes(type as TaskType)) {
         return next();

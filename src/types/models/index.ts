@@ -1438,6 +1438,11 @@ declare namespace CTypes {
     type: ItineraryType;
 
     /**
+     * zone reference for the mission.
+     */
+    zone?: Types.ObjectId;
+
+    /**
      * Extra mission configuration.
      */
     configuration?: any;
@@ -2078,11 +2083,23 @@ declare namespace CTypes {
   export interface ZoneInterface extends IMongooseObjectExt {
     /** The region of the zone. */
     region?: string;
+
     /** The country of the zone. */
     country?: string;
+
+    /** extra tags for the zone - can be used for filtering */
+    tags?: string[];
+
     /** The name of the zone. */
     name: string;
 
+    /** The visibility of the zone. */
+    public?: boolean;
+
+    /**
+     * Type of itinerary or shape drawn in the map
+     * could be a line, area or point
+     */
     type: ItineraryType;
 
     /** The surface of the zone if it's an area. */

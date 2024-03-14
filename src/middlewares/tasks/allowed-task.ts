@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import { NextFunction, Request, Response } from "express";
 import { NotAuthorizedErr } from "../../errors/not-authorized";
+import { TaskType } from "../../types/utils";
 
 /**
  * Middleware to check if the user is authorized to perform a task.
@@ -43,14 +44,30 @@ const allowedTask = asyncHandler(
       currentUser?.currentOrganizationId === currentUser?.ownedOrganizationId;
 
     if (connectedToOwnOrganization) {
+      const typeOfTaskInArray = currentUser?.allowedTaskTypes
+        ? typeof currentUser?.allowedTaskTypes[0]
+        : null;
+      const typeOfTaskInRoles = currentUser?.rolesInCurrentOrganization
+        ?.allowedTaskTypes
+        ? typeof currentUser?.rolesInCurrentOrganization?.allowedTaskTypes[0]
+        : null;
+
+      const typeOfTaskInBody = typeof type;
+
+      console.log("typeOfTaskInArray", typeOfTaskInArray);
+      console.log("typeOfTaskInRoles", typeOfTaskInRoles);
+      console.log("typeOfTaskInBody", typeOfTaskInBody);
+
       // If the user is allowed to perform the specific task, grant access.
-      if (currentUser.allowedTaskTypes?.includes(type)) {
+      if (currentUser.allowedTaskTypes?.includes(type as TaskType)) {
         return next();
       }
     } else {
       // If the user is allowed to perform the specific task, grant access.
       if (
-        currentUser.rolesInCurrentOrganization?.allowedTaskTypes?.includes(type)
+        currentUser.rolesInCurrentOrganization?.allowedTaskTypes?.includes(
+          type as TaskType
+        )
       ) {
         return next();
       }

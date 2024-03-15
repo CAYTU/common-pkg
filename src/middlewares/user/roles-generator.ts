@@ -1,6 +1,6 @@
 import { TaskType, UserRole } from "../../types/utils";
 
-const allowedTaskTypesBasedOnRole = (role: UserRole[]): TaskType[] => {
+export const allowedTaskTypesBasedOnRole = (role: UserRole[]): TaskType[] => {
   const hasAdminOrSuperAdminRole =
     role.includes(UserRole.Admin) || role.includes(UserRole.SuperAdmin);
   const hasOperatorRole = role.includes(UserRole.Operator);
@@ -19,5 +19,3 @@ const allowedTaskTypesBasedOnRole = (role: UserRole[]): TaskType[] => {
       return [];
   }
 };
-
-export default allowedTaskTypesBasedOnRole;

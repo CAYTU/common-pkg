@@ -17,6 +17,7 @@ export * from "./middlewares/errors/db-connection";
 export * from "./middlewares/errors/handler";
 export * from "./middlewares/errors/validate-request";
 export * from "./middlewares/user/current-user";
+export * from "./middlewares/user/roles-generator";
 export * from "./middlewares/tasks/allowed-task";
 
 export * from "./nats-events/listener";

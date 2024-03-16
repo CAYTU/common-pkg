@@ -755,12 +755,12 @@ declare namespace CTypes {
     /**
      * The type of the robot.
      */
-    type?: RobotType;
+    type: RobotType;
 
     /**
      * The category of the robot
      */
-    category?: RobotCategory;
+    category: RobotCategory;
 
     /**
      * The platform on which the robot operates (optional).
@@ -775,7 +775,7 @@ declare namespace CTypes {
     /**
      * The URL or path to the image associated with the robot.
      */
-    image: string;
+    image?: string;
 
     /**
      * The private token used to authenticate the robot in the backend (optional).

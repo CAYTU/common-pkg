@@ -830,7 +830,10 @@ declare namespace CTypes {
     /**
      * The last recorded geographical location of the robot (optional).
      */
-    lastRecordedLocation?: mongoose.Schema.Types.Point & Point;
+    lastRecordedLocation?: {
+      lng: number;
+      lat: number;
+    };
 
     /**
      * The unique identifier of the current task assigned to the robot (optional).
@@ -961,7 +964,10 @@ declare namespace CTypes {
     /**
      * The last recorded geographical location of the robot (optional).
      */
-    lastRecordedLocation?: mongoose.Schema.Types.Point & Point;
+    lastRecordedLocation?: {
+      lng: number;
+      lat: number;
+    };
   }
 
   /**
@@ -1001,8 +1007,10 @@ declare namespace CTypes {
     /**
      * The last recorded geographical location of the robot (optional).
      */
-    lastRecordedLocation?: mongoose.Schema.Types.Point & Point;
-
+    lastRecordedLocation?: {
+      lng: number;
+      lat: number;
+    };
     /**
      * The version number of the robot event.
      */

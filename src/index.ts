@@ -20,6 +20,9 @@ export * from "./middlewares/user/current-user";
 export * from "./middlewares/user/roles-generator";
 export * from "./middlewares/tasks/allowed-task";
 
+export * from "./middlewares/robots/ack-robot";
+export * from "./middlewares/robots/authorize-robot";
+
 export * from "./nats-events/listener";
 export * from "./nats-events/publisher";
 export * from "./nats-events/subjects";

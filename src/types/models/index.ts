@@ -1056,6 +1056,7 @@ declare namespace CTypes {
      * The display name for the simulation category.
      */
     displayName: string;
+
   }
 
   /**
@@ -1228,6 +1229,20 @@ declare namespace CTypes {
     runningAt?: Date;
     completedAt?: Date;
     duration?: number;
+    /**
+     * The organization where the simulation job belongs.
+     */
+    organizationId?: Types.ObjectId;
+
+    /**
+     * Indicates whether the simulation job is public.
+     */
+    public?: boolean;
+
+    /**
+     * The organizations with which the simulation job is shared.
+     */
+    sharedWith?: Types.ObjectId[];
   }
 
   export interface SimulationJobRepInterface extends IMongooseObjectExt {
@@ -1446,11 +1461,6 @@ declare namespace CTypes {
     type: ItineraryType;
 
     /**
-     * zone reference for the mission.
-     */
-    zone?: Types.ObjectId;
-
-    /**
      * Extra mission configuration.
      */
     configuration?: any;
@@ -1459,6 +1469,21 @@ declare namespace CTypes {
      * Mission data
      */
     missionData?: any;
+
+    /**
+     * The organization where the mission belongs.
+     */
+    organizationId?: Types.ObjectId;
+
+    /**
+     * Indicates whether the mission is public.
+     */
+    public?: boolean;
+
+    /**
+     * The organizations with which the mission is shared.
+     */
+    sharedWith?: Types.ObjectId[];
   }
 
   /**
@@ -2101,9 +2126,6 @@ declare namespace CTypes {
     /** The name of the zone. */
     name: string;
 
-    /** The visibility of the zone. */
-    public?: boolean;
-
     /**
      * Type of itinerary or shape drawn in the map
      * could be a line, area or point
@@ -2117,9 +2139,19 @@ declare namespace CTypes {
     distance?: number;
 
     /**
-     * The organization to which the robot belongs (optional).
+     * The organization where the zone belongs.
      */
     organizationId?: Types.ObjectId;
+
+    /**
+     * Indicates whether the zone is public.
+     */
+    public?: boolean;
+
+    /**
+     * The organizations with which the zone is shared.
+     */
+    sharedWith?: Types.ObjectId[];
 
     /**
      * The geographical position of the zone,

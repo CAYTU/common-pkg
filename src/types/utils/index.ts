@@ -187,6 +187,18 @@ export enum RobotStates {
    * (e.g. the robot is at 5% battery)
    */
   CriticalBattery = "criticalBattery",
+
+  /**
+   * The robot thing is provided data
+   * to its endpoint
+   */
+  Connected = "connected",
+
+  /**
+   * No data being received from the iot
+   * endpoint
+   */
+  Disconnected = "disconnected",
 }
 
 /**

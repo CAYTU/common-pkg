@@ -17,6 +17,8 @@ export interface UserPayload extends JwtPayload {
     roles: UserRole[];
     allowedTaskTypes?: TaskType[] | string[];
   };
+  isVerified?: boolean;
+  isCompleted?: boolean;
 }
 
 export const encryptor = {

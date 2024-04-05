@@ -501,6 +501,12 @@ declare namespace CTypes {
     totalAmount: number;
 
     /**
+     * Discount applied to the order.
+     * in percentage
+     */
+    discount?: number;
+
+    /**
      * The status of the order.
      */
     status: OrderStatus;

@@ -476,18 +476,24 @@ declare namespace CTypes {
     /**
      * The unique identifier of the product in the order.
      */
-    products?: Types.ObjectId[];
+    products?: {
+      productId: Types.ObjectId;
+
+      /**
+       * The amount of the product in the order.
+       */
+      quantity: number;
+      /**
+       * The options associated with the order.
+       */
+      options?: any[];
+    }[];
 
     /**
      * The deviceId (if any) associated with the order.
      * Can be a robot
      */
     deviceId?: Types.ObjectId;
-
-    /**
-     * The options associated with the order.
-     */
-    options?: any[];
 
     /**
      * The total amount of the order.
@@ -1056,7 +1062,6 @@ declare namespace CTypes {
      * The display name for the simulation category.
      */
     displayName: string;
-
   }
 
   /**

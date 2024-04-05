@@ -1451,7 +1451,8 @@ declare namespace CTypes {
      */
     shopData?: {
       shopId?: string;
-      shopName: string;
+      shopName?: string;
+      discount?: number;
       paymentLink?: string;
     };
 

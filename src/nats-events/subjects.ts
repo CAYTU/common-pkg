@@ -30,6 +30,8 @@ export enum Subjects {
   TaskAccepted = "task:accepted",
   TaskExhausted = "task:exhausted",
   TaskExpired = "task:expired",
+  TaskRobotAssigned = "task:robot:assigned",
+  TaskRobotUnassigned = "task:robot:unassigned",
   // User Subjects
   UserRegistered = "user:registered",
   UserRegistrationCompleted = "user:registration:completed",
@@ -52,7 +54,7 @@ export enum Subjects {
   TransientUserCreated = "transient:user:created",
   TransientUserUpdated = "transient:user:updated",
   TransientUserDeleted = "transient:user:deleted",
-  
+
   // Zone Subjects
   ZoneCreated = "zone:created",
   ZoneUpdated = "zone:updated",

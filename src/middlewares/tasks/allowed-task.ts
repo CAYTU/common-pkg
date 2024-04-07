@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler";
 import { NextFunction, Request, Response } from "express";
 import { NotAuthorizedErr } from "../../errors/not-authorized";
-import { TaskType } from "../../types/utils";
+import { TaskType, UserRole } from "../../types/utils";
 
 /**
  * Middleware to check if the user is authorized to perform a task.
@@ -39,17 +39,16 @@ const allowedTask = asyncHandler(
       );
     }
 
-    // check if connected to his own organization or not
-    const connectedToOwnOrganization =
-      currentUser?.currentOrganizationId === currentUser?.ownedOrganizationId;
+    // check if user is super-admin
+    const isSuperAdmin = currentUser.roles?.includes(UserRole.SuperAdmin);
 
-    if (connectedToOwnOrganization) {
-      // If the user is allowed to perform the specific task, grant access.
+    if (isSuperAdmin) {
+      // If the user is super-admin, the check allowed task type at the platform-level
       if (currentUser.allowedTaskTypes?.includes(type as TaskType)) {
         return next();
       }
     } else {
-      // If the user is allowed to perform the specific task, grant access.
+      // If the user is not super-admin, the check allowed task type at the organization-level
       if (
         currentUser.rolesInCurrentOrganization?.allowedTaskTypes?.includes(
           type as TaskType

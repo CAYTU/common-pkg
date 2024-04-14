@@ -12,7 +12,6 @@ import {
   TaskType,
   UserRole,
   UserStatuses,
-  Point,
   Services,
   UserMembershipStatus,
   OrganizationType,
@@ -209,11 +208,13 @@ declare namespace CTypes {
   /**
    * Represents an operator.
    */
+  export type IdentityType = "nationalId" | "passport" | "driverLicense";
+
   export interface OperatorInterface extends IMongooseObjectExt {
     /**
      * The type of identity document used by the operator.
      */
-    identityType?: "nationalId" | "passport" | "driverLicense";
+    identityType?: IdentityType;
 
     /**
      * The path to the operator's identity photo.
@@ -256,94 +257,25 @@ declare namespace CTypes {
     aboutMe?: string;
 
     /**
-     * The unique identifier of the operator's current task. (Optional)
+     * Indicates whether the operator is public. (Optional)
      */
-    currentTask?: Types.ObjectId;
-  }
-
-  /**
-   * Represents a simplified view of an operator.
-   */
-  export interface OperatorRepInterface extends IMongooseObjectExt {
-    /**
-     * Unique identifier for the operator.
-     */
-    id: string;
-
-    /**
-     * The unique identifier of the associated user.
-     */
-    user: Types.ObjectId;
-
-    /**
-     * Indicates whether the operator is active. (Optional)
-     */
-    active?: boolean;
+    isPublic?: boolean;
 
     /**
      * The unique identifier of the operator's current task. (Optional)
      */
     currentTask?: Types.ObjectId;
-
-    /**
-     * The status of the operator. (Optional)
-     */
-    status?: OperatorStatus;
-
-    /**
-     * The wallet associated with the operator. (Optional)
-     */
-    wallet?: Types.ObjectId;
-  }
-
-  /**
-   * Represents an event related to an operator.
-   */
-  export interface OperatorEventInterface {
-    /**
-     * Unique identifier for the event.
-     */
-    id: string;
-
-    /**
-     * The unique identifier of the associated user.
-     */
-    user: Types.ObjectId;
-
-    /**
-     * Indicates whether the operator is active. (Optional)
-     */
-    active?: boolean;
-
-    /**
-     * The unique identifier of the operator's current task. (Optional)
-     */
-    currentTask?: Types.ObjectId;
-
-    /**
-     * The status of the operator. (Optional)
-     */
-    status?: OperatorStatus;
-
-    /**
-     * The wallet associated with the operator. (Optional)
-     */
-    wallet?: Types.ObjectId;
-
-    /**
-     * The version number of the event.
-     */
-    version: number;
   }
 
   /**
    * Represents an event where an operator's identity is requested.
    */
+
   export interface OperatorRequestedEventInterface {
     /**
      * The type of identity document requested.
      */
-    identityType?: "nationalId" | "passport" | "driverLicense";
+    identityType?: IdentityType;
 
     /**
      * The path to the requested identity photo.
@@ -683,79 +615,6 @@ declare namespace CTypes {
    */
 
   /**
-   * Represents metadata associated with a robot.
-   */
-  export interface RobotMetaDataInterface extends IMongooseObjectExt {
-    /**
-     * The unique identifier of the robot.
-     */
-    robot: Types.ObjectId;
-
-    /**
-     * The battery level of the robot (optional).
-     */
-    batteryLevel?: number;
-
-    /**
-     * The speed of the robot (optional).
-     */
-    speed?: number;
-
-    /**
-     * The control mode of the robot, which can be a string or number (optional).
-     */
-    controlMode?: string | number;
-
-    /**
-     * The fault code indicating any issues with the robot (optional).
-     */
-    faultCode?: number | string;
-
-    /**
-     * The unique identifier of the current task assigned to the robot (optional).
-     */
-    currentTask?: Types.ObjectId;
-
-    /**
-     * The linear velocity of the robot (optional).
-     */
-    linearVelocity?: number;
-
-    /**
-     * The angular velocity of the robot (optional).
-     */
-    angularVelocity?: number;
-
-    /**
-     * The geographical position of the robot, specified by longitude and latitude (optional).
-     */
-    position?: {
-      lng: number;
-      lat: number;
-    };
-
-    /**
-     * Additional data associated with the robot (optional).
-     */
-    data?: any;
-  }
-
-  // You can generate doc like this for an interface
-  // export interface RobotInterface extends IMongooseObjectExt {
-  // ...
-  // }
-  // Then run this command: npx ts-json-schema-generator --path "src/types/models/index.ts" --type RobotInterface --tsconfig "tsconfig.json" --jsDoc "extended"
-  // Then copy the generated schema and paste it here
-  // Then you can use it in the model like this:
-  // const RobotSchema = new Schema<CTypes.RobotInterface>(RobotSchemaJSON);
-
-  // However, it would best practice to separate the
-  // the model into two models: AwsRobot and FreedomRobot or
-  // create a base model and extend it to AwsRobot and FreedomRobot
-  // models. This is because the two models have different attributes
-  // and it would be hard to maintain the code if we use one model
-  // for both of them.
-  /**
    * Represents the base information for a robot.
    */
   export interface RobotBaseInterface extends IMongooseObjectExt {
@@ -937,96 +796,6 @@ declare namespace CTypes {
      * The private token used to authenticate the robot in the backend (optional).
      */
     privateToken?: string;
-  }
-
-  /**
-   * Represents a simplified robot object for representation purposes.
-   */
-  export interface RobotRepInterface extends IMongooseObjectExt {
-    /**
-     * The unique identifier of the robot.
-     */
-    id: string;
-
-    /**
-     * The name of the robot.
-     */
-    name: string;
-
-    /**
-     * The platform on which the robot operates (optional).
-     */
-    platform?: RoboticPlatform;
-
-    /**
-     * The type of the robot.
-     */
-    type?: RobotType;
-
-    /**
-     * The URL or path to the image associated with the robot.
-     */
-    image: string;
-
-    /**
-     * The Firebase Cloud Messaging (FCM) token associated with the robot (optional).
-     */
-    fcmToken?: string;
-
-    /**
-     * The last recorded geographical location of the robot (optional).
-     */
-    lastRecordedLocation?: {
-      lng: number;
-      lat: number;
-    };
-  }
-
-  /**
-   * Represents a robot object for events with additional information.
-   */
-  export interface RobotEventInterface {
-    /**
-     * The unique identifier of the robot.
-     */
-    id: string;
-
-    /**
-     * The name of the robot.
-     */
-    name: string;
-
-    /**
-     * The type of the robot.
-     */
-    type?: RobotType;
-
-    /**
-     * The platform on which the robot operates (optional).
-     */
-    platform?: RoboticPlatform;
-
-    /**
-     * The URL or path to the image associated with the robot.
-     */
-    image: string;
-
-    /**
-     * The Firebase Cloud Messaging (FCM) token associated with the robot (optional).
-     */
-    fcmToken?: string;
-
-    /**
-     * The last recorded geographical location of the robot (optional).
-     */
-    lastRecordedLocation?: {
-      lng: number;
-      lat: number;
-    };
-    /**
-     * The version number of the robot event.
-     */
-    version: number;
   }
 
   /**
@@ -1633,133 +1402,6 @@ declare namespace CTypes {
   }
 
   /**
-   * Interface representing a Task Rep.
-   */
-  export interface TaskRepInterface extends IMongooseObjectExt {
-    /**
-     * ID of the task.
-     */
-    id: string;
-
-    /**
-     * Type of the task.
-     */
-    type: TaskType;
-
-    /**
-     * Fare associated with the task.
-     */
-    fare: number;
-
-    /**
-     * Code to deactivate or open the robot.
-     * This is only used when the task is a delivery task.
-     */
-    code?: number;
-
-    /**
-     * Status of the task.
-     */
-    status: TaskStatus;
-
-    /**
-     * Reference to a Robot model.
-     */
-    robot?: Types.ObjectId;
-
-    /**
-     * Reference to a Simulation job task.
-     */
-    simulationJob?: Types.ObjectId;
-
-    /**
-     * Reference to an Operator model.
-     */
-    operator?: Types.ObjectId;
-
-    /**
-     * Reference to a Customer model.
-     */
-    customer: Types.ObjectId;
-  }
-
-  /**
-   * Interface representing a Task Event.
-   */
-  export interface TaskEventInterface {
-    /**
-     * ID of the task.
-     */
-    id: string;
-
-    /**
-     * Type of the task.
-     */
-    type: TaskType;
-
-    /**
-     * Fare associated with the task.
-     */
-    fare: number;
-
-    /**
-     * Code to deactivate or open the robot.
-     * This is only used when the task is a delivery task.
-     */
-    code?: number;
-
-    /**
-     * Status of the task.
-     */
-    status: TaskStatus;
-
-    /**
-     * Reference to a Robot model.
-     */
-    robot?: Types.ObjectId;
-
-    /**
-     * Reference to an Operator model.
-     */
-    operator?: Types.ObjectId;
-
-    /**
-     * Reference to a Simulation job task.
-     */
-    simulationJob?: Types.ObjectId;
-
-    /**
-     * Reference to a Customer model.
-     */
-    customer: Types.ObjectId;
-
-    /**
-     * Version number of the task.
-     */
-    version: number;
-  }
-
-  /**
-   * Interface representing a Task Get Robot Candidate Event.
-   */
-  export interface TaskGetRobotCandidateEventInterface {
-    /**
-     * ID of the task.
-     */
-    id: string;
-
-    /**
-     * Type of the task.
-     */
-    type: TaskType;
-
-    /**
-     * Version number of the task.
-     */
-    version: number;
-  }
-
-  /**
    * URL SHORTENER INTERFACE
    */
   export interface UrlShortenerInterface extends IMongooseObjectExt {
@@ -1920,205 +1562,6 @@ declare namespace CTypes {
      * Indicates whether the user is currently online (optional).
      */
     isOnline?: boolean;
-  }
-
-  /**
-   * Represents a simplified user object for representation purposes.
-   */
-  export interface UserRepInterface extends IMongooseObjectExt {
-    /**
-     * The unique identifier of the user.
-     */
-    id: string;
-
-    /**
-     * The username of the user.
-     */
-    username: string;
-
-    /**
-     * The first name of the user.
-     */
-    firstName: string;
-
-    /**
-     * The email address of the user.
-     */
-    email: string;
-
-    /**
-     * The URL of the user's profile image (optional).
-     */
-    image?: string;
-
-    /**
-     * An array of user roles (optional).
-     */
-    roles?: UserRole[];
-
-    /**
-     * Array of user's allowed task types (optional).
-     */
-    allowedTaskTypes?: TaskType[] | string[];
-
-    /**
-     * The last name of the user.
-     */
-    lastName: string;
-
-    /**
-     * The Firebase Cloud Messaging (FCM) token of the user (optional).
-     */
-    fcmToken?: string;
-
-    /**
-     * The organization to which the user belongs (optional).
-     */
-    organizationId?: Types.ObjectId;
-
-    /**
-     * The type of OAuth authentication used by the user (optional).
-     */
-    oauthType?: OauthType;
-
-    /**
-     * The membership status of the user (optional).
-     */
-    membershipStatus?: UserMembershipStatus;
-
-    /**
-     * Indicates if the user's account is verified (optional).
-     */
-    isVerified?: boolean;
-
-    /**
-     * The type of subscription the user has (optional).
-     */
-    subscriptionType?: SubscriptionType;
-
-    /**
-     * The tier of subscription the user has (optional).
-     */
-    subscriptionTier?: SubscriptionTier;
-
-    /**
-     * Indicates whether the user is currently online (optional).
-     */
-    isOnline?: boolean;
-
-    /**
-     * Indicates if the user's profile is completed (optional).
-     */
-    isCompleted?: boolean;
-  }
-
-  /**
-   * Represents a user object for events with additional information.
-   */
-  export interface UserEventInterface {
-    /**
-     * The unique identifier of the user.
-     */
-    id: string;
-
-    /**
-     * The username of the user.
-     */
-    username: string;
-
-    /**
-     * The first name of the user.
-     */
-    firstName: string;
-
-    /**
-     * The email address of the user.
-     */
-    email: string;
-
-    /**
-     * The URL of the user's profile image (optional).
-     */
-    image?: string;
-
-    /**
-     * The last name of the user.
-     */
-    lastName: string;
-
-    /**
-     * An array of user roles (optional).
-     */
-    roles?: UserRole[];
-
-    /**
-     * Array of user's allowed task types (optional).
-     */
-    allowedTaskTypes?: TaskType[] | string[];
-
-    /**
-     * The Firebase Cloud Messaging (FCM) token of the user (optional).
-     */
-    fcmToken?: string;
-
-    /**
-     * Indicates if the user's account is verified (optional).
-     */
-    isVerified?: boolean;
-
-    /**
-     * The membership status of the user (optional).
-     */
-    membershipStatus?: UserMembershipStatus;
-
-    /**
-     * The organization to which the user belongs (optional).
-     */
-    organizationId?: Types.ObjectId;
-
-    /**
-     * The type of OAuth authentication used by the user (optional).
-     */
-    oauthType?: OauthType;
-
-    /**
-     * The type of subscription the user has (optional).
-     */
-    subscriptionType?: SubscriptionType;
-
-    /**
-     * The tier of subscription the user has (optional).
-     */
-    subscriptionTier?: SubscriptionTier;
-    /**
-     * Indicates whether the user is currently online (optional).
-     */
-    isOnline?: boolean;
-
-    /**
-     * Indicates if the user's profile is completed (optional).
-     */
-    isCompleted?: boolean;
-
-    /**
-     * The type of identity document being requested (optional).
-     */
-    identityType?: "nationalId" | "passport" | "driverLicense";
-
-    /**
-     * The URL of the user's identity document photo (optional).
-     */
-    identityPhoto?: string;
-
-    /**
-     * The identity number associated with the user (optional).
-     */
-    identityNumber?: string;
-
-    /**
-     * The version number of the user event.
-     */
-    version: number;
   }
 
   /**

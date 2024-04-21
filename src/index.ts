@@ -1,5 +1,7 @@
 // Types import
 import CTypes from "./types/models";
+// Event imports
+import { ET } from "./types/events";
 
 export * from "./errors/bad-request";
 export * from "./errors/custom";
@@ -31,12 +33,5 @@ export * from "./types/utils";
 export * from "./utils/encryptor";
 export * from "./utils/cookies";
 
-// Export event types
-export * as PaymentEvents from "./types/events/payment-evt.types";
-export * as OrganizationEvents from "./types/events/organization-evt.types";
-export * as UserEvents from "./types/events/user-evt.types";
-export * as OperatorEvents from "./types/events/operator-evt.types";
-export * as TaskEvents from "./types/events/task-evt.types";
-export * as EmailEvents from "./types/events/email-evt.types";
-
 export { CTypes };
+export { ET };

@@ -1,13 +1,18 @@
+/**
+ * @file organization-evt.types.ts
+ * @description Defines TypeScript interfaces for organization-related events.
+ */
+
 import { Subjects } from "../../nats-events/subjects";
 import CTypes from "../models";
 import { TaskType, UserRole } from "../utils";
+import { OnlyRequired } from "./common";
 
-interface OnlyRequired {
-  id: string;
-  version: number;
-}
-
-export interface OrganizationCreatedEvent {
+/**
+ * @interface OrganizationCreatedEvent
+ * @description Defines a TypeScript interface for the 'OrganizationCreated' event.
+ */
+interface OrganizationCreatedEvent {
   subject: Subjects.OrganizationCreated;
   data: CTypes.OrganizationInterface & {
     id: string;
@@ -16,17 +21,29 @@ export interface OrganizationCreatedEvent {
   };
 }
 
-export interface OrganizationUpdatedEvent {
+/**
+ * @interface OrganizationUpdatedEvent
+ * @description Defines a TypeScript interface for the 'OrganizationUpdated' event.
+ */
+interface OrganizationUpdatedEvent {
   subject: Subjects.OrganizationUpdated;
   data: Partial<CTypes.OrganizationInterface> & OnlyRequired;
 }
 
-export interface OrganizationDeletedEvent {
+/**
+ * @interface OrganizationDeletedEvent
+ * @description Defines a TypeScript interface for the 'OrganizationDeleted' event.
+ */
+interface OrganizationDeletedEvent {
   subject: Subjects.OrganizationDeleted;
   data: { id: string; version: number };
 }
 
-export interface OrganizationMemberAddedEvent {
+/**
+ * @interface OrganizationMemberAddedEvent
+ * @description Defines a TypeScript interface for the 'OrganizationMemberAdded' event.
+ */
+interface OrganizationMemberAddedEvent {
   subject: Subjects.OrganizationMemberAdded;
   data: {
     organizationId: string;
@@ -36,7 +53,11 @@ export interface OrganizationMemberAddedEvent {
   };
 }
 
-export interface OrganizationMemberRemovedEvent {
+/**
+ * @interface OrganizationMemberRemovedEvent
+ * @description Defines a TypeScript interface for the 'OrganizationMemberRemoved' event.
+ */
+interface OrganizationMemberRemovedEvent {
   subject: Subjects.OrganizationMemberRemoved;
   data: {
     organizationId: string;
@@ -46,7 +67,11 @@ export interface OrganizationMemberRemovedEvent {
   };
 }
 
-export interface OrganizationMemberInvitedEvent {
+/**
+ * @interface OrganizationMemberInvitedEvent
+ * @description Defines a TypeScript interface for the 'OrganizationMemberInvited' event.
+ */
+interface OrganizationMemberInvitedEvent {
   subject: Subjects.OrganizationMemberInvited;
   data: {
     organizationId: string;
@@ -57,7 +82,11 @@ export interface OrganizationMemberInvitedEvent {
   };
 }
 
-export interface OrganizationMemberInviteExpired {
+/**
+ * @interface OrganizationMemberInviteExpired
+ * @description Defines a TypeScript interface for the 'OrganizationMemberInviteExpired' event.
+ */
+interface OrganizationMemberInviteExpired {
   subject: Subjects.OrganizationMemberInviteExpired;
   data: {
     organizationId: string;
@@ -66,7 +95,11 @@ export interface OrganizationMemberInviteExpired {
   };
 }
 
-export interface OrganizationMemberRoleUpdated {
+/**
+ * @interface OrganizationMemberRoleUpdated
+ * @description Defines a TypeScript interface for the 'OrganizationMemberRoleUpdated' event.
+ */
+interface OrganizationMemberRoleUpdated {
   subject: Subjects.OrganizationMemberRoleUpdated;
   data: {
     organizationId: string;
@@ -75,3 +108,18 @@ export interface OrganizationMemberRoleUpdated {
     allowedTasks?: TaskType[];
   };
 }
+
+/**
+ * @exports OrganizationEventTypes
+ * @description Exporting each event type directly for easier consumption.
+ */
+export {
+  OrganizationCreatedEvent,
+  OrganizationUpdatedEvent,
+  OrganizationDeletedEvent,
+  OrganizationMemberAddedEvent,
+  OrganizationMemberRemovedEvent,
+  OrganizationMemberInvitedEvent,
+  OrganizationMemberInviteExpired,
+  OrganizationMemberRoleUpdated,
+};

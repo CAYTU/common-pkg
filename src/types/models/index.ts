@@ -262,6 +262,11 @@ declare namespace CTypes {
     isPublic?: boolean;
 
     /**
+     * Organizations with which the operator is shared. (Optional)
+     */
+    organizations?: Types.ObjectId[];
+
+    /**
      * The unique identifier of the operator's current task. (Optional)
      */
     currentTask?: Types.ObjectId;

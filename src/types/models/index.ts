@@ -21,6 +21,7 @@ import {
   ItineraryType,
   OrderStatus,
   TelepresenceType,
+  RobotStatus,
 } from "../utils";
 
 declare namespace CTypes {
@@ -705,8 +706,15 @@ declare namespace CTypes {
 
     /**
      * The current state of the robot.
+     * e.g. "active", "connected", "disconnected", "error".
      */
     state?: RobotStates;
+
+    /**
+     * The status of the robot.
+     * e.g. "assigned", "available", "running", "unavailable".
+     */
+    status?: RobotStatus;
 
     /**
      * The total count of tasks associated with the robot (optional).
@@ -751,13 +759,6 @@ declare namespace CTypes {
      */
     currentTask?: Types.ObjectId;
 
-    /**
-     * The unique identifier of the state tracker associated with the robot (optional).
-     */
-    stateTracker?: {
-      currentStatus: RobotStates;
-      startedAt: Date;
-    };
   }
 
   /**

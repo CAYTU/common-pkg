@@ -118,87 +118,38 @@ export enum UserRole {
 /**
  * @description
  * This enum is used to define the state of a robot.
- * The state of a robot can be used to determine
- * if a robot is available to execute a task.
+
  */
 export enum RobotStates {
   /**
-   * The robot is powered off
-   */
-  PoweredOff = "poweredOff",
-  /**
-   * The robot is powered on
-   * but not ready to receive commands
-   * (e.g. the robot is booting)
-   */
-  PoweredOn = "poweredOn",
-
-  /**
-   * The robot is powered on
-   * and ready to receive commands
-   * (e.g. the robot is booted)
-   */
-  Ready = "ready",
-
-  /**
-   * The robot is on Task, executing a task,
-   */
-  Running = "running",
-
-  /**
-   * The robot is charging its battery
-   * (e.g. the robot is plugged in)
-   */
-  Charging = "charging",
-
-  /**
-   * The charging is complete
-   */
-  ChargingComplete = "chargingComplete",
-
-  /**
-   * The robot is in an error state
-   * (e.g. the robot is stuck)
-   * and needs to be reset
-   */
+   * The robot is in an error state */
   Error = "error",
 
   /**
-   * The robot is now available for a new task
-   */
-  Available = "available",
-
-  /**
-   * There is a bad network connection
-   * between the robot and the server
-   */
-  BadConnection = "badConnection",
-
-  /**
-   * The robot is in a low battery state
-   * and needs to be charged
-   * (e.g. the robot is at 10% battery)
-   */
-  LowBattery = "lowBattery",
-
-  /**
-   * The robot is in a critical battery state
-   * and needs to be charged
-   * (e.g. the robot is at 5% battery)
-   */
-  CriticalBattery = "criticalBattery",
-
-  /**
-   * The robot thing is provided data
-   * to its endpoint
-   */
+   * The robot thing is providing data */
   Connected = "connected",
 
   /**
-   * No data being received from the iot
-   * endpoint
-   */
+   * No data being received from the iot endpoint */
   Disconnected = "disconnected",
+
+  /**
+   * The robot is active */
+  Active = "active",
+}
+
+/**
+ * Enumerates the possible status values for a robot.
+ */
+export enum RobotStatus {
+  /** The robot is assigned to a task. */
+  Assigned = "assigned",
+  /** The robot is available to be assigned to a task. */
+  Available = "available",
+  /** The robot is currently running a task. */
+  Running = "running",
+  /** The robot is not available to be assigned to a task. */
+  Unavailable = "unavailable",
 }
 
 /**

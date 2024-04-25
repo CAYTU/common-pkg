@@ -6,9 +6,9 @@ import { TaskType, UserRole } from "../../types/utils";
 /**
  * Middleware to check if the user is authorized to perform a task.
  *
- * This middleware verifies if the user has the necessary permissions to
- * perform the specified task. It checks the user's `allowedTaskTypes` in
- * the request payload and compares it with the task type from the request body.
+ * This middleware verifies whether the user has the necessary permissions to
+ * perform the specified task. It examines the user's `allowedTaskTypes` from
+ * the request payload and compares it with the task type provided in the request body.
  * If the user is not authorized, it throws a `NotAuthorizedErr`.
  *
  * @param req - The request object.
@@ -39,22 +39,44 @@ const allowedTask = asyncHandler(
       );
     }
 
-    // check if user is super-admin
+    // Check if the user is a super-admin.
     const isSuperAdmin = currentUser.roles?.includes(UserRole.SuperAdmin);
 
+    // Check if the user is currently connected to their organization.
+    const isCurrentUserOrganization =
+      currentUser.rolesInCurrentOrganization?.organizationId?.toString() ===
+      currentUser.ownedOrganizationId?.toString();
+
     if (isSuperAdmin) {
-      // If the user is super-admin, the check allowed task type at the platform-level
-      if (currentUser.allowedTaskTypes?.includes(type as TaskType)) {
-        return next();
-      }
+      /**
+       * If the user is a super-admin, they are allowed to perform any task.
+       * Therefore, we can skip the check and proceed to the next middleware.
+       */
+      return next();
     } else {
-      // If the user is not super-admin, the check allowed task type at the organization-level
-      if (
-        currentUser.rolesInCurrentOrganization?.allowedTaskTypes?.includes(
-          type as TaskType
-        )
-      ) {
-        return next();
+      if (isCurrentUserOrganization) {
+        /**
+         * If the user is connected to their organization, check whether the user is allowed
+         * to perform the task within their organization or on the platform.
+         */
+        if (
+          currentUser.rolesInCurrentOrganization?.allowedTaskTypes?.includes(
+            type as TaskType
+          ) ||
+          currentUser.allowedTaskTypes?.includes(type as TaskType)
+        ) {
+          return next();
+        }
+      } else {
+        // If the user is not connected to their organization, check whether the user
+        // is allowed to perform the task within the organization they are attempting to access.
+        if (
+          currentUser.rolesInCurrentOrganization?.allowedTaskTypes?.includes(
+            type as TaskType
+          )
+        ) {
+          return next();
+        }
       }
     }
 

@@ -135,6 +135,11 @@ declare namespace CTypes {
      */
     user?: Types.ObjectId;
 
+    /*
+     * Id of the user who triggered the notification
+     */
+    issuer?: Types.ObjectId;
+
     /**
      * An array of user roles relevant to the notification. (Optional)
      */

@@ -141,74 +141,9 @@ declare namespace CTypes {
     issuer?: Types.ObjectId;
 
     /**
-     * An array of user roles relevant to the notification. (Optional)
-     */
-    batchRoles?: UserRole[];
-
-    /**
      * A unique identifier of the organization to which the notification is sent. (Optional)
      */
     organizationId?: Types.ObjectId;
-
-    /**
-     * Indicates whether an email should be included with the notification. (Optional)
-     */
-    includeMail?: boolean;
-
-    /**
-     * An array of unique identifiers for participants related to the notification. (Optional)
-     */
-    participants?: Types.ObjectId[];
-  }
-
-  /***************************
-   * NotificationRepInterface: This is the interface for the notification replica
-   **************************/
-  export interface NotificationRepInterface {
-    /**
-     * Unique identifier for the notification.
-     */
-    id: string;
-
-    /**
-     * The title of the notification.
-     */
-    title: string;
-
-    /**
-     * The service associated with the notification.
-     */
-    service: Services;
-
-    /**
-     * The main content or body of the notification.
-     */
-    body: string;
-
-    /**
-     * Indicates whether the notification has been read. (Optional)
-     */
-    isRead?: boolean;
-
-    /**
-     * The unique identifier of the user associated with this notification. (Optional)
-     */
-    user?: Types.ObjectId;
-
-    /**
-     * An array of user roles relevant to the notification. (Optional)
-     */
-    batchRoles?: UserRole[];
-
-    /**
-     * Indicates whether an email should be included with the notification. (Optional)
-     */
-    includeMail?: boolean;
-
-    /**
-     * An array of unique identifiers for participants related to the notification. (Optional)
-     */
-    participant?: Types.ObjectId[];
   }
 
   /**
@@ -763,7 +698,6 @@ declare namespace CTypes {
      * The unique identifier of the current task assigned to the robot (optional).
      */
     currentTask?: Types.ObjectId;
-
   }
 
   /**

@@ -22,6 +22,7 @@ import {
   OrderStatus,
   TelepresenceType,
   RobotStatus,
+  ConnectViewerType,
 } from "../utils";
 
 declare namespace CTypes {
@@ -1248,18 +1249,23 @@ declare namespace CTypes {
   }
 
   /**
-   * Interface representing a monitoring task.
+   * Interface representing a connect task.
    */
-  export interface TaskMonitoringInterface extends IMongooseObjectExt {
+  export interface TaskConnectInterface extends IMongooseObjectExt {
     /**
-     * Name of the monitoring task.
+     * Name of the task.
      */
     name: string;
 
     /**
-     * Description of the monitoring task.
+     * Description of the task. (Optional)
      */
     description?: string;
+
+    /**
+     * The type of viewer for the task.
+     */
+    viewerType: ConnectViewerType;
   }
 
   /**
@@ -1386,9 +1392,9 @@ declare namespace CTypes {
     telepresence?: Types.ObjectId;
 
     /**
-     * Reference to a monitoring task.
+     * Reference to the connect task type
      */
-    monitoring?: Types.ObjectId;
+    connectTask?: Types.ObjectId;
   }
 
   /**

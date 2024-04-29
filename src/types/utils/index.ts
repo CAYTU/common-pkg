@@ -82,8 +82,8 @@ export enum TaskType {
   Flight = "flight",
   /** Telepresence task type */
   Telepresence = "telepresence",
-  /** Monitoring task type */
-  Monitoring = "monitoring",
+  /** Connect task type */
+  Connect = "connect",
 }
 
 /**
@@ -375,4 +375,20 @@ export enum ItineraryType {
 export enum TelepresenceType {
   Video = "video",
   Shop = "shop",
+}
+
+/**
+ * @description
+ * This enum is used to define the type of viewer
+ * that is being used to execute a 'connect' task.
+ */
+export enum ConnectViewerType {
+  /**
+   * The viewer is a robot
+   */
+  Robot = "robot",
+  /**
+   * The viewer is an avatar
+   */
+  Avatar = "avatar",
 }

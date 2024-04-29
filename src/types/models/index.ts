@@ -1265,7 +1265,7 @@ declare namespace CTypes {
     /**
      * The type of viewer for the task.
      */
-    viewerType: ConnectViewerType;
+    viewerType?: ConnectViewerType;
   }
 
   /**

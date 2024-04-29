@@ -1248,9 +1248,19 @@ declare namespace CTypes {
   }
 
   /**
-   * Interface representing a Task Custom.
+   * Interface representing a monitoring task.
    */
-  export interface TaskCustomInterface extends IMongooseObjectExt {}
+  export interface TaskMonitoringInterface extends IMongooseObjectExt {
+    /**
+     * Name of the monitoring task.
+     */
+    name: string;
+
+    /**
+     * Description of the monitoring task.
+     */
+    description?: string;
+  }
 
   /**
    * Interface representing a Task.
@@ -1376,9 +1386,9 @@ declare namespace CTypes {
     telepresence?: Types.ObjectId;
 
     /**
-     * Reference to a Custom task.
+     * Reference to a monitoring task.
      */
-    custom?: Types.ObjectId;
+    monitoring?: Types.ObjectId;
   }
 
   /**

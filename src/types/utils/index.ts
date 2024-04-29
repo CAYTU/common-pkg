@@ -82,8 +82,8 @@ export enum TaskType {
   Flight = "flight",
   /** Telepresence task type */
   Telepresence = "telepresence",
-  /** If the task is none of the above (delivery, cleaning, ...). */
-  Custom = "custom",
+  /** Monitoring task type */
+  Monitoring = "monitoring",
 }
 
 /**

@@ -1357,6 +1357,11 @@ declare namespace CTypes {
     simulationId?: Types.ObjectId;
 
     /**
+     * Reference to an avatar
+     */
+    avatarId?: string;
+
+    /**
      * Reference to a Simulation job task.
      */
     simulationJob?: Types.ObjectId;

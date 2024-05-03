@@ -115,6 +115,23 @@ export enum UserRole {
   All = "all",
 }
 
+export const PrimaryRoles = [
+  UserRole.Invited,
+  UserRole.Customer,
+  UserRole.Developer,
+  UserRole.Operator,
+  UserRole.Admin,
+  UserRole.SuperAdmin,
+];
+
+export const UserPermissions = [
+  UserRole.All,
+  UserRole.ReadOnly,
+  UserRole.Create,
+  UserRole.Delete,
+  UserRole.Update,
+];
+
 /**
  * @description
  * This enum is used to define the state of a robot.

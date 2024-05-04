@@ -1313,7 +1313,9 @@ declare namespace CTypes {
      */
     statusTracker?: {
       currentStatus: TaskStatus;
-      startedAt: Date;
+      duration?: number;
+      startedAt?: Date;
+      completedAt?: Date;
     };
 
     /**

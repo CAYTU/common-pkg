@@ -50,6 +50,9 @@ declare namespace CTypes {
    * @interface
    */
   export interface AvatarInterface extends IMongooseObjectExt {
+    name: string;
+    description?: string;
+
     channelName?: string;
     taskId?: string;
     state?: ObjectStates;

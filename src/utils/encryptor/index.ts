@@ -24,10 +24,7 @@ export interface UserPayload extends JwtPayload {
 export const encryptor = {
   // This function will be used to encrypt an ACCESS_TOKEN
   // It will take a user object and return a token
-  encryptAccessToken: (
-    paylaod: any,
-    expiresIn: string | number | undefined
-  ): string => {
+  encryptAccessToken: (paylaod: any, expiresIn?: string | number): string => {
     return jwt.sign(paylaod, `${process.env.ACCESS_SECRET}`, {
       expiresIn: expiresIn ?? "1h",
     });
@@ -35,10 +32,7 @@ export const encryptor = {
 
   // This function will be used to encrypt a REFRESH_TOKEN
   // It will take a user object and return a token
-  encryptRefreshToken: (
-    paylaod: any,
-    expiresIn: string | number | undefined
-  ): string => {
+  encryptRefreshToken: (paylaod: any, expiresIn?: string | number): string => {
     return jwt.sign(paylaod, `${process.env.REFRESH_SECRET}`, {
       expiresIn: expiresIn ?? "7d",
     });

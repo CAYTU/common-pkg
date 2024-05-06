@@ -23,6 +23,7 @@ import {
   TelepresenceType,
   RobotStatus,
   ConnectViewerType,
+  ObjectStates,
 } from "../utils";
 
 declare namespace CTypes {
@@ -43,6 +44,29 @@ declare namespace CTypes {
      */
     createdAt?: Date;
   }
+
+
+  /**
+   * Interface for an avatar job.
+   * @interface
+   */
+  export interface AvatarInterface extends IMongooseObjectExt {
+    channelName?: string;
+    taskId?: string;
+    state?: ObjectStates;
+    currentUserSession?: string;
+
+    /**
+     * The organization where the simulation job belongs.
+     */
+    organizationId?: Types.ObjectId;
+
+    /**
+     * Indicates whether the simulation job is public.
+     */
+    public?: boolean;
+  }
+
 
   /************************
    * Represents a customer.

@@ -193,6 +193,33 @@ export enum OrderStatus {
 }
 
 /**
+ * Enumerates the possible states of objects.
+ * objects:
+ * - avatar
+ * - simulation job
+ */
+export enum ObjectStates {
+  /** Initial state when a simulation job is created. */
+  Init = "init",
+  /** The simulation job is pending and waiting to start. */
+  Pending = "pending",
+  /** The simulation job is starting. */
+  Starting = "starting",
+  /** The simulation job is currently running. */
+  Running = "running",
+  /** The simulation job has been terminated. */
+  Terminated = "terminated",
+  /** The simulation job has been canceled. */
+  Canceled = "canceled",
+  /** The simulation job is terminating */
+  Terminating = "terminating",
+  /** The simulation job has been successfully completed. */
+  Completed = "completed",
+  /** The simulation job has failed to execute. */
+  Failed = "failed",
+}
+
+/**
  * Enumerates the possible states of a simulation job.
  */
 export enum SimulationJobState {

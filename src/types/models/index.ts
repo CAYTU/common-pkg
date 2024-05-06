@@ -45,7 +45,6 @@ declare namespace CTypes {
     createdAt?: Date;
   }
 
-
   /**
    * Interface for an avatar job.
    * @interface
@@ -55,6 +54,7 @@ declare namespace CTypes {
     taskId?: string;
     state?: ObjectStates;
     currentUserSession?: string;
+    image?: string;
 
     /**
      * The organization where the simulation job belongs.
@@ -66,7 +66,6 @@ declare namespace CTypes {
      */
     public?: boolean;
   }
-
 
   /************************
    * Represents a customer.

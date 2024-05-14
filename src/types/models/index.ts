@@ -15,8 +15,8 @@ import {
   Services,
   UserMembershipStatus,
   OrganizationType,
-  RobotType,
-  RobotCategory,
+  DeviceType,
+  DeviceCategory,
   SubscriptionTier,
   ItineraryType,
   OrderStatus,
@@ -632,14 +632,14 @@ declare namespace CTypes {
     name: string;
 
     /**
-     * The type of the robot.
+     * The type of the device.
      */
-    type: RobotType;
+    type: DeviceType;
 
     /**
-     * The category of the robot
+     * The category of the device
      */
-    category: RobotCategory;
+    category: DeviceCategory;
 
     /**
      * The platform on which the robot operates (optional).

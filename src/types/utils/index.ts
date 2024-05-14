@@ -337,10 +337,10 @@ export enum Services {
 
 /**
  * @description
- * This enum is used to define the category of a robot
+ * This enum is used to define the category of a device
  * that is being used to execute a task.
  */
-export enum RobotCategory {
+export enum DeviceCategory {
   /**
    * Drones (Unmanned Aerial Vehicles)
    */
@@ -350,9 +350,9 @@ export enum RobotCategory {
    */
   UGV = "ugv",
   /**
-   * For Simulation Robots
+   * For iot devices
    */
-  Simulation = "sim",
+  Iot = "iot",
   /**
    * Telepresence Robots
    */
@@ -363,29 +363,29 @@ export enum RobotCategory {
   Senelec = "senelec",
   /**
    * Forklifts
-   * (e.g. robots that can be controlled remotely)
+   * (e.g. device that can be controlled remotely)
    */
   Forklift = "forklift",
 }
 
 /**
  * @description
- * This enum is used to define the type of robot
+ * This enum is used to define the type of device
  * that is being used to execute a task.
  */
-export enum RobotType {
+export enum DeviceType {
   /**
-   * Semi-autonomous robots
-   * (e.g. robots that can be controlled remotely)
+   * Semi-autonomous device
+   * (e.g. device that can be controlled remotely)
    */
   SemiAutonomous = "semi-autonomous",
   /**
-   * Fully autonomous robots
-   * (e.g. robots that can operate without human intervention)
+   * Fully autonomous device
+   * (e.g. device that can operate without human intervention)
    */
   FullyAutonomous = "fully-autonomous",
   /**
-   * Bared robots
+   * Bared device
    */
   Bared = "bared",
 }

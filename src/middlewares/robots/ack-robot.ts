@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler";
 import CryptoJS = require("crypto-js");
-import { RobotCategory, RobotType, RoboticPlatform } from "../../types/utils";
+import { DeviceCategory, DeviceType, RoboticPlatform } from "../../types/utils";
 
 export interface RobotPayload {
   name: string;
-  type: RobotType;
-  category: RobotCategory;
+  type: DeviceType;
+  category: DeviceCategory;
   platform?: RoboticPlatform;
 }
 

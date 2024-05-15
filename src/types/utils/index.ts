@@ -421,6 +421,7 @@ export enum ItineraryType {
 export enum TelepresenceType {
   Video = "video",
   Shop = "shop",
+  Avatar = "avatar",
 }
 
 /**

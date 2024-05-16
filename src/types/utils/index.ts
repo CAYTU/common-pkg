@@ -366,6 +366,11 @@ export enum DeviceCategory {
    * (e.g. device that can be controlled remotely)
    */
   Forklift = "forklift",
+
+  /**
+   * Agricultural Devices
+   */
+  AgBOT = "agbot",
 }
 
 /**

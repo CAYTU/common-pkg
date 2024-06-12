@@ -584,7 +584,7 @@ declare namespace CTypes {
      * if payment is stripe, this is the charge id
      * if payment is wave or orange, this is the transaction id
      */
-    transactionId?: Types.ObjectId;
+    transactionId?: string;
 
     /**
      * The tier of subscription the user has (optional).

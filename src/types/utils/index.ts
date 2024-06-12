@@ -245,9 +245,9 @@ export enum RoboticPlatform {
 /**
  * Enumerates the possible subscription types for a service.
  */
-export enum SubscriptionTier {
+export enum SubscriptionType {
   Free = "free",
-  // Professional = "professional",
+  Billing = "billing",
   Enterprise = "enterprise",
 }
 

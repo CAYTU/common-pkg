@@ -554,6 +554,11 @@ declare namespace CTypes {
     amount?: number;
 
     /**
+     * The amount of the payment in credit units.
+     */
+    creditUnit?: number;
+
+    /**
      * The currency of the payment.
      */
     currency?: string;

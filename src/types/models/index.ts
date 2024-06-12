@@ -580,9 +580,12 @@ declare namespace CTypes {
     description?: string;
 
     /**
-     * If the payment is from stripe, this is the stripe payment intent id.
+     * Unique identifier of the transaction. 
+     * This is used to track the transaction in the payment gateway.
+     * if payment is stripe, this is the charge id
+     * if payment is wave or orange, this is the transaction id
      */
-    stripeId?: Types.ObjectId;
+    transactionId?: Types.ObjectId;
 
     /**
      * The type of subscription the user has (optional).

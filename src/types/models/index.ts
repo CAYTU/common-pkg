@@ -1306,11 +1306,6 @@ declare namespace CTypes {
     type: TaskType;
 
     /**
-     * Fare associated with the task.
-     */
-    fare?: number;
-
-    /**
      * Code to deactivate or open the robot.
      */
     code?: number;
@@ -1321,9 +1316,9 @@ declare namespace CTypes {
     operator?: Types.ObjectId;
 
     /**
-     * Reference to a Customer model.
+     * Reference to the user who created the task.
      */
-    customer?: Types.ObjectId;
+    owner?: Types.ObjectId;
 
     /**
      * Reference to a Robot model.
@@ -1336,40 +1331,20 @@ declare namespace CTypes {
     status?: TaskStatus;
 
     /**
-     * Reference to a Task Status Tracker.
-     * This is used to track the status of the task.
+     * The date when the task was started and finished.
+     *
+     * Started date is the date when the task was run.
+     * Finished date is the date when the task was completed or failed.
      */
-    statusTracker?: {
-      currentStatus: TaskStatus;
-      duration?: number;
-      startedAt?: Date;
-      completedAt?: Date;
-    };
-
-    /**
-     * Duration of the task.
-     */
+    startedAt?: Date;
+    finishedAt?: Date;
+    /** Duration of the task */
     duration?: number;
 
     /**
-     * Number of assignment trial for a robot.
+     * Number of assignment trial for a device.
      */
-    robotAssignmentTrial?: number;
-
-    /**
-     * Indicates whether the task has failed.
-     */
-    hasFailed?: boolean;
-
-    /**
-     * Tells why the task failed.
-     */
-    failureReason?: string;
-
-    /**
-     * Number of times the task has failed.
-     */
-    failureCount?: number;
+    deviceAssignmentTrial?: number;
 
     /**
      * Reference to a Delivery task.

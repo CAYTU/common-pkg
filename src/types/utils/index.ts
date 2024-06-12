@@ -40,7 +40,6 @@ export enum TaskStatus {
   Running = "running",
 
   /** When the task is in simulation mode. */
-  SimulationStarting = "simulation:starting",
   SimulationRunning = "simulation:running",
   SimulationCompleted = "simulation:completed",
   SimulationFailed = "simulation:failed",
@@ -48,20 +47,10 @@ export enum TaskStatus {
   SimulationTerminating = "simulation:terminating",
   SimulationCanceled = "simulation:canceled",
 
-  /** When the robot has reached the ending point or has finished the task duration. */
-  Arrived = "arrived",
   /** If the task has been canceled before reaching the final goal. */
   Cancelled = "cancelled",
-  /** When the payment service failed to collect money for the task. */
-  PaymentFailed = "payment:failed",
-  /** When the task has been refunded. */
-  Refunded = "refunded",
-  /** Scheduled time for the task. */
-  Scheduled = "scheduled",
   /** When the task has been completed. */
   Completed = "completed",
-  /** When a problem has been detected. */
-  Failure = "failure",
   /** When the task has been deleted. */
   Deleted = "deleted",
 }
@@ -227,8 +216,6 @@ export enum SimulationJobState {
   Init = "init",
   /** The simulation job is pending and waiting to start. */
   Pending = "pending",
-  /** The simulation job is starting. */
-  Starting = "starting",
   /** The simulation job is currently running. */
   Running = "running",
   /** The simulation job has been terminated. */
@@ -264,34 +251,17 @@ export enum SubscriptionTier {
   Enterprise = "enterprise",
 }
 
-export enum SubscriptionType {
-  Monthly = "monthly",
-  Annually = "annually",
-  AsYouGo = "asYouGo",
-}
-
 export enum PaymentStatus {
-  Created = "created",
   Pending = "pending",
   Succeeded = "succeeded",
   Failed = "failed",
-  Refunded = "refunded",
-  Captured = "captured",
 }
 
 export enum PaymentMethod {
-  Card = "card",
-  Bank = "bank",
-  Cash = "cash",
-  Paypal = "paypal",
-  ApplePay = "applePay",
-  GooglePay = "googlePay",
-  Alipay = "alipay",
-  Stripe = "stripe",
+  CreditCard = "creditCard",
   // Local payment method
   Wave = "wave",
   OrangeMoney = "orangeMoney",
-  Wari = "wari",
 }
 
 export enum OrganizationType {

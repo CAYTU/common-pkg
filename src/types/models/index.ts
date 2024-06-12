@@ -4,7 +4,6 @@ import {
   OperatorStatus,
   PaymentMethod,
   PaymentStatus,
-  SubscriptionType,
   RoboticPlatform,
   RobotStates,
   SimulationJobState,
@@ -580,17 +579,12 @@ declare namespace CTypes {
     description?: string;
 
     /**
-     * Unique identifier of the transaction. 
+     * Unique identifier of the transaction.
      * This is used to track the transaction in the payment gateway.
      * if payment is stripe, this is the charge id
      * if payment is wave or orange, this is the transaction id
      */
     transactionId?: Types.ObjectId;
-
-    /**
-     * The type of subscription the user has (optional).
-     */
-    subscriptionType?: SubscriptionType;
 
     /**
      * The tier of subscription the user has (optional).
@@ -609,11 +603,6 @@ declare namespace CTypes {
      * was used belongs to an organization, then the payment is made to the organization
      */
     organizationId?: Types.ObjectId;
-
-    /**
-     * The type of subscription the user wants to change to
-     */
-    subscriptionChangeType?: SubscriptionType;
 
     /**
      *  The tier of subscription the user wants to change to

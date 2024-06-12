@@ -1541,26 +1541,6 @@ declare namespace CTypes {
     status?: UserStatuses;
 
     /**
-     * The overall rating of the user (optional).
-     */
-    overallRating?: number;
-
-    /**
-     * The total time used by the user (optional).
-     */
-    overallTimeUsed?: number;
-
-    /**
-     * The total count of tasks completed by the user (optional).
-     */
-    overallTaskCount?: number;
-
-    /**
-     * The geographical position of the user (optional).
-     */
-    position?: [number, number];
-
-    /**
      * The organization to which the user belongs (optional).
      */
     ownedOrganizationId?: Types.ObjectId;
@@ -1578,11 +1558,6 @@ declare namespace CTypes {
       roles: UserRole[];
       allowedTaskTypes?: TaskType[] | string[];
     }[];
-
-    /**
-     * The payment object associated with the user (optional).
-     */
-    paymentId?: Types.ObjectId;
 
     /**
      * Indicates whether the user is currently online (optional).

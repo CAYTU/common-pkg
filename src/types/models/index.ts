@@ -16,7 +16,7 @@ import {
   OrganizationType,
   DeviceType,
   DeviceCategory,
-  SubscriptionTier,
+  SubscriptionType,
   ItineraryType,
   OrderStatus,
   TelepresenceType,
@@ -597,14 +597,17 @@ declare namespace CTypes {
     transactionId?: string;
 
     /**
-     * The tier of subscription the user has (optional).
+     * The type of subscription the user is paying for.
      */
-    subscriptionTier?: SubscriptionTier;
-
+    subscriptionType?: SubscriptionType;
     /**
-     * A boolean to tell if the user wants a
-     * change of plan
+     * The 2 next properties are used when we want to do
+     * a manual change of subscription type
+     *
+     * subscriptionChangeType: The type of subscription wants to change to
+     * requestSubscriptionChange: A boolean to tell if the user wants a change of plan
      */
+    subscriptionChangeType?: SubscriptionType;
     requestSubscriptionChange?: boolean;
 
     /**
@@ -613,11 +616,6 @@ declare namespace CTypes {
      * was used belongs to an organization, then the payment is made to the organization
      */
     organizationId?: Types.ObjectId;
-
-    /**
-     *  The tier of subscription the user wants to change to
-     */
-    subscriptionChangeTier?: SubscriptionTier;
   }
 
   /**
@@ -1519,6 +1517,11 @@ declare namespace CTypes {
      * The status of the user.
      */
     status?: UserStatuses;
+
+    /**
+     * Current subscription status of the user.
+     */
+    subscriptionType?: SubscriptionType;
 
     /**
      * The organization to which the user belongs (optional).

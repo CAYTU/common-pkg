@@ -480,9 +480,12 @@ declare namespace CTypes {
     membersCount?: number;
 
     /**
-     * The maximum number of members allowed in the organization (optional).
+     * The total amount of credit units in the organization (optional).
+     *
+     * @remarks Credit units are used to pay for services in the system.
+     * For example, a user can use credit units to pay for a subscription.
      */
-    memberLimitReached?: boolean;
+    totalCreditUnits?: number;
 
     /**
      * The unique identifier of the owner of the organization (optional).
@@ -561,7 +564,7 @@ declare namespace CTypes {
     /**
      * The amount of the payment in credit units.
      */
-    creditUnit?: number;
+    creditUnits?: number;
 
     /**
      * The currency of the payment.
@@ -582,11 +585,6 @@ declare namespace CTypes {
      * Whether the user is subscribed to a plan or not.
      */
     isSubscribed?: boolean;
-
-    /**
-     * A description of the payment (optional).
-     */
-    description?: string;
 
     /**
      * Unique identifier of the transaction.

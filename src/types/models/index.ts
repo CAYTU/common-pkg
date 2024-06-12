@@ -179,6 +179,11 @@ declare namespace CTypes {
 
   export interface OperatorInterface extends IMongooseObjectExt {
     /**
+     * The overall rating of the user (optional).
+     */
+    overallRating?: number;
+
+    /**
      * The type of identity document used by the operator.
      */
     identityType?: IdentityType;

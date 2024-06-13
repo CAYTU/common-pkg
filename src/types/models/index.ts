@@ -489,6 +489,11 @@ declare namespace CTypes {
     totalCreditUnits?: number;
 
     /**
+     * The subscription ID of the organization (optional).
+     */
+    subscriptionId?: Types.ObjectId;
+
+    /**
      * The unique identifier of the owner of the organization (optional).
      */
     owner?: Types.ObjectId;
@@ -1566,11 +1571,6 @@ declare namespace CTypes {
      * The status of the user.
      */
     status?: UserStatuses;
-
-    /**
-     * Current subscription status of the user.
-     */
-    subscriptionType?: SubscriptionType;
 
     /**
      * The organization to which the user belongs (optional).

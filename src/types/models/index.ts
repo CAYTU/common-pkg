@@ -1467,6 +1467,21 @@ declare namespace CTypes {
     email: string;
 
     /**
+     * The country of the user.
+     */
+    country?: string;
+
+    /**
+     * The city of the user.
+     */
+    city?: string;
+
+    /**
+     * The address of the user.
+     */
+    address?: string;
+
+    /**
      * Indicates if the user's account is verified (optional).
      */
     isVerified?: boolean;

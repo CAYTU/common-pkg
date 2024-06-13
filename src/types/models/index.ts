@@ -543,7 +543,7 @@ declare namespace CTypes {
     /**
      * The unique identifier of the organization to which the payment is made.
      */
-    organizationId?: Types.ObjectId;
+    organizationId: Types.ObjectId;
 
     /**
      * The unique identifier of the order for which the payment is made.
@@ -610,7 +610,7 @@ declare namespace CTypes {
     description?: string;
   }
 
-  export interface SubscriptionInterface extends Document {
+  export interface SubscriptionInterface extends IMongooseObjectExt {
     /**
      * The unique identifier of the organization to which the subscription belongs.
      */
@@ -639,7 +639,7 @@ declare namespace CTypes {
     /**
      * The end date of the subscription.
      */
-    endDate: Date;
+    endDate?: Date;
 
     /**
      * The type of subscription the user wants to change to.

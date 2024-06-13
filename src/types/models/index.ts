@@ -17,6 +17,7 @@ import {
   DeviceType,
   DeviceCategory,
   SubscriptionType,
+  SubscriptionStatus,
   ItineraryType,
   OrderStatus,
   TelepresenceType,
@@ -538,82 +539,117 @@ declare namespace CTypes {
   /**
    * Payment
    */
-  export interface PaymentInterface extends IMongooseObjectExt {
+  export interface PaymentInterface extends Document {
     /**
-     * The unique identifier of the user making the payment.
-     * The organization is already known from the user.
+     * The unique identifier of the organization to which the payment is made.
      */
-    user?: Types.ObjectId;
+    organizationId?: Types.ObjectId;
 
     /**
-     * The id of the order for which the payment is made.
+     * The unique identifier of the order for which the payment is made.
      */
     orderId?: Types.ObjectId;
 
     /**
-     * If payment is not from a user who is registered in the system
-     * then the user must be a transient user.
+     * The unique identifier of the transient user if the payment is not from a registered user.
      */
-    transientUser?: Types.ObjectId;
+    transientUserId?: Types.ObjectId;
 
     /**
      * The amount of the payment.
      */
-    amount?: number;
+    amount: number;
 
     /**
-     * The amount of the payment in credit units.
+     * The equivalent amount in credit units.
      */
     creditUnits?: number;
 
     /**
      * The currency of the payment.
      */
-    currency?: string;
+    currency: string;
 
     /**
      * The status of the payment.
      */
-    status?: PaymentStatus;
+    paymentStatus: PaymentStatus;
 
     /**
      * The method of payment.
      */
-    paymentMethod?: PaymentMethod; // Can be "card" or "wallet"
+    paymentMethod: PaymentMethod; // e.g., "CreditCard", "OrangeMoney", "Wave"
 
     /**
      * Whether the user is subscribed to a plan or not.
      */
-    isSubscribed?: boolean;
+    isSubscribed: boolean;
 
     /**
-     * Unique identifier of the transaction.
-     * This is used to track the transaction in the payment gateway.
-     * if payment is stripe, this is the charge id
-     * if payment is wave or orange, this is the transaction id
+     * The unique identifier of the transaction.
+     * For Stripe, this is the charge ID.
+     * For Wave or Orange Money, this is the transaction ID.
      */
-    transactionId?: string;
+    transactionId: string;
 
     /**
-     * The type of subscription the user is paying for.
+     * The URL for payment if the payment method requires scanning a code.
+     * This applies to methods like Orange Money and Wave.
      */
-    subscriptionType?: SubscriptionType;
-    /**
-     * The 2 next properties are used when we want to do
-     * a manual change of subscription type
-     *
-     * subscriptionChangeType: The type of subscription wants to change to
-     * requestSubscriptionChange: A boolean to tell if the user wants a change of plan
-     */
-    subscriptionChangeType?: SubscriptionType;
-    requestSubscriptionChange?: boolean;
+    paymentUrl?: string;
 
     /**
-     * Organization to which the payment is made to. (optional)
-     * Let's say a customer is paying for a service for which the device that
-     * was used belongs to an organization, then the payment is made to the organization
+     * The code received after scanning the payment URL.
+     * This applies to methods like Orange Money and Wave.
      */
-    organizationId?: Types.ObjectId;
+    paymentCode?: string;
+
+    /**
+     * A description or memo for the payment.
+     */
+    description?: string;
+  }
+
+  export interface SubscriptionInterface extends Document {
+    /**
+     * The unique identifier of the organization to which the subscription belongs.
+     */
+    organizationId: Types.ObjectId;
+
+    /**
+     * The payment method used for the subscription.
+     */
+    paymentMethod: PaymentMethod;
+
+    /**
+     * The type of subscription.
+     */
+    subscriptionType: SubscriptionType;
+
+    /**
+     * The status of the subscription.
+     */
+    subscriptionStatus: SubscriptionStatus;
+
+    /**
+     * The start date of the subscription.
+     */
+    startDate: Date;
+
+    /**
+     * The end date of the subscription.
+     */
+    endDate: Date;
+
+    /**
+     * The type of subscription the user wants to change to.
+     */
+    requestedChangeType?: SubscriptionType;
+
+    /**
+     * Whether the user has requested a change of plan.
+     */
+    hasRequestedChange?: boolean;
   }
 
   /**

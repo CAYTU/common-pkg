@@ -251,6 +251,15 @@ export enum SubscriptionType {
   Enterprise = "enterprise",
 }
 
+/**
+ * Enumerates the possible subscription statuses for a service.
+ */
+export enum SubscriptionStatus {
+  Active = "active",
+  Inactive = "inactive",
+  Canceled = "canceled",
+}
+
 export enum PaymentStatus {
   Pending = "pending",
   Succeeded = "succeeded",

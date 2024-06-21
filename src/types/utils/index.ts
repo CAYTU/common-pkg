@@ -247,8 +247,9 @@ export enum RoboticPlatform {
  */
 export enum SubscriptionType {
   Free = "free",
-  Billing = "billing",
+  Professional = "professional",
   Enterprise = "enterprise",
+  PayAsYouGo = "payAsYouGo",
 }
 
 /**

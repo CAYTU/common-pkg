@@ -544,7 +544,7 @@ declare namespace CTypes {
   /**
    * Payment
    */
-  export interface PaymentInterface extends Document {
+  export interface PaymentInterface extends IMongooseObjectExt {
     /**
      * The unique identifier of the organization to which the payment is made.
      */

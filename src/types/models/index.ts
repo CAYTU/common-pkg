@@ -624,7 +624,7 @@ declare namespace CTypes {
     /**
      * The payment method used for the subscription.
      */
-    paymentMethod: PaymentMethod;
+    paymentMethod?: PaymentMethod;
 
     /**
      * The type of subscription.
@@ -634,12 +634,12 @@ declare namespace CTypes {
     /**
      * The status of the subscription.
      */
-    subscriptionStatus: SubscriptionStatus;
+    subscriptionStatus?: SubscriptionStatus;
 
     /**
      * The start date of the subscription.
      */
-    startDate: Date;
+    startDate?: Date;
 
     /**
      * The end date of the subscription.

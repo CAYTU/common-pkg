@@ -617,11 +617,6 @@ declare namespace CTypes {
 
   export interface SubscriptionInterface extends IMongooseObjectExt {
     /**
-     * The unique identifier of the organization to which the subscription belongs.
-     */
-    organizationId: Types.ObjectId;
-
-    /**
      * The payment method used for the subscription.
      */
     paymentMethod?: PaymentMethod;

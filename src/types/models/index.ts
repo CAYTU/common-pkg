@@ -480,13 +480,8 @@ declare namespace CTypes {
      */
     membersCount?: number;
 
-    /**
-     * The total amount of credit units in the organization (optional).
-     *
-     * @remarks Credit units are used to pay for services in the system.
-     * For example, a user can use credit units to pay for a subscription.
-     */
-    totalCreditUnits?: number;
+    remainingCredits: number;
+    initialCredits: number;
 
     /**
      * The subscription ID of the organization (optional).

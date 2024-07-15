@@ -645,6 +645,8 @@ declare namespace CTypes {
      * Whether the user has requested a change of plan.
      */
     hasRequestedChange?: boolean;
+
+    transactionId?: string; // e.g., Stripe sub ID
   }
 
   /**

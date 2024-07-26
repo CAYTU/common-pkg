@@ -44,6 +44,7 @@ interface OperatorAddons {
  */
 interface AddonOwner {
   ownerId?: string;
+  organizationId?: string;
 }
 
 /**

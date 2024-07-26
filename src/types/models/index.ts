@@ -45,28 +45,41 @@ declare namespace CTypes {
     createdAt?: Date;
   }
 
+  export interface AvatarConfig extends IMongooseObjectExt {
+    name: string;
+    image?: string;
+    description?: string;
+
+    stackName: string;
+    ec2IAMRole: string;
+    ec2KeyPair: string;
+    ec2SecurityGroups: string;
+    s3Bucket: string;
+    templateKey: string;
+    amiId: string;
+    instanceType: string;
+    lambdaRoleArn: string;
+    lambdaZipKey: string;
+    documentName: string;
+    instanceCommands?: string;
+    s3TriggerBucketArn: string;
+    sourceAccount: string;
+
+    organizationId?: Types.ObjectId;
+    public?: boolean;
+  }
+
   /**
    * Interface for an avatar job.
    * @interface
    */
   export interface AvatarInterface extends IMongooseObjectExt {
-    name: string;
-    description?: string;
-
-    channelName?: string;
+    avatarId: Types.ObjectId;
     taskId?: string;
     state?: ObjectStates;
     currentUserSession?: string;
-    image?: string;
 
-    /**
-     * The organization where the simulation job belongs.
-     */
     organizationId?: Types.ObjectId;
-
-    /**
-     * Indicates whether the simulation job is public.
-     */
     public?: boolean;
   }
 

@@ -57,6 +57,7 @@ export namespace ET {
   export import TaskGetOperatorCandidateEvent = TaskEvents.TaskGetOperatorCandidateEvent;
   export import TaskAcceptedEvent = TaskEvents.TaskAcceptedEvent;
   export import TaskSimulationCreatedEvent = TaskEvents.TaskSimulationCreatedEvent;
+  export import TaskAvatarCreatedEvent = TaskEvents.TaskAvatarCreatedEvent;
 
   export import EmailLinkResendRequestEvent = EmailEvents.EmailLinkResendRequestEvent;
 

@@ -1,4 +1,14 @@
 export enum Subjects {
+  // Avatar Subjects
+  AvatarCreated = "avatar:created",
+  AvatarUpdated = "avatar:updated",
+  AvatarDeleted = "avatar:deleted",
+
+  // Avatar Config Subjects
+  AvatarConfigCreated = "avatarconfig:created",
+  AvatarConfigUpdated = "avatarconfig:updated",
+  AvatarConfigDeleted = "avatarconfig:deleted",
+
   ProductCreated = "product:created",
   ProductUpdated = "product:updated",
   ProductDeleted = "product:deleted",

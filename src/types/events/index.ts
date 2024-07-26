@@ -7,8 +7,20 @@ import * as OperatorEvents from "./operator-evt.types";
 import * as TaskEvents from "./task-evt.types";
 import * as OrganizationEvents from "./organization-evt.types";
 import * as EmailEvents from "./email-evt.types";
+import * as AvatarEvents from "./avatar-evt.types";
+import * as AvatarConfigEvents from "./avatar-config-evt.types";
 
 export namespace ET {
+  // Avatar Events
+  export import AvatarCreatedEvent = AvatarEvents.AvatarCreatedEvent;
+  export import AvatarUpdatedEvent = AvatarEvents.AvatarUpdatedEvent;
+  export import AvatarDeletedEvent = AvatarEvents.AvatarDeletedEvent;
+
+  // Avatar Config Events
+  export import AvatarConfigCreatedEvent = AvatarConfigEvents.AvatarConfigCreatedEvent;
+  export import AvatarConfigUpdatedEvent = AvatarConfigEvents.AvatarConfigUpdatedEvent;
+  export import AvatarConfigDeletedEvent = AvatarConfigEvents.AvatarConfigDeletedEvent;
+
   // Export individual events directly under ET
   export import OrganizationUpdatedEvent = OrganizationEvents.OrganizationUpdatedEvent;
   export import OrganizationCreatedEvent = OrganizationEvents.OrganizationCreatedEvent;
@@ -54,6 +66,4 @@ export namespace ET {
   export import OperatorDeletedEvent = OperatorEvents.OperatorDeletedEvent;
   export import OperatorAssignedEvent = OperatorEvents.OperatorAssignedEvent;
   export import OperatorRequestedEvent = OperatorEvents.OperatorRequestedEvent;
-
-  // Add other events here similarly if needed
 }

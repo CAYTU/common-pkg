@@ -41,6 +41,7 @@
         "jsonwebtoken": "^9.0.0",
         "mongoose": "^6.6.2",
         "mongoose-geojson-schema": "^2.2.3",
+        "nats": "^2.28.1",
         "node-nats-streaming": "^0.3.2"
     }
 }

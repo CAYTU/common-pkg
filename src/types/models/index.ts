@@ -51,22 +51,22 @@ declare namespace CTypes {
     description?: string;
 
     stackName: string;
-    ec2IAMRole: string;
-    ec2KeyPair: string;
-    ec2SecurityGroups: string;
-    s3Bucket: string;
-    templateKey: string;
-    amiId: string;
-    instanceType: string;
-    lambdaRoleArn: string;
-    lambdaZipKey: string;
-    documentName: string;
+    ec2IAMRole?: string;
+    ec2KeyPair?: string;
+    ec2SecurityGroups?: string;
+    s3Bucket?: string;
+    templateKey?: string;
+    amiId?: string;
+    instanceType?: string;
+    lambdaRoleArn?: string;
+    lambdaZipKey?: string;
+    documentName?: string;
     instanceCommands?: string;
-    s3TriggerBucketArn: string;
-    sourceAccount: string;
+    s3TriggerBucketArn?: string;
+    sourceAccount?: string;
 
-    organizationId?: Types.ObjectId;
-    public?: boolean;
+    organizationId: Types.ObjectId;
+    public: boolean;
   }
 
   /**

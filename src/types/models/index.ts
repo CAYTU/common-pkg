@@ -728,6 +728,11 @@ declare namespace CTypes {
     status?: RobotStatus;
 
     /**
+     * A notifier when an operator is requesting to assign a task to the robot.
+     */
+    assignmentRequest?: boolean;
+
+    /**
      * The total count of tasks associated with the robot (optional).
      */
     taskCount?: number;
@@ -769,6 +774,18 @@ declare namespace CTypes {
      * The unique identifier of the current task assigned to the robot (optional).
      */
     currentTask?: Types.ObjectId;
+  }
+
+  export interface DeviceAssignedTrackingInterface extends IMongooseObjectExt {
+    /**
+     * The unique identifier of the robot.
+     */
+    deviceId: Types.ObjectId;
+
+    /**
+     * The unique identifier of the task assigned to the robot.
+     */
+    taskId: Types.ObjectId;
   }
 
   /**

@@ -8,7 +8,7 @@ import * as TaskEvents from "./task-evt.types";
 import * as OrganizationEvents from "./organization-evt.types";
 import * as EmailEvents from "./email-evt.types";
 import * as AvatarEvents from "./avatar-evt.types";
-import * as AvatarConfigEvents from "./avatar-config-evt.types";
+import * as AvatarInstanceEvents from "./avatar-instance-evt.types";
 
 export namespace ET {
   // Avatar Events
@@ -16,10 +16,11 @@ export namespace ET {
   export import AvatarUpdatedEvent = AvatarEvents.AvatarUpdatedEvent;
   export import AvatarDeletedEvent = AvatarEvents.AvatarDeletedEvent;
 
-  // Avatar Config Events
-  export import AvatarConfigCreatedEvent = AvatarConfigEvents.AvatarConfigCreatedEvent;
-  export import AvatarConfigUpdatedEvent = AvatarConfigEvents.AvatarConfigUpdatedEvent;
-  export import AvatarConfigDeletedEvent = AvatarConfigEvents.AvatarConfigDeletedEvent;
+  // Avatar Instance Events
+  export import AvatarInstanceCreatedEvent = AvatarInstanceEvents.AvatarInstanceCreatedEvent;
+  export import AvatarInstanceUpdatedEvent = AvatarInstanceEvents.AvatarInstanceUpdatedEvent;
+  export import AvatarInstanceDeletedEvent = AvatarInstanceEvents.AvatarInstanceDeletedEvent;
+  export import AvatarInstanceTerminatingEvent = AvatarInstanceEvents.AvatarInstanceTerminatingEvent;
 
   // Export individual events directly under ET
   export import OrganizationUpdatedEvent = OrganizationEvents.OrganizationUpdatedEvent;

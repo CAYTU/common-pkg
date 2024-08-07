@@ -29,10 +29,20 @@ import {
 
 declare namespace CTypes {
   /**
-   * Common properties for objects stored in MongoDB with extended data.
+   * Represents a template setup data object for an avatar.
    */
+  export interface TemplateSetupData {
+    apiKey?: string;
+    transcription_model?: string;
+    completion_model?: string;
+    speech_model?: string;
+    voice_model?: string;
+    think_mode?: string;
+    conversion_history?: string;
+  }
+
   /**
-   * Represents an object with extended properties typically used in Mongoose models.
+   * Common properties for objects stored in MongoDB with extended data.
    */
   export interface IMongooseObjectExt {
     /**
@@ -75,7 +85,7 @@ declare namespace CTypes {
    * @interface
    */
   export interface AvatarInstanceInterface extends IMongooseObjectExt {
-    avatarConfigId: Types.ObjectId;
+    avatarId: Types.ObjectId;
     taskId?: string;
     state?: ObjectStates;
     templateSetup?: TemplateSetupOptions;
@@ -83,7 +93,7 @@ declare namespace CTypes {
 
     organizationId?: Types.ObjectId;
     sharedWith?: Types.ObjectId[];
-    
+
     public?: boolean;
   }
 

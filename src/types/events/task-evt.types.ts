@@ -5,6 +5,7 @@
 
 import { Subjects } from "../../nats-events/subjects";
 import CTypes from "../models";
+import { TemplateSetupOptions } from "../utils";
 import { AddonOwner, OnlyRequired } from "./common";
 
 /**
@@ -141,7 +142,7 @@ interface TaskSimulationCreatedEvent {
  * @description Defines a TypeScript interface for an event when a task simulation is created.
  * @property {Subjects.TaskAvatarCreated} subject - The subject type of the event.
  * @property {object} data - The data payload of the event.
- * @property {string} [data.avatarConfigId] - The ID of the avatar configuration (optional).
+ * @property {string} [data.avatarId] - The ID of the avatar configuration (optional).
  * @property {string} [data.taskId] - The ID of the task related to the avatar (optional).
  * @property {number} data.version - The version number of the task.
  * @property {AddonOwner} data - The addon owner details.
@@ -149,8 +150,10 @@ interface TaskSimulationCreatedEvent {
 interface TaskAvatarCreatedEvent {
   subject: Subjects.TaskAvatarCreated;
   data: {
-    avatarConfigId?: string;
+    avatarId?: string;
     taskId?: string;
+    setupData?: CTypes.TemplateSetupData;
+    templateSetupOption?: TemplateSetupOptions;
     version: number;
   } & AddonOwner;
 }

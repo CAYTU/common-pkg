@@ -24,6 +24,7 @@ import {
   RobotStatus,
   ConnectViewerType,
   ObjectStates,
+  TemplateSetupOptions,
 } from "../utils";
 
 declare namespace CTypes {
@@ -45,7 +46,7 @@ declare namespace CTypes {
     createdAt?: Date;
   }
 
-  export interface AvatarConfig extends IMongooseObjectExt {
+  export interface AvatarInterface extends IMongooseObjectExt {
     name: string;
     image?: string;
     description?: string;
@@ -73,13 +74,16 @@ declare namespace CTypes {
    * Interface for an avatar job.
    * @interface
    */
-  export interface AvatarInterface extends IMongooseObjectExt {
+  export interface AvatarInstanceInterface extends IMongooseObjectExt {
     avatarConfigId: Types.ObjectId;
     taskId?: string;
     state?: ObjectStates;
+    templateSetup?: TemplateSetupOptions;
     currentUserSession?: string;
 
     organizationId?: Types.ObjectId;
+    sharedWith?: Types.ObjectId[];
+    
     public?: boolean;
   }
 

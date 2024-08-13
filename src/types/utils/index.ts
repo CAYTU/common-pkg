@@ -358,6 +358,11 @@ export enum DeviceCategory {
    * Agricultural Devices
    */
   AgBOT = "agbot",
+
+  /**
+   * Metering Devices
+   */
+  Meter = "meter",
 }
 
 /**

@@ -788,6 +788,8 @@ declare namespace CTypes {
      * The unique identifier of the current task assigned to the robot (optional).
      */
     currentTask?: Types.ObjectId;
+
+    metadata?: any;
   }
 
   export interface DeviceAssignedTrackingInterface extends IMongooseObjectExt {

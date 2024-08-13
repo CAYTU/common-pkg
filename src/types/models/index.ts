@@ -69,6 +69,7 @@ declare namespace CTypes {
     templateKey?: string;
     amiId?: string;
     instanceType?: string;
+    instanceId?: string;
     lambdaRoleArn?: string;
     lambdaZipKey?: string;
     documentName?: string;

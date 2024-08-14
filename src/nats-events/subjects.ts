@@ -70,6 +70,9 @@ export enum Subjects {
   ZoneCreated = "zone:created",
   ZoneUpdated = "zone:updated",
   ZoneDeleted = "zone:deleted",
+  ZoneRequestCreateInitiate = "zone:request:create:initiate",
+  ZoneRequestCreateDone = "zone:request:create:done",
+
   // Vendor Subjects
   VendorCreated = "vendor:created",
   VendorUpdated = "vendor:updated",

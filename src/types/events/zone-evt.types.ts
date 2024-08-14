@@ -56,6 +56,7 @@ interface ZoneRequestCreateInitiateEvent {
   data: {
     serviceObjId: string;
     service: Services;
+    organizationId: string;
     location: { lat: number; lng: number };
     version: number;
   };
@@ -73,7 +74,6 @@ interface ZoneRequestCreateDoneEvent {
     serviceObjId: string;
     service: Services;
     zoneId: string;
-    location: { lat: number; lng: number };
     version: number;
   };
 }

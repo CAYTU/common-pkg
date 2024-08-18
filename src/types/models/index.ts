@@ -38,6 +38,8 @@ declare namespace CTypes {
     speech_model?: string;
     voice_model?: string;
     think_mode?: string;
+    fileContextType?: FileContextType;
+    fileContextUrlKey?: string;
     conversion_history?: string;
   }
 
@@ -93,9 +95,13 @@ declare namespace CTypes {
     state?: ObjectStates;
 
     templateSetup?: TemplateSetupOptions;
+
+    /**
+     * In case the service needs to know it during setup
+     */
     fileContextType?: FileContextType;
     templateSetupS3UrlKey?: string;
-    
+
     currentUserSession?: string;
 
     organizationId?: Types.ObjectId;

@@ -81,6 +81,8 @@ declare namespace CTypes {
     public: boolean;
   }
 
+  export type FileContextType = "text" | "audio" | "file";
+
   /**
    * Interface for an avatar job.
    * @interface
@@ -89,7 +91,11 @@ declare namespace CTypes {
     avatarId: Types.ObjectId;
     taskId?: string;
     state?: ObjectStates;
+
     templateSetup?: TemplateSetupOptions;
+    fileContextType?: FileContextType;
+    templateSetupS3UrlKey?: string;
+    
     currentUserSession?: string;
 
     organizationId?: Types.ObjectId;

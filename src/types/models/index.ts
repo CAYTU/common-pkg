@@ -71,13 +71,12 @@ declare namespace CTypes {
     templateKey?: string;
     amiId?: string;
     instanceType?: string;
-    instanceId?: string;
     lambdaRoleArn?: string;
     lambdaZipKey?: string;
     documentName?: string;
-    instanceCommands?: string;
-    s3TriggerBucketArn?: string;
     sourceAccount?: string;
+
+    subnetIds?: string[];
 
     organizationId: Types.ObjectId;
     public: boolean;
@@ -91,6 +90,7 @@ declare namespace CTypes {
    */
   export interface AvatarInstanceInterface extends IMongooseObjectExt {
     avatarId: Types.ObjectId;
+    instanceId: string;
     taskId?: string;
     state?: ObjectStates;
 

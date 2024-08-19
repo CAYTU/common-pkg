@@ -64,6 +64,9 @@ declare namespace CTypes {
     description?: string;
 
     stackName: string;
+
+    nonConfigurable?: boolean;
+
     ec2IAMRole?: string;
     ec2KeyPair?: string;
     ec2SecurityGroups?: string[];
@@ -128,42 +131,6 @@ declare namespace CTypes {
      * The wallet balance of the customer. (Optional)
      */
     wallet?: number;
-  }
-
-  /*********************************************
-   * CustomerRepInterface: This is the interface for the customer replica
-   * It is used to duplicate the customer model in the database of other services
-   *******************************************/
-  export interface CustomerRepInterface extends IMongooseObjectExt {
-    /**
-     * Unique identifier for the customer.
-     */
-    id: string;
-
-    /**
-     * The unique identifier of the associated user.
-     */
-    user: Types.ObjectId;
-  }
-
-  /**
-   * Represents an event related to a customer.
-   */
-  export interface CustomerEventInterface {
-    /**
-     * Unique identifier for the event.
-     */
-    id: string;
-
-    /**
-     * The unique identifier of the associated user.
-     */
-    user: Types.ObjectId;
-
-    /**
-     * The version number of the event.
-     */
-    version: number;
   }
 
   /******************************************************************
@@ -1646,6 +1613,8 @@ declare namespace CTypes {
      * Indicates whether the user is currently online (optional).
      */
     isOnline?: boolean;
+
+    lastLogin?: Date;
   }
 
   /**

@@ -66,7 +66,7 @@ declare namespace CTypes {
     stackName: string;
     ec2IAMRole?: string;
     ec2KeyPair?: string;
-    ec2SecurityGroups?: string;
+    ec2SecurityGroups?: string[];
     s3Bucket?: string;
     templateKey?: string;
     amiId?: string;

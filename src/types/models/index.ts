@@ -90,7 +90,7 @@ declare namespace CTypes {
    */
   export interface AvatarInstanceInterface extends IMongooseObjectExt {
     avatarId: Types.ObjectId;
-    instanceId: string;
+    instanceId?: string;
     taskId?: string;
     state?: ObjectStates;
 

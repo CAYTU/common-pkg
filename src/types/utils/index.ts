@@ -73,6 +73,8 @@ export enum TaskType {
   Telepresence = "telepresence",
   /** Connect task type */
   Connect = "connect",
+  // TODO: Remove this in the future
+  Custom = "custom",
 }
 
 /**

@@ -67,6 +67,8 @@ export enum TaskType {
   Inspection = "inspection",
   /** Run a simulation. */
   Simulation = "simulation",
+  /** Avatar Task */
+  Avatar = "avatar",
   /** If the task is for a flight. */
   Flight = "flight",
   /** Telepresence task type */

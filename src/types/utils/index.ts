@@ -217,6 +217,11 @@ export enum ObjectStates {
   Completed = "completed",
   /** The simulation job has failed to execute. */
   Failed = "failed",
+
+  // Avatar states
+  ShuttingDown = "shuttingDown",
+  Stopping = "stopping",
+  Stopped = "stopped",
 }
 
 /**

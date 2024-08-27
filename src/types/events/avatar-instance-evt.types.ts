@@ -36,6 +36,7 @@ interface AvatarInstanceUpdatedEvent {
   subject: Subjects.AvatarInstanceUpdated;
   data: Partial<CTypes.AvatarInstanceInterface> & {
     id: string;
+    taskId?: string;
     version: number;
   };
 }
@@ -51,6 +52,8 @@ interface AvatarInstanceDeletedEvent {
   subject: Subjects.AvatarInstanceDeleted;
   data: {
     id: string;
+    taskId?: string;
+    version: number;
   };
 }
 
@@ -65,6 +68,8 @@ interface AvatarInstanceTerminatingEvent {
   subject: Subjects.AvatarInstanceTerminating;
   data: {
     id: string;
+    taskId?: string;
+    version: number;
   };
 }
 

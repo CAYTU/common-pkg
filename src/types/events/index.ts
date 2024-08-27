@@ -21,6 +21,8 @@ export namespace ET {
   export import AvatarInstanceCreatedEvent = AvatarInstanceEvents.AvatarInstanceCreatedEvent;
   export import AvatarInstanceUpdatedEvent = AvatarInstanceEvents.AvatarInstanceUpdatedEvent;
   export import AvatarInstanceDeletedEvent = AvatarInstanceEvents.AvatarInstanceDeletedEvent;
+  export import AvatarInstanceTerminatedEvent = AvatarInstanceEvents.AvatarInstanceTerminatedEvent;
+  export import AvatarInstanceFailedEvent = AvatarInstanceEvents.AvatarInstanceFailedEvent;
   export import AvatarInstanceTerminatingEvent = AvatarInstanceEvents.AvatarInstanceTerminatingEvent;
 
   // Export individual events directly under ET

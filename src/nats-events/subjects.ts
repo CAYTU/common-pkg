@@ -8,6 +8,8 @@ export enum Subjects {
   AvatarInstanceCreated = "avatar:instance:created",
   AvatarInstanceUpdated = "avatar:instance:updated",
   AvatarInstanceDeleted = "avatar:instance:deleted",
+  AvatarInstanceTerminated = "avatar:instance:terminated",
+  AvatarInstanceFailed = "avatar:instance:failed",
   AvatarInstanceTerminating = "avatar:instance:terminating",
 
   ProductCreated = "product:created",

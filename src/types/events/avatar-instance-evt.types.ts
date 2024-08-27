@@ -73,9 +73,44 @@ interface AvatarInstanceTerminatingEvent {
   };
 }
 
+/**
+ * @interface AvatarInstanceFailedEvent
+ * @description Defines a TypeScript interface for an event when an avatar instance has failed.
+ * @property {Subjects.AvatarInstanceFailed} subject - The subject type of the event.
+ * @property {object} data - The data payload of the event.
+ * @property {string} data.id - The ID of the avatar instance.
+ */
+interface AvatarInstanceFailedEvent {
+  subject: Subjects.AvatarInstanceFailed;
+  data: {
+    id: string;
+    taskId?: string;
+    reason?: string;
+    version: number;
+  };
+}
+
+/**
+ * @interface AvatarInstanceTerminatedEvent
+ * @description Defines a TypeScript interface for an event when an avatar instance has terminated.
+ * @property {Subjects.AvatarInstanceTerminated} subject - The subject type of the event.
+ * @property {object} data - The data payload of the event.
+ * @property {string} data.id - The ID of the avatar instance.
+ */
+interface AvatarInstanceTerminatedEvent {
+  subject: Subjects.AvatarInstanceTerminated;
+  data: {
+    id: string;
+    taskId?: string;
+    version: number;
+  };
+}
+
 export {
   AvatarInstanceCreatedEvent,
   AvatarInstanceUpdatedEvent,
   AvatarInstanceDeletedEvent,
+  AvatarInstanceFailedEvent,
+  AvatarInstanceTerminatedEvent,
   AvatarInstanceTerminatingEvent,
 };

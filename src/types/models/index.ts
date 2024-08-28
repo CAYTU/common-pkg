@@ -767,7 +767,7 @@ declare namespace CTypes {
       lat: number;
     } & {
       type?: string;
-      coordinates: number[];
+      coordinates?: number[];
     };
 
     /**

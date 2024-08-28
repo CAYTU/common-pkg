@@ -765,7 +765,10 @@ declare namespace CTypes {
     lastRecordedLocation?: {
       lng: number;
       lat: number;
-    } & mongoose.Schema.Types.Point;
+    } & {
+      type: string;
+      coordinates: number[];
+    };
 
     /**
      * The unique identifier of the current task assigned to the robot (optional).

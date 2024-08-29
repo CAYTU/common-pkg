@@ -10,6 +10,7 @@ import * as EmailEvents from "./email-evt.types";
 import * as AvatarEvents from "./avatar-evt.types";
 import * as AvatarInstanceEvents from "./avatar-instance-evt.types";
 import * as ZoneEvents from "./zone-evt.types";
+import * as SubscriptionEvents from "./subscription-evt.types";
 
 export namespace ET {
   // Avatar Events
@@ -78,4 +79,11 @@ export namespace ET {
   export import ZoneDeletedEvent = ZoneEvents.ZoneDeletedEvent;
   export import ZoneRequestCreateInitiateEvent = ZoneEvents.ZoneRequestCreateInitiateEvent;
   export import ZoneRequestCreateDoneEvent = ZoneEvents.ZoneRequestCreateDoneEvent;
+
+  // Subscription Events
+  export import SubscriptionCreatedEvent = SubscriptionEvents.SubscriptionCreatedEvent;
+  export import SubscriptionUpdatedEvent = SubscriptionEvents.SubscriptionUpdatedEvent;
+  export import SubscriptionDeletedEvent = SubscriptionEvents.SubscriptionDeletedEvent;
+  export import SubscriptionCancelledEvent = SubscriptionEvents.SubscriptionCancelledEvent;
+  export import SubscriptionChangeRequestEvent = SubscriptionEvents.SubscriptionChangeRequestEvent;
 }

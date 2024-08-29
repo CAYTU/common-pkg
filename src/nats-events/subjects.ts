@@ -152,7 +152,7 @@ export enum Subjects {
   SubscriptionActivated = "subscription:activated",
   SubscriptionDeactivated = "subscription:deactivated",
   SubscriptionRenewed = "subscription:renewed",
-  SubscriptionCanceled = "subscription:canceled",
+  SubscriptionCancelled = "subscription:cancelled",
   SubscriptionPaymentFailed = "subscription:payment:failed",
   SubscriptionPaymentSucceeded = "subscription:payment:succeeded",
   SubscriptionPaymentCaptured = "subscription:payment:captured",

@@ -1430,6 +1430,11 @@ declare namespace CTypes {
     avatarId?: string;
 
     /**
+     * Reference to the avatar instance
+     */
+    avatarInstanceId?: Types.ObjectId;
+
+    /**
      * Reference to a Simulation job task.
      */
     simulationJob?: Types.ObjectId;
@@ -1469,8 +1474,15 @@ declare namespace CTypes {
      */
     connectTask?: Types.ObjectId;
 
+    /**
+     * A string to store the reason for the task failure
+     * or any other information related to the task.
+     */
     reason?: string;
 
+    /**
+     * Any additional data related to the task.
+     */
     payload?: any;
   }
 

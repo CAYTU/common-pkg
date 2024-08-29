@@ -53,6 +53,10 @@ export enum TaskStatus {
   Completed = "completed",
   /** When the task has been deleted. */
   Deleted = "deleted",
+
+  Failed = "failed",
+  Terminated = "terminated",
+  Stopped = "stopped",
 }
 
 /**

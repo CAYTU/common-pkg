@@ -656,6 +656,8 @@ declare namespace CTypes {
      */
     hasRequestedChange?: boolean;
 
+    requestPayload?: string;
+
     transactionId?: string; // e.g., Stripe sub ID
   }
 
@@ -1466,6 +1468,10 @@ declare namespace CTypes {
      * Reference to the connect task type
      */
     connectTask?: Types.ObjectId;
+
+    reason?: string;
+
+    payload?: any;
   }
 
   /**

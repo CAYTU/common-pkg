@@ -41,7 +41,7 @@ declare namespace CTypes {
     think_mode?: string;
     file_context_type?: FileContextType;
     s3_context_key?: string;
-    conversion_history?: {
+    conversation_history?: {
       [key: string]: string;
     }[];
   }
@@ -84,6 +84,11 @@ declare namespace CTypes {
 
     subnetIds?: string[];
 
+    /**
+     * The id of the user who created it.
+     */
+    user?: Types.ObjectId;
+
     organizationId: Types.ObjectId;
     public: boolean;
   }
@@ -109,6 +114,8 @@ declare namespace CTypes {
     templateSetupS3UrlKey?: string;
 
     currentUserSession?: string;
+
+    user?: Types.ObjectId;
 
     organizationId?: Types.ObjectId;
     sharedWith?: Types.ObjectId[];
@@ -690,6 +697,11 @@ declare namespace CTypes {
     platform?: RoboticPlatform;
 
     /**
+     * The unique identifier of the user who created the device.
+     */
+    user?: Types.ObjectId;
+
+    /**
      * The unique identifier for the robot on its platform.
      */
     platformRobotId: Types.ObjectId;
@@ -963,6 +975,11 @@ declare namespace CTypes {
     description?: string;
 
     /**
+     * The user who created the simulation.
+     */
+    user?: Types.ObjectId;
+
+    /**
      * The ID of the organization where the simulation belongs.
      */
     organizationId: Types.ObjectId;
@@ -1010,58 +1027,6 @@ declare namespace CTypes {
   }
 
   /**
-   * Represents the interface for a simulation representation.
-   * @interface
-   */
-  export interface SimulationRepInterface extends IMongooseObjectExt {
-    /** The ID of the simulation. */
-    id: string;
-    /** The name of the simulation. */
-    name: string;
-    /** The image of the simulation. */
-    image?: string;
-    /** The description of the simulation. */
-    description?: string;
-    /** The job definition of the simulation. */
-    jobDefinition: string;
-    /** The job queue of the simulation. */
-    jobQueue: string;
-    /** The template URL of the simulation. */
-    templateURL: string;
-    /** The role of the simulation. */
-    role: string;
-    /** The region of the simulation. */
-    region: string;
-  }
-
-  /**
-   * Interface for a simulation event object.
-   * @interface
-   */
-  export interface SimulationEventInterface extends IMongooseObjectExt {
-    /** The unique identifier for the simulation event. */
-    id: string;
-    /** The name of the simulation event. */
-    name: string;
-    /** The URL of the image associated with the simulation event. */
-    image?: string;
-    /** A description of the simulation event. */
-    description?: string;
-    /** The job definition for the simulation event. */
-    jobDefinition: string;
-    /** The job queue for the simulation event. */
-    jobQueue: string;
-    /** The URL of the simulation event template. */
-    templateURL: string;
-    /** The role associated with the simulation event. */
-    role: string;
-    /** The region associated with the simulation event. */
-    region: string;
-    /** The version number of the simulation event. */
-    version: number;
-  }
-
-  /**
    * Interface for a simulation job.
    * @interface
    */
@@ -1095,34 +1060,6 @@ declare namespace CTypes {
      * The organizations with which the simulation job is shared.
      */
     sharedWith?: Types.ObjectId[];
-  }
-
-  export interface SimulationJobRepInterface extends IMongooseObjectExt {
-    id: string;
-    jobId: string;
-    taskId?: string;
-    jobName: string;
-    simulationId: string;
-    endpoint: string;
-    thing: string;
-    state?: SimulationJobState;
-    user?: Types.ObjectId;
-  }
-
-  export interface SimulationJobEventInterface extends IMongooseObjectExt {
-    id: string;
-    jobId: string;
-    taskId?: string;
-    jobName: string;
-    simulationId: string;
-    endpoint: string;
-    thing: string;
-    state?: SimulationJobState;
-    user?: Types.ObjectId;
-    duration?: number;
-    runningAt?: Date;
-    completedAt?: Date;
-    version: number;
   }
 
   export type DeliveryType = "indoor" | "outdoor";

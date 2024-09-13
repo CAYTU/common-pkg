@@ -5,7 +5,7 @@ on:
     branches:
       - main
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   build-and-test:
@@ -15,7 +15,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: "16"
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -56,33 +56,36 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: "16"
 
       - name: Configure git
         run: |
-            git config --global user.email "github-actions[bot]@users.noreply.github.com"
-            git config --global user.name "github-actions[bot]"
-
-      - name: Get version
-        id: get_version
-        run: |
-            if [[ $GITHUB_REF == refs/tags/* ]]; then
-                echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
-            else
-                npm version patch -m "Bump version to %s [skip ci]"
-                VERSION=$(node -p "require('./package.json').version")
-                echo ::set-output name=VERSION::$VERSION
-                git push --follow-tags
-            fi
-
-      - name: Update package.json
-        run: |
-          npm version ${{ steps.get_version.outputs.VERSION }} --no-git-tag-version
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
+
+          - name: Get current version
+          id: current_version
+          run: echo ::set-output name=VERSION::$(node -p "require('./package.json').version")
+
+      - name: Determine new version
+        id: new_version
+        run: |
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+          NEW_VERSION=${GITHUB_REF#refs/tags/v}
+          else
+          NEW_VERSION=$(npx semver ${{ steps.current_version.outputs.VERSION }} -i patch)
+          fi
+          echo ::set-output name=VERSION::$NEW_VERSION
+
+      - name: Update version if changed
+        if: steps.current_version.outputs.VERSION != steps.new_version.outputs.VERSION
+        run: |
+          npm version ${{ steps.new_version.outputs.VERSION }} --no-git-tag-version
           git add package.json
-          git commit -m "Update package.json version to ${{ steps.get_version.outputs.VERSION }} [skip ci]"
+          git commit -m "Bump version to ${{ steps.new_version.outputs.VERSION }} [skip ci]"
           git push
+          git tag v${{ steps.new_version.outputs.VERSION }}
+          git push --tags
 
       - name: Create Release
         id: create_release
@@ -90,12 +93,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.get_version.outputs.VERSION }}
-          release_name: Release ${{ steps.get_version.outputs.VERSION }}
+          tag_name: v${{ steps.new_version.outputs.VERSION }}
+          release_name: Release ${{ steps.new_version.outputs.VERSION }}
           body: |
             Changes in this Release
-            - First Change
-            - Second Change
+            - Automated release by GitHub Actions
           draft: false
           prerelease: false
 
@@ -107,7 +109,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: "16"
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -135,9 +137,9 @@ jobs:
 
       - name: Update README.md
         run: |
-          sed -i "s|v[0-9]\.[0-9]\.[0-9]*|v${{ steps.get_version.outputs.VERSION }}|g" README.md
+          sed -i "s|v[0-9]\.[0-9]\.[0-9]*|v${{ steps.new_version.outputs.VERSION }}|g" README.md
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git add README.md
-          git commit -m "Update version in README.md to ${{ steps.get_version.outputs.VERSION }} [skip ci]"
+          git commit -m "Update version in README.md to ${{ steps.new_version.outputs.VERSION }} [skip ci]"
           git push

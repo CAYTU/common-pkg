@@ -1,0 +1,109 @@
+# File: .github/workflows/build-and-publish.yml
+
+name: Build and Publish @caytu/shared
+
+on:
+  push:
+    branches:
+      - main
+  release:
+    types: [created]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Setup CodeArtifact registry
+        id: codeartifact
+        run: |
+          CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain ${{ secrets.CODEARTIFACT_DOMAIN }} --domain-owner ${{ secrets.AWS_ACCOUNT_ID }} --query authorizationToken --output text)
+          echo "::set-output name=CODEARTIFACT_AUTH_TOKEN::$CODEARTIFACT_AUTH_TOKEN"
+          npm config set "@caytu:registry" "https://caytu-${{ secrets.AWS_ACCOUNT_ID }}.d.codeartifact.${{ secrets.AWS_REGION }}.amazonaws.com/npm/shared/"
+          npm config set //caytu-${{ secrets.AWS_ACCOUNT_ID }}.d.codeartifact.${{ secrets.AWS_REGION }}.amazonaws.com/npm/shared/:_authToken $CODEARTIFACT_AUTH_TOKEN
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run tests
+        run: yarn test
+
+      - name: Run type tests
+        run: yarn test:types
+
+      - name: Build
+        run: yarn build
+
+  publish:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Setup CodeArtifact registry
+        id: codeartifact
+        run: |
+          CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain ${{ secrets.CODEARTIFACT_DOMAIN }} --domain-owner ${{ secrets.AWS_ACCOUNT_ID }} --query authorizationToken --output text)
+          echo "::set-output name=CODEARTIFACT_AUTH_TOKEN::$CODEARTIFACT_AUTH_TOKEN"
+          npm config set "@caytu:registry" "https://caytu-${{ secrets.AWS_ACCOUNT_ID }}.d.codeartifact.${{ secrets.AWS_REGION }}.amazonaws.com/npm/shared/"
+          npm config set //caytu-${{ secrets.AWS_ACCOUNT_ID }}.d.codeartifact.${{ secrets.AWS_REGION }}.amazonaws.com/npm/shared/:_authToken $CODEARTIFACT_AUTH_TOKEN
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: Increment version
+        id: version_step
+        run: |
+          npm version patch
+          VERSION=$(node -p "require('./package.json').version")
+          echo "::set-output name=VERSION::$VERSION"
+
+      - name: Update package.json version
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git pull
+          git add package.json
+          git commit -m "update package.json version to ${{ steps.version_step.outputs.VERSION }}"
+          git push
+
+      - name: Publish to AWS CodeArtifact
+        run: |
+          npm publish
+
+      - name: Update README.md
+        run: |
+          sed -i "s|v[0-9]\.[0-9]\.[0-9]*|v${{ steps.version_step.outputs.VERSION }}|g" README.md
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git pull
+          git add README.md
+          git commit -m "update version in README.md to ${{ steps.version_step.outputs.VERSION }}"
+          git push

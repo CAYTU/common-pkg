@@ -1,21 +1,49 @@
 {
     "name": "@caytu/shared",
     "version": "2.0.139",
-    "description": "Shared Packages",
+    "description": "Shared Library for Caytu",
     "main": "./build/index.js",
     "types": "./build/index.d.ts",
     "files": [
         "build/**/*"
     ],
+    "exports": {
+        ".": "./build/index.js",
+        "./users/models": "./build/users/models/index.js",
+        "./users/events": "./build/users/events/index.js",
+        "./users/types": "./build/users/utils/index.js",
+        "./billings/models": "./build/billings/models/index.js",
+        "./billings/events": "./build/billings/events/index.js"
+    },
+    "typesVersions": {
+        "*": {
+            "users/models": [
+                "build/users/models/index.d.ts"
+            ],
+            "users/events": [
+                "build/users/events/index.d.ts"
+            ],
+            "users/utils": [
+                "build/users/utils/index.d.ts"
+            ],
+            "billings/models": [
+                "build/billings/models/index.d.ts"
+            ],
+            "billings/events": [
+                "build/billings/events/index.d.ts"
+            ]
+        }
+    },
     "scripts": {
         "clean": "del ./build/*",
         "build": "yarn run clean && tsc",
         "prepare": "npm run co:login",
         "co:login": "aws codeartifact login --tool npm --repository shared --domain caytu",
         "pub": "git add . && git commit -m \"Package Updated.\" && yarn version -i patch && yarn run build && npm publish",
-        "test": "jest --watchAll --no-cache"
+        "test": "jest",
+        "test:types": "tsc --noEmit"
     },
-    "author": "caytu",
+    "author": "CAYTU",
     "license": "MIT",
     "private": false,
     "devDependencies": {
@@ -24,8 +52,8 @@
         "del-cli": "^5.0.0",
         "jest": "^29.0.3",
         "supertest": "^6.2.4",
-        "ts-jest": "^29.0.0",
-        "typescript": "^4.8.3"
+        "ts-jest": "^29.2.5",
+        "typescript": "^5.6.2"
     },
     "dependencies": {
         "@types/cookie-session": "^2.0.44",
@@ -38,10 +66,12 @@
         "express": "^4.18.1",
         "express-async-handler": "^1.2.0",
         "express-validator": "^6.14.2",
+        "jest-runner-tsd": "^6.0.0",
         "jsonwebtoken": "^9.0.0",
         "mongoose": "^6.6.2",
         "mongoose-geojson-schema": "^2.2.3",
         "nats": "^2.28.1",
-        "node-nats-streaming": "^0.3.2"
+        "node-nats-streaming": "^0.3.2",
+        "tsd": "^0.31.2"
     }
 }

@@ -1,6 +1,6 @@
 import { Stan } from "node-nats-streaming";
 import { Subjects } from "./subjects";
-import { NatsConnection } from "nats";
+import { NatsConnection, Payload } from "nats";
 
 /**
  * An interface that defines the structure of an event.
@@ -69,7 +69,10 @@ export abstract class Publisher<T extends Event> {
         }
 
         // Publish the message
-        this.wsClient.publish(this.subject, Buffer.from(JSON.stringify(data)));
+        this.wsClient.publish(
+          this.subject,
+          Buffer.from(JSON.stringify(data)) as any,
+        );
         console.log("(WS) Event published to subject", this.subject);
 
         // Optionally, you can flush the message to ensure it's sent immediately

@@ -1,5 +1,5 @@
 // Types import
-import CTypes from "./types/models";
+import CTypes from "./types/models/users";
 // Event imports
 import { ET } from "./types/events";
 
@@ -32,6 +32,23 @@ export * from "./types/utils";
 
 export * from "./utils/encryptor";
 export * from "./utils/cookies";
+
+/**
+ * Export the billings module
+ * @module billings
+ * @description This module contains all the billing related interfaces and events.
+ */
+export * from "./billings/models";
+export * from "./billings/events";
+
+/**
+ * Export the users module
+ * @module users
+ * @description This module contains all the user related interfaces and events.
+ */
+export * from "./users/models";
+export * from "./users/events";
+// export * from "./users/utils";
 
 export { CTypes };
 export { ET };

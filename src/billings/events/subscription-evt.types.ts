@@ -4,7 +4,7 @@
  */
 
 import { Subjects } from "../../nats-events/subjects";
-import CTypes from "../models";
+import { SubscriptionInterface } from "../models";
 
 /**
  * @interface SubscriptionCreatedEvent
@@ -17,7 +17,7 @@ import CTypes from "../models";
  */
 interface SubscriptionCreatedEvent {
   subject: Subjects.SubscriptionCreated;
-  data: CTypes.SubscriptionInterface & {
+  data: SubscriptionInterface & {
     id: string;
     organizationId?: string;
     version: number;
@@ -35,7 +35,7 @@ interface SubscriptionCreatedEvent {
  */
 interface SubscriptionUpdatedEvent {
   subject: Subjects.SubscriptionUpdated;
-  data: Partial<CTypes.SubscriptionInterface> & {
+  data: Partial<SubscriptionInterface> & {
     id: string;
     version: number;
   };

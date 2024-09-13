@@ -5,21 +5,21 @@
 
 import mongoose from "mongoose";
 import { Subjects } from "../../nats-events/subjects";
-import CTypes from "../models/users";
-import { OauthType, UserRole, UserStatuses } from "../utils";
-import { OperatorAddons } from "./common";
+import { UserInterface } from "../models/users";
+import { OperatorAddons } from "../../types/events/common";
+import { OauthType, UserRole, UserStatuses } from "../../types/utils";
 
 /**
  * @interface UserRegisteredEvent
  * @description Defines a TypeScript interface for an event when a user is registered.
  * @property {Subjects.UserRegistered} subject - The subject type of the event.
  * @property {object} data - The data payload of the event.
- * @property {Partial<CTypes.UserInterface>} data - A partial object of the user details.
+ * @property {Partial<UserInterface>} data - A partial object of the user details.
  * @property {OperatorAddons} data - The operator addons details.
  */
 interface UserRegisteredEvent {
   subject: Subjects.UserRegistered;
-  data: Partial<CTypes.UserInterface> & OperatorAddons;
+  data: Partial<UserInterface> & OperatorAddons;
 }
 
 /**
@@ -27,7 +27,7 @@ interface UserRegisteredEvent {
  * @description Defines a TypeScript interface for an event when a user is created.
  * @property {Subjects.UserCreated} subject - The subject type of the event.
  * @property {object} data - The data payload of the event.
- * @property {Partial<CTypes.UserInterface>} data - A partial object of the user details.
+ * @property {Partial<UserInterface>} data - A partial object of the user details.
  * @property {string} data.id - The ID of the user.
  * @property {boolean} [data.isPublic] - Flag indicating if the user is public (optional).
  * @property {boolean} [data.operatorRequestIntent] - Flag indicating operator request intent (optional).
@@ -36,7 +36,7 @@ interface UserRegisteredEvent {
  */
 interface UserCreatedEvent {
   subject: Subjects.UserCreated;
-  data: Partial<CTypes.UserInterface> & {
+  data: Partial<UserInterface> & {
     id: string;
     isPublic?: boolean;
     operatorRequestIntent?: boolean;
@@ -50,14 +50,14 @@ interface UserCreatedEvent {
  * @description Defines a TypeScript interface for an event when a user is updated.
  * @property {Subjects.UserUpdated} subject - The subject type of the event.
  * @property {object} data - The data payload of the event.
- * @property {Partial<CTypes.UserInterface>} data - A partial object of the user details.
+ * @property {Partial<UserInterface>} data - A partial object of the user details.
  * @property {string} data.id - The ID of the user.
  * @property {number} data.version - The version number of the user.
  * @property {boolean} [data.operatorRequestIntent] - Flag indicating operator request intent (optional).
  */
 interface UserUpdatedEvent {
   subject: Subjects.UserUpdated;
-  data: Partial<CTypes.UserInterface> & {
+  data: Partial<UserInterface> & {
     id: string;
     version: number;
     operatorRequestIntent?: boolean;

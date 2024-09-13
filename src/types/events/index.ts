@@ -1,7 +1,7 @@
 // We'll export all events from here as ET (Event Types) namespace:
 //
 
-import * as PaymentEvents from "./payment-evt.types";
+import * as PaymentEvents from "../../billings/events/payment-evt.types";
 import * as UserEvents from "./user-evt.types";
 import * as OperatorEvents from "./operator-evt.types";
 import * as TaskEvents from "./task-evt.types";
@@ -10,7 +10,7 @@ import * as EmailEvents from "./email-evt.types";
 import * as AvatarEvents from "./avatar-evt.types";
 import * as AvatarInstanceEvents from "./avatar-instance-evt.types";
 import * as ZoneEvents from "./zone-evt.types";
-import * as SubscriptionEvents from "./subscription-evt.types";
+import * as SubscriptionEvents from "../../billings/events/subscription-evt.types";
 
 export namespace ET {
   // Avatar Events

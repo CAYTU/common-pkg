@@ -137,6 +137,11 @@ export enum Subjects {
   OrderUpdated = "order:updated",
   OrderDeleted = "order:deleted",
 
+  // Plan subjects
+  PlanCreated = "plan:created",
+  PlanUpdated = "plan:updated",
+  PlanDeleted = "plan:deleted",
+
   // Billing
   BillingCreated = "billing:created",
   BillingUpdated = "billing:updated",
@@ -172,4 +177,12 @@ export enum Subjects {
   UrlExpirationCreated = "url:expiration:created",
   UrlExpirationUpdated = "url:expiration:updated",
   UrlExpirationDeleted = "url:expiration:deleted",
+
+  // Usage Subjects
+  UsageCreated = "usage:created",
+  UsageUpdated = "usage:updated",
+  UsageDeleted = "usage:deleted",
+  UsageStarted = "usage:started",
+  UsageEnded = "usage:ended",
+  UsageFailed = "usage:failed",
 }

@@ -4,8 +4,8 @@
  */
 
 import { Subjects } from "../../nats-events/subjects";
-import CTypes from "../models";
-import { OnlyRequired } from "./common";
+import { OnlyRequired } from "../../types/events/common";
+import { PaymentInterface } from "../models";
 
 /**
  * @interface PaymentCreatedEvent
@@ -18,7 +18,7 @@ import { OnlyRequired } from "./common";
  */
 interface PaymentCreatedEvent {
   subject: Subjects.PaymentCreated;
-  data: CTypes.PaymentInterface & {
+  data: PaymentInterface & {
     id: string;
     deviceId?: string;
     version: number;
@@ -35,7 +35,7 @@ interface PaymentCreatedEvent {
  */
 interface PaymentUpdatedEvent {
   subject: Subjects.PaymentUpdated;
-  data: Partial<CTypes.PaymentInterface> & OnlyRequired;
+  data: Partial<PaymentInterface> & OnlyRequired;
 }
 
 /**

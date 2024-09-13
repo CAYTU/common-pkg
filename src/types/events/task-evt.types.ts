@@ -4,7 +4,7 @@
  */
 
 import { Subjects } from "../../nats-events/subjects";
-import CTypes from "../models";
+import CTypes from "../models/users";
 import { TemplateSetupOptions } from "../utils";
 import { AddonOwner, OnlyRequired } from "./common";
 

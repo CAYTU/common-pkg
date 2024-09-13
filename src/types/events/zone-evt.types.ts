@@ -4,7 +4,7 @@
  */
 
 import { Subjects } from "../../nats-events/subjects";
-import CTypes from "../models";
+import CTypes from "../models/users";
 import { Services } from "../utils";
 import { OnlyRequired } from "./common";
 

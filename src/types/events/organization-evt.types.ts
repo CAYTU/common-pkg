@@ -4,7 +4,7 @@
  */
 
 import { Subjects } from "../../nats-events/subjects";
-import CTypes from "../models";
+import CTypes from "../models/users";
 import { TaskType, UserRole } from "../utils";
 import { OnlyRequired } from "./common";
 

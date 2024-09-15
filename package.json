@@ -62,7 +62,7 @@
         "clean": "del ./build/*",
         "build": "yarn run clean && tsc",
         "prepare": "npm run co:login",
-        "co:login": "aws codeartifact login --tool npm --repository shared --domain caytu --profile eks-admin",
+        "co:login": "aws codeartifact login --tool npm --repository shared --domain caytu",
         "pub": "git add . && git commit -m \"Package Updated.\" && yarn version -i patch && yarn run build && npm publish",
         "test": "jest",
         "test:types": "tsc --noEmit"

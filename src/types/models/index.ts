@@ -2,8 +2,6 @@ import mongoose, { Types } from "mongoose";
 import {
   OauthType,
   OperatorStatus,
-  PaymentMethod,
-  PaymentStatus,
   RoboticPlatform,
   RobotStates,
   SimulationJobState,
@@ -16,8 +14,6 @@ import {
   OrganizationType,
   DeviceType,
   DeviceCategory,
-  SubscriptionType,
-  SubscriptionStatus,
   ItineraryType,
   OrderStatus,
   TelepresenceType,
@@ -551,121 +547,6 @@ declare namespace CTypes {
      * The unique identifier of the user. Populated when the user accepts the invitation.
      */
     user?: Types.ObjectId;
-  }
-
-  /**
-   * Payment
-   */
-  export interface PaymentInterface extends IMongooseObjectExt {
-    /**
-     * The unique identifier of the organization to which the payment is made.
-     */
-    organizationId: Types.ObjectId;
-
-    /**
-     * The unique identifier of the order for which the payment is made.
-     */
-    orderId?: Types.ObjectId;
-
-    /**
-     * The unique identifier of the transient user if the payment is not from a registered user.
-     */
-    transientUserId?: Types.ObjectId;
-
-    /**
-     * The amount of the payment.
-     */
-    amount: number;
-
-    /**
-     * The equivalent amount in credit units.
-     */
-    creditUnits?: number;
-
-    /**
-     * The currency of the payment.
-     */
-    currency: string;
-
-    /**
-     * The status of the payment.
-     */
-    paymentStatus: PaymentStatus;
-
-    /**
-     * The method of payment.
-     */
-    paymentMethod: PaymentMethod; // e.g., "CreditCard", "OrangeMoney", "Wave"
-
-    /**
-     * Whether the user is subscribed to a plan or not.
-     */
-    isSubscribed: boolean;
-
-    /**
-     * The unique identifier of the transaction.
-     * For Stripe, this is the charge ID.
-     * For Wave or Orange Money, this is the transaction ID.
-     */
-    transactionId: string;
-
-    /**
-     * The URL for payment if the payment method requires scanning a code.
-     * This applies to methods like Orange Money and Wave.
-     */
-    paymentUrl?: string;
-
-    /**
-     * The code received after scanning the payment URL.
-     * This applies to methods like Orange Money and Wave.
-     */
-    paymentCode?: string;
-
-    /**
-     * A description or memo for the payment.
-     */
-    description?: string;
-  }
-
-  export interface SubscriptionInterface extends IMongooseObjectExt {
-    /**
-     * The payment method used for the subscription.
-     */
-    paymentMethod?: PaymentMethod;
-
-    /**
-     * The type of subscription.
-     */
-    subscriptionType: SubscriptionType;
-
-    /**
-     * The status of the subscription.
-     */
-    subscriptionStatus?: SubscriptionStatus;
-
-    /**
-     * The start date of the subscription.
-     */
-    startDate?: Date;
-
-    /**
-     * The end date of the subscription.
-     */
-    endDate?: Date;
-
-    /**
-     * The type of subscription the user wants to change to.
-     */
-    requestedChangeType?: SubscriptionType;
-
-    /**
-     * Whether the user has requested a change of plan.
-     */
-    hasRequestedChange?: boolean;
-
-    requestPayload?: string;
-
-    transactionId?: string; // e.g., Stripe sub ID
   }
 
   /**

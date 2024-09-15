@@ -6,6 +6,7 @@ import {
   SubscriptionStatus,
   PaymentStatus,
   PaymentMethod,
+  Services,
 } from "../../types/utils";
 import { IMongooseObjectExt } from "../../types/utils/models";
 
@@ -133,18 +134,16 @@ export interface UsageInterface extends IMongooseObjectExt {
   organizationId: Types.ObjectId;
   /** The ID of the subscription associated with this usage */
   subscriptionId: Types.ObjectId;
-  /** The billing period start date */
-  billingPeriodStart: Date;
-  /** The billing period end date */
-  billingPeriodEnd: Date;
-  /** Usage details for each feature */
-  featureUsage: Record<
-    string,
-    {
-      quantity: number;
-      cost: number;
-    }
-  >;
+  /** The service for which the usage is tracked */
+  service?: Services;
+  /** The id of the service instance */
+  serviceRefId?: string;
+  /** The amount of credit units remaining */
+  creditRemaining?: number;
+  /** The amount of credit units consumed */
+  creditConsumed: number;
+  /** The user id of the user who consumed the credit */
+  userId?: Types.ObjectId;
   /** Total cost for the current billing period */
   totalCost: number;
 }

@@ -265,11 +265,23 @@ export enum RoboticPlatform {
 /**
  * Enumerates the possible subscription types for a service.
  */
-export enum SubscriptionType {
+export enum PlanType {
   Free = "free",
   Professional = "professional",
   Enterprise = "enterprise",
-  PayAsYouGo = "payAsYouGo",
+}
+
+export enum PlanSubcategory {
+  IoT = "iot",
+  Robot = "robot",
+}
+
+export enum UnitOfMeasurement {
+  ApiCall = "api-call",
+  Device = "device",
+  Hour = "hour",
+  Gigabyte = "gb",
+  // Add other units as needed
 }
 
 /**
@@ -278,12 +290,13 @@ export enum SubscriptionType {
 export enum SubscriptionStatus {
   Active = "active",
   Inactive = "inactive",
-  Canceled = "canceled",
+  Cancelled = "cancelled",
 }
 
 export enum PaymentStatus {
   Pending = "pending",
   Succeeded = "succeeded",
+  Cancelled = "cancelled",
   Failed = "failed",
 }
 
@@ -323,6 +336,7 @@ export enum Services {
   Payment = "payment",
   Task = "task",
   Robot = "robot",
+  Avatar = "avatar",
   Operator = "operator",
   Simulation = "simulation",
   Customer = "customer",

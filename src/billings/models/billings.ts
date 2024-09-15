@@ -3,8 +3,46 @@ import {
   PlanType,
   PlanSubcategory,
   UnitOfMeasurement,
+  SubscriptionStatus,
+  PaymentStatus,
+  PaymentMethod,
 } from "../../types/utils";
 import { IMongooseObjectExt } from "../../types/utils/models";
+
+/**
+ * Represents the payment model executed by an organization for a subscription or usage.
+ */
+export interface PaymentInterface {
+  /** The unique identifier of the organization to which the payment is made. */
+  organizationId: Types.ObjectId;
+  /** @deprecated A unique identifier of the order for which the payment is made. */
+  orderId?: Types.ObjectId;
+  /**  @deprecated unique identifier of the transient user if the payment is not from a registered user. */
+  transientUserId?: Types.ObjectId;
+  /** The amount of the payment. */
+  amount: number;
+  /** The equivalent amount in credit units. */
+  creditUnits?: number;
+  /** The currency of the payment. */
+  currency: string;
+  /** The status of the payment. */
+  paymentStatus: PaymentStatus;
+  /** The method of payment. */
+  paymentMethod: PaymentMethod; // e.g., "CreditCard", "OrangeMoney", "Wave"
+  /** the subscription which the user is paying for.*/
+  subscriptionId?: Types.ObjectId;
+  /**  The unique identifier of the transaction.*/
+  transactionId?: string;
+  /** The URL for payment if the payment method requires scanning a code. */
+  paymentUrl?: string;
+  /**
+   * The code received after scanning the payment URL.
+   * This applies to methods like Orange Money and Wave.
+   */
+  paymentCode?: string;
+  /** A description or memo for the payment. */
+  description?: string;
+}
 
 /**
  * Represents a feature of a plan with its properties and pricing details.
@@ -48,8 +86,6 @@ export interface PlanInterface extends IMongooseObjectExt {
   title: string;
   /** The type of the plan */
   type: PlanType;
-  /** The billing cycle of the plan */
-  billingCycle: "monthly" | "yearly";
   /** Features common to all subcategories of the plan */
   commonFeatures: Record<string, PlanFeature>;
   /** Subcategories of the plan with their specific details */
@@ -62,6 +98,31 @@ export interface PlanInterface extends IMongooseObjectExt {
   organizationId?: Types.ObjectId;
   /** Reference to the base plan for custom plans */
   baseplanId?: Types.ObjectId;
+}
+
+/**
+ * Represents the subscription interface chosen by an organization.
+ */
+export interface SubscriptionInterface extends IMongooseObjectExt {
+  planId: Types.ObjectId;
+  /** The unique identifier of the user who owns the subscription. */
+  organizationId: Types.ObjectId;
+  /** The status of the subscription. */
+  subscriptionStatus?: SubscriptionStatus;
+  /** The start date of the subscription. */
+  currentPeriodStart?: Date;
+  /**  The end date of the subscription. */
+  currentPeriodEnd?: Date;
+  /** The id of the subscription in the stripe system */
+  stripeSubscriptionId?: string;
+  /**  The id of the customer in the stripe system */
+  stripeCustomerId?: string;
+  /** The type of subscription plan the user wants to change to. */
+  requestPlanChangeType?: PlanType;
+  /** Whether the user has requested a change of plan. */
+  hasRequestedChange?: boolean;
+  /**  A stringified JSON object containing the payload of the request. */
+  requestPayload?: string;
 }
 
 /**

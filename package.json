@@ -11,9 +11,15 @@
         ".": "./build/index.js",
         "./users/models": "./build/users/models/index.js",
         "./users/events": "./build/users/events/index.js",
-        "./users/types": "./build/users/utils/index.js",
+        "./users/utils": "./build/users/utils/index.js",
         "./billings/models": "./build/billings/models/index.js",
-        "./billings/events": "./build/billings/events/index.js"
+        "./billings/events": "./build/billings/events/index.js",
+        "./nats-events": "./build/nats-events/index.js",
+        "./middlewares/auth": "./build/middlewares/auth/index.js",
+        "./middlewares/errors": "./build/middlewares/errors/index.js",
+        "./middlewares/user": "./build/middlewares/user/index.js",
+        "./errors": "./build/errors/index.js",
+        "./utils": "./build/utils/index.js"
     },
     "typesVersions": {
         "*": {
@@ -31,6 +37,24 @@
             ],
             "billings/events": [
                 "build/billings/events/index.d.ts"
+            ],
+            "nats-events": [
+                "build/nats-events/index.d.ts"
+            ],
+            "middlewares/auth": [
+                "build/middlewares/auth/index.d.ts"
+            ],
+            "middlewares/errors": [
+                "build/middlewares/errors/index.d.ts"
+            ],
+            "middlewares/user": [
+                "build/middlewares/user/index.d.ts"
+            ],
+            "errors": [
+                "build/errors/index.d.ts"
+            ],
+            "utils": [
+                "build/utils/index.d.ts"
             ]
         }
     },

@@ -9,6 +9,7 @@ import {
   PlanType,
   PlanSubcategory,
   UnitOfMeasurement,
+  Services,
 } from "../../types/utils";
 import { expectType } from "tsd";
 
@@ -77,24 +78,19 @@ expectType<{ min?: number; max?: number; step?: number } | undefined>(
 const usage: UsageInterface = {
   organizationId: new Types.ObjectId(),
   subscriptionId: new Types.ObjectId(),
-  billingPeriodStart: new Date(),
-  billingPeriodEnd: new Date(),
-  featureUsage: {
-    users: {
-      quantity: 10,
-      cost: 100,
-    },
-  },
+  service: Services.Avatar,
+  creditConsumed: 10,
+  serviceRefId: new Types.ObjectId()?.toString(),
+  creditRemaining: 90,
+  userId: new Types.ObjectId(),
   totalCost: 100,
 };
 
 expectType<Types.ObjectId>(usage.organizationId);
 expectType<Types.ObjectId>(usage.subscriptionId);
-expectType<Date>(usage.billingPeriodStart);
-expectType<Date>(usage.billingPeriodEnd);
-expectType<Record<string, { quantity: number; cost: number }>>(
-  usage.featureUsage
-);
+expectType<Services | undefined>(usage.service);
+expectType<number>(usage.creditConsumed);
+expectType<number | undefined>(usage.creditRemaining);
 expectType<number>(usage.totalCost);
 
 describe("Billing Interfaces", () => {
@@ -144,22 +140,21 @@ describe("Billing Interfaces", () => {
       const usage: UsageInterface = {
         organizationId: new Types.ObjectId(),
         subscriptionId: new Types.ObjectId(),
-        billingPeriodStart: new Date(),
-        billingPeriodEnd: new Date(),
-        featureUsage: {
-          storage: {
-            quantity: 50,
-            cost: 2.5,
-          },
-        },
+        service: Services.Avatar,
+        creditConsumed: 5,
+        creditRemaining: 45,
+        userId: new Types.ObjectId(),
+        serviceRefId: new Types.ObjectId()?.toString(),
         totalCost: 50,
       };
 
       expect(usage).toHaveProperty("organizationId");
       expect(usage).toHaveProperty("subscriptionId");
-      expect(usage).toHaveProperty("billingPeriodStart");
-      expect(usage).toHaveProperty("billingPeriodEnd");
-      expect(usage).toHaveProperty("featureUsage");
+      expect(usage).toHaveProperty("service");
+      expect(usage).toHaveProperty("creditConsumed");
+      expect(usage).toHaveProperty("creditRemaining");
+      expect(usage).toHaveProperty("userId");
+      expect(usage).toHaveProperty("serviceRefId");
       expect(usage).toHaveProperty("totalCost");
     });
   });

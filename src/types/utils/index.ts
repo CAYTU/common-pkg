@@ -281,6 +281,8 @@ export enum UnitOfMeasurement {
   Device = "device",
   Hour = "hour",
   Gigabyte = "gb",
+  Count = "count",
+  Boolean = "boolean",
   // Add other units as needed
 }
 

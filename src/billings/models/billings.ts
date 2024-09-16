@@ -6,9 +6,9 @@ import {
   SubscriptionStatus,
   PaymentStatus,
   PaymentMethod,
+  Services,
 } from "../../types/utils";
 import { IMongooseObjectExt } from "../../types/utils/models";
-import { TaskType } from "../../tasks/enums";
 
 /**
  * Represents the payment model executed by an organization for a subscription or usage.
@@ -134,10 +134,10 @@ export interface UsageInterface extends IMongooseObjectExt {
   organizationId: Types.ObjectId;
   /** The ID of the subscription associated with this usage */
   subscriptionId: Types.ObjectId;
-  /** The type for which the usage is tracked */
-  taskType?: TaskType;
-  /** The id of the task */
-  taskId?: string;
+  /** The service for which the usage is tracked */
+  service?: Services;
+  /** The id of the service instance */
+  serviceRefId?: string;
   /** The amount of credit units remaining */
   creditRemaining?: number;
   /** The amount of credit units consumed */

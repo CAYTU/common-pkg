@@ -46,11 +46,10 @@ interface UsageDeletedEvent {
 interface UsageStartedEvent {
   subject: Subjects.UsageStarted;
   data: {
-    id: string;
     serviceRefId: string;
     service: Services;
-    organizationId?: string;
-    ratePerHour?: number;
+    organizationId: string;
+    userId?: string;
   };
 }
 
@@ -60,7 +59,12 @@ interface UsageStartedEvent {
  */
 interface UsageEndedEvent {
   subject: Subjects.UsageEnded;
-  data: { id: string; serviceRefId: string };
+  data: {
+    serviceRefId: string;
+    service: Services;
+    organizationId: string;
+    userId?: string;
+  };
 }
 
 /**
@@ -69,7 +73,7 @@ interface UsageEndedEvent {
  */
 interface UsageFailedEvent {
   subject: Subjects.UsageFailed;
-  data: { id: string; serviceRefId: string };
+  data: { id: string; taskId: string };
 }
 
 /**

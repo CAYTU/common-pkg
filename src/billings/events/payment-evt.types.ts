@@ -3,8 +3,8 @@
  * @description Defines TypeScript interfaces related to payment events.
  */
 
+import { OnlyRequired } from "../../common";
 import { Subjects } from "../../nats-events/subjects";
-import { OnlyRequired } from "../../types/events/common";
 import { PaymentInterface } from "../models";
 
 /**

@@ -1,5 +1,5 @@
 // Types import
-import CTypes from "./types/models/users";
+import CTypes from "./types/models";
 // Event imports
 import { ET } from "./types/events";
 
@@ -40,6 +40,15 @@ export * from "./tasks/events";
 export * from "./tasks/enums";
 export * from "./tasks/data";
 
+/**
+ * Export the organizations module
+ * @module organizations
+ * @description This module contains all the organization related interfaces and events.
+ */
+export * from "./organizations/models";
+export * from "./organizations/events";
+export * from "./organizations/enums";
+
 // Export Errors
 export * from "./errors";
 
@@ -50,6 +59,9 @@ export * from "./middlewares/user";
 
 // Export Nats Events
 export * from "./nats-events";
+
+// Export commons
+export * from "./common";
 
 export { CTypes };
 export { ET };

@@ -8,8 +8,6 @@ import {
   UserRole,
   UserStatuses,
   Services,
-  UserMembershipStatus,
-  OrganizationType,
   DeviceType,
   DeviceCategory,
   ItineraryType,
@@ -24,6 +22,10 @@ import {
   TelepresenceType,
   TemplateSetupOptions,
 } from "../../tasks/enums";
+import {
+  OrganizationType,
+  UserMembershipStatus,
+} from "../../organizations/enums";
 
 declare namespace CTypes {
   /**
@@ -550,10 +552,6 @@ declare namespace CTypes {
      */
     user?: Types.ObjectId;
   }
-
-  /**
-   * Robot:
-   */
 
   /**
    * Represents the base information for a robot.

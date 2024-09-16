@@ -4,8 +4,8 @@
  */
 
 import { Subjects } from "../../nats-events/subjects";
-import CTypes from "../models/users";
-import { OnlyRequired } from "./common";
+import CTypes from "../models";
+import { OnlyRequired } from "../../common";
 
 /**
  * @interface OperatorCreatedEvent

@@ -18,6 +18,9 @@
         "./tasks/events": "./build/tasks/events/index.js",
         "./tasks/enums": "./build/tasks/enums/index.js",
         "./tasks/data": "./build/tasks/data/index.js",
+        "./organizations/models": "./build/organizations/models/index.js",
+        "./organizations/events": "./build/organizations/events/index.js",
+        "./organizations/enums": "./build/organizations/enums/index.js",
         "./nats-events": "./build/nats-events/index.js",
         "./middlewares/auth": "./build/middlewares/auth/index.js",
         "./middlewares/errors": "./build/middlewares/errors/index.js",
@@ -54,6 +57,15 @@
             ],
             "tasks/data": [
                 "build/tasks/data/index.d.ts"
+            ],
+            "organizations/models": [
+                "build/organizations/models/index.d.ts"
+            ],
+            "organizations/events": [
+                "build/organizations/events/index.d.ts"
+            ],
+            "organizations/enums": [
+                "build/organizations/enums/index.d.ts"
             ],
             "nats-events": [
                 "build/nats-events/index.d.ts"

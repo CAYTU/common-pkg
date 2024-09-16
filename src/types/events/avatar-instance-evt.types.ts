@@ -4,7 +4,7 @@
  */
 
 import { Subjects } from "../../nats-events/subjects";
-import CTypes from "../models/users";
+import CTypes from "../models";
 
 /**
  * @interface AvatarInstanceCreatedEvent

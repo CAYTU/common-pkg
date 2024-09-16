@@ -235,11 +235,6 @@ export enum PaymentMethod {
   OrangeMoney = "orangeMoney",
 }
 
-export enum OrganizationType {
-  Principal = "principal",
-  Subsidiary = "subsidiary",
-}
-
 export enum OauthType {
   Default = "default",
   Google = "google",
@@ -250,13 +245,6 @@ export enum UserStatuses {
   Busy = "busy",
   Idle = "idle",
   None = "none",
-}
-
-export enum UserMembershipStatus {
-  Pending = "pending",
-  Approved = "approved",
-  Denied = "denied",
-  Expired = "expired",
 }
 
 export enum Services {

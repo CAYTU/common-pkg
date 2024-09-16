@@ -1,44 +1,11 @@
 /**
- * @file organization-evt.types.ts
- * @description Defines TypeScript interfaces for organization-related events.
+ * @file organization-member-evt.types.ts
+ * @description Defines TypeScript interfaces for organization-member-related events.
  */
 
 import { Subjects } from "../../nats-events/subjects";
 import { TaskType } from "../../tasks/enums";
-import CTypes from "../models/users";
-import { UserRole } from "../utils";
-import { OnlyRequired } from "./common";
-
-/**
- * @interface OrganizationCreatedEvent
- * @description Defines a TypeScript interface for the 'OrganizationCreated' event.
- */
-interface OrganizationCreatedEvent {
-  subject: Subjects.OrganizationCreated;
-  data: CTypes.OrganizationInterface & {
-    id: string;
-    version: number;
-    userId?: string;
-  };
-}
-
-/**
- * @interface OrganizationUpdatedEvent
- * @description Defines a TypeScript interface for the 'OrganizationUpdated' event.
- */
-interface OrganizationUpdatedEvent {
-  subject: Subjects.OrganizationUpdated;
-  data: Partial<CTypes.OrganizationInterface> & OnlyRequired;
-}
-
-/**
- * @interface OrganizationDeletedEvent
- * @description Defines a TypeScript interface for the 'OrganizationDeleted' event.
- */
-interface OrganizationDeletedEvent {
-  subject: Subjects.OrganizationDeleted;
-  data: { id: string; version: number };
-}
+import { UserRole } from "../../types/utils";
 
 /**
  * @interface OrganizationMemberAddedEvent
@@ -115,9 +82,6 @@ interface OrganizationMemberRoleUpdated {
  * @description Exporting each event type directly for easier consumption.
  */
 export {
-  OrganizationCreatedEvent,
-  OrganizationUpdatedEvent,
-  OrganizationDeletedEvent,
   OrganizationMemberAddedEvent,
   OrganizationMemberRemovedEvent,
   OrganizationMemberInvitedEvent,

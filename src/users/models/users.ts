@@ -1,8 +1,9 @@
 // File: src/models/users.ts
 
 import { Types } from "mongoose";
-import { OauthType, UserMembershipStatus, UserRole } from "../../types/utils";
+import { OauthType, UserRole } from "../../types/utils";
 import { TaskType } from "../../tasks/enums";
+import { UserMembershipStatus } from "../../organizations/enums";
 
 /**
  * @interface UserInterface
@@ -36,24 +37,6 @@ export interface UserInterface {
   }[];
   isOnline?: boolean;
   lastLogin?: Date;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
-
-/**
- * @interface UserReplicaInterface
- *
- * @description Defines a TypeScript interface for a user replica object.
- *              A user replica object is a subset of the user object. It is used
- *              to represent a user object when another service needs to access user
- */
-export interface UserReplicaInterface {
-  username: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  roles: UserRole[];
-  ownedOrganizationId?: Types.ObjectId;
   createdAt?: Date;
   updatedAt?: Date;
 }

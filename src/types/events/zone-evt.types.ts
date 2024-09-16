@@ -4,9 +4,9 @@
  */
 
 import { Subjects } from "../../nats-events/subjects";
-import CTypes from "../models/users";
+import CTypes from "../models";
 import { Services } from "../utils";
-import { OnlyRequired } from "./common";
+import { OnlyRequired } from "../../common";
 
 /**
  * @interface ZoneCreatedEvent

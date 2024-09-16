@@ -6,8 +6,8 @@
 import mongoose from "mongoose";
 import { Subjects } from "../../nats-events/subjects";
 import { UserInterface } from "../models/users";
-import { OperatorAddons } from "../../types/events/common";
 import { OauthType, UserRole, UserStatuses } from "../../types/utils";
+import { OperatorAddons } from "../../common";
 
 /**
  * @interface UserRegisteredEvent

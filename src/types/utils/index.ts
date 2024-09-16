@@ -19,71 +19,6 @@ export type GeoJSONType = {
 };
 
 /**
- * Enumerates the possible status values for a task.
- */
-export enum TaskStatus {
-  /** First state when a task is newly created. */
-  Init = "init",
-  /** When a task is created, it is in pending state. */
-  Pending = "pending",
-  /** When a robot has been assigned to the task. */
-  RobotAssigned = "robot:assigned",
-  /** Only accepted after an operator has picked up the task. */
-  OperatorAssigned = "operator:assigned",
-  /** When the operator has accepted the task. */
-  Accepted = "accepted",
-  /** When the operator has rejected the task. */
-  Rejected = "rejected",
-  /** When the operator has started the task. */
-  Started = "started",
-  /** When the operator is driving the robot in charge of executing the task. */
-  Running = "running",
-
-  /** When the task is in simulation mode. */
-  SimulationRunning = "simulation:running",
-  SimulationCompleted = "simulation:completed",
-  SimulationFailed = "simulation:failed",
-  SimulationTerminated = "simulation:terminated",
-  SimulationTerminating = "simulation:terminating",
-  SimulationCanceled = "simulation:canceled",
-
-  /** If the task has been canceled before reaching the final goal. */
-  Cancelled = "cancelled",
-  /** When the task has been completed. */
-  Completed = "completed",
-  /** When the task has been deleted. */
-  Deleted = "deleted",
-
-  Failed = "failed",
-  Terminated = "terminated",
-  Stopped = "stopped",
-}
-
-/**
- * Enumerates the possible types of tasks.
- */
-export enum TaskType {
-  /** If the task is a delivery. */
-  Delivery = "delivery",
-  /** If the task is for cleaning. */
-  Cleaning = "cleaning",
-  /** Inspection Task. */
-  Inspection = "inspection",
-  /** Run a simulation. */
-  Simulation = "simulation",
-  /** Avatar Task */
-  Avatar = "avatar",
-  /** If the task is for a flight. */
-  Flight = "flight",
-  /** Telepresence task type */
-  Telepresence = "telepresence",
-  /** Connect task type */
-  Connect = "connect",
-  // TODO: Remove this in the future
-  Custom = "custom",
-}
-
-/**
  * Enumerates the possible roles for users.
  */
 export enum UserRole {
@@ -120,15 +55,6 @@ export const PrimaryRoles = [
   UserRole.Admin,
   UserRole.SuperAdmin,
 ];
-
-/**
- * Enumerates the possible types of avatar
- * templates that can be used for the AI link.
- */
-export enum TemplateSetupOptions {
-  Default = "default",
-  Custom = "custom",
-}
 
 export const UserPermissions = [
   UserRole.All,
@@ -437,31 +363,4 @@ export enum ItineraryType {
    * (e.g. a cleaning robot cleaning a surface area)
    */
   Area = "area",
-}
-
-/**
- * @description
- * This enum is used to define the type of telepresence robot
- * that is being used to execute a task.
- */
-export enum TelepresenceType {
-  Video = "video",
-  Shop = "shop",
-  Avatar = "avatar",
-}
-
-/**
- * @description
- * This enum is used to define the type of viewer
- * that is being used to execute a 'connect' task.
- */
-export enum ConnectViewerType {
-  /**
-   * The viewer is a robot
-   */
-  Robot = "robot",
-  /**
-   * The viewer is an avatar
-   */
-  Avatar = "avatar",
 }

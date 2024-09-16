@@ -4,9 +4,10 @@
  */
 
 import { Subjects } from "../../nats-events/subjects";
-import { TemplateSetupOptions } from "../../tasks/enums";
-import CTypes from "../models/users";
-import { AddonOwner, OnlyRequired } from "./common";
+import { AddonOwner, OnlyRequired } from "../../common";
+import { TaskInterface } from "../models";
+import { TemplateSetupData } from "../data";
+import { TaskStatus, TaskType, TemplateSetupOptions } from "../enums";
 
 /**
  * @interface TaskCreatedEvent
@@ -18,7 +19,7 @@ import { AddonOwner, OnlyRequired } from "./common";
  */
 interface TaskCreatedEvent {
   subject: Subjects.TaskCreated;
-  data: Partial<CTypes.TaskInterface> & AddonOwner;
+  data: Partial<TaskInterface> & AddonOwner;
 }
 
 /**
@@ -26,13 +27,13 @@ interface TaskCreatedEvent {
  * @description Defines a TypeScript interface for an event when a task is updated.
  * @property {Subjects.TaskUpdated} subject - The subject type of the event.
  * @property {object} data - The data payload of the event.
- * @property {Partial<CTypes.TaskInterface>} data - A partial object of the task details.
+ * @property {Partial<TaskInterface>} data - A partial object of the task details.
  * @property {OnlyRequired} data - The required properties of the task.
  * @property {AddonOwner} data - The addon owner details.
  */
 interface TaskUpdatedEvent {
   subject: Subjects.TaskUpdated;
-  data: Partial<CTypes.TaskInterface> & OnlyRequired & AddonOwner;
+  data: Partial<TaskInterface> & OnlyRequired & AddonOwner;
 }
 
 /**
@@ -152,10 +153,25 @@ interface TaskAvatarCreatedEvent {
   data: {
     avatarId?: string;
     taskId?: string;
-    setupData?: CTypes.TemplateSetupData;
+    setupData?: TemplateSetupData;
     templateSetupOption?: TemplateSetupOptions;
     version: number;
   } & AddonOwner;
+}
+
+/**
+ * @interface TaskUsageEvent
+ * @description Defines a TypeScript interface for an event when a task is used.
+ */
+interface TaskUsageEvent {
+  subject: Subjects.TaskUsage;
+  data: {
+    organizationId: string;
+    taskId: string;
+    taskType: TaskType;
+    duration: number;
+    status: TaskStatus;
+  };
 }
 
 /**
@@ -173,4 +189,5 @@ export {
   TaskAcceptedEvent,
   TaskSimulationCreatedEvent,
   TaskAvatarCreatedEvent,
+  TaskUsageEvent,
 };

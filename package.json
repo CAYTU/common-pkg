@@ -14,6 +14,10 @@
         "./users/utils": "./build/users/utils/index.js",
         "./billings/models": "./build/billings/models/index.js",
         "./billings/events": "./build/billings/events/index.js",
+        "./tasks/models": "./build/tasks/models/index.js",
+        "./tasks/events": "./build/tasks/events/index.js",
+        "./tasks/enums": "./build/tasks/enums/index.js",
+        "./tasks/data": "./build/tasks/data/index.js",
         "./nats-events": "./build/nats-events/index.js",
         "./middlewares/auth": "./build/middlewares/auth/index.js",
         "./middlewares/errors": "./build/middlewares/errors/index.js",
@@ -37,6 +41,18 @@
             ],
             "billings/events": [
                 "build/billings/events/index.d.ts"
+            ],
+            "tasks/models": [
+                "build/tasks/models/index.d.ts"
+            ],
+            "tasks/events": [
+                "build/tasks/events/index.d.ts"
+            ],
+            "tasks/enums": [
+                "build/tasks/enums/index.d.ts"
+            ],
+            "tasks/data": [
+                "build/tasks/data/index.d.ts"
             ],
             "nats-events": [
                 "build/nats-events/index.d.ts"

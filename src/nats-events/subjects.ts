@@ -42,6 +42,7 @@ export enum Subjects {
   TaskProposal = "task:proposal",
   TaskAccepted = "task:accepted",
   TaskExhausted = "task:exhausted",
+  TaskUsage = "task:usage",
   TaskExpired = "task:expired",
   TaskRobotAssigned = "task:robot:assigned",
   TaskRobotUnassigned = "task:robot:unassigned",

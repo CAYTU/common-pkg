@@ -29,6 +29,16 @@ export * from "./billings/events";
 export * from "./users/models";
 export * from "./users/events";
 
+/**
+ * Export the tasks module
+ * @module tasks
+ * @description This module contains all the task related interfaces and events.
+ */
+export * from "./tasks/models";
+export * from "./tasks/events";
+export * from "./tasks/enums";
+export * from "./tasks/data";
+
 // Export Errors
 export * from "./errors";
 

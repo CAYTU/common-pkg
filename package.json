@@ -23,7 +23,8 @@
         "./middlewares/errors": "./build/middlewares/errors/index.js",
         "./middlewares/user": "./build/middlewares/user/index.js",
         "./errors": "./build/errors/index.js",
-        "./utils": "./build/utils/index.js"
+        "./utils": "./build/utils/index.js",
+        "./utils/billings": "./build/utils/billings/index.js"
     },
     "typesVersions": {
         "*": {
@@ -71,6 +72,9 @@
             ],
             "utils": [
                 "build/utils/index.d.ts"
+            ],
+            "utils/billings": [
+                "build/utils/billings/index.d.ts"
             ]
         }
     },

@@ -12,6 +12,7 @@ import {
   Services,
 } from "../../types/utils";
 import { expectType } from "tsd";
+import { TaskType } from "../../tasks/enums";
 
 // PlanInterface tests
 const plan: PlanInterface = {
@@ -78,9 +79,9 @@ expectType<{ min?: number; max?: number; step?: number } | undefined>(
 const usage: UsageInterface = {
   organizationId: new Types.ObjectId(),
   subscriptionId: new Types.ObjectId(),
-  service: Services.Avatar,
+  taskType: TaskType.Avatar,
   creditConsumed: 10,
-  serviceRefId: new Types.ObjectId()?.toString(),
+  taskId: new Types.ObjectId()?.toString(),
   creditRemaining: 90,
   userId: new Types.ObjectId(),
   totalCost: 100,
@@ -88,7 +89,7 @@ const usage: UsageInterface = {
 
 expectType<Types.ObjectId>(usage.organizationId);
 expectType<Types.ObjectId>(usage.subscriptionId);
-expectType<Services | undefined>(usage.service);
+expectType<TaskType | undefined>(usage.taskType);
 expectType<number>(usage.creditConsumed);
 expectType<number | undefined>(usage.creditRemaining);
 expectType<number>(usage.totalCost);
@@ -140,21 +141,21 @@ describe("Billing Interfaces", () => {
       const usage: UsageInterface = {
         organizationId: new Types.ObjectId(),
         subscriptionId: new Types.ObjectId(),
-        service: Services.Avatar,
+        taskType: TaskType.Avatar,
         creditConsumed: 5,
         creditRemaining: 45,
         userId: new Types.ObjectId(),
-        serviceRefId: new Types.ObjectId()?.toString(),
+        taskId: new Types.ObjectId()?.toString(),
         totalCost: 50,
       };
 
       expect(usage).toHaveProperty("organizationId");
       expect(usage).toHaveProperty("subscriptionId");
-      expect(usage).toHaveProperty("service");
+      expect(usage).toHaveProperty("taskType");
       expect(usage).toHaveProperty("creditConsumed");
       expect(usage).toHaveProperty("creditRemaining");
       expect(usage).toHaveProperty("userId");
-      expect(usage).toHaveProperty("serviceRefId");
+      expect(usage).toHaveProperty("taskId");
       expect(usage).toHaveProperty("totalCost");
     });
   });

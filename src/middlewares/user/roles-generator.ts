@@ -1,4 +1,5 @@
-import { TaskType, UserRole } from "../../types/utils";
+import { TaskType } from "../../tasks/enums";
+import { UserRole } from "../../types/utils";
 
 export const allowedTaskTypesBasedOnRole = (role: UserRole[]): TaskType[] => {
   const hasAdminOrSuperAdminRole =

@@ -5,8 +5,6 @@ import {
   RoboticPlatform,
   RobotStates,
   SimulationJobState,
-  TaskStatus,
-  TaskType,
   UserRole,
   UserStatuses,
   Services,
@@ -16,12 +14,16 @@ import {
   DeviceCategory,
   ItineraryType,
   OrderStatus,
-  TelepresenceType,
   RobotStatus,
-  ConnectViewerType,
   ObjectStates,
-  TemplateSetupOptions,
 } from "../utils";
+import {
+  ConnectViewerType,
+  TaskStatus,
+  TaskType,
+  TelepresenceType,
+  TemplateSetupOptions,
+} from "../../tasks/enums";
 
 declare namespace CTypes {
   /**

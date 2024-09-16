@@ -3,7 +3,8 @@
 // However, to shorten the token length, we'll create a function using
 
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { TaskType, UserRole } from "../../types/utils";
+import { UserRole } from "../../types/utils";
+import { TaskType } from "../../tasks/enums";
 
 export interface UserPayload extends JwtPayload {
   id: string;

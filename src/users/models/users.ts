@@ -1,12 +1,8 @@
 // File: src/models/users.ts
 
 import { Types } from "mongoose";
-import {
-  OauthType,
-  TaskType,
-  UserMembershipStatus,
-  UserRole,
-} from "../../types/utils";
+import { OauthType, UserMembershipStatus, UserRole } from "../../types/utils";
+import { TaskType } from "../../tasks/enums";
 
 /**
  * @interface UserInterface

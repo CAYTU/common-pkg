@@ -1,7 +1,8 @@
 import asyncHandler from "express-async-handler";
 import { NextFunction, Request, Response } from "express";
 import { NotAuthorizedErr } from "../../errors/not-authorized";
-import { TaskType, UserRole } from "../../types/utils";
+import { UserRole } from "../../types/utils";
+import { TaskType } from "../../tasks/enums";
 
 /**
  * Middleware to check if the user is authorized to perform a task.

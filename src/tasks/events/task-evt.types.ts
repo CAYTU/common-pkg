@@ -169,6 +169,7 @@ interface TaskUsageEvent {
     organizationId: string;
     taskId: string;
     taskType: TaskType;
+    userId?: string;
     duration: number;
     status: TaskStatus;
   };

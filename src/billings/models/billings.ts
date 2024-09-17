@@ -3,12 +3,10 @@ import {
   PlanType,
   PlanSubcategory,
   UnitOfMeasurement,
-  SubscriptionStatus,
-  PaymentStatus,
-  PaymentMethod,
   Services,
 } from "../../types/utils";
 import { IMongooseObjectExt } from "../../types/utils/models";
+import { PaymentMethod, PaymentStatus, SubscriptionStatus } from "../enums";
 
 /**
  * Represents the payment model executed by an organization for a subscription or usage.
@@ -43,6 +41,12 @@ export interface PaymentInterface {
   paymentCode?: string;
   /** A description or memo for the payment. */
   description?: string;
+  /**
+   * Indicates whether the payment was made to purchase credits.
+   * If `true`, the payment is for credit purchase.
+   * If `false`, the payment is for a subscription charge.
+   */
+  isCreditPurchase?: boolean;
 }
 
 /**

@@ -21,6 +21,7 @@ export * from "./utils/billings";
  */
 export * from "./billings/models";
 export * from "./billings/events";
+export * from "./billings/enums";
 
 /**
  * Export the users module

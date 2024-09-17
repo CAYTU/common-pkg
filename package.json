@@ -14,6 +14,7 @@
         "./users/utils": "./build/users/utils/index.js",
         "./billings/models": "./build/billings/models/index.js",
         "./billings/events": "./build/billings/events/index.js",
+        "./billings/enums": "./build/billings/enums/index.js",
         "./tasks/models": "./build/tasks/models/index.js",
         "./tasks/events": "./build/tasks/events/index.js",
         "./tasks/enums": "./build/tasks/enums/index.js",
@@ -45,6 +46,9 @@
             ],
             "billings/events": [
                 "build/billings/events/index.d.ts"
+            ],
+            "billings/enums": [
+                "build/billings/enums/index.d.ts"
             ],
             "tasks/models": [
                 "build/tasks/models/index.d.ts"

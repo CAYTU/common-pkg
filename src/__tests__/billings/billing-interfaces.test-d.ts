@@ -46,7 +46,7 @@ expectType<boolean>(plan.isCustom);
 
 // PlanFeature tests
 const planFeature_one: PlanFeature = {
-  name: "devices",
+  stripeProductId: "prod_12345",
   service: Services.Robot,
   displayName: "Devices",
   unitOfMeasurement: UnitOfMeasurement.Device,
@@ -55,7 +55,7 @@ const planFeature_one: PlanFeature = {
   isCustomizable: false,
 };
 
-expectType<string | undefined>(planFeature_one.name);
+expectType<string | undefined>(planFeature_one.stripeProductId);
 expectType<number>(planFeature_one.costPerUnit);
 expectType<number | undefined>(planFeature_one.freeQuota);
 expectType<boolean>(planFeature_one.isCustomizable);
@@ -69,7 +69,6 @@ const planFeature_two: PlanFeature = {
   isCustomizable: false,
 };
 
-expectType<string | undefined>(planFeature_two.name);
 expectType<number>(planFeature_two.costPerUnit);
 expectType<number | undefined>(planFeature_two.freeQuota);
 expectType<boolean>(planFeature_two.isCustomizable);

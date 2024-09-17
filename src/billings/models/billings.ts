@@ -49,8 +49,8 @@ export interface PaymentInterface {
  * Represents a feature of a plan with its properties and pricing details.
  */
 export interface PlanFeature {
-  /** The unique identifier of the feature */
-  name?: string;
+  /** The id of the product in the stripe system */
+  stripeProductId?: string;
   /** The service it involves */
   service: Services;
   /** The human-readable name of the feature */

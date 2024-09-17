@@ -50,7 +50,9 @@ export interface PaymentInterface {
  */
 export interface PlanFeature {
   /** The unique identifier of the feature */
-  name: string;
+  name?: string;
+  /** The service it involves */
+  service: Services;
   /** The human-readable name of the feature */
   displayName: string;
   /** The unit of measurement for this feature's usage */
@@ -61,12 +63,6 @@ export interface PlanFeature {
   freeQuota?: number;
   /** Indicates if the feature can be customized for specific organizations */
   isCustomizable: boolean;
-  /** Any constraints or limits on the feature's usage */
-  constraints?: {
-    min?: number;
-    max?: number;
-    step?: number;
-  };
 }
 
 /**
@@ -76,7 +72,7 @@ export interface PlanSubcategoryDetails {
   /** The type of subcategory (e.g., 'iot', 'robot') */
   type: PlanSubcategory;
   /** Features specific to this subcategory */
-  features: Record<string, PlanFeature>;
+  features: Types.ObjectId[];
 }
 
 /**
@@ -88,11 +84,9 @@ export interface PlanInterface extends IMongooseObjectExt {
   /** The type of the plan */
   type: PlanType;
   /** Features common to all subcategories of the plan */
-  commonFeatures: Record<string, PlanFeature>;
+  features?: Types.ObjectId[];
   /** Subcategories of the plan with their specific details */
-  subcategories: PlanSubcategoryDetails[];
-  /** Minimum commitment amount, if any */
-  minimumCommitment?: number;
+  subcategories?: PlanSubcategoryDetails[];
   /** Indicates if this is a custom enterprise plan */
   isCustom: boolean;
   /** The ID of the organization for custom enterprise plans */

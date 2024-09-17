@@ -17,29 +17,22 @@ import { expectType } from "tsd";
 const plan: PlanInterface = {
   title: "Premium Plan",
   type: PlanType.Professional,
-  commonFeatures: {
-    users: {
-      name: "users",
-      displayName: "Users",
-      unitOfMeasurement: UnitOfMeasurement.Count,
-      costPerUnit: 10,
-      freeQuota: 5,
-      isCustomizable: false,
-    },
-  },
   subcategories: [
     {
       type: PlanSubcategory.IoT,
-      features: {
-        storage: {
-          name: "storage",
-          displayName: "Storage",
-          unitOfMeasurement: UnitOfMeasurement.Gigabyte,
-          costPerUnit: 0.05,
-          freeQuota: 10,
-          isCustomizable: true,
-        },
-      },
+      features: [
+        new Types.ObjectId(),
+        new Types.ObjectId(),
+        new Types.ObjectId(),
+      ],
+    },
+    {
+      type: PlanSubcategory.Robot,
+      features: [
+        new Types.ObjectId(),
+        new Types.ObjectId(),
+        new Types.ObjectId(),
+      ],
     },
   ],
   isCustom: false,
@@ -47,32 +40,40 @@ const plan: PlanInterface = {
 
 expectType<string>(plan.title);
 expectType<PlanType>(plan.type);
-expectType<Record<string, PlanFeature>>(plan.commonFeatures);
-expectType<PlanSubcategoryDetails[]>(plan.subcategories);
+expectType<Types.ObjectId[] | undefined>(plan.features);
+expectType<PlanSubcategoryDetails[] | undefined>(plan.subcategories);
 expectType<boolean>(plan.isCustom);
 
 // PlanFeature tests
-const planFeature: PlanFeature = {
-  name: "storage",
-  displayName: "Storage",
-  unitOfMeasurement: UnitOfMeasurement.Gigabyte,
+const planFeature_one: PlanFeature = {
+  name: "devices",
+  service: Services.Robot,
+  displayName: "Devices",
+  unitOfMeasurement: UnitOfMeasurement.Device,
   costPerUnit: 0.05,
-  freeQuota: 10,
-  isCustomizable: true,
-  constraints: {
-    min: 0,
-    max: 100,
-    step: 10,
-  },
+  freeQuota: 1,
+  isCustomizable: false,
 };
 
-expectType<string>(planFeature.name);
-expectType<number>(planFeature.costPerUnit);
-expectType<number | undefined>(planFeature.freeQuota);
-expectType<boolean>(planFeature.isCustomizable);
-expectType<{ min?: number; max?: number; step?: number } | undefined>(
-  planFeature.constraints
-);
+expectType<string | undefined>(planFeature_one.name);
+expectType<number>(planFeature_one.costPerUnit);
+expectType<number | undefined>(planFeature_one.freeQuota);
+expectType<boolean>(planFeature_one.isCustomizable);
+expectType<Services>(planFeature_one.service);
+
+const planFeature_two: PlanFeature = {
+  service: Services.Avatar,
+  displayName: "Avatar",
+  unitOfMeasurement: UnitOfMeasurement.Hour,
+  costPerUnit: 3,
+  isCustomizable: false,
+};
+
+expectType<string | undefined>(planFeature_two.name);
+expectType<number>(planFeature_two.costPerUnit);
+expectType<number | undefined>(planFeature_two.freeQuota);
+expectType<boolean>(planFeature_two.isCustomizable);
+expectType<Services>(planFeature_two.service);
 
 // UsageInterface tests
 const usage: UsageInterface = {
@@ -99,38 +100,17 @@ describe("Billing Interfaces", () => {
       const plan: PlanInterface = {
         title: "Enterprise Plan",
         type: PlanType.Enterprise,
-        commonFeatures: {
-          support: {
-            name: "support",
-            displayName: "Priority Support",
-            unitOfMeasurement: UnitOfMeasurement.Boolean,
-            costPerUnit: 0,
-            freeQuota: 1,
-            isCustomizable: false,
-          },
-        },
-        subcategories: [
-          {
-            type: PlanSubcategory.IoT,
-            features: {
-              devices: {
-                name: "devices",
-                displayName: "Connected Devices",
-                unitOfMeasurement: UnitOfMeasurement.Count,
-                costPerUnit: 1,
-                freeQuota: 50,
-                isCustomizable: true,
-              },
-            },
-          },
+        features: [
+          new Types.ObjectId(),
+          new Types.ObjectId(),
+          new Types.ObjectId(),
         ],
-        isCustom: false,
+        isCustom: true,
       };
 
       expect(plan).toHaveProperty("title");
       expect(plan).toHaveProperty("type");
-      expect(plan).toHaveProperty("commonFeatures");
-      expect(plan).toHaveProperty("subcategories");
+      expect(plan).toHaveProperty("features");
       expect(plan).toHaveProperty("isCustom");
     });
   });

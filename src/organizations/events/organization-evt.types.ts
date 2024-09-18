@@ -52,6 +52,24 @@ interface OrganizationCreditConsumedEvent {
   };
 }
 
+interface OrganizationCreditFinishedEvent {
+  subject: Subjects.OrganizationCreditFinished;
+  data: {
+    id: string;
+    version: number;
+  };
+}
+
+interface OrganizationCreditThresholdReachedEvent {
+  subject: Subjects.OrganizationCreditThresholdReached;
+  data: {
+    id: string;
+    creditRemaining: number;
+    userId?: string;
+    version: number;
+  };
+}
+
 /**
  * @exports OrganizationEventTypes
  * @description Exporting each event type directly for easier consumption.
@@ -61,4 +79,6 @@ export {
   OrganizationUpdatedEvent,
   OrganizationDeletedEvent,
   OrganizationCreditConsumedEvent,
+  OrganizationCreditFinishedEvent,
+  OrganizationCreditThresholdReachedEvent,
 };

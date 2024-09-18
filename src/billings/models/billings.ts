@@ -103,25 +103,53 @@ export interface PlanInterface extends IMongooseObjectExt {
  * Represents the subscription interface chosen by an organization.
  */
 export interface SubscriptionInterface extends IMongooseObjectExt {
+  /** The ID of the plan associated with this subscription. */
   planId: Types.ObjectId;
-  /** The unique identifier of the user who owns the subscription. */
+  
+  /** The unique identifier of the organization that owns the subscription. */
   organizationId: Types.ObjectId;
+  
   /** The status of the subscription. */
-  subscriptionStatus?: SubscriptionStatus;
-  /** The start date of the subscription. */
+  subscriptionStatus: SubscriptionStatus;
+  
+  /** The start date of the current subscription period. */
   currentPeriodStart?: Date;
-  /**  The end date of the subscription. */
+  
+  /** The end date of the current subscription period. */
   currentPeriodEnd?: Date;
-  /** The id of the subscription in the stripe system */
+  
+  /** The ID of the subscription in the Stripe system. */
   stripeSubscriptionId?: string;
-  /**  The id of the customer in the stripe system */
+  
+  /** The ID of the customer in the Stripe system. */
   stripeCustomerId?: string;
+  
   /** The type of subscription plan the user wants to change to. */
   requestPlanChangeType?: PlanType;
+  
   /** Whether the user has requested a change of plan. */
   hasRequestedChange?: boolean;
-  /**  A stringified JSON object containing the payload of the request. */
+  
+  /** A stringified JSON object containing the payload of the change request. */
   requestPayload?: string;
+  
+  /** Indicates whether payment was bypassed for this subscription. */
+  paymentBypassed?: boolean;
+  
+  /** The ID of the admin who last modified this subscription. */
+  lastModifiedBy?: Types.ObjectId;
+  
+  /** The date when this subscription was last modified. */
+  lastModifiedDate?: Date;
+  
+  /** The reason for bypassing payment, if applicable. */
+  bypassReason?: string;
+  
+  /** The date until which this subscription is valid, if different from currentPeriodEnd. */
+  validUntil?: Date;
+  
+  /** Any additional notes or comments about this subscription. */
+  notes?: string;
 }
 
 /**

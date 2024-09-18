@@ -133,6 +133,8 @@ export enum Subjects {
   OrganizationMemberInviteRejected = "organization:member:invite:rejected",
   OrganizationMemberInviteResend = "organization:member:invite:resend",
   OrganizationCreditConsumed = "organization:credit:consumed",
+  OrganizationCreditFinished = "organization:credit:finished",
+  OrganizationCreditThresholdReached = "organization:credit:threshold:reached",
 
   // Order Subjects
   OrderCreated = "order:created",
@@ -143,6 +145,11 @@ export enum Subjects {
   PlanCreated = "plan:created",
   PlanUpdated = "plan:updated",
   PlanDeleted = "plan:deleted",
+
+  // Plan features
+  PlanFeatureCreated = "plan:feature:created",
+  PlanFeatureUpdated = "plan:feature:updated",
+  PlanFeatureDeleted = "plan:feature:deleted",
 
   // Billing
   BillingCreated = "billing:created",

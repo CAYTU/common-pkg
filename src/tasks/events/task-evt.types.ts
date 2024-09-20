@@ -61,7 +61,7 @@ interface TaskDeletedEvent {
  */
 interface TaskGetRobotCandidateEvent {
   subject: Subjects.RobotGetCandidate;
-  data: { taskId: string; version: number };
+  data: { taskId: string; deviceId: string; version: number };
 }
 
 /**
@@ -114,7 +114,7 @@ interface TaskGetOperatorCandidateEvent {
  */
 interface TaskAcceptedEvent {
   subject: Subjects.TaskAccepted;
-  data: { customer: string; taskId?: string; version: number };
+  data: { owner: string; taskId?: string; version: number };
 }
 
 /**

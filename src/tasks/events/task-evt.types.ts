@@ -19,7 +19,7 @@ import { TaskStatus, TaskType, TemplateSetupOptions } from "../enums";
  */
 interface TaskCreatedEvent {
   subject: Subjects.TaskCreated;
-  data: Partial<TaskInterface> & AddonOwner;
+  data: Partial<TaskInterface> & AddonOwner & OnlyRequired;
 }
 
 /**

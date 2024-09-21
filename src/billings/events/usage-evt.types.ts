@@ -8,6 +8,7 @@
  *
  */
 
+import { OnlyRequired } from "../../common";
 import { Subjects } from "../../nats-events/subjects";
 import { Services } from "../../types/utils";
 import { UsageInterface } from "../models";
@@ -18,7 +19,7 @@ import { UsageInterface } from "../models";
  */
 interface UsageCreatedEvent {
   subject: Subjects.UsageCreated;
-  data: UsageInterface;
+  data: UsageInterface & OnlyRequired;
 }
 
 /**
@@ -27,7 +28,7 @@ interface UsageCreatedEvent {
  */
 interface UsageUpdatedEvent {
   subject: Subjects.UsageUpdated;
-  data: Partial<UsageInterface>;
+  data: Partial<UsageInterface> & OnlyRequired;
 }
 
 /**
@@ -36,7 +37,7 @@ interface UsageUpdatedEvent {
  */
 interface UsageDeletedEvent {
   subject: Subjects.UsageDeleted;
-  data: { id: string };
+  data: { id: string, version: number };
 }
 
 /**

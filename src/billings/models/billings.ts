@@ -3,7 +3,7 @@ import {
   PlanType,
   PlanSubcategory,
   UnitOfMeasurement,
-  Services,
+  BillingServices,
 } from "../../types/utils";
 import { IMongooseObjectExt } from "../../types/utils/models";
 import { PaymentMethod, PaymentStatus, SubscriptionStatus } from "../enums";
@@ -56,7 +56,7 @@ export interface PlanFeature {
   /** The id of the product in the stripe system */
   stripeProductId?: string;
   /** The service it involves */
-  service: Services;
+  service: BillingServices;
   /** The human-readable name of the feature */
   displayName: string;
   /** The unit of measurement for this feature's usage */
@@ -163,7 +163,7 @@ export interface UsageInterface extends IMongooseObjectExt {
   /** The ID of the subscription associated with this usage */
   subscriptionId: Types.ObjectId;
   /** The service for which the usage is tracked */
-  service?: Services;
+  service?: BillingServices;
   /** The id of the service instance */
   serviceRefId?: string;
   /** The amount of credit units remaining */

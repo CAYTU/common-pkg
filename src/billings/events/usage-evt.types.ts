@@ -10,7 +10,7 @@
 
 import { OnlyRequired } from "../../common";
 import { Subjects } from "../../nats-events/subjects";
-import { Services } from "../../types/utils";
+import { BillingServices } from "../../types/utils";
 import { UsageInterface } from "../models";
 
 /**
@@ -37,7 +37,7 @@ interface UsageUpdatedEvent {
  */
 interface UsageDeletedEvent {
   subject: Subjects.UsageDeleted;
-  data: { id: string, version: number };
+  data: { id: string; version: number };
 }
 
 /**
@@ -48,7 +48,7 @@ interface UsageStartedEvent {
   subject: Subjects.UsageStarted;
   data: {
     serviceRefId: string;
-    service: Services;
+    service: BillingServices;
     organizationId: string;
     userId?: string;
   };
@@ -62,7 +62,7 @@ interface UsageEndedEvent {
   subject: Subjects.UsageEnded;
   data: {
     serviceRefId: string;
-    service: Services;
+    service: BillingServices;
     organizationId: string;
     userId?: string;
   };

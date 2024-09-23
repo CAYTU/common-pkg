@@ -242,6 +242,18 @@ export enum Services {
   SimulationJob = "simulationJob",
 }
 
+export enum BillingServices {
+  Device = "device",
+  User = "user",
+  Storage = "storage",
+  API = "api",
+  Integration = "integration",
+  Support = "support",
+
+  Simulation = "simulation",
+  Avatar = "avatar",
+}
+
 /**
  * @description
  * This enum is used to define the category of a device

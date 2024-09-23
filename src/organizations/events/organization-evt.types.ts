@@ -5,7 +5,7 @@
 
 import { OnlyRequired } from "../../common";
 import { Subjects } from "../../nats-events/subjects";
-import { Services } from "../../types/utils";
+import { BillingServices } from "../../types/utils";
 import { OrganizationInterface } from "../models";
 
 /**
@@ -46,7 +46,7 @@ interface OrganizationCreditConsumedEvent {
     creditConsumed: number;
     creditRemaining: number;
     userId?: string;
-    service: Services;
+    service: BillingServices;
     serviceRefId: string;
     version: number;
   };

@@ -9,7 +9,7 @@ import {
   PlanType,
   PlanSubcategory,
   UnitOfMeasurement,
-  Services,
+  BillingServices,
 } from "../../types/utils";
 import { expectType } from "tsd";
 
@@ -47,7 +47,7 @@ expectType<boolean>(plan.isCustom);
 // PlanFeature tests
 const planFeature_one: PlanFeature = {
   stripeProductId: "prod_12345",
-  service: Services.Robot,
+  service: BillingServices.Device,
   displayName: "Devices",
   unitOfMeasurement: UnitOfMeasurement.Device,
   costPerUnit: 0.05,
@@ -59,10 +59,10 @@ expectType<string | undefined>(planFeature_one.stripeProductId);
 expectType<number>(planFeature_one.costPerUnit);
 expectType<number | undefined>(planFeature_one.freeQuota);
 expectType<boolean>(planFeature_one.isCustomizable);
-expectType<Services>(planFeature_one.service);
+expectType<BillingServices>(planFeature_one.service);
 
 const planFeature_two: PlanFeature = {
-  service: Services.Avatar,
+  service: BillingServices.Avatar,
   displayName: "Avatar",
   unitOfMeasurement: UnitOfMeasurement.Hour,
   costPerUnit: 3,
@@ -72,13 +72,13 @@ const planFeature_two: PlanFeature = {
 expectType<number>(planFeature_two.costPerUnit);
 expectType<number | undefined>(planFeature_two.freeQuota);
 expectType<boolean>(planFeature_two.isCustomizable);
-expectType<Services>(planFeature_two.service);
+expectType<BillingServices>(planFeature_two.service);
 
 // UsageInterface tests
 const usage: UsageInterface = {
   organizationId: new Types.ObjectId(),
   subscriptionId: new Types.ObjectId(),
-  service: Services.Avatar,
+  service: BillingServices.Avatar,
   creditConsumed: 10,
   serviceRefId: new Types.ObjectId()?.toString(),
   creditRemaining: 90,
@@ -88,7 +88,7 @@ const usage: UsageInterface = {
 
 expectType<Types.ObjectId>(usage.organizationId);
 expectType<Types.ObjectId>(usage.subscriptionId);
-expectType<Services | undefined>(usage.service);
+expectType<BillingServices | undefined>(usage.service);
 expectType<number>(usage.creditConsumed);
 expectType<number | undefined>(usage.creditRemaining);
 expectType<number>(usage.totalCost);
@@ -119,7 +119,7 @@ describe("Billing Interfaces", () => {
       const usage: UsageInterface = {
         organizationId: new Types.ObjectId(),
         subscriptionId: new Types.ObjectId(),
-        service: Services.Avatar,
+        service: BillingServices.Avatar,
         creditConsumed: 5,
         creditRemaining: 45,
         userId: new Types.ObjectId(),

@@ -117,6 +117,8 @@ export enum Subjects {
   PaymentFailed = "payment:failed",
   PaymentSucceeded = "payment:succeeded",
   PaymentCaptured = "payment:captured",
+  PaymentScheduled = "payment:scheduled",
+  PaymentScheduledDateReached = "payment:scheduled:date:reached",
 
   // Organization
   OrganizationCreated = "organization:created",

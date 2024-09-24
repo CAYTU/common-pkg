@@ -74,7 +74,9 @@ export interface PlanFeature {
  */
 export interface PlanSubcategoryDetails {
   /** The type of subcategory (e.g., 'iot', 'robot') */
-  type: PlanSubcategory;
+  type: string;
+  /** The price set for this subcategory */
+  price?: number | string;
   /** Features specific to this subcategory */
   features: Types.ObjectId[];
 }

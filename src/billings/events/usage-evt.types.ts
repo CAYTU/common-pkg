@@ -51,6 +51,7 @@ interface UsageStartedEvent {
     service: BillingServices;
     organizationId: string;
     userId?: string;
+    metadata?: any;
   };
 }
 
@@ -65,6 +66,23 @@ interface UsageEndedEvent {
     service: BillingServices;
     organizationId: string;
     userId?: string;
+    metadata?: any;
+  };
+}
+
+/**
+ * @interface UsageRecordedEvent
+ * @description Defines a TypeScript interface for an event when a usage is recorded.
+ */
+interface UsageRecordedEvent {
+  subject: Subjects.UsageRecorded;
+  data: {
+    duration: number;
+    serviceRefId: string;
+    service: BillingServices;
+    organizationId: string;
+    userId?: string;
+    metadata?: any;
   };
 }
 
@@ -88,4 +106,5 @@ export {
   UsageStartedEvent,
   UsageEndedEvent,
   UsageFailedEvent,
+  UsageRecordedEvent,
 };

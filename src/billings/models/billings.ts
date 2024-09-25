@@ -6,7 +6,12 @@ import {
   BillingServices,
 } from "../../types/utils";
 import { IMongooseObjectExt } from "../../types/utils/models";
-import { PaymentMethod, PaymentStatus, SubscriptionStatus } from "../enums";
+import {
+  PaymentMethod,
+  PaymentStatus,
+  SubscriptionStatus,
+  UsageStatus,
+} from "../enums";
 
 /**
  * Represents the payment model executed by an organization for a subscription or usage.
@@ -176,4 +181,10 @@ export interface UsageInterface extends IMongooseObjectExt {
   userId?: Types.ObjectId;
   /** Total cost for the current billing period */
   totalCost: number;
+  /** Duration of the usage */
+  duration: number;
+  /** Metadata for the usage */
+  metadata?: any;
+  /** The status of the usage */
+  status: UsageStatus;
 }

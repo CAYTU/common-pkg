@@ -196,4 +196,5 @@ export enum Subjects {
   UsageStarted = "usage:started",
   UsageEnded = "usage:ended",
   UsageFailed = "usage:failed",
+  UsageRecorded = "usage:recorded",
 }

@@ -12,6 +12,7 @@ import {
   BillingServices,
 } from "../../types/utils";
 import { expectType } from "tsd";
+import { UsageStatus } from "../../billings/enums";
 
 // PlanInterface tests
 const plan: PlanInterface = {
@@ -84,6 +85,8 @@ const usage: UsageInterface = {
   creditRemaining: 90,
   userId: new Types.ObjectId(),
   totalCost: 100,
+  duration: 0,
+  status: UsageStatus.Waiting,
 };
 
 expectType<Types.ObjectId>(usage.organizationId);
@@ -92,6 +95,7 @@ expectType<BillingServices | undefined>(usage.service);
 expectType<number>(usage.creditConsumed);
 expectType<number | undefined>(usage.creditRemaining);
 expectType<number>(usage.totalCost);
+expectType<UsageStatus>(usage.status);
 
 describe("Billing Interfaces", () => {
   describe("PlanInterface", () => {
@@ -125,6 +129,8 @@ describe("Billing Interfaces", () => {
         userId: new Types.ObjectId(),
         serviceRefId: new Types.ObjectId()?.toString(),
         totalCost: 50,
+        duration: 0,
+        status: UsageStatus.Billed,
       };
 
       expect(usage).toHaveProperty("organizationId");
@@ -135,6 +141,8 @@ describe("Billing Interfaces", () => {
       expect(usage).toHaveProperty("userId");
       expect(usage).toHaveProperty("serviceRefId");
       expect(usage).toHaveProperty("totalCost");
+      expect(usage).toHaveProperty("duration");
+      expect(usage).toHaveProperty("status");
     });
   });
 });

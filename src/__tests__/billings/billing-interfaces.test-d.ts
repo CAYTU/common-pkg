@@ -12,7 +12,7 @@ import {
   BillingServices,
 } from "../../types/utils";
 import { expectType } from "tsd";
-import { UsageStatus } from "../../billings/enums";
+import { UsageStatus, UsageType } from "../../billings/enums";
 
 // PlanInterface tests
 const plan: PlanInterface = {
@@ -86,6 +86,7 @@ const usage: UsageInterface = {
   userId: new Types.ObjectId(),
   totalCost: 100,
   duration: 0,
+  usageType: UsageType.Recurring,
   status: UsageStatus.Waiting,
 };
 
@@ -130,6 +131,7 @@ describe("Billing Interfaces", () => {
         serviceRefId: new Types.ObjectId()?.toString(),
         totalCost: 50,
         duration: 0,
+        usageType: UsageType.Recurring,
         status: UsageStatus.Billed,
       };
 

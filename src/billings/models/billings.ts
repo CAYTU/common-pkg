@@ -190,4 +190,6 @@ export interface UsageInterface extends IMongooseObjectExt {
   status: UsageStatus;
   /** The type of usage */
   usageType: UsageType;
+  /** Indicates whether the usage has been billed */
+  isBilled: boolean;
 }

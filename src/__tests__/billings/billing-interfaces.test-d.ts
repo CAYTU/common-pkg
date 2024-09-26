@@ -88,6 +88,7 @@ const usage: UsageInterface = {
   duration: 0,
   usageType: UsageType.Recurring,
   status: UsageStatus.Waiting,
+  isBilled: false,
 };
 
 expectType<Types.ObjectId>(usage.organizationId);
@@ -133,6 +134,7 @@ describe("Billing Interfaces", () => {
         duration: 0,
         usageType: UsageType.Recurring,
         status: UsageStatus.Billed,
+        isBilled: false,
       };
 
       expect(usage).toHaveProperty("organizationId");

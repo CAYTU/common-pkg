@@ -11,6 +11,7 @@ import {
   PaymentStatus,
   SubscriptionStatus,
   UsageStatus,
+  UsageType,
 } from "../enums";
 
 /**
@@ -187,4 +188,6 @@ export interface UsageInterface extends IMongooseObjectExt {
   metadata?: any;
   /** The status of the usage */
   status: UsageStatus;
+  /** The type of usage */
+  usageType: UsageType;
 }

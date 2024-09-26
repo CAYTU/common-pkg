@@ -9,3 +9,8 @@ export enum UsageStatus {
   Cancelled = "cancelled",
   Failed = "failed",
 }
+
+export enum UsageType {
+  Recurring = "recurring",
+  OneTime = "one-time",
+}

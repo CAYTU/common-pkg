@@ -42,12 +42,9 @@ interface OrganizationDeletedEvent {
 interface OrganizationCreditConsumedEvent {
   subject: Subjects.OrganizationCreditConsumed;
   data: {
-    id: string;
+    organizationId: string;
+    subscriptionId?: string;
     creditConsumed: number;
-    creditRemaining: number;
-    userId?: string;
-    service: BillingServices;
-    serviceRefId: string;
     version: number;
   };
 }

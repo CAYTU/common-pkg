@@ -205,11 +205,14 @@ export enum PlanSubcategory {
 export enum UnitOfMeasurement {
   ApiCall = "api-call",
   Device = "device",
-  Hour = "hour",
   Gigabyte = "gb",
   Count = "count",
   Boolean = "boolean",
   // Add other units as needed
+
+  Hour = "hour",
+  Minute = "minute",
+  Second = "second",
 }
 
 export enum OauthType {

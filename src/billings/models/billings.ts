@@ -140,6 +140,12 @@ export interface SubscriptionInterface extends IMongooseObjectExt {
   /** Whether the user has requested a change of plan. */
   hasRequestedChange?: boolean;
 
+  /**  The status of the request to change the subscription plan. */
+  changePlanRequestStatus?: SubscriptionStatus;
+
+  /** The ID of the plan the user wants to change to. */
+  changePlanId?: Types.ObjectId;
+
   /** A stringified JSON object containing the payload of the change request. */
   requestPayload?: string;
 

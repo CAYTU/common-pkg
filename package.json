@@ -9,6 +9,7 @@
     ],
     "exports": {
         ".": "./build/index.js",
+        "./devices/models": "./build/devices/models/index.js",
         "./users/models": "./build/users/models/index.js",
         "./users/events": "./build/users/events/index.js",
         "./users/utils": "./build/users/utils/index.js",
@@ -32,6 +33,12 @@
     },
     "typesVersions": {
         "*": {
+            ".": [
+                "build/index.d.ts"
+            ],
+            "devices/models": [
+                "build/devices/models/index.d.ts"
+            ],
             "users/models": [
                 "build/users/models/index.d.ts"
             ],

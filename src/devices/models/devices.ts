@@ -9,6 +9,20 @@ import {
   RobotStatus,
 } from "../../types/utils";
 
+interface OldLocationFormat {
+  lng: number;
+  lat: number;
+}
+
+interface NewLocationFormat {
+  type: "Point";
+  coordinates: [number, number]; // [longitude, latitude]
+}
+
+type FlexibleLocation = (OldLocationFormat | NewLocationFormat) & {
+  [key: string]: any; // This allows for additional properties
+};
+
 /**
  * Represents the base information for a robot.
  */
@@ -112,14 +126,9 @@ export interface RobotBaseInterface extends IMongooseObjectExt {
 
   /**
    * The last recorded geographical location of the robot (optional).
+   * Supports both old and new formats.
    */
-  lastRecordedLocation?: {
-    lng: number;
-    lat: number;
-  } & {
-    type?: string;
-    coordinates?: number[];
-  };
+  lastRecordedLocation?: FlexibleLocation;
 
   /**
    * The unique identifier of the current task assigned to the robot (optional).

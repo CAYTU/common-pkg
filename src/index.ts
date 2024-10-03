@@ -15,6 +15,13 @@ export * from "./utils/cookies";
 export * from "./utils/billings";
 
 /**
+ * Export the devices module
+ * @module devices
+ * @description This module contains all the device related interfaces.
+ */
+export * from "./devices/models";
+
+/**
  * Export the billings module
  * @module billings
  * @description This module contains all the billing related interfaces and events.

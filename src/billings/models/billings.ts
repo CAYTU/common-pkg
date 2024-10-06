@@ -1,7 +1,6 @@
 import { Types } from "mongoose";
 import {
   PlanType,
-  PlanSubcategory,
   UnitOfMeasurement,
   BillingServices,
 } from "../../types/utils";
@@ -73,6 +72,8 @@ export interface PlanFeature {
   freeQuota?: number;
   /** Indicates if the feature can be customized for specific organizations */
   isCustomizable: boolean;
+  /** Indicates if the feature is already in use */
+  isUsed?: boolean;
 }
 
 /**

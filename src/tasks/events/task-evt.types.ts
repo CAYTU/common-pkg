@@ -6,8 +6,9 @@
 import { Subjects } from "../../nats-events/subjects";
 import { AddonOwner, OnlyRequired } from "../../common";
 import { TaskInterface } from "../models";
-import { TemplateSetupData } from "../data";
-import { TaskStatus, TaskType, TemplateSetupOptions } from "../enums";
+import { TemplateSetupData, TemplateSetupOptions } from "../../avatars/utils";
+import { TaskStatus, TaskType } from "../enums";
+
 
 /**
  * @interface TaskCreatedEvent

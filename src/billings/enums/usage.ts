@@ -9,6 +9,8 @@ export enum UsageStatus {
   Cancelled = "cancelled",
   Failed = "failed",
   FreeQuota = "free-quota",
+  InUse = "in-use",
+  Pending = "pending",
 }
 
 export enum UsageType {

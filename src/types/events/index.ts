@@ -5,8 +5,8 @@ import * as PaymentEvents from "../../billings/events/payment-evt.types";
 import * as UserEvents from "./user-evt.types";
 import * as OperatorEvents from "./operator-evt.types";
 import * as EmailEvents from "./email-evt.types";
-import * as AvatarEvents from "./avatar-evt.types";
-import * as AvatarInstanceEvents from "./avatar-instance-evt.types";
+import * as AvatarEvents from "../../avatars/events/avatar-evt.types";
+import * as AvatarInstanceEvents from "../../avatars/events/avatar-instance-evt.types";
 import * as ZoneEvents from "./zone-evt.types";
 import * as SubscriptionEvents from "../../billings/events/subscription-evt.types";
 

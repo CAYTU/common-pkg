@@ -4,20 +4,20 @@
  */
 
 import { Subjects } from "../../nats-events/subjects";
-import CTypes from "../models";
+import { AvatarInstanceInterface } from "../models";
 
 /**
  * @interface AvatarInstanceCreatedEvent
  * @description Defines a TypeScript interface for an event when an avatar instance is created.
  * @property {Subjects.AvatarInstanceCreated} subject - The subject type of the event.
  * @property {object} data - The data payload of the event.
- * @property {Partial<CTypes.AvatarInstanceInterface>} data - A partial object of the avatar instance details.
+ * @property {Partial<AvatarInstanceInterface>} data - A partial object of the avatar instance details.
  * @property {string} data.id - The ID of the avatar instance.
  * @property {number} data.version - The version number of the avatar instance.
  */
 interface AvatarInstanceCreatedEvent {
   subject: Subjects.AvatarInstanceCreated;
-  data: CTypes.AvatarInstanceInterface & {
+  data: AvatarInstanceInterface & {
     id: string;
     version: number;
   };
@@ -28,13 +28,13 @@ interface AvatarInstanceCreatedEvent {
  * @description Defines a TypeScript interface for an event when an avatar instance is updated.
  * @property {Subjects.AvatarInstanceUpdated} subject - The subject type of the event.
  * @property {object} data - The data payload of the event.
- * @property {Partial<CTypes.AvatarInstanceInterface>} data - A partial object of the avatar instance details.
+ * @property {Partial<AvatarInstanceInterface>} data - A partial object of the avatar instance details.
  * @property {string} data.id - The ID of the avatar instance.
  * @property {number} data.version - The version number of the avatar instance.
  */
 interface AvatarInstanceUpdatedEvent {
   subject: Subjects.AvatarInstanceUpdated;
-  data: Partial<CTypes.AvatarInstanceInterface> & {
+  data: Partial<AvatarInstanceInterface> & {
     id: string;
     taskId?: string;
     version: number;

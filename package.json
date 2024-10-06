@@ -9,6 +9,9 @@
     ],
     "exports": {
         ".": "./build/index.js",
+        "./avatars/models": "./build/avatars/models/index.js",
+        "./avatars/events": "./build/avatars/events/index.js",
+        "./avatars/utils": "./build/avatars/utils/index.js",
         "./devices/models": "./build/devices/models/index.js",
         "./users/models": "./build/users/models/index.js",
         "./users/events": "./build/users/events/index.js",
@@ -35,6 +38,15 @@
         "*": {
             ".": [
                 "build/index.d.ts"
+            ],
+            "./avatars/models": [
+                "build/avatars/models/index.d.ts"
+            ],
+            "./avatars/events": [
+                "build/avatars/events/index.d.ts"
+            ],
+            "./avatars/utils": [
+                "build/avatars/utils/index.d.ts"
             ],
             "devices/models": [
                 "build/devices/models/index.d.ts"

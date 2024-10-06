@@ -8,4 +8,7 @@ export enum SubscriptionStatus {
   PastDue = "pastDue",
   Blocked = "blocked",
   Cancelled = "cancelled",
+
+  CancelledPending = "cancelledPending",
+  Ended = "ended",
 }

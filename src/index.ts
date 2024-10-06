@@ -15,6 +15,15 @@ export * from "./utils/cookies";
 export * from "./utils/billings";
 
 /**
+ * Export the avatars module
+ * @module avatars
+ * @description This module contains all the avatar related interfaces and events.
+ */
+export * from "./avatars/models";
+export * from "./avatars/utils";
+export * from "./avatars/events";
+
+/**
  * Export the devices module
  * @module devices
  * @description This module contains all the device related interfaces.
@@ -46,7 +55,6 @@ export * from "./users/events";
 export * from "./tasks/models";
 export * from "./tasks/events";
 export * from "./tasks/enums";
-export * from "./tasks/data";
 
 /**
  * Export the organizations module

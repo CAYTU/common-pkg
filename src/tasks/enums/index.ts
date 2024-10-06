@@ -2,4 +2,3 @@
 
 export * from "./task-status";
 export * from "./task-types";
-export * from "./task-props";

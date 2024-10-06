@@ -8,6 +8,7 @@ export enum UsageStatus {
   Waiting = "waiting",
   Cancelled = "cancelled",
   Failed = "failed",
+  FreeQuota = "free-quota",
 }
 
 export enum UsageType {

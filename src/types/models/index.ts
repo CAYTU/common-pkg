@@ -13,14 +13,12 @@ import {
   ItineraryType,
   OrderStatus,
   RobotStatus,
-  ObjectStates,
 } from "../utils";
 import {
   ConnectViewerType,
   TaskStatus,
   TaskType,
   TelepresenceType,
-  TemplateSetupOptions,
 } from "../../tasks/enums";
 import {
   OrganizationType,
@@ -28,24 +26,6 @@ import {
 } from "../../organizations/enums";
 
 declare namespace CTypes {
-  /**
-   * Represents a template setup data object for an avatar.
-   */
-  export interface TemplateSetupData {
-    channel_name?: string;
-    apiKey?: string;
-    transcription_model?: string;
-    completion_model?: string;
-    speech_model?: string;
-    voice_model?: string;
-    think_mode?: string;
-    file_context_type?: FileContextType;
-    s3_context_key?: string;
-    conversation_history?: {
-      [key: string]: string;
-    }[];
-  }
-
   /**
    * Common properties for objects stored in MongoDB with extended data.
    */
@@ -59,88 +39,6 @@ declare namespace CTypes {
      * The date when the object was created (optional).
      */
     createdAt?: Date;
-  }
-
-  export interface AvatarInterface extends IMongooseObjectExt {
-    name: string;
-    image?: string;
-    description?: string;
-
-    stackName: string;
-
-    nonConfigurable?: boolean;
-
-    ec2IAMRole?: string;
-    ec2KeyPair?: string;
-    ec2SecurityGroups?: string[];
-    s3Bucket?: string;
-    templateKey?: string;
-    amiId?: string;
-    instanceType?: string;
-    lambdaRoleArn?: string;
-    lambdaZipKey?: string;
-    documentName?: string;
-    sourceAccount?: string;
-
-    subnetIds?: string[];
-
-    /**
-     * The id of the user who created it.
-     */
-    user?: Types.ObjectId;
-
-    organizationId: Types.ObjectId;
-    public: boolean;
-  }
-
-  export type FileContextType = "text" | "audio" | "file";
-
-  /**
-   * Interface for an avatar job.
-   * @interface
-   */
-  export interface AvatarInstanceInterface extends IMongooseObjectExt {
-    avatarId: Types.ObjectId;
-    instanceId?: string;
-    taskId?: string;
-    state?: ObjectStates;
-
-    templateSetup?: TemplateSetupOptions;
-
-    /**
-     * In case the service needs to know it during setup
-     */
-    fileContextType?: FileContextType;
-    templateSetupS3UrlKey?: string;
-
-    currentUserSession?: string;
-
-    user?: Types.ObjectId;
-
-    organizationId?: Types.ObjectId;
-    sharedWith?: Types.ObjectId[];
-
-    public?: boolean;
-  }
-
-  /************************
-   * Represents a customer.
-   **********************/
-  export interface CustomerInterface extends IMongooseObjectExt {
-    /**
-     * The unique identifier of the associated user.
-     */
-    user: Types.ObjectId;
-
-    /**
-     * The loyalty points of the customer. (Optional)
-     */
-    loyaltyPoint?: number;
-
-    /**
-     * The wallet balance of the customer. (Optional)
-     */
-    wallet?: number;
   }
 
   /******************************************************************

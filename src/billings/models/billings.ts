@@ -46,6 +46,9 @@ export interface PaymentInterface {
   paymentCode?: string;
   /** A description or memo for the payment. */
   description?: string;
+  /** URL to the invoice for the payment */
+  invoiceUrl?: string;
+
   /**
    * Indicates whether the payment was made to purchase credits.
    * If `true`, the payment is for credit purchase.
@@ -191,6 +194,8 @@ export interface UsageInterface extends IMongooseObjectExt {
   totalCost: number;
   /** Duration of the usage */
   duration: number;
+  /** The amount of usage for quantity-based services */
+  quantity?: number;
   /** Metadata for the usage */
   metadata?: any;
   /** The status of the usage */

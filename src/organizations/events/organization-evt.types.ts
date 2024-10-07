@@ -49,6 +49,24 @@ interface OrganizationCreditConsumedEvent {
   };
 }
 
+interface OrganizationCreditEstimationThresholdReachedEvent {
+  subject: Subjects.OrganizationCreditEstimationThresholdReached;
+  data: {
+    organizationId: string;
+    creditRemaining: number;
+    userId?: string;
+    version: number;
+  };
+}
+
+interface OrganizationCreditEstimationFinishedEvent {
+  subject: Subjects.OrganizationCreditEstimationFinished;
+  data: {
+    organizationId: string;
+    version: number;
+  };
+}
+
 interface OrganizationCreditFinishedEvent {
   subject: Subjects.OrganizationCreditFinished;
   data: {
@@ -78,4 +96,6 @@ export {
   OrganizationCreditConsumedEvent,
   OrganizationCreditFinishedEvent,
   OrganizationCreditThresholdReachedEvent,
+  OrganizationCreditEstimationThresholdReachedEvent,
+  OrganizationCreditEstimationFinishedEvent,
 };

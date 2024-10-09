@@ -5,7 +5,7 @@ const errorHandler = async (
   err: Error,
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   if (err instanceof CustomErr) {
     return res.status(err.statusCode).send({

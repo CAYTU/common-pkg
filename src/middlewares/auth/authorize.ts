@@ -10,5 +10,5 @@ export const authorize = asyncHandler(
     }
 
     throw new NotAuthorizedErr();
-  }
+  },
 );

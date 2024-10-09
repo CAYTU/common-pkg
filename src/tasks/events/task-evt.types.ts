@@ -9,7 +9,6 @@ import { TaskInterface } from "../models";
 import { TemplateSetupData, TemplateSetupOptions } from "../../avatars/utils";
 import { TaskStatus, TaskType } from "../enums";
 
-
 /**
  * @interface TaskCreatedEvent
  * @description Defines a TypeScript interface for an event when a task is created.

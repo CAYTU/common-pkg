@@ -11,5 +11,5 @@ export const authorizeRobot = asyncHandler(
       throw new NotAuthorizedErr("Robot not authorized");
     }
     next();
-  }
+  },
 );

@@ -76,7 +76,7 @@ If you want to contribute to the development of this package, follow these steps
    npm publish
    ```
 
-__Please ensure that you have the necessary credentials and permissions to publish to your CodeArtifact repository.__
+**Please ensure that you have the necessary credentials and permissions to publish to your CodeArtifact repository.**
 
 ## Versioning
 

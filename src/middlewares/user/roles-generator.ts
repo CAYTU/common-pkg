@@ -14,7 +14,7 @@ export const allowedTaskTypesBasedOnRole = (role: UserRole[]): TaskType[] => {
     case hasCustomerRole:
       // All task types are allowed for customer except for simulation
       return [...Object.values(TaskType)].filter(
-        (taskType) => taskType !== TaskType.Simulation
+        (taskType) => taskType !== TaskType.Simulation,
       );
     default:
       return [];

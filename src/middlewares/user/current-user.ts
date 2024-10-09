@@ -67,5 +67,5 @@ export const currentUser = asyncHandler(
     }
     // Continue to the next middleware or route handler
     next();
-  }
+  },
 );

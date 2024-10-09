@@ -6,16 +6,33 @@ on:
       - main
     tags:
       - "v*"
+  pull_request:
+    branches:
+      - main
 
 jobs:
+  lint-and-format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: "yarn"
+      - run: yarn install
+      - run: yarn lint
+      - run: yarn format:check
+
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Use Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "16"
+          cache: "yarn"
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -28,7 +45,7 @@ jobs:
         id: codeartifact
         run: |
           CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain ${{ secrets.CODEARTIFACT_DOMAIN }} --domain-owner ${{ secrets.AWS_ACCOUNT_ID }} --query authorizationToken --output text)
-          echo "::set-output name=CODEARTIFACT_AUTH_TOKEN::$CODEARTIFACT_AUTH_TOKEN"
+          echo "CODEARTIFACT_AUTH_TOKEN=$CODEARTIFACT_AUTH_TOKEN" >> $GITHUB_OUTPUT
           npm config set "@caytu:registry" "https://caytu-${{ secrets.AWS_ACCOUNT_ID }}.d.codeartifact.${{ secrets.AWS_REGION }}.amazonaws.com/npm/shared/"
           npm config set //caytu-${{ secrets.AWS_ACCOUNT_ID }}.d.codeartifact.${{ secrets.AWS_REGION }}.amazonaws.com/npm/shared/:_authToken $CODEARTIFACT_AUTH_TOKEN
 
@@ -45,18 +62,20 @@ jobs:
         run: yarn build
 
   create-release:
-    needs: build-and-test
+    needs: [lint-and-format, build-and-test]
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "16"
+          cache: "yarn"
 
       - name: Configure git
         run: |
@@ -65,7 +84,7 @@ jobs:
 
       - name: Get current version
         id: current_version
-        run: echo ::set-output name=VERSION::$(node -p "require('./package.json').version")
+        run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
       - name: Determine new version
         id: new_version
@@ -75,7 +94,7 @@ jobs:
           else
             NEW_VERSION=$(npx semver ${{ steps.current_version.outputs.VERSION }} -i patch)
           fi
-            echo ::set-output name=VERSION::$NEW_VERSION
+          echo "VERSION=$NEW_VERSION" >> $GITHUB_OUTPUT
 
       - name: Update version if changed
         if: steps.current_version.outputs.VERSION != steps.new_version.outputs.VERSION
@@ -105,16 +124,17 @@ jobs:
     needs: create-release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # Ensure all history and tags are fetched
+          fetch-depth: 0
       - name: Fetch tags
         run: git fetch --tags
 
       - name: Use Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "16"
+          cache: "yarn"
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -127,7 +147,7 @@ jobs:
         id: codeartifact
         run: |
           CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain ${{ secrets.CODEARTIFACT_DOMAIN }} --domain-owner ${{ secrets.AWS_ACCOUNT_ID }} --query authorizationToken --output text)
-          echo "::set-output name=CODEARTIFACT_AUTH_TOKEN::$CODEARTIFACT_AUTH_TOKEN"
+          echo "CODEARTIFACT_AUTH_TOKEN=$CODEARTIFACT_AUTH_TOKEN" >> $GITHUB_OUTPUT
           npm config set "@caytu:registry" "https://caytu-${{ secrets.AWS_ACCOUNT_ID }}.d.codeartifact.${{ secrets.AWS_REGION }}.amazonaws.com/npm/shared/"
           npm config set //caytu-${{ secrets.AWS_ACCOUNT_ID }}.d.codeartifact.${{ secrets.AWS_REGION }}.amazonaws.com/npm/shared/:_authToken $CODEARTIFACT_AUTH_TOKEN
 
@@ -139,3 +159,11 @@ jobs:
 
       - name: Publish to AWS CodeArtifact
         run: npm publish
+
+  dependency-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout Repository"
+        uses: actions/checkout@v3
+      - name: "Dependency Review"
+        uses: actions/dependency-review-action@v3

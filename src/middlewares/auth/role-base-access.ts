@@ -16,19 +16,26 @@ const RbaUserACL = {
   hasRequiredRole: (user: any, roles: UserRole[]) => {
     const platformRoles = user?.roles || [];
     const orgRoles = user?.rolesInCurrentOrganization?.roles || [];
-    return roles.some(role => platformRoles.includes(role) || orgRoles.includes(role));
+    return roles.some(
+      (role) => platformRoles.includes(role) || orgRoles.includes(role),
+    );
   },
   canCreate: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-        
-      if (RbaUserACL.hasRequiredRole(req.currentUser, [UserRole.Create, UserRole.All, UserRole.SuperAdmin])) {
+      if (
+        RbaUserACL.hasRequiredRole(req.currentUser, [
+          UserRole.Create,
+          UserRole.All,
+          UserRole.SuperAdmin,
+        ])
+      ) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You are not allowed to perform this operation.`
+          `You are not allowed to perform this operation.`,
         );
       }
-    }
+    },
   ),
 
   /**
@@ -37,15 +44,20 @@ const RbaUserACL = {
    */
   canEdit: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-
-      if (RbaUserACL.hasRequiredRole(req.currentUser, [UserRole.All, UserRole.Update, UserRole.SuperAdmin])) {
+      if (
+        RbaUserACL.hasRequiredRole(req.currentUser, [
+          UserRole.All,
+          UserRole.Update,
+          UserRole.SuperAdmin,
+        ])
+      ) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You are not allowed to perform this operation.`
+          `You are not allowed to perform this operation.`,
         );
       }
-    }
+    },
   ),
 
   /**
@@ -54,15 +66,20 @@ const RbaUserACL = {
    */
   canDelete: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-
-      if (RbaUserACL.hasRequiredRole(req.currentUser, [UserRole.All, UserRole.Delete, UserRole.SuperAdmin])) {
+      if (
+        RbaUserACL.hasRequiredRole(req.currentUser, [
+          UserRole.All,
+          UserRole.Delete,
+          UserRole.SuperAdmin,
+        ])
+      ) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You are not allowed to perform this operation.`
+          `You are not allowed to perform this operation.`,
         );
       }
-    }
+    },
   ),
 
   /**
@@ -71,30 +88,26 @@ const RbaUserACL = {
    */
   canReadOnly: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-
       if (
-        RbaUserACL.hasRequiredRole(
-          req.currentUser,
-          [
-            UserRole.ReadOnly,
-            UserRole.All,
-            UserRole.Admin,
-            UserRole.Customer,
-            UserRole.Operator,
-            UserRole.Developer,
-            UserRole.Robot,
-            UserRole.Invited,
-            UserRole.SuperAdmin,
-          ]
-        )
+        RbaUserACL.hasRequiredRole(req.currentUser, [
+          UserRole.ReadOnly,
+          UserRole.All,
+          UserRole.Admin,
+          UserRole.Customer,
+          UserRole.Operator,
+          UserRole.Developer,
+          UserRole.Robot,
+          UserRole.Invited,
+          UserRole.SuperAdmin,
+        ])
       ) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You are not allowed to perform this operation.`
+          `You are not allowed to perform this operation.`,
         );
       }
-    }
+    },
   ),
 
   /**
@@ -103,26 +116,22 @@ const RbaUserACL = {
    */
   isCustomer: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-
       if (
-        RbaUserACL.hasRequiredRole(
-          req.currentUser,
-          [
-            UserRole.Customer,
-            UserRole.Admin,
-            UserRole.Operator,
-            UserRole.Developer,
-            UserRole.SuperAdmin,
-          ]
-        )
+        RbaUserACL.hasRequiredRole(req.currentUser, [
+          UserRole.Customer,
+          UserRole.Admin,
+          UserRole.Operator,
+          UserRole.Developer,
+          UserRole.SuperAdmin,
+        ])
       ) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You are not allowed to perform this operation.`
+          `You are not allowed to perform this operation.`,
         );
       }
-    }
+    },
   ),
 
   /**
@@ -131,15 +140,20 @@ const RbaUserACL = {
    */
   isOperator: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-
-      if (RbaUserACL.hasRequiredRole(req.currentUser, [UserRole.Admin, UserRole.Operator, UserRole.SuperAdmin])) {
+      if (
+        RbaUserACL.hasRequiredRole(req.currentUser, [
+          UserRole.Admin,
+          UserRole.Operator,
+          UserRole.SuperAdmin,
+        ])
+      ) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You are not allowed to perform this operation.`
+          `You are not allowed to perform this operation.`,
         );
       }
-    }
+    },
   ),
 
   /**
@@ -148,15 +162,19 @@ const RbaUserACL = {
    */
   isAdmin: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-
-      if (RbaUserACL.hasRequiredRole(req.currentUser, [UserRole.Admin, UserRole.SuperAdmin])) {
+      if (
+        RbaUserACL.hasRequiredRole(req.currentUser, [
+          UserRole.Admin,
+          UserRole.SuperAdmin,
+        ])
+      ) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You are not allowed to perform this operation.`
+          `You are not allowed to perform this operation.`,
         );
       }
-    }
+    },
   ),
 
   /**
@@ -165,15 +183,14 @@ const RbaUserACL = {
    */
   isSuperAdmin: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-
       if (RbaUserACL.hasRequiredRole(req.currentUser, [UserRole.SuperAdmin])) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You are not allowed to perform this operation.`
+          `You are not allowed to perform this operation.`,
         );
       }
-    }
+    },
   ),
 
   /**
@@ -182,15 +199,19 @@ const RbaUserACL = {
    */
   isDeveloper: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-
-      if (RbaUserACL.hasRequiredRole(req.currentUser, [UserRole.Developer, UserRole.SuperAdmin])) {
+      if (
+        RbaUserACL.hasRequiredRole(req.currentUser, [
+          UserRole.Developer,
+          UserRole.SuperAdmin,
+        ])
+      ) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You are not allowed to perform this operation.`
+          `You are not allowed to perform this operation.`,
         );
       }
-    }
+    },
   ),
 
   /**
@@ -199,15 +220,19 @@ const RbaUserACL = {
    */
   isRobot: asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
-
-      if (RbaUserACL.hasRequiredRole(req.currentUser, [UserRole.Robot, UserRole.SuperAdmin])) {
+      if (
+        RbaUserACL.hasRequiredRole(req.currentUser, [
+          UserRole.Robot,
+          UserRole.SuperAdmin,
+        ])
+      ) {
         next();
       } else {
         throw new ForbiddenErr(
-          `You are not allowed to perform this operation.`
+          `You are not allowed to perform this operation.`,
         );
       }
-    }
+    },
   ),
 };
 

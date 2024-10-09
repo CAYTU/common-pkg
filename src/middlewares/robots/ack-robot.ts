@@ -39,7 +39,7 @@ export const ackRobot = asyncHandler(
         try {
           var bytes = CryptoJS.AES.decrypt(token, `${process.env.ROBOT_TOKEN}`);
           var decryptedData = JSON.parse(
-            bytes.toString(CryptoJS.enc.Utf8)
+            bytes.toString(CryptoJS.enc.Utf8),
           ) as RobotPayload;
         } catch (err) {
           console.log("Token decryption failed");
@@ -58,5 +58,5 @@ export const ackRobot = asyncHandler(
     req.robot = rb as RobotPayload;
 
     next();
-  }
+  },
 );

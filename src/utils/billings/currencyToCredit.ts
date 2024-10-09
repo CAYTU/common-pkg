@@ -8,7 +8,7 @@
  */
 export const convertCurrencyToCreditUnits = (
   amount: number,
-  currency: string
+  currency: string,
 ): number => {
   const conversionRates: { [key: string]: number } = {
     USD: 1, // 1 USD = 1 credit unit

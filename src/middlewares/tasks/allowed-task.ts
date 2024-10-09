@@ -36,7 +36,7 @@ const allowedTask = asyncHandler(
         currentUser?.rolesInCurrentOrganization?.allowedTaskTypes?.length === 0)
     ) {
       throw new NotAuthorizedErr(
-        "You are not allowed to perform any task in this organization."
+        "You are not allowed to perform any task in this organization.",
       );
     }
 
@@ -62,7 +62,7 @@ const allowedTask = asyncHandler(
          */
         if (
           currentUser.rolesInCurrentOrganization?.allowedTaskTypes?.includes(
-            type as TaskType
+            type as TaskType,
           ) ||
           currentUser.allowedTaskTypes?.includes(type as TaskType)
         ) {
@@ -73,7 +73,7 @@ const allowedTask = asyncHandler(
         // is allowed to perform the task within the organization they are attempting to access.
         if (
           currentUser.rolesInCurrentOrganization?.allowedTaskTypes?.includes(
-            type as TaskType
+            type as TaskType,
           )
         ) {
           return next();
@@ -83,9 +83,9 @@ const allowedTask = asyncHandler(
 
     // If the user is not allowed to perform the task, throw an error.
     throw new NotAuthorizedErr(
-      `You are not allowed to perform the task: ${type}`
+      `You are not allowed to perform the task: ${type}`,
     );
-  }
+  },
 );
 
 export { allowedTask };

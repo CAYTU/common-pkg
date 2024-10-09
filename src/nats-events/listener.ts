@@ -32,7 +32,7 @@ export abstract class Listener<T extends Event> {
     const subs = this.client.subscribe(
       this.subject,
       this.queueGroupName,
-      this.subscriptionOptions()
+      this.subscriptionOptions(),
     );
 
     subs.on("message", (msg: Message) => {

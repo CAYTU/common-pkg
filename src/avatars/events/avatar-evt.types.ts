@@ -3,6 +3,7 @@
  * @description Defines TypeScript interfaces related to avatar events.
  */
 
+import { OnlyRequired } from "../../common";
 import { Subjects } from "../../nats-events/subjects";
 import { AvatarInterface } from "../models";
 
@@ -17,10 +18,7 @@ import { AvatarInterface } from "../models";
  */
 interface AvatarCreatedEvent {
   subject: Subjects.AvatarCreated;
-  data: AvatarInterface & {
-    id: string;
-    version: number;
-  };
+  data: AvatarInterface & OnlyRequired;
 }
 
 /**
@@ -34,10 +32,7 @@ interface AvatarCreatedEvent {
  */
 interface AvatarUpdatedEvent {
   subject: Subjects.AvatarUpdated;
-  data: Partial<AvatarInterface> & {
-    id: string;
-    version: number;
-  };
+  data: Partial<AvatarInterface> & OnlyRequired;
 }
 
 /**

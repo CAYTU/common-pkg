@@ -3,7 +3,7 @@ import { IMongooseObjectExt } from "../../types/utils/models";
 import { AvatarPlatformType } from "../utils";
 
 /**
- * Represents an avatar configuration, including details for cloud deployment (EC2, Lambda, S3)
+ * Represents an avatar configuration, including details for cloud deployment (AWS EC2, Lambda, S3, GCP)
  * and organizational ownership.
  */
 export interface AvatarInterface extends IMongooseObjectExt {
@@ -38,6 +38,36 @@ export interface AvatarInterface extends IMongooseObjectExt {
    * If true, the avatar's settings cannot be modified.
    */
   nonConfigurable?: boolean;
+
+  /**
+   * The organization to which this avatar belongs.
+   */
+  organizationId: Types.ObjectId;
+
+  /**
+   * The id of the user who created this avatar (optional).
+   */
+  user?: Types.ObjectId;
+
+  /**
+   * Indicates whether the avatar is publicly accessible.
+   * If true, the avatar is available to everyone; otherwise, it is restricted to the organization.
+   */
+  public: boolean;
+
+  /**
+   * ID of the last user who modified this avatar (optional).
+   */
+  lastModifiedBy?: Types.ObjectId;
+
+  /**************************
+   * AWS-specific fields
+   **************************/
+
+  /**
+   * AWS region for the avatar's cloud resources (optional).
+   */
+  awsRegion?: string;
 
   /**
    * IAM role for the EC2 instance, which defines permissions
@@ -106,19 +136,22 @@ export interface AvatarInterface extends IMongooseObjectExt {
    */
   subnetIds?: string[];
 
-  /**
-   * The id of the user who created this avatar (optional).
-   */
-  user?: Types.ObjectId;
+  /********************************
+   * GCP-specific fields
+   ********************************/
 
   /**
-   * The organization to which this avatar belongs.
+   * The Google Cloud Platform project ID where the avatar is deployed (optional).
    */
-  organizationId: Types.ObjectId;
+  projectId?: string;
 
   /**
-   * Indicates whether the avatar is publicly accessible.
-   * If true, the avatar is available to everyone; otherwise, it is restricted to the organization.
+   * GCP region for the avatar's cloud resources (optional).
    */
-  public: boolean;
+  gcpRegion?: string;
+
+  /**
+   * Name of the instance group in GCP for managing the avatar's resources (optional).
+   */
+  instanceGroupName?: string;
 }

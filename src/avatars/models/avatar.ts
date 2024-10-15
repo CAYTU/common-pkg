@@ -23,11 +23,6 @@ export interface AvatarInterface extends IMongooseObjectExt {
   description?: string;
 
   /**
-   * Cloud stack name associated with this avatar (e.g., AWS CloudFormation stack name).
-   */
-  stackName: string;
-
-  /**
    * Platform on which the avatar operates (optional). This could be a platform type
    * such as AWS, GCP, etc., defined by the AvatarPlatformType enum.
    */
@@ -110,16 +105,6 @@ export interface AvatarInterface extends IMongooseObjectExt {
   instanceType?: string;
 
   /**
-   * IAM role ARN to be assumed by the Lambda function for the avatar (optional).
-   */
-  lambdaRoleArn?: string;
-
-  /**
-   * The key in the S3 bucket where the Lambda function's deployment package (ZIP) is stored (optional).
-   */
-  lambdaZipKey?: string;
-
-  /**
    * The name of an SSM or configuration document that may be used to manage the EC2 instance
    * or other cloud resources (optional).
    */
@@ -129,12 +114,6 @@ export interface AvatarInterface extends IMongooseObjectExt {
    * Source AWS account ID from which certain resources, such as AMIs or roles, may be shared (optional).
    */
   sourceAccount?: string;
-
-  /**
-   * Subnet IDs within the VPC where the EC2 instance is deployed (optional).
-   * These define network access to the instance.
-   */
-  subnetIds?: string[];
 
   /********************************
    * GCP-specific fields

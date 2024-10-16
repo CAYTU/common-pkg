@@ -53,13 +53,13 @@ const planFeature_one: PlanFeature = {
   unitOfMeasurement: UnitOfMeasurement.Device,
   costPerUnit: 0.05,
   freeQuota: 1,
-  isCustomizable: false,
+  isBaseFeature: false,
 };
 
 expectType<string | undefined>(planFeature_one.stripeProductId);
 expectType<number>(planFeature_one.costPerUnit);
 expectType<number | undefined>(planFeature_one.freeQuota);
-expectType<boolean>(planFeature_one.isCustomizable);
+expectType<boolean | undefined>(planFeature_one.isBaseFeature);
 expectType<BillingServices>(planFeature_one.service);
 
 const planFeature_two: PlanFeature = {
@@ -67,12 +67,12 @@ const planFeature_two: PlanFeature = {
   displayName: "Avatar",
   unitOfMeasurement: UnitOfMeasurement.Hour,
   costPerUnit: 3,
-  isCustomizable: false,
+  isBaseFeature: false,
 };
 
 expectType<number>(planFeature_two.costPerUnit);
 expectType<number | undefined>(planFeature_two.freeQuota);
-expectType<boolean>(planFeature_two.isCustomizable);
+expectType<boolean | undefined>(planFeature_one?.isBaseFeature);
 expectType<BillingServices>(planFeature_two.service);
 
 // UsageInterface tests

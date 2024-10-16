@@ -73,10 +73,10 @@ export interface PlanFeature {
   costPerUnit: number;
   /** Any free quota included in the plan */
   freeQuota?: number;
-  /** Indicates if the feature can be customized for specific organizations */
-  isCustomizable: boolean;
   /** Indicates if the feature is already in use */
   isUsed?: boolean;
+  /** Indicates if the feature is used as a base feature (case: Avatar & Simulation) */
+  isBaseFeature?: boolean;
 }
 
 /**
@@ -87,6 +87,8 @@ export interface PlanSubcategoryDetails {
   type: string;
   /** The price set for this subcategory */
   price?: number | string;
+  /** The stripe product ID for this subcategory */
+  stripeProductId?: string;
   /** Features specific to this subcategory */
   features: Types.ObjectId[];
 }

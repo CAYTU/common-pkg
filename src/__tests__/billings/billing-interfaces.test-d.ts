@@ -36,14 +36,14 @@ const plan: PlanInterface = {
       ],
     },
   ],
-  isCustom: false,
+  isBasePlan: false,
 };
 
 expectType<string>(plan.title);
 expectType<PlanType>(plan.type);
 expectType<Types.ObjectId[] | undefined>(plan.features);
 expectType<PlanSubcategoryDetails[] | undefined>(plan.subcategories);
-expectType<boolean>(plan.isCustom);
+expectType<boolean>(plan.isBasePlan);
 
 // PlanFeature tests
 const planFeature_one: PlanFeature = {
@@ -110,13 +110,13 @@ describe("Billing Interfaces", () => {
           new Types.ObjectId(),
           new Types.ObjectId(),
         ],
-        isCustom: true,
+        isBasePlan: true,
       };
 
       expect(plan).toHaveProperty("title");
       expect(plan).toHaveProperty("type");
       expect(plan).toHaveProperty("features");
-      expect(plan).toHaveProperty("isCustom");
+      expect(plan).toHaveProperty("isBasePlan");
     });
   });
 

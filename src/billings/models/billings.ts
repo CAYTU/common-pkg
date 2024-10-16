@@ -112,7 +112,7 @@ export interface PlanInterface extends IMongooseObjectExt {
   /** Reference to the base plan for custom plans */
   baseplanId?: Types.ObjectId;
   /** Indicates if the plan is published */
-  isPublished: boolean;
+  isPublished?: boolean;
 }
 
 /**

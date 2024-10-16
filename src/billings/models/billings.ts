@@ -105,12 +105,14 @@ export interface PlanInterface extends IMongooseObjectExt {
   features?: Types.ObjectId[];
   /** Subcategories of the plan with their specific details */
   subcategories?: PlanSubcategoryDetails[];
-  /** Indicates if this is a custom enterprise plan */
-  isCustom: boolean;
+  /** Indicates if this is a base plan */
+  isBasePlan: boolean;
   /** The ID of the organization for custom enterprise plans */
   organizationId?: Types.ObjectId;
   /** Reference to the base plan for custom plans */
   baseplanId?: Types.ObjectId;
+  /** Indicates if the plan is published */
+  isPublished: boolean;
 }
 
 /**

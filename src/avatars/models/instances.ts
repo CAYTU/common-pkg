@@ -67,11 +67,6 @@ export interface AvatarInstanceInterface extends IMongooseObjectExt {
   organizationId?: Types.ObjectId;
 
   /**
-   * The ID of the avatar used to create the avatar instance (optional).
-   */
-  avatar?: Types.ObjectId;
-
-  /**
    * Array of user IDs that this avatar instance is shared with (optional).
    * These users may have access to the avatar instance, depending on the sharing policy.
    */

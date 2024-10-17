@@ -110,11 +110,6 @@ export interface AvatarInterface extends IMongooseObjectExt {
    */
   documentName?: string;
 
-  /**
-   * Source AWS account ID from which certain resources, such as AMIs or roles, may be shared (optional).
-   */
-  sourceAccount?: string;
-
   /********************************
    * GCP-specific fields
    ********************************/

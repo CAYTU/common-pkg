@@ -82,4 +82,14 @@ export interface AvatarInstanceInterface extends IMongooseObjectExt {
    * The Google Cloud Platform zone where the avatar instance is running (optional).
    */
   zone?: string;
+
+  /**
+   * The Google Cloud Platform region where the avatar instance is running (optional).
+   */
+  region?: string;
+
+  /**
+   * The Google Cloud Platform instance group where the avatar instance belong (optional).
+   */
+  groupName?: string;
 }

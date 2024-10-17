@@ -73,10 +73,10 @@ export interface PlanFeature {
   costPerUnit: number;
   /** Any free quota included in the plan */
   freeQuota?: number;
-  /** Indicates if the feature can be customized for specific organizations */
-  isCustomizable: boolean;
   /** Indicates if the feature is already in use */
   isUsed?: boolean;
+  /** Indicates if the feature is used as a base feature (case: Avatar & Simulation) */
+  isBaseFeature?: boolean;
 }
 
 /**
@@ -87,6 +87,8 @@ export interface PlanSubcategoryDetails {
   type: string;
   /** The price set for this subcategory */
   price?: number | string;
+  /** The stripe product ID for this subcategory */
+  stripeProductId?: string;
   /** Features specific to this subcategory */
   features: Types.ObjectId[];
 }
@@ -105,12 +107,14 @@ export interface PlanInterface extends IMongooseObjectExt {
   features?: Types.ObjectId[];
   /** Subcategories of the plan with their specific details */
   subcategories?: PlanSubcategoryDetails[];
-  /** Indicates if this is a custom enterprise plan */
-  isCustom: boolean;
+  /** Indicates if this is a base plan */
+  isBasePlan: boolean;
   /** The ID of the organization for custom enterprise plans */
   organizationId?: Types.ObjectId;
   /** Reference to the base plan for custom plans */
   baseplanId?: Types.ObjectId;
+  /** Indicates if the plan is published */
+  isPublished?: boolean;
 }
 
 /**

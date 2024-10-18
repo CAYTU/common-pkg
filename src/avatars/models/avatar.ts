@@ -55,6 +55,11 @@ export interface AvatarInterface extends IMongooseObjectExt {
    */
   lastModifiedBy?: Types.ObjectId;
 
+  /**
+   * S3 key of the default template setup file for the avatar.
+   */
+  templateSetupFile?: string;
+
   /**************************
    * AWS-specific fields
    **************************/

@@ -79,6 +79,11 @@ export interface AvatarInstanceInterface extends IMongooseObjectExt {
   public?: boolean;
 
   /**
+   * The AWS SSM document name used to run the avatar instance (optional).
+   */
+  documentName?: string;
+
+  /**
    * The Google Cloud Platform zone where the avatar instance is running (optional).
    */
   zone?: string;

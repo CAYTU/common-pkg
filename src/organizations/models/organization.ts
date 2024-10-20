@@ -4,7 +4,7 @@ import { IMongooseObjectExt } from "../../types/utils/models";
 import { OrganizationType } from "../enums";
 
 /**
- * Represents an organization object with extended properties.
+ * Represents an organization with extended properties.
  */
 export interface OrganizationInterface extends IMongooseObjectExt {
   /**
@@ -13,7 +13,22 @@ export interface OrganizationInterface extends IMongooseObjectExt {
   name: string;
 
   /**
-   * The domain associated with the organization.
+   * The total remaining credits available for the organization.
+   */
+  remainingCredits: number;
+
+  /**
+   * The initial amount of credits the organization started with.
+   */
+  initialCredits: number;
+
+  /**
+   * The credit threshold at which notifications or actions are triggered (optional).
+   */
+  creditThreshold?: number;
+
+  /**
+   * The domain associated with the organization (optional).
    */
   domain?: string;
 
@@ -23,7 +38,7 @@ export interface OrganizationInterface extends IMongooseObjectExt {
   description?: string;
 
   /**
-   * The URL or path to the image associated with the organization (optional).
+   * The URL or path to the image/logo associated with the organization (optional).
    */
   image?: string;
 
@@ -43,37 +58,32 @@ export interface OrganizationInterface extends IMongooseObjectExt {
   city?: string;
 
   /**
-   * The address of the organization (optional).
+   * The street address of the organization (optional).
    */
   address?: string;
 
   /**
-   * Array of task types allowed for the organization (optional).
+   * Array of default task types that the organization is allowed to perform (optional).
    */
   defaultAllowedTaskTypes?: TaskType[];
 
   /**
-   * The number of members in the organization (optional).
+   * The total number of members in the organization (optional).
    */
   membersCount?: number;
 
-  remainingCredits: number;
-  initialCredits: number;
-
   /**
-   * The subscription ID of the organization (optional).
+   * The MongoDB ObjectId for the organization's subscription (optional).
    */
   subscriptionId?: Types.ObjectId;
 
   /**
-   * The unique identifier of the owner of the organization (optional).
+   * The MongoDB ObjectId representing the owner of the organization (optional).
    */
   owner?: Types.ObjectId;
 
   /**
-   * The type of organization (optional).
-   * @remarks This property is used to differentiate between different types of organizations.
-   * For example, one can be a principal organization while another can be a subsidiary.
+   * The type of organization, which differentiates between principal organizations and subsidiaries (optional).
    */
   type?: OrganizationType;
 }

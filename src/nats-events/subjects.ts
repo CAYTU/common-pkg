@@ -107,7 +107,9 @@ export enum Subjects {
 
   // Task Type
   TaskSimulationCreated = "task:simulation:created",
+  TaskSimulationTerminated = "task:simulation:terminated",
   TaskAvatarCreated = "task:avatar:created",
+  TaskAvatarTerminated = "task:avatar:terminated",
 
   // Payment
   PaymentCreated = "payment:created",

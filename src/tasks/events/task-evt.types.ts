@@ -95,8 +95,6 @@ interface TaskRobotUnAssignedEvent {
  * @description Defines a TypeScript interface for an event when requesting an operator candidate for a task.
  * @property {Subjects.OperatorGetCandidate} subject - The subject type of the event.
  * @property {object} data - The data payload of the event.
- * @property {string} data.taskId - The ID of the task.
- * @property {number} data.version - The version number of the task.
  */
 interface TaskGetOperatorCandidateEvent {
   subject: Subjects.OperatorGetCandidate;
@@ -108,9 +106,7 @@ interface TaskGetOperatorCandidateEvent {
  * @description Defines a TypeScript interface for an event when a task is accepted.
  * @property {Subjects.TaskAccepted} subject - The subject type of the event.
  * @property {object} data - The data payload of the event.
- * @property {string} data.customer - The ID of the customer accepting the task.
- * @property {string} [data.taskId] - The ID of the task (optional).
- * @property {number} data.version - The version number of the task.
+
  */
 interface TaskAcceptedEvent {
   subject: Subjects.TaskAccepted;
@@ -122,10 +118,6 @@ interface TaskAcceptedEvent {
  * @description Defines a TypeScript interface for an event when a task simulation is created.
  * @property {Subjects.TaskSimulationCreated} subject - The subject type of the event.
  * @property {object} data - The data payload of the event.
- * @property {string} [data.userId] - The ID of the user initiating the simulation (optional).
- * @property {string} data.simulationId - The ID of the simulation.
- * @property {string} [data.taskId] - The ID of the task related to the simulation (optional).
- * @property {number} data.version - The version number of the task.
  * @property {AddonOwner} data - The addon owner details.
  */
 interface TaskSimulationCreatedEvent {
@@ -139,13 +131,26 @@ interface TaskSimulationCreatedEvent {
 }
 
 /**
+ * @interface TaskSimulationTerminatedEvent
+ * @description Defines a TypeScript interface for an event when a task simulation is terminated.
+ * @property {Subjects.TaskSimulationTerminated} subject - The subject type of the event.
+ * @property {object} data - The data payload of the event.
+ */
+interface TaskSimulationTerminatedEvent {
+  subject: Subjects.TaskSimulationTerminated;
+  data: {
+    simulationId?: string;
+    simulationJobId?: string;
+    taskId: string;
+    version: number;
+  } & AddonOwner;
+}
+
+/**
  * @interface TaskAvatarCreatedEvent
  * @description Defines a TypeScript interface for an event when a task simulation is created.
  * @property {Subjects.TaskAvatarCreated} subject - The subject type of the event.
  * @property {object} data - The data payload of the event.
- * @property {string} [data.avatarId] - The ID of the avatar configuration (optional).
- * @property {string} [data.taskId] - The ID of the task related to the avatar (optional).
- * @property {number} data.version - The version number of the task.
  * @property {AddonOwner} data - The addon owner details.
  */
 interface TaskAvatarCreatedEvent {
@@ -155,6 +160,22 @@ interface TaskAvatarCreatedEvent {
     taskId?: string;
     setupData?: TemplateSetupData;
     templateSetupOption?: TemplateSetupOptions;
+    version: number;
+  } & AddonOwner;
+}
+
+/**
+ * @interface TaskAvatarTerminatedEvent
+ * @description Defines a TypeScript interface for an event when a task avatar is terminated.
+ * @property {Subjects.TaskAvatarTerminated} subject - The subject type of the event.
+ * @property {object} data - The data payload of the event.
+ */
+interface TaskAvatarTerminatedEvent {
+  subject: Subjects.TaskAvatarTerminated;
+  data: {
+    avatarId?: string;
+    avatarInstanceId?: string;
+    taskId: string;
     version: number;
   } & AddonOwner;
 }
@@ -189,6 +210,8 @@ export {
   TaskGetOperatorCandidateEvent,
   TaskAcceptedEvent,
   TaskSimulationCreatedEvent,
+  TaskSimulationTerminatedEvent,
   TaskAvatarCreatedEvent,
+  TaskAvatarTerminatedEvent,
   TaskUsageEvent,
 };

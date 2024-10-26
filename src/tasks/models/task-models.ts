@@ -4,128 +4,177 @@ import { TaskType } from "../enums/task-types";
 import { TaskStatus } from "../enums";
 
 /**
- * Interface representing a Task.
+ * Represents a Task entity within the system.
+ * 
+ * A Task is a job or action performed by an operator, robot, or simulation. 
+ * This interface defines the structure of the Task document in MongoDB, 
+ * including relationships to other models and various task properties.
  */
 export interface TaskInterface extends IMongooseObjectExt {
+  
   /**
    * Type of the task.
+   * 
+   * Example: 'delivery', 'cleaning', 'telepresence', etc.
    */
   type: TaskType;
 
   /**
-   * Code to deactivate or open the robot.
+   * Code used to deactivate or open the robot.
+   * 
+   * Optional field that stores the code needed to operate the robot in certain tasks.
    */
   code?: number;
 
   /**
-   * Reference to an Operator model.
+   * Flag to indicate if the task requires an operator.
+   */
+  requestOperator?: boolean;
+
+  /**
+   * Flag to indicate if the task requires a specific device.
+   */
+  requestDevice?: boolean;
+
+  /**
+   * Reference to an Operator model (if applicable).
+   * 
+   * The operator handling the task, identified by their ObjectId.
    */
   operator?: Types.ObjectId;
 
   /**
    * Reference to the user who created the task.
+   * 
+   * Represents the owner of the task.
    */
   owner?: Types.ObjectId;
 
   /**
-   * Reference to a Robot model.
+   * Reference to a Robot model (if applicable).
+   * 
+   * The robot assigned to execute the task.
    */
   robot?: Types.ObjectId;
 
   /**
    * Status of the task.
+   * 
+   * Can represent states like 'pending', 'in-progress', 'completed', 'failed', etc.
    */
   status?: TaskStatus;
 
   /**
-   * The date when the task was started and finished.
-   *
-   * Started date is the date when the task was run.
-   * Finished date is the date when the task was completed or failed.
+   * Date when the task was started.
+   * 
+   * This is the timestamp for when the task execution began.
    */
   startedAt?: Date;
+
+  /**
+   * Date when the task was finished.
+   * 
+   * This is the timestamp for when the task was either completed or failed.
+   */
   finishedAt?: Date;
-  /** Duration of the task */
+
+  /**
+   * Total duration of the task in milliseconds.
+   * 
+   * Duration between `startedAt` and `finishedAt`.
+   */
   duration?: number;
 
   /**
-   * Number of assignment trial for a device.
-   */
-  deviceAssignmentTrial?: number;
-
-  /**
-   * Reference to a Delivery task.
+   * Reference to a Delivery task (if applicable).
+   * 
+   * Links to the specific Delivery task related to this Task entity.
    */
   delivery?: Types.ObjectId;
 
   /**
-   * Reference to a Cleaning task.
+   * Reference to a Cleaning task (if applicable).
+   * 
+   * Links to the specific Cleaning task related to this Task entity.
    */
   cleaning?: Types.ObjectId;
 
   /**
-   * Reference to a Simulation for the selected job.
+   * Reference to a Simulation entity associated with this task.
    */
   simulationId?: Types.ObjectId;
 
   /**
-   * Reference to an avatar
+   * Reference to an Avatar entity related to this task.
    */
   avatarId?: string;
 
   /**
-   * Reference to the avatar instance
+   * Reference to a specific instance of an Avatar.
    */
   avatarInstanceId?: Types.ObjectId;
 
   /**
    * Reference to a Simulation job task.
+   * 
+   * Used if this task involves a simulation job.
    */
   simulationJob?: Types.ObjectId;
 
   /**
-   * The organization where the task belong.
+   * Organization where the task belongs.
+   * 
+   * Indicates the organization that owns or initiated this task.
    */
   organizationId?: Types.ObjectId;
 
   /**
    * Indicates whether the task is public.
+   * 
+   * Public tasks can be seen or interacted with by other users.
    */
   public?: boolean;
 
   /**
-   * The organizations with which the task is shared.
+   * List of organizations that this task is shared with.
+   * 
+   * Contains ObjectIds of organizations that have access to this task.
    */
   sharedWith?: Types.ObjectId[];
 
   /**
-   * Reference to an Inspection task.
+   * Reference to an Inspection task (if applicable).
    */
   inspection?: Types.ObjectId;
 
   /**
-   * Reference to a Flight task.
+   * Reference to a Flight task (if applicable).
    */
   flight?: Types.ObjectId;
 
   /**
-   * Reference to a Telepresence task.
+   * Reference to a Telepresence task (if applicable).
    */
   telepresence?: Types.ObjectId;
 
   /**
-   * Reference to the connect task type
+   * Reference to a Connect task (if applicable).
+   * 
+   * Used to link to a task where a device is connected.
    */
   connectTask?: Types.ObjectId;
 
   /**
-   * A string to store the reason for the task failure
-   * or any other information related to the task.
+   * A detailed reason for task failure or additional context related to the task.
+   * 
+   * Can be a string or a structured object with further information.
    */
-  reason?: string;
+  reason?: string | Record<string, any>;
 
   /**
-   * Any additional data related to the task.
+   * Any additional data or metadata related to the task.
+   * 
+   * This can store dynamic task-specific data.
    */
   payload?: any;
 }

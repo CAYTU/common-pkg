@@ -3,6 +3,7 @@
  * @description Defines TypeScript interfaces for organization-related events.
  */
 
+import { CreditSourceOrigin, CreditType } from "../../billings/enums";
 import { OnlyRequired } from "../../common";
 import { Subjects } from "../../nats-events/subjects";
 import { BillingServices } from "../../types/utils";
@@ -87,6 +88,21 @@ interface OrganizationCreditThresholdReachedEvent {
   };
 }
 
+interface OrganizationCreditUpdatedEvent {
+  subject: Subjects.OrganizationCreditUpdated;
+  data: {
+    organizationId: string;
+    creditUnits: number;
+    amount: number;
+    creditType: CreditType;
+    source: {
+      origin: CreditSourceOrigin;
+      name?: string;
+    };
+    version: number;
+  };
+}
+
 /**
  * @exports OrganizationEventTypes
  * @description Exporting each event type directly for easier consumption.
@@ -95,6 +111,7 @@ export {
   OrganizationCreatedEvent,
   OrganizationUpdatedEvent,
   OrganizationDeletedEvent,
+  OrganizationCreditUpdatedEvent,
   OrganizationCreditConsumedEvent,
   OrganizationCreditFinishedEvent,
   OrganizationCreditThresholdReachedEvent,

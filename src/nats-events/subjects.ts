@@ -126,6 +126,7 @@ export enum Subjects {
   OrganizationCreated = "organization:created",
   OrganizationUpdated = "organization:updated",
   OrganizationDeleted = "organization:deleted",
+  OrganizationCreditUpdated = "organization:credit:updated",
   OrganizationMemberInvited = "organization:member:invited",
   OrganizationMemberInviteExpired = "organization:member:invite:expired",
   OrganizationMemberAdded = "organization:member:added",

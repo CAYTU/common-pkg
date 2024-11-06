@@ -6,6 +6,8 @@ import {
 } from "../../types/utils";
 import { IMongooseObjectExt } from "../../types/utils/models";
 import {
+  CreditSourceOrigin,
+  CreditType,
   PaymentMethod,
   PaymentStatus,
   SubscriptionStatus,
@@ -21,7 +23,7 @@ export interface PaymentInterface {
   organizationId: Types.ObjectId;
   /** @deprecated A unique identifier of the order for which the payment is made. */
   orderId?: Types.ObjectId;
-  /**  @deprecated unique identifier of the transient user if the payment is not from a registered user. */
+  /** @deprecated Unique identifier of the transient user if the payment is not from a registered user. */
   transientUserId?: Types.ObjectId;
   /** The amount of the payment. */
   amount: number;
@@ -32,10 +34,10 @@ export interface PaymentInterface {
   /** The status of the payment. */
   paymentStatus: PaymentStatus;
   /** The method of payment. */
-  paymentMethod: PaymentMethod; // e.g., "CreditCard", "OrangeMoney", "Wave"
-  /** the subscription which the user is paying for.*/
+  paymentMethod: PaymentMethod;
+  /** The subscription which the user is paying for. */
   subscriptionId?: Types.ObjectId;
-  /**  The unique identifier of the transaction.*/
+  /** The unique identifier of the transaction. */
   transactionId?: string;
   /** The URL for payment if the payment method requires scanning a code. */
   paymentUrl?: string;
@@ -55,6 +57,18 @@ export interface PaymentInterface {
    * If `false`, the payment is for a subscription charge.
    */
   isCreditPurchase?: boolean;
+
+  /** The type of credit added: could be free, bonus, or transferred. */
+  creditType?: CreditType;
+
+  /**
+   * The source from which the credits are received.
+   * Specifies the origin of the credit and includes the name of the entity/person who performed the transfer if applicable.
+   */
+  source?: {
+    origin: CreditSourceOrigin;
+    name?: string; // Name of the person or entity who initiated the transfer (if applicable)
+  };
 }
 
 /**

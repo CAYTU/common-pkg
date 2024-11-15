@@ -156,10 +156,9 @@ interface TaskSimulationTerminatedEvent {
 interface TaskAvatarCreatedEvent {
   subject: Subjects.TaskAvatarCreated;
   data: {
-    avatarId?: string;
     taskId?: string;
-    setupData?: TemplateSetupData;
-    templateSetupOption?: TemplateSetupOptions;
+    avatarId?: string;
+    templateSetupData?: TemplateSetupData;
     version: number;
   } & AddonOwner;
 }

@@ -1,82 +1,107 @@
-// Type definitions for avatars
-
-/**
- * Type representing the file context for a task, specifying the type of
- * data involved (e.g., text, audio, or file).
- */
-export type FileContextType = "text" | "audio" | "file";
-
 /**
  * Type representing the platform used for the avatar's deployment.
  */
 export type AvatarPlatformType = "aws" | "gcp";
 
 /**
- * Represents a template setup data object for an avatar, containing configurations
- * and parameters used during the avatar's setup process.
+ * Represents the setup data for configuring an assistant or avatar with models, services, and user-specific details.
  */
 export interface TemplateSetupData {
   /**
-   * The name of the communication or messaging channel for the avatar (optional).
-   * This could represent a unique identifier for a specific channel the avatar will interact with.
+   * A record of API keys used for external services.
+   * The key is a string representing the service name, and the value is the corresponding API key.
    */
-  channel_name?: string;
+  api_keys?: Record<string, string>;
 
   /**
-   * API key used for authenticating requests to external services or platforms (optional).
-   * This could be necessary for services like transcription, speech, or AI models.
+   * An object containing the models used by the assistant for different tasks such as transcription, completion, and speech processing.
    */
-  apiKey?: string;
+  models?: {
+    /**
+     * The model used for transcription (e.g., converting speech to text).
+     */
+    transcription_model?: string;
+
+    /**
+     * The model used for text completion (e.g., generating or completing text responses).
+     */
+    completion_model?: string;
+
+    /**
+     * The model used for speech recognition or processing.
+     */
+    speech_model?: string;
+
+    /**
+     * The model used for voice synthesis (e.g., converting text to speech).
+     */
+    voice?: string;
+  };
 
   /**
-   * The model used for transcription (optional).
-   * This could represent an AI model name or version that the avatar uses for speech-to-text.
+   * An object containing configurations for various services the assistant interacts with.
+   * It includes optional embedding services for handling text embeddings.
    */
-  transcription_model?: string;
+  services: {
+    [key: string]: any;
+    /**
+     * Configuration for embedding services, such as models and credentials used to generate text embeddings.
+     */
+    embedding?: {
+      /**
+       * The model used for generating text embeddings.
+       */
+      embedding_model?: string;
+
+      /**
+       * Credentials for accessing embedding-related services, particularly for documents.
+       */
+      credentials?: {
+        /**
+         * A document credential, which might be used to authenticate or authorize access to document processing services.
+         */
+        document?: string;
+      };
+    };
+  };
 
   /**
-   * The model used for text completion (optional).
-   * This defines the AI model the avatar uses for generating or completing text responses.
+   * An object containing details about the assistant, including its name and user-related context.
    */
-  completion_model?: string;
+  assistant?: {
+    /**
+     * The name of the assistant or avatar.
+     */
+    assistant_name?: string;
 
-  /**
-   * The model used for speech processing (optional).
-   * This refers to the specific model for processing or recognizing speech inputs.
-   */
-  speech_model?: string;
+    /**
+     * An object representing the user information interacting with the assistant.
+     */
+    user?: {
+      /**
+       * The first name of the user.
+       */
+      firstname: string;
 
-  /**
-   * The model used for voice synthesis (optional).
-   * This defines the avatar's voice or speech generation model for converting text into spoken audio.
-   */
-  voice_model?: string;
+      /**
+       * The full name of the user.
+       */
+      Name: string;
 
-  /**
-   * The mode of thinking or reasoning applied by the avatar during interactions (optional).
-   * This could refer to a predefined mode or style the avatar uses to approach conversations.
-   */
-  think_mode?: string;
+      /**
+       * The job function or role of the user.
+       */
+      Function: string;
+    };
 
-  /**
-   * Type of file context related to the avatar's setup (optional).
-   * This defines the context in which files are used during the avatar's setup,
-   * such as configuration or initialization files.
-   */
-  file_context_type?: FileContextType;
+    /**
+     * The base context used by the assistant during interactions (e.g., initial setup or default information).
+     */
+    base_context?: string;
 
-  /**
-   * S3 key for retrieving the file containing the context for the avatar setup (optional).
-   * This key points to a file in an S3 bucket used during the avatar's initialization.
-   */
-  s3_context_key?: string;
-
-  /**
-   * A history of previous conversations the avatar has been involved in (optional).
-   * This is an array of key-value objects where each key represents a context
-   * identifier and the value is the corresponding conversation data.
-   */
-  conversation_history?: {
-    [key: string]: string;
-  }[];
+    /**
+     * Additional context for the assistant, which could be null if no extra context is provided.
+     */
+    addition_context: string | null;
+  };
 }

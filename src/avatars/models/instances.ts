@@ -1,7 +1,6 @@
 import { Types } from "mongoose";
 import { IMongooseObjectExt } from "../../types/utils/models";
 import { ObjectStates } from "../../types/utils";
-import { FileContextType, TemplateSetupOptions } from "../utils";
 
 /**
  * Interface representing an instance of an avatar, which can include information about
@@ -35,14 +34,7 @@ export interface AvatarInstanceInterface extends IMongooseObjectExt {
    * Configuration options for setting up the avatar template,
    * such as specific setup instructions or parameters (optional).
    */
-  templateSetup?: TemplateSetupOptions;
-
-  /**
-   * Specifies the type of file context, in case the service needs to know it during setup
-   * (optional). This could relate to the type of files being used for the avatar's setup,
-   * such as configuration or deployment files.
-   */
-  fileContextType?: FileContextType;
+  templateSetup?: any;
 
   /**
    * The key to an S3 object that stores the avatar's setup template.

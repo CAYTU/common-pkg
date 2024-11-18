@@ -115,6 +115,11 @@ export interface AvatarInterface extends IMongooseObjectExt {
    */
   documentName?: string;
 
+  /**
+   * The command to run on the EC2 instance when it starts (optional).
+   */
+  command?: string;
+
   /********************************
    * GCP-specific fields
    ********************************/

@@ -5,10 +5,13 @@ export enum SubscriptionStatus {
   Active = "active",
   Pending = "pending",
   Inactive = "inactive",
-  PastDue = "pastDue",
   Blocked = "blocked",
   Cancelled = "cancelled",
 
-  CancelledPending = "cancelledPending",
+  PastDue = "past_due",
+  Unpaid = "unpaid",
+  Trial = "trial",
+
+  CancelledPending = "cancelled_pending",
   Ended = "ended",
 }

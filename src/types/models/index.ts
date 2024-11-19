@@ -759,6 +759,13 @@ declare namespace CTypes {
     user?: Types.ObjectId;
 
     /**
+     * The attached rate for this simulation (optional).
+     * This is the rate that the user will be charged for using this simulation.
+     * If not set, the user will be charged the default rate.
+     */
+    rate?: Types.ObjectId;
+
+    /**
      * The ID of the organization where the simulation belongs.
      */
     organizationId: Types.ObjectId;

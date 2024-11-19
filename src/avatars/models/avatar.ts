@@ -45,6 +45,13 @@ export interface AvatarInterface extends IMongooseObjectExt {
   user?: Types.ObjectId;
 
   /**
+   * The attached rate for this avatar (optional).
+   * This is the rate that the user will be charged for using this avatar.
+   * If not set, the user will be charged the default rate.
+   */
+  rate?: Types.ObjectId;
+
+  /**
    * Indicates whether the avatar is publicly accessible.
    * If true, the avatar is available to everyone; otherwise, it is restricted to the organization.
    */

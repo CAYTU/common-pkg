@@ -208,6 +208,7 @@ export enum UnitOfMeasurement {
   Gigabyte = "gb",
   Count = "count",
   Boolean = "boolean",
+  Duration = "duration",
   // Add other units as needed
 
   Hour = "hour",

@@ -95,13 +95,8 @@ export interface TemplateSetupData {
     };
 
     /**
-     * The base context used by the assistant during interactions (e.g., initial setup or default information).
-     */
-    base_context?: string;
-
-    /**
      * Additional context for the assistant, which could be null if no extra context is provided.
      */
-    addition_context: string | null;
+    additional_context?: string;
   };
 }

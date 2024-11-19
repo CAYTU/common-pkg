@@ -42,7 +42,7 @@ export interface TemplateSetupData {
    * An object containing configurations for various services the assistant interacts with.
    * It includes optional embedding services for handling text embeddings.
    */
-  services: {
+  services?: {
     [key: string]: any;
     /**
      * Configuration for embedding services, such as models and credentials used to generate text embeddings.

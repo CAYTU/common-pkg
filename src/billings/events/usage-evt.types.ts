@@ -1,11 +1,11 @@
 /**
- * @fileoverview Usage event types.
+ * @fileoverview Defines the event types and interfaces for the billing system's usage tracking.
  * @packageDocumentation
  * @module billings/events
  *
- * @remarks
- * This file contains interfaces related to usage events.
- *
+ * This module contains type definitions for all usage-related events in the billing system.
+ * Events are categorized into lifecycle events (creation, updates, deletion) and
+ * operational events (starting, ending, recording, failures).
  */
 
 import { OnlyRequired } from "../../common";
@@ -13,9 +13,35 @@ import { Subjects } from "../../nats-events/subjects";
 import { BillingServices } from "../../types/utils";
 import { UsageInterface } from "../models";
 
+// ============================================================================
+// Base Types
+// ============================================================================
+
 /**
+ * Common properties shared across usage events that involve service interaction
+ */
+interface BaseServiceEventData {
+  /** Unique identifier for the service reference */
+  serviceRefId: string;
+  /** Type of billing service */
+  service: BillingServices;
+  /** Organization identifier */
+  organizationId: string;
+  /** Optional user identifier */
+  userId?: string;
+  /** Optional rate identifier for billing calculations */
+  rateId?: string;
+  /** Optional metadata for additional context */
+  metadata?: any;
+}
+
+// ============================================================================
+// Lifecycle Events
+// ============================================================================
+
+/**
+ * Event emitted when a new usage record is created
  * @interface UsageCreatedEvent
- * @description Defines a TypeScript interface for an event when a usage is created.
  */
 interface UsageCreatedEvent {
   subject: Subjects.UsageCreated;
@@ -23,8 +49,8 @@ interface UsageCreatedEvent {
 }
 
 /**
+ * Event emitted when an existing usage record is updated
  * @interface UsageUpdatedEvent
- * @description Defines a TypeScript interface for an event when a usage is updated.
  */
 interface UsageUpdatedEvent {
   subject: Subjects.UsageUpdated;
@@ -32,79 +58,84 @@ interface UsageUpdatedEvent {
 }
 
 /**
+ * Event emitted when a usage record is deleted
  * @interface UsageDeletedEvent
- * @description Defines a TypeScript interface for an event when a usage is deleted.
  */
 interface UsageDeletedEvent {
   subject: Subjects.UsageDeleted;
-  data: { id: string; version: number };
+  data: {
+    /** Unique identifier of the deleted usage record */
+    id: string;
+    /** Version number for optimistic concurrency control */
+    version: number;
+  };
 }
 
+// ============================================================================
+// Operational Events
+// ============================================================================
+
 /**
+ * Event emitted when a service usage period begins
  * @interface UsageStartedEvent
- * @description Defines a TypeScript interface for an event when a usage is started.
  */
 interface UsageStartedEvent {
   subject: Subjects.UsageStarted;
-  data: {
-    serviceRefId: string;
-    service: BillingServices;
-    organizationId: string;
-    userId?: string;
-    metadata?: any;
-  };
+  data: BaseServiceEventData;
 }
 
 /**
+ * Event emitted when a service usage period ends
  * @interface UsageEndedEvent
- * @description Defines a TypeScript interface for an event when a usage is ended.
  */
 interface UsageEndedEvent {
   subject: Subjects.UsageEnded;
-  data: {
-    serviceRefId: string;
-    service: BillingServices;
-    organizationId: string;
-    userId?: string;
-    metadata?: any;
-  };
+  data: BaseServiceEventData;
 }
 
 /**
+ * Event emitted when usage metrics are recorded
  * @interface UsageRecordedEvent
- * @description Defines a TypeScript interface for an event when a usage is recorded.
+ * @extends Adds duration to BaseServiceEventData
  */
 interface UsageRecordedEvent {
   subject: Subjects.UsageRecorded;
-  data: {
+  data: BaseServiceEventData & {
+    /** Duration of the usage in milliseconds */
     duration: number;
-    serviceRefId: string;
-    service: BillingServices;
-    organizationId: string;
-    userId?: string;
-    metadata?: any;
   };
 }
 
 /**
+ * Event emitted when a usage operation fails
  * @interface UsageFailedEvent
- * @description Defines a TypeScript interface for an event when a usage fails.
  */
 interface UsageFailedEvent {
   subject: Subjects.UsageFailed;
-  data: { id: string; taskId: string };
+  data: {
+    /** Identifier of the failed usage record */
+    id: string;
+    /** Associated task identifier */
+    taskId: string;
+  };
 }
 
-/**
- * @exports UsageEventTypes
- * @description Exporting usage event types for broader consumption.
- */
+// ============================================================================
+// Exports
+// ============================================================================
+
 export {
+  // Base Types
+  BaseServiceEventData,
+
+  // Lifecycle Events
   UsageCreatedEvent,
   UsageUpdatedEvent,
   UsageDeletedEvent,
+
+  // Operational Events
   UsageStartedEvent,
   UsageEndedEvent,
-  UsageFailedEvent,
   UsageRecordedEvent,
+  UsageFailedEvent,
 };

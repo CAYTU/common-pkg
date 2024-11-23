@@ -98,5 +98,10 @@ export interface TemplateSetupData {
      * Additional context for the assistant, which could be null if no extra context is provided.
      */
     additional_context?: string;
+
+    /**
+     * The file path to the base context file for iot assistant.
+     */
+    base_context?: string;
   };
 }

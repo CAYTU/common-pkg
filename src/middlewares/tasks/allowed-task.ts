@@ -5,6 +5,18 @@ import { UserRole } from "../../types/utils";
 import { TaskType } from "../../tasks/enums";
 
 /**
+ * An array containing task types that are temporarily disabled.
+ */
+const TEMPORARY_DISABLED_TASKS = [
+  TaskType.Delivery,
+  TaskType.Cleaning,
+  TaskType.Inspection,
+
+  // Add more task types here...
+  TaskType.Custom,
+];
+
+/**
  * Middleware to check if the user is authorized to perform a task.
  *
  * This middleware verifies whether the user has the necessary permissions to
@@ -88,4 +100,4 @@ const allowedTask = asyncHandler(
   },
 );
 
-export { allowedTask };
+export { allowedTask, TEMPORARY_DISABLED_TASKS };

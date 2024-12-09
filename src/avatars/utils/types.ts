@@ -60,7 +60,7 @@ export interface TemplateSetupData {
         /**
          * A document credential, which might be used to authenticate or authorize access to document processing services.
          */
-        document?: string;
+        [key: string]: string;
       };
     };
   };

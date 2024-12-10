@@ -62,9 +62,9 @@ export interface OperatorInterface extends IMongooseObjectExt {
   isPublic?: boolean;
 
   /**
-   * Organizations with which the operator is shared. (Optional)
+   * If the operator is not public, the organization the operator belongs to. (Optional)
    */
-  organizations?: Types.ObjectId[];
+  organization?: Types.ObjectId;
 
   /**
    * The unique identifier of the operator's current task. (Optional)

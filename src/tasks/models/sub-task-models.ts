@@ -10,27 +10,63 @@ import {
 /**
  * Interface representing a Task Delivery.
  */
+/**
+ * Interface representing the delivery details of a task.
+ */
 export interface TaskDeliveryInterface extends IMongooseObjectExt {
   /**
    * Reference to the order.
+   * @type {Types.ObjectId}
    */
   order?: Types.ObjectId;
 
+  /**
+   * Type of delivery to be performed (indoor | outdoor).
+   * @type {DeliveryType}
+   */
   deliveryType?: DeliveryType;
 
   /**
-   * Delivery Attributes
+   * Description of the cleaning task.
+   * @type {string}
    */
-  itinerary?: {
-    from: {
-      lat: number;
-      lng: number;
-    };
-    to: {
-      lat: number;
-      lng: number;
-    };
+  description?: string;
+
+  /**
+   * Starting coordinates of the delivery.
+   * @type {{ lat: number; lng: number }}
+   */
+  start: {
+    lat: number;
+    lng: number;
   };
+
+  /**
+   * Ending coordinates of the delivery.
+   * @type {{ lat: number; lng: number }}
+   */
+  end: {
+    lat: number;
+    lng: number;
+  };
+
+  /**
+   * Estimated time for the delivery in minutes.
+   * @type {number}
+   */
+  estimatedTime?: number;
+
+  /**
+   * Estimated distance for the delivery in meters.
+   * @type {number}
+   */
+  estimatedDistance?: number;
+
+  /**
+   * Additional metadata related to the delivery.
+   * @type {any}
+   */
+  metadata?: any;
 }
 
 /**

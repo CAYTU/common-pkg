@@ -101,20 +101,6 @@ export enum RobotStatus {
   Unavailable = "unavailable",
 }
 
-/**
- * Enumerates the possible status values for an operator.
- */
-export enum OperatorStatus {
-  /** The operator's status is pending approval. */
-  Pending = "Pending",
-  /** The operator's application has been denied. */
-  Denied = "Denied",
-  /** The operator's application has been approved. */
-  Approved = "Approved",
-  /** The operator's approval has been revoked. */
-  Revoked = "Revoked",
-}
-
 export enum OrderStatus {
   Created = "created",
   Pending = "pending",

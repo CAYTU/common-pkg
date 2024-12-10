@@ -1,7 +1,6 @@
 import mongoose, { Types } from "mongoose";
 import {
   OauthType,
-  OperatorStatus,
   RoboticPlatform,
   RobotStates,
   SimulationJobState,
@@ -24,6 +23,7 @@ import {
   OrganizationType,
   UserMembershipStatus,
 } from "../../organizations/enums";
+import { OperatorStatus } from "../../operators/operator-status";
 
 declare namespace CTypes {
   /**

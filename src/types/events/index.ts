@@ -3,7 +3,6 @@
 
 import * as PaymentEvents from "../../billings/events/payment-evt.types";
 import * as UserEvents from "./user-evt.types";
-import * as OperatorEvents from "./operator-evt.types";
 import * as EmailEvents from "./email-evt.types";
 import * as AvatarEvents from "../../avatars/events/avatar-evt.types";
 import * as AvatarInstanceEvents from "../../avatars/events/avatar-instance-evt.types";
@@ -42,13 +41,6 @@ export namespace ET {
   export import UserRoleUpdatedEvent = UserEvents.UserRoleUpdatedEvent;
 
   export import EmailLinkResendRequestEvent = EmailEvents.EmailLinkResendRequestEvent;
-
-  // Operator Events
-  export import OperatorCreatedEvent = OperatorEvents.OperatorCreatedEvent;
-  export import OperatorUpdatedEvent = OperatorEvents.OperatorUpdatedEvent;
-  export import OperatorDeletedEvent = OperatorEvents.OperatorDeletedEvent;
-  export import OperatorAssignedEvent = OperatorEvents.OperatorAssignedEvent;
-  export import OperatorRequestedEvent = OperatorEvents.OperatorRequestedEvent;
 
   // Zone Events
   export import ZoneCreatedEvent = ZoneEvents.ZoneCreatedEvent;

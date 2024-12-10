@@ -3,20 +3,20 @@
  * @description Defines TypeScript interfaces related to operator events.
  */
 
-import { Subjects } from "../../nats-events/subjects";
-import CTypes from "../models";
 import { OnlyRequired } from "../../common";
+import { Subjects } from "../../nats-events/subjects";
+import { OperatorInterface, OperatorRequestedEventInterface } from "../models";
 
 /**
  * @interface OperatorCreatedEvent
  * @description Defines a TypeScript interface for an event where an operator is created.
  * @property {Subjects.OperatorCreated} subject - The subject type of the event.
  * @property {object} data - The data payload of the event.
- * @property {Partial<CTypes.OperatorInterface> & OnlyRequired} data - The partial operator interface containing only required fields.
+ * @property {Partial<OperatorInterface> & OnlyRequired} data - The partial operator interface containing only required fields.
  */
 interface OperatorCreatedEvent {
   subject: Subjects.OperatorCreated;
-  data: Partial<CTypes.OperatorInterface> & OnlyRequired;
+  data: Partial<OperatorInterface> & OnlyRequired;
 }
 
 /**
@@ -24,11 +24,11 @@ interface OperatorCreatedEvent {
  * @description Defines a TypeScript interface for an event where an operator is updated.
  * @property {Subjects.OperatorUpdated} subject - The subject type of the event.
  * @property {object} data - The data payload of the event.
- * @property {Partial<CTypes.OperatorInterface> & OnlyRequired} data - The partial operator interface containing only required fields.
+ * @property {Partial<OperatorInterface> & OnlyRequired} data - The partial operator interface containing only required fields.
  */
 interface OperatorUpdatedEvent {
   subject: Subjects.OperatorUpdated;
-  data: Partial<CTypes.OperatorInterface> & OnlyRequired;
+  data: Partial<OperatorInterface> & OnlyRequired;
 }
 
 /**
@@ -63,11 +63,11 @@ interface OperatorAssignedEvent {
  * @description Defines a TypeScript interface for an event where an operator request is made.
  * @property {Subjects.OperatorRequested} subject - The subject type of the event.
  * @property {object} data - The data payload of the event.
- * @property {Partial<CTypes.OperatorRequestedEventInterface>} data - The partial operator requested event interface.
+ * @property {Partial<OperatorRequestedEventInterface>} data - The partial operator requested event interface.
  */
 interface OperatorRequestedEvent {
   subject: Subjects.OperatorRequested;
-  data: Partial<CTypes.OperatorRequestedEventInterface>;
+  data: Partial<OperatorRequestedEventInterface>;
 }
 
 /**

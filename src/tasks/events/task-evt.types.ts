@@ -98,7 +98,12 @@ interface TaskRobotUnAssignedEvent {
  */
 interface TaskGetOperatorCandidateEvent {
   subject: Subjects.OperatorGetCandidate;
-  data: { taskId: string; version: number };
+  data: {
+    taskId: string;
+    operatorId?: string;
+    deviceId?: string;
+    version: number;
+  };
 }
 
 /**

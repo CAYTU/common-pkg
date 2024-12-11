@@ -10,6 +10,7 @@ export * from "./middlewares/robots/authorize-robot";
 
 export * from "./types/utils";
 
+export * from "./utils";
 export * from "./utils/encryptor";
 export * from "./utils/cookies";
 export * from "./utils/billings";

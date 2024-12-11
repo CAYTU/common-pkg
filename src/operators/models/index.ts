@@ -12,6 +12,23 @@ export interface OperatorInterface extends IMongooseObjectExt {
   overallRating?: number;
 
   /**
+   * The number of ratings the user has received (optional).
+   */
+  ratings?: [
+    {
+      /**
+       * The unique identifier of the user who rated the operator.
+       */
+      user: Types.ObjectId;
+
+      /**
+       * The rating value.
+       */
+      rating: number;
+    },
+  ];
+
+  /**
    * The type of identity document used by the operator.
    */
   identityType?: IdentityType;

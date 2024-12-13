@@ -1,6 +1,6 @@
 {
   "name": "@caytu/shared",
-  "version": "2.0.212",
+  "version": "2.0.213",
   "description": "Shared Library for Caytu",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",

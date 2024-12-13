@@ -91,3 +91,6 @@ export interface OperatorRequestedEventInterface extends OperatorRequestData {
    */
   user: Types.ObjectId;
 }
+
+// Export interface
+export * from "./operator-request";

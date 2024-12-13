@@ -5,6 +5,7 @@
 
 import { OnlyRequired } from "../../common";
 import { Subjects } from "../../nats-events/subjects";
+import { OperatorStatus } from "../enums";
 import { OperatorInterface, OperatorRequestedEventInterface } from "../models";
 
 /**
@@ -65,9 +66,24 @@ interface OperatorAssignedEvent {
  * @property {object} data - The data payload of the event.
  * @property {Partial<OperatorRequestedEventInterface>} data - The partial operator requested event interface.
  */
-interface OperatorRequestedEvent {
-  subject: Subjects.OperatorRequested;
+interface OperatorRequestEvent {
+  subject: Subjects.OperatorRequest;
   data: Partial<OperatorRequestedEventInterface>;
+}
+
+/**
+ * @interface OperatorStatusUpdatedEvent
+ * @description Defines a TypeScript interface for an event where an operator's status is updated.
+ *
+ * @property {Subjects.OperatorStatusUpdated} subject - The subject type of the event.
+ * @property {object} data - The data payload of the event.
+ * @property {string} data.id - The ID of the operator whose status is being updated.
+ * @property {OperatorStatus} data.status - The new status of the operator.
+ * @property {number} data.version - The version number of the operator whose status is being updated.
+ */
+interface OperatorStatusUpdatedEvent {
+  subject: Subjects.OperatorStatusUpdated;
+  data: { id: string; status: OperatorStatus; version?: number };
 }
 
 /**
@@ -79,5 +95,6 @@ export {
   OperatorUpdatedEvent,
   OperatorDeletedEvent,
   OperatorAssignedEvent,
-  OperatorRequestedEvent,
+  OperatorRequestEvent,
+  OperatorStatusUpdatedEvent,
 };

@@ -90,14 +90,17 @@
       "organizations/enums": [
         "build/organizations/enums/index.d.ts"
       ],
-      "operators": [
-        "build/operators/index.d.ts"
-      ],
       "operators/models": [
         "build/operators/models/index.d.ts"
       ],
       "operators/events": [
         "build/operators/events/index.d.ts"
+      ],
+      "operators/enums": [
+        "build/operators/enums/index.d.ts"
+      ],
+      "operators/types": [
+        "build/operators/types/index.d.ts"
       ],
       "nats-events": [
         "build/nats-events/index.d.ts"

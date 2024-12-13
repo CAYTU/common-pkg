@@ -1,47 +1,20 @@
 import { Types } from "mongoose";
 import { IMongooseObjectExt } from "../../types/utils/models";
-import { OperatorStatus } from "../operator-status";
 import { DeviceCategory } from "../../types/utils";
-
-export type IdentityType = "nationalId" | "passport" | "driverLicense";
+import { OperatorStatus } from "../enums";
+import { Rating } from "../types";
+import { OperatorRequestData } from "./operator-request";
 
 export interface OperatorInterface extends IMongooseObjectExt {
   /**
-   * The overall rating of the user (optional).
+   * The overall rating of the user. (Optional)
    */
   overallRating?: number;
 
   /**
-   * The number of ratings the user has received (optional).
+   * The number of ratings the user has received. (Optional)
    */
-  ratings?: [
-    {
-      /**
-       * The unique identifier of the user who rated the operator.
-       */
-      user: Types.ObjectId;
-
-      /**
-       * The rating value.
-       */
-      rating: number;
-    },
-  ];
-
-  /**
-   * The type of identity document used by the operator.
-   */
-  identityType?: IdentityType;
-
-  /**
-   * The path to the operator's identity photo.
-   */
-  identityPhoto?: string;
-
-  /**
-   * The operator's identity number. (Optional)
-   */
-  identityNumber?: string;
+  ratings?: Rating[];
 
   /**
    * The unique identifier of the associated user.
@@ -67,6 +40,11 @@ export interface OperatorInterface extends IMongooseObjectExt {
    * The total amount of earned credit by the operator. (Optional)
    */
   earnedCredits?: number;
+
+  /**
+   * The total amount of converted credit by the operator. (Optional)
+   */
+  convertedCredits?: number;
 
   /**
    * A brief description about the operator. (Optional)
@@ -97,34 +75,19 @@ export interface OperatorInterface extends IMongooseObjectExt {
    * A list of device categories allowed for the operator. (Optional)
    */
   allowedDeviceCategories?: DeviceCategory[];
+
+  /**
+   * The request data for the operator. (Optional)
+   */
+  requestData?: OperatorRequestData;
 }
 
 /**
  * Represents an event where an operator's identity is requested.
  */
-export interface OperatorRequestedEventInterface {
-  /**
-   * The type of identity document requested.
-   */
-  identityType?: IdentityType;
-
-  /**
-   * The path to the requested identity photo.
-   */
-  identityPhoto?: string;
-
-  /**
-   * The requested identity number. (Optional)
-   */
-  identityNumber?: string;
-
+export interface OperatorRequestedEventInterface extends OperatorRequestData {
   /**
    * The unique identifier of the associated user.
    */
   user: Types.ObjectId;
-
-  /**
-   * A brief description about the operator. (Optional)
-   */
-  aboutMe?: string;
 }

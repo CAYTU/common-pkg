@@ -71,9 +71,10 @@ export * from "./organizations/enums";
  * @module operators
  * @description This module contains all the operator-related interfaces and events.
  */
-export * from "./operators";
 export * from "./operators/models";
 export * from "./operators/events";
+export * from "./operators/enums";
+export * from "./operators/types";
 
 // Export Errors
 export * from "./errors";

@@ -5,7 +5,7 @@
 
 import { OnlyRequired } from "../../common";
 import { Subjects } from "../../nats-events/subjects";
-import { OperatorStatus } from "../enums";
+import { OperatorRequestStatus, OperatorStatus } from "../enums";
 import { OperatorInterface, OperatorRequestedEventInterface } from "../models";
 
 /**
@@ -87,6 +87,22 @@ interface OperatorStatusUpdatedEvent {
 }
 
 /**
+ * Event interface for when the status of an operator request is updated.
+ *
+ * @interface OperatorRequestStatusUpdatedEvent
+ *
+ * @property {Subjects.OperatorRequestStatusUpdated} subject - The subject of the event.
+ * @property {Object} data - The data associated with the event.
+ * @property {string} data.id - The unique identifier of the operator request.
+ * @property {OperatorRequestStatus} data.status - The new status of the operator request.
+ * @property {number} [data.version] - The optional version number of the event.
+ */
+interface OperatorRequestStatusUpdatedEvent {
+  subject: Subjects.OperatorRequestStatusUpdated;
+  data: { id: string; status: OperatorRequestStatus; version?: number };
+}
+
+/**
  * @exports OperatorEvents
  * @description Exporting operator event types for broader consumption.
  */
@@ -97,4 +113,5 @@ export {
   OperatorAssignedEvent,
   OperatorRequestEvent,
   OperatorStatusUpdatedEvent,
+  OperatorRequestStatusUpdatedEvent,
 };

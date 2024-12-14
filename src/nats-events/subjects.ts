@@ -102,6 +102,7 @@ export enum Subjects {
   OperatorUnassigned = "operator:unassigned",
   OperatorRequest = "operator:request",
   OperatorStatusUpdated = "operator:status:updated",
+  OperatorRequestStatusUpdated = "operator:request:status:updated",
 
   // FCM Tokens
   RobotFcmTokenUpdated = "robot:fcmToken:updated",

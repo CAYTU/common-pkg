@@ -90,6 +90,11 @@ export interface OperatorRequestedEventInterface extends OperatorRequestData {
    * The unique identifier of the associated user.
    */
   user: Types.ObjectId;
+
+  /**
+   * The unique identifier of the organization the request is made for.
+   */
+  organization?: Types.ObjectId;
 }
 
 // Export interface

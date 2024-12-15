@@ -35,6 +35,9 @@ export enum Subjects {
   RobotUnassigned = "robot:unassigned",
   RobotIsOnline = "robot:is:online",
   RobotIsOffline = "robot:is:offline",
+
+  IotDeviceOrchestratorAdd = "iot:device:orchestrator:add",
+
   // Taks Subjects
   TaskCreated = "task:created",
   TaskUpdated = "task:updated",

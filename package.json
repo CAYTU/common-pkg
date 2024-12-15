@@ -13,6 +13,7 @@
     "./avatars/events": "./build/avatars/events/index.js",
     "./avatars/utils": "./build/avatars/utils/index.js",
     "./devices/models": "./build/devices/models/index.js",
+    "./devices/events": "./build/devices/events/index.js",
     "./users/models": "./build/users/models/index.js",
     "./users/events": "./build/users/events/index.js",
     "./users/utils": "./build/users/utils/index.js",
@@ -54,6 +55,9 @@
       ],
       "devices/models": [
         "build/devices/models/index.d.ts"
+      ],
+      "devices/events": [
+        "build/devices/events/index.d.ts"
       ],
       "users/models": [
         "build/users/models/index.d.ts"

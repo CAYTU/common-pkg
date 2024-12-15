@@ -30,6 +30,7 @@ export * from "./avatars/events";
  * @description This module contains all the device related interfaces.
  */
 export * from "./devices/models";
+export * from "./devices/events";
 
 /**
  * Export the billings module

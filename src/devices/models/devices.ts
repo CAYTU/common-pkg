@@ -227,3 +227,33 @@ export interface FreedomRobotInterface {
    */
   privateToken?: string;
 }
+
+/**
+ * Interface representing the base structure for a device.
+ *
+ * This interface is a renaming of the `RobotBaseInterface` interface.
+ */
+export interface DeviceBaseInterface extends RobotBaseInterface {}
+
+/**
+ * Interface representing an IoT device.
+ *
+ * This interface is simply a renaming of the `AwsRobotInterface` interface.
+ */
+export interface IoTDeviceInterface extends AwsRobotInterface {}
+
+/**
+ * Interface representing the addition of an IoT device to the scheduler orchestration.
+ * Extends the IoTDeviceInterface.
+ *
+ * @interface IotDeviceSchedulerAddInterface
+ * @extends {IoTDeviceInterface}
+ *
+ * @property {Types.ObjectId} deviceId - The unique identifier of the robot.
+ */
+export interface IotDeviceOrchestratorAddInterface extends IoTDeviceInterface {
+  /**
+   * The unique identifier of the robot.
+   */
+  deviceId: Types.ObjectId;
+}

@@ -6,7 +6,7 @@
 import { Subjects } from "../../nats-events/subjects";
 import { AddonOwner, OnlyRequired } from "../../common";
 import { TaskInterface } from "../models";
-import { TemplateSetupData, TemplateSetupOptions } from "../../avatars/utils";
+import { TemplateSetupData } from "../../avatars/utils";
 import { TaskStatus, TaskType } from "../enums";
 
 /**

@@ -15,47 +15,50 @@ export const allowedTaskTypesBasedOnRole = (role: UserRole[]): TaskType[] => {
   const hasOperatorRole = role.includes(UserRole.Operator);
   const hasCustomerRole = role.includes(UserRole.Customer);
 
-  // Use a switch statement to determine allowed tasks based on roles
+  // Get all available task types
+  const allTaskTypes = Object.values(TaskType);
+
   switch (true) {
-    // SuperAdmin has access to all task types
     case hasSuperAdminRole:
-      return [...Object.values(TaskType)];
+      return allTaskTypes;
 
-    // Admins and Operators have similar restrictions, except Operators have additional limitations
     case hasAdminRole:
-      return [...Object.values(TaskType)].filter(
+      return allTaskTypes.filter(
         (taskType) =>
-          ![...TEMPORARY_DISABLED_TASKS, TaskType.Simulation].includes(
-            taskType,
-          ), // Exclude disabled tasks and "Simulation"
+          !TEMPORARY_DISABLED_TASKS.includes(taskType) &&
+          taskType !== TaskType.Simulation,
       );
 
-    // Operators have more restricted access, excluding "Flight" and "Simulation" tasks
     case hasOperatorRole:
-      return [...Object.values(TaskType)].filter(
+      return allTaskTypes.filter(
         (taskType) =>
-          ![
-            ...TEMPORARY_DISABLED_TASKS,
-            TaskType.Flight,
-            TaskType.Simulation,
-          ].includes(taskType), // Exclude disabled tasks, "Flight", and "Simulation"
+          !TEMPORARY_DISABLED_TASKS.includes(taskType) &&
+          ![TaskType.Flight, TaskType.Simulation].includes(taskType),
       );
 
-    // Customers have the most restricted access, excluding multiple task types
-    case hasCustomerRole:
-      return [...Object.values(TaskType)].filter(
-        (taskType) =>
-          ![
-            ...TEMPORARY_DISABLED_TASKS,
-            TaskType.Connect,
-            TaskType.Flight,
-            TaskType.Simulation,
-            TaskType.Telepresence,
-          ].includes(taskType), // Exclude disabled tasks and several other types
-      );
+    case hasCustomerRole: {
+      const restrictedTasks = [
+        ...TEMPORARY_DISABLED_TASKS,
+        TaskType.Connect,
+        TaskType.Flight,
+        TaskType.Simulation,
+        TaskType.Telepresence,
+      ];
 
-    // Default case: return an empty array for unrecognized roles
+      // Ensure we're not adding duplicates in restrictedTasks
+      const uniqueRestrictedTasks = [...new Set(restrictedTasks)];
+
+      return allTaskTypes.filter(
+        (taskType) => !uniqueRestrictedTasks.includes(taskType),
+      );
+    }
+
     default:
       return [];
   }
+};
+
+// Add type checking to ensure TaskType enum matches
+type ValidateTaskType = {
+  [K in TaskType]: string;
 };

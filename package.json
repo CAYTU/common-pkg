@@ -139,6 +139,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "jest --coverage",
+    "test:dev": "jest --watchAll --no-cache",
     "test:types": "tsc --noEmit"
   },
   "author": "CAYTU",

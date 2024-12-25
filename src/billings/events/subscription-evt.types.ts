@@ -4,6 +4,8 @@
  */
 
 import { Subjects } from "../../nats-events/subjects";
+import { PlanType } from "../../types/utils";
+import { SubscriptionChangeResponseType } from "../enums";
 import { SubscriptionInterface } from "../models";
 
 /**
@@ -82,6 +84,9 @@ export interface SubscriptionChangeRequestEvent {
   data: {
     organizationId: string;
     subscriptionType?: string;
+    reuestChangeType?: PlanType;
+    changePlanId?: string;
+    approvalStatus?: SubscriptionChangeResponseType;
     requestPayload?: string;
     version: number;
   };

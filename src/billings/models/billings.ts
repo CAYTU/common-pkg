@@ -10,6 +10,7 @@ import {
   CreditType,
   PaymentMethod,
   PaymentStatus,
+  SubscriptionChangeResponseType,
   SubscriptionStatus,
   UsageStatus,
   UsageType,
@@ -166,7 +167,7 @@ export interface SubscriptionInterface extends IMongooseObjectExt {
   hasRequestedChange?: boolean;
 
   /**  The status of the request to change the subscription plan. */
-  changePlanRequestStatus?: SubscriptionStatus;
+  changePlanRequestStatus?: SubscriptionChangeResponseType;
 
   /** The ID of the plan the user wants to change to. */
   changePlanId?: Types.ObjectId;
@@ -191,6 +192,9 @@ export interface SubscriptionInterface extends IMongooseObjectExt {
 
   /** Any additional notes or comments about this subscription. */
   notes?: string;
+
+  /** The reason for rejecting the change request, if applicable. */
+  rejectedChangeReason?: string;
 }
 
 /**

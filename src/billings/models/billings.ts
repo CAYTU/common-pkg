@@ -141,6 +141,9 @@ export interface SubscriptionInterface extends IMongooseObjectExt {
   /** The unique identifier of the organization that owns the subscription. */
   organizationId: Types.ObjectId;
 
+  /** To disable the billing for the organization so that the payment is done manually. */
+  isBillingDisabled?: boolean;
+
   /** The status of the subscription. */
   subscriptionStatus: SubscriptionStatus;
 

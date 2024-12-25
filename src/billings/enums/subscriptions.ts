@@ -23,6 +23,8 @@ export enum SubscriptionStatus {
  */
 export enum SubscriptionChangeResponseType {
   Approved = "approved",
-  Denied = "denied",
+  Rejected = "rejected",
   Pending = "pending",
+  UnderReview = "under_review",
+  NeedsInformation = "needs_information",
 }

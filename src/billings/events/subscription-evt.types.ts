@@ -84,10 +84,10 @@ export interface SubscriptionChangeRequestEvent {
   data: {
     organizationId: string;
     subscriptionType?: string;
-    reuestChangeType?: PlanType;
+    requestedChangeType?: PlanType;
     changePlanId?: string;
-    approvalStatus?: SubscriptionChangeResponseType;
-    requestPayload?: string;
+    status?: SubscriptionChangeResponseType;
+    requestedPayload?: string;
     version: number;
   };
 }

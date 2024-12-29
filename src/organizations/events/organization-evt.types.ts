@@ -6,7 +6,7 @@
 import { CreditSourceOrigin, CreditType } from "../../billings/enums";
 import { OnlyRequired } from "../../common";
 import { Subjects } from "../../nats-events/subjects";
-import { BillingServices } from "../../types/utils";
+import { TaskType } from "../../tasks/enums";
 import { OrganizationInterface } from "../models";
 
 /**
@@ -104,6 +104,19 @@ interface OrganizationCreditUpdatedEvent {
 }
 
 /**
+ * @interface OrganizationEnabledTaskTypeEvent
+ * @description Defines a TypeScript interface for an event where an organization enables a task type.
+ * @property {Subjects.OrganizationEnabledTaskType} subject - The subject type of the event.
+ * @property {object} data - The data payload of the event.
+ * @property {string} data.id - The ID of the organization enabling the task type.
+ * @property {TaskType[]} data.taskType - The task type being enabled.
+ */
+interface OrganizationEnabledTaskTypeEvent {
+  subject: Subjects.OrganizationEnabledTaskType;
+  data: { id: string; taskType: TaskType[] };
+}
+
+/**
  * @exports OrganizationEventTypes
  * @description Exporting each event type directly for easier consumption.
  */
@@ -117,4 +130,5 @@ export {
   OrganizationCreditThresholdReachedEvent,
   OrganizationCreditEstimationThresholdReachedEvent,
   OrganizationCreditEstimationFinishedEvent,
+  OrganizationEnabledTaskTypeEvent,
 };

@@ -149,6 +149,8 @@ export enum Subjects {
   // Estimation credit
   OrganizationCreditEstimationThresholdReached = "organization:credit:estimation:threshold:reached",
   OrganizationCreditEstimationFinished = "organization:credit:estimation:finished",
+  OrganizationEnabledTaskType = "organization:enabled:task:type",
+
 
   // Order Subjects
   OrderCreated = "order:created",

@@ -33,6 +33,11 @@ export interface OrganizationInterface extends IMongooseObjectExt {
   thresholdNotificationSent?: boolean;
 
   /**
+   * Credit finished notification sent (optional).
+   */
+  creditFinishedSent?: boolean;
+
+  /**
    * The domain associated with the organization (optional).
    */
   domain?: string;

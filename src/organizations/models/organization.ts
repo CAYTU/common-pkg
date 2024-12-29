@@ -38,6 +38,11 @@ export interface OrganizationInterface extends IMongooseObjectExt {
   creditFinishedSent?: boolean;
 
   /**
+   * Silent notifications (optional).
+   */
+  silentNotifications?: boolean;
+
+  /**
    * The domain associated with the organization (optional).
    */
   domain?: string;
@@ -71,6 +76,15 @@ export interface OrganizationInterface extends IMongooseObjectExt {
    * The street address of the organization (optional).
    */
   address?: string;
+
+  /**
+   * Optional array of task types that the organization is enabled to perform.
+   * If this is empty, the organization is allowed to perform all task types.
+   * If this is not empty, the organization is only allowed to perform the task types in this array.
+   *
+   * Only System Administrators can change this field.
+   */
+  organizationEnabledTasks?: TaskType[];
 
   /**
    * Array of default task types that the organization is allowed to perform (optional).

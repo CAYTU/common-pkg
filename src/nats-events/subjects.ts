@@ -151,7 +151,6 @@ export enum Subjects {
   OrganizationCreditEstimationFinished = "organization:credit:estimation:finished",
   OrganizationEnabledTaskType = "organization:enabled:task:type",
 
-
   // Order Subjects
   OrderCreated = "order:created",
   OrderUpdated = "order:updated",

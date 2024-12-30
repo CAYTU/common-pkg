@@ -77,6 +77,15 @@ export * from "./operators/events";
 export * from "./operators/enums";
 export * from "./operators/types";
 
+/**
+ * Export the routines module
+ * @module routines
+ * @description This module contains all the routine related interfaces and events.
+ */
+export * from "./routines/models";
+export * from "./routines/events";
+export * from "./routines/enums";
+
 // Export Errors
 export * from "./errors";
 

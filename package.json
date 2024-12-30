@@ -31,6 +31,9 @@
     "./operators/events": "./build/operators/events/index.js",
     "./operators/enums": "./build/operators/enums/index.js",
     "./operators/types": "./build/operators/types/index.js",
+    "./routines/models": "./build/routines/models/index.js",
+    "./routines/events": "./build/routines/events/index.js",
+    "./routines/enums": "./build/routines/enums/index.js",
     "./nats-events": "./build/nats-events/index.js",
     "./middlewares/auth": "./build/middlewares/auth/index.js",
     "./middlewares/errors": "./build/middlewares/errors/index.js",
@@ -109,6 +112,15 @@
       ],
       "operators/types": [
         "build/operators/types/index.d.ts"
+      ],
+      "routines/models": [
+        "build/routines/models/index.d.ts"
+      ],
+      "routines/events": [
+        "build/routines/events/index.d.ts"
+      ],
+      "routines/enums": [
+        "build/routines/enums/index.d.ts"
       ],
       "nats-events": [
         "build/nats-events/index.d.ts"

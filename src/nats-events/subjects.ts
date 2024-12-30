@@ -38,6 +38,10 @@ export enum Subjects {
 
   IotDeviceOrchestratorAdd = "iot:device:orchestrator:add",
 
+  RoutineCreated = "routine:created",
+  RoutineUpdated = "routine:updated",
+  RoutineDeleted = "routine:deleted",
+
   // Taks Subjects
   TaskCreated = "task:created",
   TaskUpdated = "task:updated",

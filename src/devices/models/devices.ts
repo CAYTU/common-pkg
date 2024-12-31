@@ -135,7 +135,10 @@ export interface RobotBaseInterface extends IMongooseObjectExt {
    */
   currentTask?: Types.ObjectId;
 
-  metadata?: any;
+  /**
+   * The metadata associated with the robot (optional).
+   */
+  metadata?: Record<string, any>;
 }
 
 export interface DeviceAssignedTrackingInterface extends IMongooseObjectExt {

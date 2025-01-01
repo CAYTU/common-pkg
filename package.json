@@ -35,6 +35,7 @@
     "./routines/events": "./build/routines/events/index.js",
     "./routines/enums": "./build/routines/enums/index.js",
     "./nats-events": "./build/nats-events/index.js",
+    "./minio": "./build/minio/index.js",
     "./middlewares/auth": "./build/middlewares/auth/index.js",
     "./middlewares/errors": "./build/middlewares/errors/index.js",
     "./middlewares/user": "./build/middlewares/user/index.js",
@@ -142,6 +143,12 @@
       ],
       "utils/billings": [
         "build/utils/billings/index.d.ts"
+      ],
+      "minio": [
+        "build/minio/index.d.ts"
+      ],
+      "*": [
+        "build/index.d.ts"
       ]
     }
   },
@@ -171,11 +178,13 @@
     "typescript-eslint": "^8.8.1"
   },
   "dependencies": {
+    "@google-cloud/storage": "^7.14.0",
     "@types/cookie-session": "^2.0.44",
     "@types/crypto-js": "^4.2.2",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/mongoose-geojson-schema": "^2.1.6",
+    "aws-sdk": "^2.1692.0",
     "cookie-session": "^2.0.0",
     "crypto-js": "^4.2.0",
     "express": "^4.18.1",
@@ -183,6 +192,7 @@
     "express-validator": "^6.14.2",
     "jest-runner-tsd": "^6.0.0",
     "jsonwebtoken": "^9.0.0",
+    "minio": "^8.0.3",
     "mongoose": "^6.6.2",
     "mongoose-geojson-schema": "^2.2.3",
     "nats": "^2.28.1",

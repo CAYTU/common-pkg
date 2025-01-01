@@ -97,6 +97,9 @@ export * from "./middlewares/user";
 // Export Nats Events
 export * from "./nats-events";
 
+// Export Minio
+export * from "./minio";
+
 // Export commons
 export * from "./common";
 

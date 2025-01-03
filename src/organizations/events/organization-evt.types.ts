@@ -57,6 +57,7 @@ interface OrganizationCreditEstimationThresholdReachedEvent {
     creditRemaining: number;
     estimatedCreditConsumed: number;
     userId?: string;
+    rateId?: string;
     version: number;
   };
 }
@@ -65,6 +66,7 @@ interface OrganizationCreditEstimationFinishedEvent {
   subject: Subjects.OrganizationCreditEstimationFinished;
   data: {
     organizationId: string;
+    rateId?: string;
     estimatedCreditConsumed: number;
     version: number;
   };

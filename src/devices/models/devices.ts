@@ -139,6 +139,11 @@ export interface RobotBaseInterface extends IMongooseObjectExt {
    * The metadata associated with the robot (optional).
    */
   metadata?: Record<string, any>;
+
+  /**
+   * Indicates wheter a routine has been setup for the device
+   */
+  routineSetup?: Boolean;
 }
 
 export interface DeviceAssignedTrackingInterface extends IMongooseObjectExt {

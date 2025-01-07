@@ -1,7 +1,6 @@
 // Enums for routine types and states
 export enum RoutineType {
   SCHEDULED = "scheduled", // Runs on a schedule (cron)
-  EVENT_TRIGGERED = "event", // Triggered by MQTT events
   CONDITION = "condition", // Runs when conditions are met
   IMMEDIATE = "immediate", // Runs immediately when created
 }
@@ -12,6 +11,7 @@ export enum RoutineState {
   COMPLETED = "completed",
   FAILED = "failed",
   DRAFT = "draft",
+  CANCELLED = "cancelled",
 }
 
 export enum ActionType {
@@ -19,5 +19,4 @@ export enum ActionType {
   NOTIFY = "notify",
   WEBHOOK = "webhook",
   API_ENDPOINT = "api_endpoint",
-  CHAIN_ACTIONS = "chain_actions",
 }

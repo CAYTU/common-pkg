@@ -243,18 +243,7 @@ export interface DeviceBaseInterface extends RobotBaseInterface {}
  *
  * This interface is simply a renaming of the `AwsRobotInterface` interface.
  */
-export interface IoTDeviceInterface extends AwsRobotInterface {}
-
-/**
- * Interface representing the addition of an IoT device to the scheduler orchestration.
- * Extends the IoTDeviceInterface.
- *
- * @interface IotDeviceSchedulerAddInterface
- * @extends {IoTDeviceInterface}
- *
- * @property {Types.ObjectId} deviceId - The unique identifier of the robot.
- */
-export interface IotDeviceOrchestratorAddInterface extends IoTDeviceInterface {
+export interface IoTDeviceInterface extends AwsRobotInterface {
   /**
    * The unique identifier of the robot.
    */

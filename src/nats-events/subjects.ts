@@ -36,7 +36,20 @@ export enum Subjects {
   RobotIsOnline = "robot:is:online",
   RobotIsOffline = "robot:is:offline",
 
+  // Should replace the robot subject
+  DeviceCreated = "device:created",
+  DeviceUpdated = "device:updated",
+  DeviceDeleted = "device:deleted",
+  DeviceAssigned = "device:assigned",
+  DeviceGetCandidate = "device:get:candidate",
+  DeviceUnassigned = "device:unassigned",
+  DeviceIsOnline = "device:is:online",
+  DeviceIsOffline = "device:is:offline",
+
   IotDeviceOrchestratorAdd = "iot:device:orchestrator:add",
+  IotDeviceOrchestratorUpdate = "iot:device:orchestrator:update",
+  IotDeviceOrchestratorRemove = "iot:device:orchestrator:remove",
+  IotDeviceOrchestratorStatus = "iot:device:orchestrator:status",
 
   RoutineCreated = "routine:created",
   RoutineUpdated = "routine:updated",

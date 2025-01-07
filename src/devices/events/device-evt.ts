@@ -1,9 +1,7 @@
 import { Subjects } from "../../nats-events/subjects";
 import { AddonOwner, OnlyRequired } from "../../common";
-import {
-  DeviceBaseInterface,
-  IotDeviceOrchestratorAddInterface,
-} from "../models";
+import { DeviceBaseInterface, IoTDeviceInterface } from "../models";
+import { StatusResponse } from "../enums";
 
 /**
  * @interface DeviceCreatedEvent
@@ -51,11 +49,29 @@ interface DeviceGetRobotCandidateEvent {
  * @interface IotDeviceOrchestratorAddEvent
  *
  * @property {Subjects.IotDeviceOrchestrator} subject - The subject of the event, indicating that an IoT device scheduler has been added.
- * @property {IotDeviceOrchestratorAddInterface & { version: number }} data - The data associated with the event, including the version number.
+ * @property {IoTDeviceInterface & { version: number }} data - The data associated with the event, including the version number.
  */
 interface IotDeviceOrchestratorAddEvent {
   subject: Subjects.IotDeviceOrchestratorAdd;
-  data: IotDeviceOrchestratorAddInterface & { version: number };
+  data: IoTDeviceInterface & { version: number };
+}
+
+interface IotDeviceOrchestratorUpdateEvent {
+  subject: Subjects.IotDeviceOrchestratorUpdate;
+  data: Partial<IoTDeviceInterface>;
+}
+
+interface IotDeviceOrchestratorRemoveEvent {
+  subject: Subjects.IotDeviceOrchestratorRemove;
+  data: { deviceId: string; version: number };
+}
+
+interface IotDeviceOrchestratorStatusEvent {
+  subject: Subjects.IotDeviceOrchestratorStatus;
+  data: {
+    status: StatusResponse;
+    data: IoTDeviceInterface;
+  };
 }
 
 export {
@@ -64,4 +80,7 @@ export {
   DeviceUpdatedEvent,
   DeviceGetRobotCandidateEvent,
   IotDeviceOrchestratorAddEvent,
+  IotDeviceOrchestratorUpdateEvent,
+  IotDeviceOrchestratorRemoveEvent,
+  IotDeviceOrchestratorStatusEvent,
 };

@@ -31,6 +31,7 @@ export * from "./avatars/events";
  */
 export * from "./devices/models";
 export * from "./devices/events";
+export * from "./devices/enums";
 
 /**
  * Export the billings module

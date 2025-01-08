@@ -46,6 +46,7 @@ export enum Subjects {
   DeviceIsOnline = "device:is:online",
   DeviceIsOffline = "device:is:offline",
 
+  RoutineSendNotification = "routine:send:notification",
   IotDeviceOrchestratorAdd = "iot:device:orchestrator:add",
   IotDeviceOrchestratorUpdate = "iot:device:orchestrator:update",
   IotDeviceOrchestratorRemove = "iot:device:orchestrator:remove",

@@ -16,3 +16,14 @@ export interface RoutineDeletedEvent {
   subject: Subjects.RoutineDeleted;
   data: { id: string; version: number };
 }
+
+export interface RoutineSendNotificationEvent {
+  subject: Subjects.RoutineSendNotification;
+  data: {
+    id: string;
+    recipient: string;
+    message: string;
+    subject: string;
+    extra: Record<string, any>;
+  };
+}

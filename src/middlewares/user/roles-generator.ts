@@ -39,7 +39,6 @@ export const allowedTaskTypesBasedOnRole = (role: UserRole[]): TaskType[] => {
     case hasCustomerRole: {
       const restrictedTasks = [
         ...TEMPORARY_DISABLED_TASKS,
-        TaskType.Connect,
         TaskType.Flight,
         TaskType.Simulation,
         TaskType.Telepresence,
@@ -59,6 +58,6 @@ export const allowedTaskTypesBasedOnRole = (role: UserRole[]): TaskType[] => {
 };
 
 // Add type checking to ensure TaskType enum matches
-type ValidateTaskType = {
+export type ValidateTaskType = {
   [K in TaskType]: string;
 };

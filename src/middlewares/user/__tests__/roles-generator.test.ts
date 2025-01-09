@@ -82,7 +82,6 @@ describe("allowedTaskTypesBasedOnRole", () => {
       const allTaskTypes = Object.values(TaskType);
       const restrictedTasks = [
         ...TEMPORARY_DISABLED_TASKS,
-        TaskType.Connect,
         TaskType.Flight,
         TaskType.Simulation,
         TaskType.Telepresence,
@@ -98,7 +97,6 @@ describe("allowedTaskTypesBasedOnRole", () => {
       const roles = [UserRole.Customer];
       const result = allowedTaskTypesBasedOnRole(roles);
 
-      expect(result).not.toContain(TaskType.Connect);
       expect(result).not.toContain(TaskType.Flight);
       expect(result).not.toContain(TaskType.Simulation);
       expect(result).not.toContain(TaskType.Telepresence);

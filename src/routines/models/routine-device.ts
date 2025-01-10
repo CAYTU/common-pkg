@@ -5,6 +5,9 @@ import { IRoutineCondition } from "./routine-condition";
 
 // Main Routine Schema
 export interface IDeviceRoutine extends IMongooseObjectExt {
+  // Identification
+  topic: string;
+
   name: string;
   description?: string;
   deviceId: string;

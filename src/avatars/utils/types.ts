@@ -39,6 +39,14 @@ export interface TemplateSetupData {
   };
 
   /**
+   * Wolof configuration for the assistant, including the endpoint and credential used for communication.
+   */
+  whosper?: {
+    endpoint?: string;
+    credential: string;
+  };
+
+  /**
    * An object containing configurations for various services the assistant interacts with.
    * It includes optional embedding services for handling text embeddings.
    */
@@ -104,4 +112,9 @@ export interface TemplateSetupData {
      */
     base_context?: string;
   };
+
+  /**
+   * For any additional configurations or settings not covered by the above fields.
+   */
+  [key: string]: unknown;
 }

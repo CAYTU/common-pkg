@@ -1,4 +1,3 @@
-// src/types/conditions.ts
 export enum ConditionType {
   DEVICE_STATE = "device_state", // Device state condition
   COMPARISON = "comparison", // Value comparison condition
@@ -24,6 +23,12 @@ export interface BaseCondition {
   id: string;
 }
 
+interface ThresholdCondition extends BaseCondition {
+  type: ConditionType.THRESHOLD;
+  operator: ComparisonOperator;
+  target: string;
+}
+
 export interface DeviceStateCondition extends BaseCondition {
   type: ConditionType.DEVICE_STATE;
   stateKey: string;
@@ -36,14 +41,6 @@ export interface ComparisonCondition extends BaseCondition {
   field: string;
   operator: ComparisonOperator;
   value: any;
-}
-
-export interface ThresholdCondition extends BaseCondition {
-  type: ConditionType.THRESHOLD;
-  metric: string;
-  operator: ComparisonOperator;
-  threshold: number;
-  duration?: number; // Duration in seconds for the condition to be true
 }
 
 export interface TimeWindowCondition extends BaseCondition {

@@ -17,55 +17,72 @@ declare global {
 
 /**
  * Middleware that sets the current user and access grant status in the request object.
+ * Checks for authentication token in the following order:
+ * 1. Authorization header (Bearer token)
+ * 2. c_aToken cookie
+ *
  * @param req The Express request object.
  * @param res The Express response object.
  * @param next The next function to invoke the next middleware or route handler.
  */
 export const currentUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    let payload: UserPayload | undefined;
-    let token: string | undefined;
-
     // Default accessGrant to deny
     req.accessGrant = "deny";
 
-    // Check if the access token is in the request header or if c_aToken is in the cookie
-    if (
-      (!req.headers.authorization ||
-        !req.headers.authorization?.startsWith("Bearer")) &&
-      !getCookie(req, "c_aToken")
-    ) {
-      // No access token found, continue to the next middleware or route handler
+    // Try to extract token from different sources
+    const token = extractToken(req);
+
+    // If no token is found, deny access
+    if (!token) {
       throw new NotAuthorizedErr("Access denied. Please log in.");
     }
 
-    // Get the access token
-    token =
-      req.headers.authorization?.split(" ")[1] || getCookie(req, "c_aToken");
+    try {
+      // Verify the token
+      if (encryptor.verifyAccessToken(token)) {
+        // Decode the access token
+        const payload = encryptor.decryptAccessToken(token);
 
-    if (!token) {
-      // No access token found, continue to the next middleware or route handler
-      console.error("No access token found");
-      throw new NotAuthorizedErr("Access denied. No token found.");
-    }
+        // Set the currentUser property of the request object
+        req.currentUser = payload;
 
-    // Check if the access token is valid
-    if (encryptor.verifyAccessToken(token)) {
-      // Decode the access token
-      payload = encryptor.decryptAccessToken(token);
-
-      // Set the currentUser property of the request object
-      req.currentUser = payload;
-
-      // Set the accessGrant property of the request object
-      if (payload) {
-        req.accessGrant = "allow";
+        // Set the accessGrant property of the request object
+        if (payload) {
+          req.accessGrant = "allow";
+        }
       }
-    } else {
-      // The access token is invalid, continue to the next middleware or route handler
-      return next();
+
+      // Continue to the next middleware or route handler
+      next();
+    } catch (error) {
+      console.error("Token verification failed:", error);
+      throw new NotAuthorizedErr("Invalid or expired token.");
     }
-    // Continue to the next middleware or route handler
-    next();
   },
 );
+
+/**
+ * Extracts authentication token from request in the following priority:
+ * 1. Authorization header (Bearer token)
+ * 2. c_aToken cookie
+ *
+ * @param req The Express request object
+ * @returns The token if found, undefined otherwise
+ */
+function extractToken(req: Request): string | undefined {
+  // Check for Bearer token in Authorization header
+  const authHeader = req.headers.authorization;
+  if (authHeader?.startsWith("Bearer ")) {
+    return authHeader.split(" ")[1];
+  }
+
+  // If no Bearer token, check for token in cookies
+  const cookieToken = getCookie(req, "c_aToken");
+  if (cookieToken) {
+    return cookieToken;
+  }
+
+  // No token found
+  return undefined;
+}

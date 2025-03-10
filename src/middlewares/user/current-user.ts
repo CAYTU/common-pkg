@@ -71,16 +71,16 @@ export const currentUser = asyncHandler(
  * @returns The token if found, undefined otherwise
  */
 function extractToken(req: Request): string | undefined {
-  // Check for Bearer token in Authorization header
-  const authHeader = req.headers.authorization;
-  if (authHeader?.startsWith("Bearer ")) {
-    return authHeader.split(" ")[1];
-  }
-
-  // If no Bearer token, check for token in cookies
+  // Check for c_aToken cookie in the request
   const cookieToken = getCookie(req, "c_aToken");
   if (cookieToken) {
     return cookieToken;
+  }
+
+  // If no cookie token, check for Bearer token in Authorization header
+  const authHeader = req.headers.authorization;
+  if (authHeader?.startsWith("Bearer ")) {
+    return authHeader.split(" ")[1];
   }
 
   // No token found

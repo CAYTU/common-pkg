@@ -28,13 +28,8 @@ export class Logger {
    * @deprecated Use info() instead.
    * This method is deprecated and will be removed in future versions.
    */
-  static debug(
-    message: string,
-    meta?: Record<string, unknown>,
-  ): void {
-    console.warn(
-      "Logger.debug() is deprecated. Use Logger.info() instead.",
-    );
+  static debug(message: string, meta?: Record<string, unknown>): void {
+    console.warn("Logger.debug() is deprecated. Use Logger.info() instead.");
     this.log("DEBUG", message, meta);
   }
 

@@ -22,6 +22,23 @@ export class Logger {
   }
 
   /**
+   * Logs a message with "debug" level.
+   * @param message - The debug message to log.
+   * @param meta - Optional metadata to include.
+   * @deprecated Use info() instead.
+   * This method is deprecated and will be removed in future versions.
+   */
+  static debug(
+    message: string,
+    meta?: Record<string, unknown>,
+  ): void {
+    console.warn(
+      "Logger.debug() is deprecated. Use Logger.info() instead.",
+    );
+    this.log("DEBUG", message, meta);
+  }
+
+  /**
    * Logs a message with "error" level.
    * @param message - The error message to log.
    * @param error - Optional error object to include additional details.
@@ -102,5 +119,17 @@ export class Logger {
     // Example:
     // this.externalEndpoint = options.externalEndpoint;
     // this.logLevel = options.logLevel;
+  }
+
+  /**
+   * Sets the log level for the logger.
+   * @param level - The log level to set (e.g., "INFO", "WARN", "ERROR").
+   */
+  static setLogLevel(level: string): void {
+    // Placeholder for setting log level logic.
+    // Example: this.logLevel = level;
+    // This could be used to filter logs based on severity.
+    // For now, we will just log the level change.
+    console.log(`Log level set to: ${level}`);
   }
 }

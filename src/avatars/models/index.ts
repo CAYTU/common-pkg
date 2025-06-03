@@ -1,2 +1,3 @@
 export * from "./avatar";
-export * from "./instances";
+export * from "./pool";
+export * from "./instance";

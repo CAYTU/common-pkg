@@ -7,17 +7,11 @@ import { ObjectStates } from "../../types/utils";
  * its cloud deployment and state.
  * @interface
  */
-export interface AvatarInstanceInterface extends IMongooseObjectExt {
+export interface AvatarPoolInterface extends IMongooseObjectExt {
   /**
-   * The ID of the avatar that this instance is associated with.
+   * The ID of the avatar that this pool is associated with.
    */
   avatarId: Types.ObjectId;
-
-  /**
-   * The unique identifier of the cloud instance (e.g., AWS EC2 instance ID)
-   * where this avatar is deployed (optional).
-   */
-  instanceId?: string;
 
   /**
    * ID of the associated task that may have triggered or is running this avatar instance (optional).
@@ -63,6 +57,21 @@ export interface AvatarInstanceInterface extends IMongooseObjectExt {
    * These users may have access to the avatar instance, depending on the sharing policy.
    */
   sharedWith?: Types.ObjectId[];
+
+  /**
+   * Specifies if this avatar instance is scalable, allowing to automatically scale it (optional).
+   */
+  scalable?: boolean;
+
+  /**
+   * The number of avatar instances in the pool (optional).
+   */
+  count?: Number;
+
+  /**
+   * The limit number of avatar instances in the pool (optional).
+   */
+  limit?: Number;
 
   /**
    * Specifies if this avatar instance is public, allowing anyone to access it (optional).

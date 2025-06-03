@@ -75,8 +75,7 @@ export interface AvatarInstanceInterface extends IMongooseObjectExt {
    */
   public?: boolean;
 
-
-    /**
+  /**
    * Specifies if this avatar instance is available, no peer connected to it (optional).
    */
   available?: boolean;

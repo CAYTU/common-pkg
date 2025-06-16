@@ -185,6 +185,38 @@ interface TaskAvatarTerminatedEvent {
 }
 
 /**
+ * @interface TaskAvatarPoolCreatedEvent
+ * @description Defines a TypeScript interface for an event when a task simulation is created.
+ * @property {Subjects.TaskAvatarPoolCreated} subject - The subject type of the event.
+ * @property {object} data - The data payload of the event.
+ * @property {AddonOwner} data - The addon owner details.
+ */
+interface TaskAvatarPoolCreatedEvent {
+  subject: Subjects.TaskAvatarPoolCreated;
+  data: {
+    taskId?: string;
+    avatarId?: string;
+    templateSetupData?: TemplateSetupData;
+    version: number;
+  } & AddonOwner;
+}
+
+/**
+ * @interface TaskAvatarPoolTerminatedEvent
+ * @description Defines a TypeScript interface for an event when a task avatar is terminated.
+ * @property {Subjects.TaskAvatarPoolTerminated} subject - The subject type of the event.
+ * @property {object} data - The data payload of the event.
+ */
+interface TaskAvatarPoolTerminatedEvent {
+  subject: Subjects.TaskAvatarPoolTerminated;
+  data: {
+    avatarId?: string;
+    taskId: string;
+    version: number;
+  } & AddonOwner;
+}
+
+/**
  * @interface TaskUsageEvent
  * @description Defines a TypeScript interface for an event when a task is used.
  */
@@ -217,5 +249,7 @@ export {
   TaskSimulationTerminatedEvent,
   TaskAvatarCreatedEvent,
   TaskAvatarTerminatedEvent,
+  TaskAvatarPoolCreatedEvent,
+  TaskAvatarPoolTerminatedEvent,
   TaskUsageEvent,
 };

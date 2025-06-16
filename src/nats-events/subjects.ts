@@ -12,6 +12,14 @@ export enum Subjects {
   AvatarInstanceFailed = "avatar:instance:failed",
   AvatarInstanceTerminating = "avatar:instance:terminating",
 
+  // Avatar Pool Subjects
+  AvatarPoolCreated = "avatar:instance:created",
+  AvatarPoolUpdated = "avatar:instance:updated",
+  AvatarPoolDeleted = "avatar:instance:deleted",
+  AvatarPoolTerminated = "avatar:instance:terminated",
+  AvatarPoolFailed = "avatar:instance:failed",
+  AvatarPoolTerminating = "avatar:instance:terminating",
+
   ProductCreated = "product:created",
   ProductUpdated = "product:updated",
   ProductDeleted = "product:deleted",

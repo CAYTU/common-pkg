@@ -196,6 +196,8 @@ interface TaskAvatarPoolCreatedEvent {
   data: {
     taskId?: string;
     avatarId?: string;
+    limit?: number;
+    scalable?: boolean;
     templateSetupData?: TemplateSetupData;
     version: number;
   } & AddonOwner;

@@ -212,7 +212,7 @@ interface TaskAvatarPoolCreatedEvent {
 interface TaskAvatarPoolTerminatedEvent {
   subject: Subjects.TaskAvatarPoolTerminated;
   data: {
-    avatarId?: string;
+    avatarPoolId?: string;
     taskId: string;
     version: number;
   } & AddonOwner;

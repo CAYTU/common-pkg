@@ -142,8 +142,8 @@ export enum Subjects {
   TaskSimulationTerminated = "task:simulation:terminated",
   TaskAvatarCreated = "task:avatar:created",
   TaskAvatarTerminated = "task:avatar:terminated",
-  TaskAvatarPoolCreated = "task:avatar:created",
-  TaskAvatarPoolTerminated = "task:avatar:terminated",
+  TaskAvatarPoolCreated = "task:avatarpool:created",
+  TaskAvatarPoolTerminated = "task:avatarpool:terminated",
 
   // Payment
   PaymentCreated = "payment:created",

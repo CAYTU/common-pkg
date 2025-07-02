@@ -28,6 +28,11 @@ export enum TaskType {
   Avatar = "avatar",
 
   /**
+   * A task that involves running multiple avatars.
+   */
+  AvatarPool = "avatarpool",
+
+  /**
    * A task for managing or executing a flight, likely involving drones or flying vehicles.
    */
   Flight = "flight",

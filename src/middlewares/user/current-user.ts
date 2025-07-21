@@ -16,44 +16,26 @@ declare global {
 }
 
 /**
- * Middleware that sets the current user and access grant status in the request object.
- * Checks for authentication token in the following order:
- * 1. Authorization header (Bearer token)
- * 2. c_aToken cookie
- *
- * @param req The Express request object.
- * @param res The Express response object.
- * @param next The next function to invoke the next middleware or route handler.
+ * Authentication middleware that supports both JWT and API tokens.
+ * Extracts token from Authorization header or cookie, validates it,
+ * and sets user context in the request.
  */
 export const currentUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    // Default accessGrant to deny
     req.accessGrant = "deny";
 
-    // Try to extract token from different sources
     const token = extractToken(req);
-
-    // If no token is found, deny access
     if (!token) {
       throw new NotAuthorizedErr("Access denied. Please log in.");
     }
 
     try {
-      // Verify the token
-      if (encryptor.verifyAccessToken(token)) {
-        // Decode the access token
-        const payload = encryptor.decryptAccessToken(token);
-
-        // Set the currentUser property of the request object
+      if (await encryptor.verifyAccessToken(token)) {
+        const payload = await encryptor.decryptAccessToken(token);
         req.currentUser = payload;
-
-        // Set the accessGrant property of the request object
-        if (payload) {
-          req.accessGrant = "allow";
-        }
+        req.accessGrant = payload ? "allow" : "deny";
       }
 
-      // Continue to the next middleware or route handler
       next();
     } catch (error) {
       console.error("Token verification failed:", error);
@@ -63,26 +45,16 @@ export const currentUser = asyncHandler(
 );
 
 /**
- * Extracts authentication token from request in the following priority:
- * 1. Authorization header (Bearer token)
- * 2. c_aToken cookie
- *
- * @param req The Express request object
- * @returns The token if found, undefined otherwise
+ * Extract token from cookie (priority) or Authorization header
  */
 function extractToken(req: Request): string | undefined {
-  // Check for c_aToken cookie in the request
   const cookieToken = getCookie(req, "c_aToken");
-  if (cookieToken) {
-    return cookieToken;
-  }
+  if (cookieToken) return cookieToken;
 
-  // If no cookie token, check for Bearer token in Authorization header
   const authHeader = req.headers.authorization;
   if (authHeader?.startsWith("Bearer ")) {
     return authHeader.split(" ")[1];
   }
 
-  // No token found
   return undefined;
 }

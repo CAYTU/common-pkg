@@ -113,7 +113,6 @@ export interface TaskInterface extends IMongooseObjectExt {
    */
   avatarInstanceId?: Types.ObjectId;
 
-
   /**
    * Reference to an Avatar Pool related to this task.
    */

@@ -49,6 +49,7 @@ export * from "./billings/enums";
  */
 export * from "./users/models";
 export * from "./users/events";
+export { validateApiToken } from "./users/utils/api-token-validator";
 
 /**
  * Export the tasks module

@@ -30,7 +30,10 @@ export abstract class Listener<T extends Event> {
   async createConsumer() {
     // Note: You'll need to ensure the stream exists before creating the consumer
     // This is typically done during application initialization
-    this.consumer = await this.js.consumers.get(this.streamName, this.consumerName);
+    this.consumer = await this.js.consumers.get(
+      this.streamName,
+      this.consumerName,
+    );
   }
 
   /**
@@ -45,7 +48,9 @@ export abstract class Listener<T extends Event> {
       throw new Error("Consumer not initialized");
     }
 
-    console.log(`Starting to consume messages: ${this.subject} / ${this.consumerName}`);
+    console.log(
+      `Starting to consume messages: ${this.subject} / ${this.consumerName}`,
+    );
 
     // Using consume() for continuous message delivery
     const messages = await this.consumer.consume({

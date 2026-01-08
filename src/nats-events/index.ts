@@ -5,10 +5,7 @@ export * from "./publisher";
 export * from "./subjects";
 
 // Re-export commonly used types from NATS libraries for convenience
-export type {
-  NatsConnection,
-  ConnectionOptions,
-} from "@nats-io/nats-core";
+export type { NatsConnection, ConnectionOptions } from "@nats-io/nats-core";
 
 export type {
   JetStreamClient,

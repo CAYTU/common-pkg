@@ -137,7 +137,9 @@ apiTokenSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 // STATIC METHODS
 // ============================================================================
 
-apiTokenSchema.statics.build = function (attrs: ApiTokenInterface): ApiTokenDoc {
+apiTokenSchema.statics.build = function (
+  attrs: ApiTokenInterface,
+): ApiTokenDoc {
   return new ApiToken(attrs);
 };
 
@@ -146,17 +148,16 @@ apiTokenSchema.statics.findActiveTokens = function (): Promise<ApiTokenDoc[]> {
 };
 
 apiTokenSchema.statics.findByUserId = function (
-  userId: Types.ObjectId | string
+  userId: Types.ObjectId | string,
 ): Promise<ApiTokenDoc[]> {
-  const userObjectId = typeof userId === 'string' 
-    ? new Types.ObjectId(userId) 
-    : userId;
-  
+  const userObjectId =
+    typeof userId === "string" ? new Types.ObjectId(userId) : userId;
+
   return this.find({ userId: userObjectId, isActive: true }).exec();
 };
 
 apiTokenSchema.statics.findByPrefix = function (
-  prefix: string
+  prefix: string,
 ): Promise<ApiTokenDoc[]> {
   return this.find({ tokenPrefix: prefix, isActive: true }).exec();
 };

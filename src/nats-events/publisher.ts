@@ -49,7 +49,7 @@ export abstract class Publisher<T extends Event> {
       msgID?: string; // Unique message ID for deduplication
       headers?: Record<string, string>; // Custom headers
       timeout?: number; // Timeout for publish operation
-    }
+    },
   ): Promise<PubAck> {
     try {
       const payload = JSON.stringify(data);
@@ -58,17 +58,17 @@ export abstract class Publisher<T extends Event> {
 
       // Create headers if needed
       let msgHeaders = undefined;
-      
+
       if (options?.headers || options?.msgID) {
         msgHeaders = headers();
-        
+
         // Add custom headers
         if (options.headers) {
           Object.entries(options.headers).forEach(([key, value]) => {
             msgHeaders!.append(key, value);
           });
         }
-        
+
         // Add message ID for deduplication
         if (options.msgID) {
           msgHeaders.append("Nats-Msg-Id", options.msgID);
@@ -82,7 +82,7 @@ export abstract class Publisher<T extends Event> {
       });
 
       console.log(
-        `Event published to subject ${this.subject} - Stream: ${pubAck.stream}, Seq: ${pubAck.seq}`
+        `Event published to subject ${this.subject} - Stream: ${pubAck.stream}, Seq: ${pubAck.seq}`,
       );
 
       return pubAck;

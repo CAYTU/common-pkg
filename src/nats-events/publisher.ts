@@ -1,17 +1,14 @@
-import { Stan } from "node-nats-streaming";
+import { NatsConnection, headers } from "@nats-io/nats-core";
+import { JetStreamClient, PubAck } from "@nats-io/jetstream";
 import { Subjects } from "./subjects";
-import { NatsConnection, Payload } from "nats";
 
-/**
- * An interface that defines the structure of an event.
- */
 interface Event {
   subject: Subjects;
   data: any;
 }
 
 /**
- * An abstract base class for publishing events to multiple communication channels.
+ * An abstract base class for publishing events to JetStream.
  * @typeparam T - The event type that extends the Event interface.
  */
 export abstract class Publisher<T extends Event> {
@@ -21,65 +18,104 @@ export abstract class Publisher<T extends Event> {
   abstract subject: T["subject"];
 
   /**
-   * The NATS Streaming client used for publishing to NATS.
+   * The NATS connection client.
    */
-  private natsClient: Stan;
+  private client: NatsConnection;
 
   /**
-   * The WebSocket client used for publishing to WebSocket.
-   * This is optional and will only be used if provided.
+   * The JetStream client used for publishing to streams.
    */
-  private wsClient?: NatsConnection;
+  private js: JetStreamClient;
 
   /**
    * Creates a new Publisher instance.
-   * @param natsClient - The NATS Streaming client instance.
-   * @param wsClient - (Optional) The WebSocket client instance for WebSocket communication.
+   * @param client - The NATS connection instance.
+   * @param js - The JetStream client instance.
    */
-  constructor(natsClient: Stan, wsClient?: NatsConnection) {
-    this.natsClient = natsClient;
-    this.wsClient = wsClient;
+  constructor(client: NatsConnection, js: JetStreamClient) {
+    this.client = client;
+    this.js = js;
   }
 
   /**
-   * Publishes the event data to the NATS and optionally to the WebSocket channel.
+   * Publishes the event data to JetStream.
    * @param data - The event data to be published.
-   * @returns A Promise that resolves when the event is successfully published or rejects if there is an error.
+   * @param options - Optional publish options
+   * @returns A Promise that resolves to PubAck when the event is successfully published
    */
-  async publish(data: T["data"]): Promise<void> {
-    // Publish to NATS
-    await new Promise<void>((resolve, reject) => {
-      this.natsClient.publish(this.subject, JSON.stringify(data), (err) => {
-        if (err) {
-          console.error("Error publishing to NATS:", err);
-          reject(err);
-        } else {
-          console.log("(NATS) Event published to subject", this.subject);
-          resolve();
-        }
-      });
-    });
-
-    // Publish to WebSocket if client is provided
-    if (this.wsClient) {
-      try {
-        if (this.wsClient.isClosed()) {
-          console.log("(WS) WebSocket is closed. Reconnecting...");
-          // Add logic to handle reconnection if needed
-        }
-
-        // Publish the message
-        this.wsClient.publish(
-          this.subject,
-          Buffer.from(JSON.stringify(data)) as any,
-        );
-        console.log("(WS) Event published to subject", this.subject);
-
-        // Optionally, you can flush the message to ensure it's sent immediately
-        await this.wsClient.flush();
-      } catch (err) {
-        console.error("Error during WebSocket operation:", err);
-      }
+  async publish(
+    data: T["data"],
+    options?: {
+      msgID?: string; // Unique message ID for deduplication
+      headers?: Record<string, string>; // Custom headers
+      timeout?: number; // Timeout for publish operation
     }
+  ): Promise<PubAck> {
+    try {
+      const payload = JSON.stringify(data);
+      const encoder = new TextEncoder();
+      const encodedData = encoder.encode(payload);
+
+      // Create headers if needed
+      let msgHeaders = undefined;
+      
+      if (options?.headers || options?.msgID) {
+        msgHeaders = headers();
+        
+        // Add custom headers
+        if (options.headers) {
+          Object.entries(options.headers).forEach(([key, value]) => {
+            msgHeaders!.append(key, value);
+          });
+        }
+        
+        // Add message ID for deduplication
+        if (options.msgID) {
+          msgHeaders.append("Nats-Msg-Id", options.msgID);
+        }
+      }
+
+      // Publish to JetStream
+      const pubAck = await this.js.publish(this.subject, encodedData, {
+        headers: msgHeaders,
+        timeout: options?.timeout,
+      });
+
+      console.log(
+        `Event published to subject ${this.subject} - Stream: ${pubAck.stream}, Seq: ${pubAck.seq}`
+      );
+
+      return pubAck;
+    } catch (err) {
+      console.error("Error publishing to JetStream:", err);
+      throw err;
+    }
+  }
+
+  /**
+   * Publishes multiple messages in a batch
+   * @param dataArray - Array of event data to publish
+   * @returns Promise that resolves to array of PubAcks
+   */
+  async publishBatch(dataArray: T["data"][]): Promise<PubAck[]> {
+    const publishPromises = dataArray.map((data) => this.publish(data));
+    return Promise.all(publishPromises);
+  }
+
+  /**
+   * Check if the client is connected
+   */
+  isConnected(): boolean {
+    return !this.client.isClosed();
+  }
+
+  /**
+   * Get connection info
+   */
+  getConnectionInfo() {
+    return {
+      connected: !this.client.isClosed(),
+      server: this.client.info?.server_name,
+    };
   }
 }

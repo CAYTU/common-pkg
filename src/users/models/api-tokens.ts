@@ -1,16 +1,19 @@
-import mongoose, { Document, Model } from "mongoose";
+import mongoose, { Document, Model, Types } from "mongoose";
 import { UserRole } from "../utils/user-roles";
 import { TaskType } from "../../tasks/enums/task-types";
 
+/**
+ * Base API Token interface - represents the raw data structure
+ */
 export interface ApiTokenInterface {
-  userId: mongoose.Schema.Types.ObjectId;
+  userId: Types.ObjectId;
   tokenName: string;
-  tokenHash: string;
+  tokenHash?: string;
   tokenPrefix: string;
   permissions: {
     roles: UserRole[];
     allowedTaskTypes: TaskType[];
-    organizationId?: mongoose.Schema.Types.ObjectId;
+    organizationId?: Types.ObjectId;
   };
   lastUsedAt?: Date;
   expiresAt?: Date;
@@ -23,15 +26,32 @@ export interface ApiTokenInterface {
   };
 }
 
-export interface ApiTokenDoc extends Document, ApiTokenInterface {
-  version: number;
+// Include id in the base interface
+export interface ApiTokenDocFields extends ApiTokenInterface {
+  id: string;
+  _id: Types.ObjectId;
 }
 
+export interface ApiTokenDoc extends Document, ApiTokenDocFields {
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+/**
+ * API Token Model interface - includes static methods
+ */
 export interface ApiTokenModel extends Model<ApiTokenDoc> {
-  build: (attrs: ApiTokenInterface) => ApiTokenDoc;
+  build(attrs: ApiTokenInterface): ApiTokenDoc;
+  findActiveTokens(): Promise<ApiTokenDoc[]>;
+  findByUserId(userId: Types.ObjectId | string): Promise<ApiTokenDoc[]>;
+  findByPrefix(prefix: string): Promise<ApiTokenDoc[]>;
 }
 
-const apiTokenSchema = new mongoose.Schema<ApiTokenInterface>(
+/**
+ * API Token Schema with proper typing
+ * IMPORTANT: Use ApiTokenDoc as first generic, ApiTokenModel as second
+ */
+const apiTokenSchema = new mongoose.Schema<ApiTokenDoc, ApiTokenModel>(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -96,27 +116,69 @@ const apiTokenSchema = new mongoose.Schema<ApiTokenInterface>(
   {
     timestamps: true,
     toJSON: {
+      virtuals: true,
       transform(_, ret) {
-        ret.id = ret._id;
-        delete ret._id;
-        delete ret.tokenHash; // Never expose hash
+        ret.id = ret._id.toString();
+        delete ret.tokenHash;
       },
+    },
+    toObject: {
+      virtuals: true,
     },
   },
 );
 
-// Indexes for performance
+// Compound indexes
 apiTokenSchema.index({ userId: 1, isActive: 1 });
+apiTokenSchema.index({ tokenPrefix: 1, isActive: 1 });
 apiTokenSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
-// Static build method
-apiTokenSchema.statics.build = (attrs: ApiTokenInterface) => {
+// ============================================================================
+// STATIC METHODS
+// ============================================================================
+
+apiTokenSchema.statics.build = function (attrs: ApiTokenInterface): ApiTokenDoc {
   return new ApiToken(attrs);
 };
 
-const ApiToken: ApiTokenModel = mongoose.model<ApiTokenDoc, ApiTokenModel>(
+apiTokenSchema.statics.findActiveTokens = function (): Promise<ApiTokenDoc[]> {
+  return this.find({ isActive: true }).exec();
+};
+
+apiTokenSchema.statics.findByUserId = function (
+  userId: Types.ObjectId | string
+): Promise<ApiTokenDoc[]> {
+  const userObjectId = typeof userId === 'string' 
+    ? new Types.ObjectId(userId) 
+    : userId;
+  
+  return this.find({ userId: userObjectId, isActive: true }).exec();
+};
+
+apiTokenSchema.statics.findByPrefix = function (
+  prefix: string
+): Promise<ApiTokenDoc[]> {
+  return this.find({ tokenPrefix: prefix, isActive: true }).exec();
+};
+
+// ============================================================================
+// MIDDLEWARE
+// ============================================================================
+
+apiTokenSchema.pre("save", async function () {
+  if (this.expiresAt && this.expiresAt < new Date()) {
+    this.isActive = false;
+  }
+});
+
+apiTokenSchema.post("save", function (doc) {
+  console.log(`API token saved with id: ${doc.id}`);
+});
+
+/**
+ * API Token Model
+ */
+export const ApiToken = mongoose.model<ApiTokenDoc, ApiTokenModel>(
   "ApiToken",
   apiTokenSchema,
 );
-
-export { ApiToken };

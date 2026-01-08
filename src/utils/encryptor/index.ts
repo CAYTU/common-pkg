@@ -31,16 +31,20 @@ export const encryptor = {
   },
 
   // JWT token methods
-  encryptAccessToken: (payload: any, expiresIn?: string | number): string => {
-    return jwt.sign(payload, `${process.env.ACCESS_SECRET}`, {
-      expiresIn: expiresIn ?? "1h",
-    });
+  encryptAccessToken: (payload: any, expiresIn?: number): string => {
+    const secret = process.env.ACCESS_SECRET as string;
+    if (expiresIn !== undefined) {
+      return jwt.sign(payload, secret, { expiresIn });
+    }
+    return jwt.sign(payload, secret, { expiresIn: "1h" });
   },
 
-  encryptRefreshToken: (payload: any, expiresIn?: string | number): string => {
-    return jwt.sign(payload, `${process.env.REFRESH_SECRET}`, {
-      expiresIn: expiresIn ?? "7d",
-    });
+  encryptRefreshToken: (payload: any, expiresIn?: number): string => {
+    const secret = process.env.REFRESH_SECRET as string;
+    if (expiresIn !== undefined) {
+      return jwt.sign(payload, secret, { expiresIn });
+    }
+    return jwt.sign(payload, secret, { expiresIn: "7d" });
   },
 
   // Enhanced decrypt - handles both JWT and API tokens
@@ -51,11 +55,16 @@ export const encryptor = {
       }
       return await apiTokenValidator(token);
     }
-    return jwt.verify(token, `${process.env.ACCESS_SECRET}`) as UserPayload;
+    // jsonwebtoken 9.x: verify returns synchronously when no callback is provided
+    // but we keep it consistent with async pattern
+    const secret = process.env.ACCESS_SECRET as string;
+    return jwt.verify(token, secret) as UserPayload;
   },
 
-  decryptRefreshToken: (token: string): any => {
-    return jwt.verify(token, `${process.env.REFRESH_SECRET}`) as any;
+  decryptRefreshToken: async (token: string): Promise<any> => {
+    // jsonwebtoken 9.x: verify returns synchronously when no callback is provided
+    const secret = process.env.REFRESH_SECRET as string;
+    return jwt.verify(token, secret) as any;
   },
 
   // Enhanced verify - handles both JWT and API tokens
@@ -68,9 +77,9 @@ export const encryptor = {
     }
   },
 
-  verifyRefreshToken: (token: string): boolean => {
+  verifyRefreshToken: async (token: string): Promise<boolean> => {
     try {
-      jwt.verify(token, `${process.env.REFRESH_SECRET}`);
+      await encryptor.decryptRefreshToken(token);
       return true;
     } catch (error) {
       return false;

@@ -25,7 +25,7 @@ export const validateApiToken = async (token: string): Promise<UserPayload> => {
   // Verify token against stored hashes
   let validToken: any = null;
   for (const apiToken of apiTokens) {
-    const isValid = await ApiTokenUtils.verify(token, apiToken.tokenHash!);
+    const isValid = await ApiTokenUtils.verify(token, apiToken.tokenHash);
     if (isValid) {
       validToken = apiToken;
       break;

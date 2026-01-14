@@ -597,31 +597,36 @@ declare namespace CTypes {
    * Represents a category for simulation regions.
    * @remarks This interface is used to define simulation regions for virtual environments.
    */
-  export interface SimulationRegionInterface extends SimulationCategoryInterface {}
+  export interface SimulationRegionInterface
+    extends SimulationCategoryInterface {}
 
   /**
    * Represents a category for simulation job queues.
    * @remarks This interface is used to define job queues for simulation tasks.
    */
-  export interface SimulationJobQueueInterface extends SimulationCategoryInterface {}
+  export interface SimulationJobQueueInterface
+    extends SimulationCategoryInterface {}
 
   /**
    * Represents a category for simulation job definitions.
    * @remarks This interface is used to define job definitions for simulation tasks.
    */
-  export interface SimulationJobDefinitionInterface extends SimulationCategoryInterface {}
+  export interface SimulationJobDefinitionInterface
+    extends SimulationCategoryInterface {}
 
   /**
    * Represents a category for simulation roles.
    * @remarks This interface is used to define roles for simulation users or entities.
    */
-  export interface SimulationRoleInterface extends SimulationCategoryInterface {}
+  export interface SimulationRoleInterface
+    extends SimulationCategoryInterface {}
 
   /**
    * Represents a category for simulation template URLs.
    * @remarks This interface is used to define URLs for simulation templates.
    */
-  export interface SimulationTemplateURLInterface extends SimulationCategoryInterface {}
+  export interface SimulationTemplateURLInterface
+    extends SimulationCategoryInterface {}
 
   export interface SimulationInterface extends IMongooseObjectExt {
     /**

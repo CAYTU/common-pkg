@@ -9,6 +9,8 @@
   ],
   "exports": {
     ".": "./build/index.js",
+    "./types/enums": "./build/types/utils/index.js",
+    "./subjects": "./build/nats-events/subjects-only.js",
     "./avatars/models": "./build/avatars/models/index.js",
     "./avatars/events": "./build/avatars/events/index.js",
     "./avatars/utils": "./build/avatars/utils/index.js",
@@ -47,6 +49,12 @@
     "*": {
       ".": [
         "build/index.d.ts"
+      ],
+      "types/enums": [
+        "build/types/utils/index.d.ts"
+      ],
+      "subjects": [
+        "build/nats-events/subjects-only.d.ts"
       ],
       "avatars/models": [
         "build/avatars/models/index.d.ts"
@@ -193,7 +201,7 @@
     "jest-runner-tsd": "^6.0.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.13.8",
-    "mongoose-geojson-schema": "^2.2.3",
+    "mongoose-geojson-schema": "^2.2.4",
     "nats": "^2.28.1",
     "node-nats-streaming": "^0.3.2",
     "tsd": "^0.31.2"

@@ -4323,7 +4323,7 @@ mongodb@4.17.2:
     "@aws-sdk/credential-providers" "^3.186.0"
     "@mongodb-js/saslprep" "^1.1.0"
 
-mongoose-geojson-schema@^2.2.3:
+mongoose-geojson-schema@^2.2.4:
   version "2.2.7"
   resolved "https://registry.yarnpkg.com/mongoose-geojson-schema/-/mongoose-geojson-schema-2.2.7.tgz#e90bc5b6e54d36c53fbf1445ad0f146c6ee82813"
   integrity sha512-BNBRAGQj1R/XVl893+ELO6jIkHDiwg+IhdFDxLscHoJP/yhjTvQY/N1s5YafkFU6LoJQ82AHbJq0NRcXRyRT3A==

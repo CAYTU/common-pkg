@@ -460,6 +460,43 @@ declare namespace CTypes {
     currentTask?: Types.ObjectId;
 
     metadata?: any;
+
+    manifest?: RobotManifestInterface;
+  }
+
+  export interface ManifestCommandEntry {
+    topic: string;
+    schema?: string;
+    values?: Record<string, any>;
+    velocity_max?: number;
+    angular_max?: number;
+    field_mapping?: Record<string, string>;
+  }
+
+  export interface ManifestSensorEntry {
+    topic: string;
+    type?: string;
+    frame_id?: string;
+    encoding?: string;
+  }
+
+  export interface ManifestSafetyLimits {
+    max_velocity?: number;
+    max_angular_velocity?: number;
+    max_tilt_degrees?: number;
+    min_proximity_m?: number;
+    min_battery_pct?: number;
+  }
+
+  export interface RobotManifestInterface {
+    robot_type: string;
+    capabilities: string[];
+    command_map: Record<string, ManifestCommandEntry>;
+    state_topics: Record<string, string>;
+    sensors: Record<string, ManifestSensorEntry>;
+    safety_limits: ManifestSafetyLimits;
+    vla_model?: string;
+    description?: string;
   }
 
   export interface DeviceAssignedTrackingInterface extends IMongooseObjectExt {

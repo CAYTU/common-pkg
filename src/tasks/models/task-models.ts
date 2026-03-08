@@ -57,6 +57,13 @@ export interface TaskInterface extends IMongooseObjectExt {
   robot?: Types.ObjectId;
 
   /**
+   * References to multiple Robot models for multi-robot monitoring tasks.
+   *
+   * Used when a single task monitors or controls multiple robots simultaneously.
+   */
+  robots?: Types.ObjectId[];
+
+  /**
    * Status of the task.
    *
    * Can represent states like 'pending', 'in-progress', 'completed', 'failed', etc.

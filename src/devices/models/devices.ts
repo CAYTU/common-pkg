@@ -144,6 +144,64 @@ export interface RobotBaseInterface extends IMongooseObjectExt {
    * Indicates wheter a routine has been setup for the device
    */
   routineSetup?: Boolean;
+
+  /**
+   * The CAYTU Brain manifest defining the robot's capabilities,
+   * command mappings, sensors, and safety limits.
+   */
+  manifest?: RobotManifestInterface;
+}
+
+/**
+ * A single command mapping in the robot manifest.
+ * Maps a universal command name to a robot-specific MQTT topic and message schema.
+ */
+export interface ManifestCommandEntry {
+  topic: string;
+  schema?: string;
+  values?: Record<string, any>;
+  velocity_max?: number;
+  angular_max?: number;
+  field_mapping?: Record<string, string>;
+}
+
+/**
+ * A sensor/camera configuration in the robot manifest.
+ */
+export interface ManifestSensorEntry {
+  topic: string;
+  type?: string;
+  frame_id?: string;
+  encoding?: string;
+}
+
+/**
+ * Robot-specific safety limits enforced by the CAYTU Brain safety watchdog.
+ */
+export interface ManifestSafetyLimits {
+  max_velocity?: number;
+  max_angular_velocity?: number;
+  max_tilt_degrees?: number;
+  min_proximity_m?: number;
+  min_battery_pct?: number;
+}
+
+/**
+ * Complete robot manifest defining capabilities, command mappings,
+ * sensors, safety limits, and VLA model preferences.
+ *
+ * This is the core abstraction that allows CAYTU Brain to support
+ * any robot type without code changes.
+ */
+export interface RobotManifestInterface {
+  robot_type: string;
+  capabilities: string[];
+  command_map: Record<string, ManifestCommandEntry>;
+  state_topics: Record<string, string>;
+  sensors: Record<string, ManifestSensorEntry>;
+  safety_limits: ManifestSafetyLimits;
+  vla_model?: string;
+  description?: string;
 }
 
 export interface DeviceAssignedTrackingInterface extends IMongooseObjectExt {

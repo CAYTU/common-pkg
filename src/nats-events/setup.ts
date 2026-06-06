@@ -11,8 +11,12 @@ import {
 } from "nats";
 
 export const EVENTS_STREAM_NAME = "EVENTS";
-// `>` matches every subject — every Caytu event flows through this one stream.
-export const EVENTS_STREAM_SUBJECTS = [">"];
+// `*` matches any single-token subject. Caytu's event subjects use `:` as the
+// delimiter (e.g. `task:created`), which NATS treats as part of a single
+// token — so `*` captures all of them. Using `>` instead would also capture
+// JetStream's internal `$JS.>` control subjects and the server then requires
+// no_ack mode, which we don't want.
+export const EVENTS_STREAM_SUBJECTS = ["*"];
 
 export interface CaytuNatsClients {
   nc: NatsConnection;

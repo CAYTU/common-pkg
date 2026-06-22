@@ -160,7 +160,16 @@ jobs:
         run: yarn build
 
       - name: Publish to AWS CodeArtifact
-        run: npm publish
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          # Prerelease versions (3.0.0-rc.1 etc.) must publish under a dist-tag
+          # other than 'latest' so default `yarn add` doesn't pick them up.
+          if [[ "${VERSION}" == *-* ]]; then
+            echo "publishing prerelease ${VERSION} under dist-tag 'next'"
+            npm publish --tag next
+          else
+            npm publish
+          fi
 
   dependency-review:
     runs-on: ubuntu-latest

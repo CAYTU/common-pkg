@@ -126,9 +126,14 @@ jobs:
     needs: create-release
     runs-on: ubuntu-latest
     steps:
+      # Checkout latest main (not the trigger commit) so we pick up the
+      # version bump that create-release just pushed. Without ref: main,
+      # this job sees package.json at the pre-bump version and either
+      # publishes a stale prerelease or 409s on an already-published version.
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          ref: main
       - name: Fetch tags
         run: git fetch --tags
 

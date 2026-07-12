@@ -1,6 +1,6 @@
 {
   "name": "@caytu/shared",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "Shared Library for Caytu",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -21,6 +21,7 @@
     "./users/utils": "./build/users/utils/index.js",
     "./billings/models": "./build/billings/models/index.js",
     "./billings/events": "./build/billings/events/index.js",
+    "./licenses/events": "./build/licenses/events/index.js",
     "./billings/enums": "./build/billings/enums/index.js",
     "./tasks/models": "./build/tasks/models/index.js",
     "./tasks/events": "./build/tasks/events/index.js",
@@ -82,6 +83,9 @@
       ],
       "billings/models": [
         "build/billings/models/index.d.ts"
+      ],
+      "licenses/events": [
+        "build/licenses/events/index.d.ts"
       ],
       "billings/events": [
         "build/billings/events/index.d.ts"

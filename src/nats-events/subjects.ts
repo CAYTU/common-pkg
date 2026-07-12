@@ -201,6 +201,11 @@ export enum Subjects {
   BillingPaymentMethodCreated = "billing:payment:method:create",
   BillingPaymentMethodUpdated = "billing:payment:method:update",
 
+  // License
+  /** A subscription approval entitles an org to a signed device license. */
+  LicenseGrantRequested = "license:grant:requested",
+  LicenseIssued = "license:issued",
+
   // Subscription
   SubscriptionCreated = "subscription:created",
   SubscriptionUpdated = "subscription:updated",

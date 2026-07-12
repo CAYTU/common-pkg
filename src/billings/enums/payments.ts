@@ -3,6 +3,12 @@ export enum PaymentStatus {
   Succeeded = "succeeded",
   Cancelled = "cancelled",
   Failed = "failed",
+  /**
+   * Money returned to the customer. A payment can be refunded in several
+   * partial steps, so this marks a payment refunded in full — how much came
+   * back overall is the sum of its refund records.
+   */
+  Refunded = "refunded",
 }
 
 export enum PaymentMethod {

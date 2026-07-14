@@ -47,22 +47,80 @@ export enum UserRole {
   All = "all",
 }
 
+/**
+ * Who a user *is*. Exactly one of these is meaningful per scope: a user has a
+ * primary role on the platform, and a primary role in each organization they
+ * belong to.
+ *
+ * `SuperAdmin` is platform-only. It is not an organization role, and a value of
+ * `super-admin` inside an organization's role array grants nothing — see
+ * `RbaUserACL.hasPrimaryRole`.
+ */
 export const PrimaryRoles = [
   UserRole.Invited,
+  UserRole.Robot,
   UserRole.Customer,
   UserRole.Developer,
   UserRole.Operator,
   UserRole.Admin,
   UserRole.SuperAdmin,
-];
+] as const;
 
+/**
+ * What a member may *do* inside one organization. These are member permissions:
+ * they are only ever read from a user's roles in an organization, never from
+ * their platform roles. `All` is the wildcard over the other four — it means
+ * "every verb, for this member, in this organization". It has never meant
+ * super-admin.
+ */
 export const UserPermissions = [
   UserRole.All,
   UserRole.ReadOnly,
   UserRole.Create,
   UserRole.Delete,
   UserRole.Update,
-];
+] as const;
+
+/** A role that says who someone is. */
+export type PrimaryRole = (typeof PrimaryRoles)[number];
+
+/** A permission that says what a member may do in an organization. */
+export type UserPermission = (typeof UserPermissions)[number];
+
+export const isPrimaryRole = (role: UserRole): role is PrimaryRole =>
+  (PrimaryRoles as readonly UserRole[]).includes(role);
+
+export const isUserPermission = (role: UserRole): role is UserPermission =>
+  (UserPermissions as readonly UserRole[]).includes(role);
+
+/**
+ * Splits a mixed role array into the two axes. Values belonging to neither list
+ * are returned in `unknown` rather than silently dropped, so callers (the role
+ * partition migration, in particular) can report them instead of losing them.
+ */
+export const splitRoles = (
+  roles: UserRole[] = [],
+): {
+  primary: PrimaryRole[];
+  permissions: UserPermission[];
+  unknown: string[];
+} => {
+  const primary: PrimaryRole[] = [];
+  const permissions: UserPermission[] = [];
+  const unknown: string[] = [];
+
+  for (const role of roles) {
+    if (isPrimaryRole(role)) primary.push(role);
+    else if (isUserPermission(role)) permissions.push(role);
+    else unknown.push(role as string);
+  }
+
+  return {
+    primary: [...new Set(primary)],
+    permissions: [...new Set(permissions)],
+    unknown: [...new Set(unknown)],
+  };
+};
 
 /**
  * @description
